@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0"?>
 <gather>
 				<Station>
@@ -36,4 +37,44 @@
 					<reposize>60000</reposize>
 					<ratio>10</ratio>
 				</Station>
+=======
+<?xml version="1.0"?>
+<gather>
+				<Station>
+					<name>Budapest</name>
+					<freq>60</freq>
+					<snumber>10</snumber>
+					<time starttime='500' stoptime='1000'>1000</time>
+					<maxinbw>100</maxinbw>
+					<maxoutbw>100</maxoutbw>
+					<diskbw>100</diskbw>
+					<torepo>ceph</torepo>
+					<reposize>60000</reposize>
+					<ratio>1</ratio>
+				</Station>
+				<Station>
+					<name>Kecskemet</name>
+					<freq>80</freq> 
+					<snumber>5</snumber>
+					<time starttime='100' stoptime='400'>-1</time> <!-- time = -1 eseten a Station nem uzemel -->
+					<maxinbw>100</maxinbw>
+					<maxoutbw>100</maxoutbw>
+					<diskbw>100</diskbw>
+					<torepo>moon</torepo>
+					<reposize>1000</reposize>
+					<ratio>5</ratio> 
+				</Station>
+				<Station>
+					<name>Szeged</name>
+					<freq>40</freq>
+					<snumber>5</snumber>
+					<time starttime='300' stoptime='800'>1000</time>
+					<maxinbw>100</maxinbw>
+					<maxoutbw>100</maxoutbw>
+					<diskbw>100</diskbw>
+					<torepo>moon</torepo> 
+					<reposize>60000</reposize>
+					<ratio>10</ratio>
+				</Station>
+>>>>>>> origin/andrasmarkus-patch-1
 </gather>

@@ -20,7 +20,13 @@ public class Cloud {
 
 	public Cloud(VirtualAppliance va,String cloudfile) throws IOException, SAXException, ParserConfigurationException {
 		this.va = va;
+<<<<<<< HEAD
 		iaas = CloudLoader.loadNodes(cloudfile);
+=======
+		String tmp ="c:\\szakdoga\\dissect-cf-master\\src\\main\\java\\iot\\extension\\LPDSCloud.xml";
+		//String tmp = "d:\\Dokumentumok\\SZTE\\szakdoga\\dissect-cf-andrasmarkus-patch-1\\src\\main\\java\\iot\\extension\\LPDSCloud.xml";
+		iaas = CloudLoader.loadNodes(tmp);
+>>>>>>> origin/andrasmarkus-patch-1
 		//iaas.machines.get(0).localDisk.registerObject(va);
 	}
 }
