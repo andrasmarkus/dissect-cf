@@ -2,6 +2,8 @@ package iot.extension;
 
 import hu.mta.sztaki.lpds.cloud.simulator.util.*;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.*;
@@ -16,11 +18,9 @@ public class Cloud {
 		return va;
 	}
 
-	public Cloud(VirtualAppliance va) throws IOException, SAXException, ParserConfigurationException {
+	public Cloud(VirtualAppliance va,String cloudfile) throws IOException, SAXException, ParserConfigurationException {
 		this.va = va;
-		 String tmp ="c:\\szakdoga\\dissect-cf-master\\src\\main\\java\\iot\\extension\\LPDSCloud.xml";
-		//String tmp = "d:\\Dokumentumok\\SZTE\\szakdoga\\dissect-cf-andrasmarkus-patch-1\\src\\main\\java\\iot\\extension\\LPDSCloud.xml";
-		iaas = CloudLoader.loadNodes(tmp);
-		iaas.machines.get(0).localDisk.registerObject(va);
+		iaas = CloudLoader.loadNodes(cloudfile);
+		//iaas.machines.get(0).localDisk.registerObject(va);
 	}
 }
