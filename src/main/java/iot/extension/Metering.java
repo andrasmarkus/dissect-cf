@@ -25,7 +25,10 @@ public class Metering extends DeferredEvent {
 				+ Timed.getFireCount() + " " + sdf.format(cal.getTime()), this.filesize, false);
 		for (Station s : Station.stations) {
 			if (s.getName().equals(this.sName)) {
-				s.getRepo().registerObject(so);
+				if(s.getRepo().registerObject(so)){
+					s.generatedfilesize+=this.filesize;
+					Station.allstationsize+=this.filesize;
+				};
 			}
 		}
 	}

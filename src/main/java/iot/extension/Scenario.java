@@ -106,8 +106,11 @@ public class Scenario {
 					}
 				}
 			}
-
+			
+			//Application.getInstance(60,new VirtualAppliance("Base", 0, 0, false, 1000),1);
+			Application.getInstance(60,null,1);
 			Timed.simulateUntilLastEvent();
+			
 			// hasznos infok:
 			if(print==1){
 				System.out.println("~~~~~~~~~~~~");
