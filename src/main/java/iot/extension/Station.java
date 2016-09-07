@@ -89,7 +89,6 @@ public class Station extends Timed {
 	 *            station-t jellemzo adatok : Stationdata
 	 */
 	public Station(long maxinbw, long maxoutbw, long diskbw, long reposize, final Stationdata sd) {
-		generatedfilesize = 0;
 		this.vm = null;
 		this.i = 0;
 		this.sd = sd;
@@ -108,7 +107,7 @@ public class Station extends Timed {
 	public String getName() {
 		return this.sd.name;
 	}
-
+	
 	public Repository getRepo() {
 		return repo;
 	}
@@ -288,9 +287,41 @@ public class Station extends Timed {
 			} catch (NetworkException e) {
 				e.printStackTrace();
 			}
+				}
+			} catch (NetworkException e) {
+				e.printStackTrace();
+			}
+		}
+		// share nothing felho
+		else {
+			if (this.pm.getState().equals(State.RUNNING) && this.i == 0 ) {
+				i++;
+				try {
+					if(!this.pm.isHostingVMs()){
+						this.vm = this.pm.requestVM(Cloud.getVa(),this.pm.getCapacities(), Cloud.iaas.repositories.get(0), 1)[0];
+					}else{
+						this.vm = this.pm.listVMs().iterator().next();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// megkeresi a celrepo-t es elkuldeni annak
+			try {
+				if ((this.repo.getMaxStorageCapacity() - this.repo.getFreeStorageCapacity()) >= sd.ratio * sd.filesize
+						|| isMetering == false) {
+					if (this.vm != null) {
+						if (vm.getState().equals(VirtualMachine.State.RUNNING)) {
+							this.startCommunicate(vm.getResourceAllocation().getHost().localDisk);
+						}
+					}
+				}
+			} catch (NetworkException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-
+	
 	/**
 	 * toString metodus a Station lenyeges adatainak kiiratashoz,debugolashoz
 	 */
@@ -298,5 +329,6 @@ public class Station extends Timed {
 	public String toString() {
 		return "Station [" + sd + ", reposize:" + this.repo.getMaxStorageCapacity() + ",fajlmeret "
 				+ this.generatedfilesize + "]";
+		return "Station [" + sd + ", reposize:" + this.repo.getMaxStorageCapacity() + "]";
 	}
 }
