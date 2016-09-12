@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
+import iot.extension.Application.VmCollector;
 import iot.extension.Station.Stationdata;
 
 public class Scenario {
@@ -108,15 +109,20 @@ public class Scenario {
 			}
 			
 			//Application.getInstance(60,new VirtualAppliance("Base", 0, 0, false, 1000),1);
-			//Application.getInstance(60,null,1);
+			Application.getInstance(60000,1);
 			Timed.simulateUntilLastEvent();
 			
 			// hasznos infok:
 			if(print==1){
-				System.out.println("~~~~~~~~~~~~");
+				/*System.out.println("~~~~~~~~~~~~");
 				for (Station s : Station.stations) {
 					System.out.println(s.toString());
+				}*/
+				int i=0;
+				for(VmCollector vmcl : Application.vmlist){
+				i+=vmcl.tasknumber;
 				}
+				System.out.println("VM: "+Application.vmlist.size() + " tasks: "+i);
 				System.out.println("~~~~~~~~~~~~");
 				System.out.println(Cloud.iaas.repositories.toString());
 				System.out.println("~~~~~~~~~~~~");

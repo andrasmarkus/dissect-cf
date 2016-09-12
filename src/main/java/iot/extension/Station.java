@@ -61,7 +61,7 @@ public class Station extends Timed {
 		}
 	}
 
-	private Stationdata sd;
+	public Stationdata sd;
 	private Repository repo;
 	private Repository torepo;
 	private long reposize;
@@ -102,7 +102,7 @@ public class Station extends Timed {
 		this.reposize = reposize;
 		repo = new Repository(this.reposize, sd.name, maxinbw, maxoutbw, diskbw, lmap);
 		this.torepo = this.findRepo(sd.torepo);
-		this.startMeter(sd.freq); // ezt majd mashol kell meghivni, ideiglenes!!
+		//this.startMeter(sd.freq); // ezt majd mashol kell meghivni, ideiglenes!!
 	}
 
 	public String getName() {
@@ -164,7 +164,7 @@ public class Station extends Timed {
 	 * @param interval
 	 *            frekvencia
 	 */
-	private void startMeter(final long interval) {
+	public void startMeter(final long interval) {
 		if (isWorking) {
 			subscribe(interval);
 			isMetering = true;
