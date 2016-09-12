@@ -108,11 +108,15 @@ public class Scenario {
 			}
 			
 			//Application.getInstance(60,new VirtualAppliance("Base", 0, 0, false, 1000),1);
-			Application.getInstance(60,null,1);
+			//Application.getInstance(60,null,1);
 			Timed.simulateUntilLastEvent();
 			
 			// hasznos infok:
 			if(print==1){
+				System.out.println("~~~~~~~~~~~~");
+				for (Station s : Station.stations) {
+					System.out.println(s.toString());
+				}
 				System.out.println("~~~~~~~~~~~~");
 				System.out.println(Cloud.iaas.repositories.toString());
 				System.out.println("~~~~~~~~~~~~");
@@ -122,10 +126,7 @@ public class Scenario {
 						System.out.println(p);
 					}
 				}
-				System.out.println("~~~~~~~~~~~~");
-				for (Station s : Station.stations) {
-					System.out.println(s.toString());
-				}
+				
 			}
 			
 		}

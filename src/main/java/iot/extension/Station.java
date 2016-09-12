@@ -65,6 +65,7 @@ public class Station extends Timed {
 	private Repository repo;
 	private Repository torepo;
 	private long reposize;
+	private long time;
 	private HashMap<String, Integer> lmap;
 	private int lat;
 	private int i;
@@ -167,6 +168,7 @@ public class Station extends Timed {
 		if (isWorking) {
 			subscribe(interval);
 			isMetering = true;
+			this.time=Timed.getFireCount();
 		}
 	}
 
@@ -225,16 +227,16 @@ public class Station extends Timed {
 	@Override
 	public void tick(long fires) {
 		// a meres a megadott ideig tart csak
-		if (Timed.getFireCount() < sd.lifetime && Timed.getFireCount() >= sd.starttime
-				&& Timed.getFireCount() <= sd.stoptime) {
+		if (Timed.getFireCount() < (sd.lifetime+this.time) && Timed.getFireCount() >= (sd.starttime+this.time)
+				&& Timed.getFireCount() <= (sd.stoptime+this.time)) {
 			for (int i = 0; i < sd.sensornumber; i++) {
 				new Metering(sd.name, i, sd.filesize);
 			}
-		} else if (Timed.getFireCount() > sd.stoptime) {
+		} else if (Timed.getFireCount() > (sd.stoptime+this.time)) {
 			isMetering = false;
 		}
 		// de a station mukodese addig amig az osszes SO el nem lett kuldve
-		if (this.repo.getFreeStorageCapacity() == reposize && Timed.getFireCount() > sd.lifetime) {
+		if (this.repo.getFreeStorageCapacity() == reposize && Timed.getFireCount() > (sd.lifetime+this.time)) {
 			this.stopMeter();
 		}
 
@@ -260,10 +262,7 @@ public class Station extends Timed {
 				i++;
 				try {
 					if (!this.pm.isHostingVMs()) {
-						//System.out.println("vm megkerve: "+this.torepo+" ido: "+fires);
-						//System.out.println(this.pm.getCapacities() + " vm megkeresekor " + this.torepo.getName());
-						//AlterableResourceConstraints arc = new AlterableResourceConstraints(8,0.001,16000000000L);
-						this.vm = this.pm.requestVM(Cloud.getVa(), this.pm.getCapacities(),
+						this.vm = this.pm.requestVM(Cloud.getVa(), Cloud.getArc(),
 								Cloud.iaas.repositories.get(0), 1)[0];
 					} else {
 						this.vm = this.pm.listVMs().iterator().next();
