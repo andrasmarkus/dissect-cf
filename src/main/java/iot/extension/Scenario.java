@@ -119,10 +119,16 @@ public class Scenario {
 					System.out.println(s.toString());
 				}*/
 				int i=0;
+				int j=0;
 				for(VmCollector vmcl : Application.vmlist){
-				i+=vmcl.tasknumber;
+					if(vmcl.worked){
+						j++;
+						i+=vmcl.tasknumber;
+					}
+					
+					
 				}
-				System.out.println("VM: "+Application.vmlist.size() + " tasks: "+i);
+				System.out.println("VM: "+j + " tasks: "+i);
 				System.out.println("~~~~~~~~~~~~");
 				System.out.println(Cloud.iaas.repositories.toString());
 				System.out.println("~~~~~~~~~~~~");

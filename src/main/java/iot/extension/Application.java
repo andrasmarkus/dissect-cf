@@ -15,14 +15,16 @@ public class Application extends Timed {
 		public VirtualMachine vm;
 		public boolean isworking;
 		public int tasknumber;
+		public boolean worked;
 
 		public VmCollector(VirtualMachine vm, boolean isworking) {
 			this.vm = vm;
 			this.isworking = isworking;
 			this.tasknumber=0;
+			this.worked=false;
 		}
 	}
-
+	private static int i=0;
 	public static Application app;
 	public static ArrayList<VmCollector> vmlist;
 	private int print;
@@ -55,6 +57,12 @@ public class Application extends Timed {
 			if (Application.vmlist.get(i).isworking == false
 					&& Application.vmlist.get(i).vm.getState().equals(VirtualMachine.State.RUNNING)) {
 				vmc = Application.vmlist.get(i);
+				if(Application.i==0){
+					Application.i++;
+					for(Station s: Station.stations){
+						s.startMeter(s.sd.freq);
+					}
+				}
 				return vmc;
 			}
 		}
@@ -85,16 +93,13 @@ public class Application extends Timed {
 		}
 		if (Application.vmlist.isEmpty()) {
 			this.generateAndAddVM();
-			for(Station s: Station.stations){
-				s.startMeter(s.sd.freq);
-			}
 		} else {
 			final VmCollector vml = this.VmSearch();
 			if (vml == null) {
 				this.generateAndAddVM();
 			} else {
-				if ((Station.allstationsize - Application.allgenerateddatasize) > 5000) {
-					Application.localfilesize = 5000;
+				if ((Station.allstationsize - Application.allgenerateddatasize) > 5000000) {
+					Application.localfilesize = 5000000;
 				} else {
 					Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
 				}
@@ -108,6 +113,7 @@ public class Application extends Timed {
 							@Override
 							public void conComplete() {
 								vml.isworking = false;
+								vml.worked=true;
 								vml.tasknumber++;
 								if (print == 1) {
 									//System.out.println("VM computeTask has ended with " + i + " bytes.");
@@ -120,6 +126,7 @@ public class Application extends Timed {
 					e.printStackTrace();
 				}
 				vml.isworking = true;
+				
 				Application.allgenerateddatasize += Application.localfilesize; // kilepesi
 																				// feltetelhez
 
