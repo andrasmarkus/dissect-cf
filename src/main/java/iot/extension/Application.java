@@ -106,6 +106,7 @@ public class Application extends Timed {
 				try {
 					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+ vml.vm+" : "+fires);
 					if (Application.localfilesize != 0) {
+						vml.isworking = true;
 						vml.vm.newComputeTask(Application.localfilesize /* 10000 */
 						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
 							//long i = Application.localfilesize;
@@ -125,7 +126,6 @@ public class Application extends Timed {
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
-				vml.isworking = true;
 				
 				Application.allgenerateddatasize += Application.localfilesize; // kilepesi
 																				// feltetelhez
