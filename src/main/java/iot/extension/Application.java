@@ -59,6 +59,7 @@ public class Application extends Timed {
 				vmc = Application.vmlist.get(i);
 				if(Application.i==0){
 					Application.i++;
+					System.out.println("Scenario started at: "+Timed.getFireCount());
 					for(Station s: Station.stations){
 						s.startMeter(s.sd.freq);
 					}
@@ -106,18 +107,19 @@ public class Application extends Timed {
 				try {
 					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+ vml.vm+" : "+fires);
 					if (Application.localfilesize != 0) {
+						System.out.println(vml.vm+" started at "+Timed.getFireCount());
 						vml.isworking = true;
 						vml.vm.newComputeTask(Application.localfilesize /* 10000 */
 						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
-							//long i = Application.localfilesize;
-
+							long i = Timed.getFireCount();
+							long ii = Application.localfilesize;
 							@Override
 							public void conComplete() {
 								vml.isworking = false;
 								vml.worked=true;
 								vml.tasknumber++;
 								if (print == 1) {
-									//System.out.println("VM computeTask has ended with " + i + " bytes.");
+									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
 									
 								}
 							}
