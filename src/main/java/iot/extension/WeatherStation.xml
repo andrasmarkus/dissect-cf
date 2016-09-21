@@ -4,11 +4,11 @@
 <name>Abádszalók (oatti)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
-<torepo>moon</torepo>
+<torepo>ceph</torepo>
 <reposize>60000</reposize>
 <ratio>1</ratio>
 </Station>
@@ -16,7 +16,7 @@
 <name>Ács (pyldy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -28,7 +28,7 @@
 <name>Adács (nagyponty)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -40,11 +40,11 @@
 <name>Adony (agroszerviz2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
-<torepo>moon</torepo>
+<torepo>ceph</torepo>
 <reposize>60000</reposize>
 <ratio>1</ratio>
 </Station>
@@ -52,7 +52,7 @@
 <name>Ajka (tityor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -64,7 +64,7 @@
 <name>Albertirsa (lavandart)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -76,7 +76,7 @@
 <name>Aldebrő (omme_aldebro)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -88,7 +88,7 @@
 <name>Alsóbogát (omme_alsobogat)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -100,7 +100,7 @@
 <name>Alsónémedi (gomba)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -112,7 +112,7 @@
 <name>Alsónemesapáti (omme_alsonemesapati)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -124,7 +124,7 @@
 <name>Alsóörs (bgerry009)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -136,7 +136,7 @@
 <name>Anarcs (omme_anarcs)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -148,7 +148,7 @@
 <name>Annavölgy (csipke)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -160,7 +160,7 @@
 <name>Apc (Agro2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -172,7 +172,7 @@
 <name>Áporka (biofungiaporka)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -184,7 +184,7 @@
 <name>Bábolna (tref7)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -196,7 +196,7 @@
 <name>Bábolna (ztn_babolna)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -208,7 +208,7 @@
 <name>Bácsszőlős (omme_bacsszolos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -220,7 +220,7 @@
 <name>Badacsony  (badacsony_strand)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -232,7 +232,7 @@
 <name>Badacsonytomaj (badacsonytomaj_strand)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -244,7 +244,7 @@
 <name>Baja (bajaobs)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -256,7 +256,7 @@
 <name>Baja (dudley)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -268,7 +268,7 @@
 <name>Bajna (gykel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -280,7 +280,7 @@
 <name>Bak (omme_bak)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -292,7 +292,19 @@
 <name>Bakonybél (geol46)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Bakonyszombathely (omme_bakonyszombathely)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -304,7 +316,7 @@
 <name>Balassagyarmat (corleonepizza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -316,7 +328,7 @@
 <name>Balatonakali (strandholidaykemping)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -328,7 +340,7 @@
 <name>Balatonalmádi (sanyi276)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -340,7 +352,7 @@
 <name>Balatonalmádi (vitorlas_kikoto)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -352,7 +364,7 @@
 <name>Balatoncsicsó (bakonyerdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -364,7 +376,7 @@
 <name>Balatonfenyves (balatonfenyves)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -376,7 +388,7 @@
 <name>Balatonföldvár (onkormanyzat)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -388,7 +400,7 @@
 <name>Balatonfüred (globusz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -400,7 +412,7 @@
 <name>Balatonfüred (probio)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -412,7 +424,7 @@
 <name>Balatonfűzfő (BalatoniBob)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -424,7 +436,7 @@
 <name>Balatonfűzfő (balatonfuzfo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -436,7 +448,7 @@
 <name>Balatonkenese (horl)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -448,7 +460,7 @@
 <name>Balatonlelle (Balatonlelle)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -460,7 +472,7 @@
 <name>Balatonlelle (csagi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -472,7 +484,7 @@
 <name>Balatonlelle (tothbal)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -484,7 +496,7 @@
 <name>Balatonszemes (szemes2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -496,7 +508,7 @@
 <name>Balatonvilágos (balatonfruitkft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -508,7 +520,7 @@
 <name>Balkány (kandras)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -520,7 +532,7 @@
 <name>Balmazújváros (Balmazagro)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -532,19 +544,7 @@
 <name>Bánd (MeteoRick)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Baracs (agrobaracs)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -556,7 +556,7 @@
 <name>Barbacs (omitec)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -568,7 +568,7 @@
 <name>Barcs (petlas)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -580,7 +580,7 @@
 <name>Barlahida (csaszarz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -592,7 +592,7 @@
 <name>Bart (togateam)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -604,7 +604,7 @@
 <name>Békéscsaba (medovaszki_farm)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -616,7 +616,7 @@
 <name>Beled (telekikober)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -628,7 +628,7 @@
 <name>Berekfürdő (berekvizkft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -640,7 +640,19 @@
 <name>Beret (Gerizon)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Beret (Michelika)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -652,19 +664,7 @@
 <name>Berhida (agroterm_kft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Berkenye (homecontrol)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -676,7 +676,7 @@
 <name>Besnyő (ERIGERON1949)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -688,19 +688,7 @@
 <name>Biatorbágy (kobuki2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Boba (omme_boba)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -712,7 +700,7 @@
 <name>Bodrogolaszi (kovacsmet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -724,7 +712,7 @@
 <name>Bordány (bordany)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -736,7 +724,7 @@
 <name>Bős (boskenderato)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -748,7 +736,7 @@
 <name>Bratislava (idokep_pozsony)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -760,7 +748,7 @@
 <name>Bucsu (nerno1952)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -772,7 +760,7 @@
 <name>Budakeszi, Farkashegyi Repülőtér (lhfh)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -784,7 +772,7 @@
 <name>Budaörs (Wirtz_Laszlo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -796,7 +784,7 @@
 <name>Budaörs (koszezso)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -808,7 +796,7 @@
 <name>Budapest Hármashatárhegy (LHHH)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -820,7 +808,7 @@
 <name>Budapest I. ker (idokep_var)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -832,7 +820,19 @@
 <name>Budapest II.ker - Budaliget (lecsmen)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Budapest III. ker - Római part (powerful79)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -844,7 +844,7 @@
 <name>Budapest III. ker (harrer_pal_alt_isk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -856,7 +856,7 @@
 <name>Budapest III.ker - Békásmegyer (nukee)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -868,7 +868,7 @@
 <name>Budapest III.ker - Csillaghegy (tom)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -880,7 +880,7 @@
 <name>Budapest IV. ker (fodori)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -892,7 +892,7 @@
 <name>Budapest IV.ker - Újpest (Zolkabolka)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -904,7 +904,7 @@
 <name>Budapest IV.ker - Újpest (xabi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -916,7 +916,19 @@
 <name>Budapest IX. ker (lurdyhaz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Budapest VIII. ker (kandras2)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -928,19 +940,7 @@
 <name>Budapest XI. ker (kelensuli)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Budapest XI.ker - Gazdagrét (zsoni)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -952,7 +952,7 @@
 <name>Budapest XII. ker (omme_budapest_12ker)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -964,7 +964,7 @@
 <name>Budapest XII. ker (patrik75)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -976,7 +976,7 @@
 <name>Budapest XII.ker - Zugliget (kondorferenc)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -988,7 +988,7 @@
 <name>Budapest XIX. ker (cad)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1000,7 +1000,7 @@
 <name>Budapest XV.ker - Rákospalota (rpalota)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1012,7 +1012,19 @@
 <name>Budapest XVII.ker - Rákoskert (amatorfodrasz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Budapest XVIII.ker - Pestszentimre (soper)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1024,7 +1036,7 @@
 <name>Budapest XVIII.ker - Pestszentlőrinc (cilu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1036,7 +1048,7 @@
 <name>Budapest XXI.ker - Csepel (islander)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1048,7 +1060,7 @@
 <name>Budapest XXI.ker - Csepel (localnet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1060,7 +1072,7 @@
 <name>Budapest XXII. ker (kishaz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1072,7 +1084,7 @@
 <name>Budapest XXII.ker - Budatétény (gyvezer)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1084,7 +1096,7 @@
 <name>Budapest XXII.ker - Budatétény (jupiter)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1096,7 +1108,7 @@
 <name>Budapest XXIII. ker (Ferko77)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1108,7 +1120,7 @@
 <name>Budapest XXIII.ker - Soroksár (jk71)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1120,7 +1132,7 @@
 <name>Bükkábrány (matrai_eromu_zrt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1132,7 +1144,7 @@
 <name>Cegléd (vini64)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1144,7 +1156,7 @@
 <name>Celldömölk (pannonpipics)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1156,7 +1168,7 @@
 <name>Chernelházadamonya (repcevolgye)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1168,7 +1180,7 @@
 <name>Cibakháza (cibakhaza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1180,7 +1192,7 @@
 <name>Csajág (tothlaci)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1192,7 +1204,7 @@
 <name>Csanádapáca (Tompika100)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1204,7 +1216,7 @@
 <name>Császártöltés (omme_csaszartoltes)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1216,7 +1228,7 @@
 <name>Cserkeszőlő (cserkeszolo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1228,7 +1240,7 @@
 <name>Csíkrákos (atamas)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1240,7 +1252,7 @@
 <name>Csipkerek (vasidio)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1252,7 +1264,7 @@
 <name>Csóka-hegy (ztn_csokahegy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1264,7 +1276,7 @@
 <name>Csomád (joesalty)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1276,7 +1288,7 @@
 <name>Csombárd (LukacsNorbert)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1288,7 +1300,7 @@
 <name>Csongrád (BJG)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1300,7 +1312,7 @@
 <name>Csopak (csopakph)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1312,7 +1324,7 @@
 <name>Csurgó (omme_csurgo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1324,7 +1336,7 @@
 <name>Debrecen-Józsa (olig13)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1336,7 +1348,7 @@
 <name>Debrecen (jozsamet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1348,7 +1360,7 @@
 <name>Decs (Demon_decs)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1360,7 +1372,7 @@
 <name>Diósjenő (play)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1372,7 +1384,7 @@
 <name>Dorog (bjoco1977)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1384,7 +1396,7 @@
 <name>Dorog (dorogieromu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1396,7 +1408,7 @@
 <name>Dunaharaszti (scroll)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1408,7 +1420,7 @@
 <name>Dunakeszi (atidk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1420,7 +1432,7 @@
 <name>Dunakeszi (silenthunter)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1432,7 +1444,7 @@
 <name>Dunaszentgyörgy (dsztgymgszov)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1444,7 +1456,7 @@
 <name>Dunaújváros Repülőtér (lhdv)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1456,7 +1468,7 @@
 <name>Dunaújváros (mordok)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1468,7 +1480,7 @@
 <name>Dunavecse (dunavecseimgrt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1480,7 +1492,7 @@
 <name>Edelény (rencsis)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1492,7 +1504,7 @@
 <name>Edelény (sztjg)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1504,7 +1516,7 @@
 <name>Egeralja (zajcsek)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1516,7 +1528,7 @@
 <name>Egyházasfalu (SimonyiKaroly_AltalanosIskola)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1528,7 +1540,7 @@
 <name>Eplény (nordica_siarena_hegy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1540,7 +1552,7 @@
 <name>Eplény (nordica_siarena_kozep)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1552,7 +1564,7 @@
 <name>Eplény (nordica_siarena_volgy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1564,7 +1576,7 @@
 <name>Érd Tusculánum (Isi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1576,19 +1588,7 @@
 <name>Érd-Ófalu (tigi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Érd (rjancsi)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1600,7 +1600,19 @@
 <name>Érsekcsanád Gátőrház (aduvizig)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Esztergom (avassy)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1612,7 +1624,7 @@
 <name>Esztergom (hegymeg)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1624,7 +1636,7 @@
 <name>Esztergom (mnandy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1636,19 +1648,7 @@
 <name>Etes (si_88)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Fegyvernek (Levente10)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1660,7 +1660,7 @@
 <name>Fehérgyarmat (dfgadmin)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1672,7 +1672,7 @@
 <name>Feketegyarmat (feketegyarmat)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1684,7 +1684,7 @@
 <name>Felsőtárkány (egererdozrt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1696,7 +1696,7 @@
 <name>Fenyéd (blueskyvodafone)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1708,7 +1708,7 @@
 <name>Fonyód (sipos_hegy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1720,7 +1720,7 @@
 <name>Fonyódliget (edenudulo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1732,7 +1732,7 @@
 <name>Forró (partosfalvip)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1744,7 +1744,7 @@
 <name>Fót (szakacscsaba)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1756,7 +1756,7 @@
 <name>Fülöpszállás (kelemenszek)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1768,7 +1768,7 @@
 <name>Gárdony (vitalhotelnautis)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1780,7 +1780,7 @@
 <name>Gávavencsellő (eulac)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1792,7 +1792,7 @@
 <name>Göd (hight)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1804,7 +1804,7 @@
 <name>Gödöllő (ehog90)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1816,7 +1816,7 @@
 <name>Gödöllő (omme_katki_godollo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1828,7 +1828,7 @@
 <name>Gödöllő (vuszi_godollo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1840,7 +1840,7 @@
 <name>Gúti erdészet (gutherd)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1852,7 +1852,7 @@
 <name>Gyarmatpuszta (gyarmatpuszta)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1864,7 +1864,7 @@
 <name>Gyömrő  (gyomrotofurdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1876,7 +1876,7 @@
 <name>Gyömrő (lightning)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1888,7 +1888,19 @@
 <name>Gyömrő (stirlitz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Gyöngyös (omme_gyongyos)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1900,7 +1912,7 @@
 <name>Gyöngyössolymos (sempi7)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1912,7 +1924,7 @@
 <name>Gyöngyöstarján (olilaci)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1924,7 +1936,7 @@
 <name>Györköny (Komplex_Farm)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1936,7 +1948,7 @@
 <name>Győrszentiván (csjahn)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1948,7 +1960,7 @@
 <name>Gyula Városerdő (dalerdzrt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1960,7 +1972,7 @@
 <name>Gyula (Corso_Boutique_Hotel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1972,7 +1984,7 @@
 <name>Gyula (Szennyviztelep_Gyula)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1984,7 +1996,7 @@
 <name>Gyula (lipiz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -1996,19 +2008,7 @@
 <name>Gyula (varfurdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Hajdúdorog (zajgato_kft)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2020,7 +2020,7 @@
 <name>Hajdúszoboszló repülőtér (lhho)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2032,7 +2032,7 @@
 <name>Hajdúszoboszló (omme_hajduszoboszlo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2044,7 +2044,7 @@
 <name>Hajdúszoboszló (thokoly_iskola)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2056,7 +2056,7 @@
 <name>Hajós (imzkft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2068,7 +2068,7 @@
 <name>Harta (hartabalazs)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2080,7 +2080,7 @@
 <name>Helvécia (kecskesb78)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2092,7 +2092,19 @@
 <name>Herceghalom (andrabor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Hernádnémeti (gilanyid)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2104,7 +2116,19 @@
 <name>Hetényegyháza (UNITESZT)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Heves (omme_heves)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2116,7 +2140,7 @@
 <name>Hévíz (riedling)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2128,7 +2152,7 @@
 <name>Hódmezővásárhely (attila)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2140,7 +2164,7 @@
 <name>Hódmezővásárhely (lecsapo999)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2152,7 +2176,7 @@
 <name>Hódmezővásárhely (rona)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2164,7 +2188,7 @@
 <name>Igal (gellertapartman)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2176,7 +2200,7 @@
 <name>Inárcs (toyota)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2188,7 +2212,7 @@
 <name>Isaszeg (mcll)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2200,7 +2224,7 @@
 <name>Izsák (Bikatorok)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2212,7 +2236,7 @@
 <name>Jászárokszállás (camelot)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2224,7 +2248,7 @@
 <name>Jászberény (felugyelo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2236,7 +2260,7 @@
 <name>Jászberény (hegyimami)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2248,7 +2272,7 @@
 <name>Jászberény (kokaix)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2260,7 +2284,7 @@
 <name>Jászboldogháza (fajtakiserleti)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2272,7 +2296,7 @@
 <name>Jászfényszaru (urbi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2284,7 +2308,7 @@
 <name>Jósvafő (anp_jo1)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2296,7 +2320,7 @@
 <name>Kajárpéc (pari08)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2308,7 +2332,7 @@
 <name>Káld (heyjoe)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2320,7 +2344,7 @@
 <name>Kálló (jazmin98)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2332,7 +2356,7 @@
 <name>Kalocsa Reptér (lhka)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2344,7 +2368,7 @@
 <name>Kalocsa (maril)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2356,7 +2380,7 @@
 <name>Kaposszerdahely (mercedesz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2368,7 +2392,7 @@
 <name>Kaposvár (kat_vedelem_somogy2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2380,7 +2404,19 @@
 <name>Kaposvár (kat_vedelem_somogy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Kaposvár (mmg)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2392,7 +2428,7 @@
 <name>Karancslapujtő (kendre256b)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2404,7 +2440,7 @@
 <name>Kardos (kardos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2416,7 +2452,7 @@
 <name>Kecskemét (csalanos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2428,7 +2464,7 @@
 <name>Kecskemét (kecskemeti_arboretum)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2440,7 +2476,7 @@
 <name>Kecskemét (microsystem_kmet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2452,7 +2488,7 @@
 <name>Kékestető (kekestetosipalya)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2464,7 +2500,7 @@
 <name>Kékkút (mkk021)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2476,7 +2512,7 @@
 <name>Kékkút (mkk021_szel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2488,7 +2524,7 @@
 <name>Kendig-csúcs (HA1KYY)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2500,7 +2536,7 @@
 <name>Kengyel (omme_kengyel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2512,7 +2548,7 @@
 <name>Kercaszomor (omme_kercaszomor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2524,7 +2560,7 @@
 <name>Kerekegyháza (faragomuvek)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2536,7 +2572,7 @@
 <name>Keszegfalva (tiborrko)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2548,7 +2584,7 @@
 <name>Keszthely (keszthely)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2560,19 +2596,7 @@
 <name>Királyegyháza (lafarge)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Kisbér (0139)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2584,7 +2608,7 @@
 <name>Kisbodak (omme_kisbodak)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2596,7 +2620,7 @@
 <name>Kisgyalán (hirtalbe)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2608,7 +2632,19 @@
 <name>Kisgyőr (ronaorzo_termeszet_haza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Kiskőrös Repülőtér (solyomrepuloe)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2620,7 +2656,7 @@
 <name>Kiskunfélegyháza (tower)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2632,7 +2668,19 @@
 <name>Kiskunhalas (galac)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Kiskunlacháza (hzoli68)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2644,7 +2692,19 @@
 <name>Kiskunlacháza (lhkk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Kistokaj (szuhigyuri)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2656,7 +2716,7 @@
 <name>Kistolmács (esne4)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2668,7 +2728,7 @@
 <name>Kisújszállás-Igarió (nagykun2000)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2680,7 +2740,7 @@
 <name>Kisvárda (deagtckitnyki)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2692,7 +2752,7 @@
 <name>Komárom (beatlowe)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2704,7 +2764,7 @@
 <name>Komoró (omme_komoro)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2716,7 +2776,7 @@
 <name>Kópháza (hoczeklaci)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2728,7 +2788,7 @@
 <name>Kőszeg (hepi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2740,7 +2800,7 @@
 <name>Kötegyán (hajdukft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2752,7 +2812,19 @@
 <name>Kovácshida (Avo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Kunhegyes (omme_kunhegyes)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2764,19 +2836,7 @@
 <name>Kunszentmiklós (ksztmiklos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Lachtal (sissipark2)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2788,7 +2848,7 @@
 <name>Lajoskomárom (mgszov1)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2800,7 +2860,7 @@
 <name>Lajosmizse (folplastkft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2812,7 +2872,7 @@
 <name>Lajosmizse (omme_lajosmizse)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2824,7 +2884,7 @@
 <name>Leányfalu (gaborbacsi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2836,7 +2896,7 @@
 <name>Lepsény (gyumolcsoskert)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2848,7 +2908,7 @@
 <name>Lőrinci (tg177)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2860,7 +2920,7 @@
 <name>Maconka (bshe_maconka)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2872,7 +2932,7 @@
 <name>Madocsa (KJanos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2884,7 +2944,7 @@
 <name>Magyaratád (gazdasz_kft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2896,7 +2956,7 @@
 <name>Magyarkanizsa (Aeroclub_DELTA)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2908,7 +2968,7 @@
 <name>Magyarszombatfa (Rangado)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2920,7 +2980,7 @@
 <name>Makó (bagosikert)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2932,7 +2992,7 @@
 <name>Makó (givaudan)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2944,7 +3004,7 @@
 <name>Marcali (omme_marcali)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2956,7 +3016,7 @@
 <name>Mátészalka (maxliner_hungary)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2968,7 +3028,7 @@
 <name>Mátészalka (mszalka_baross)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2980,7 +3040,7 @@
 <name>Mátranovák (matranovak)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -2992,7 +3052,7 @@
 <name>Mátraszentistván (sipark_hegy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3004,7 +3064,7 @@
 <name>Mátraszentistván (sipark_volgy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3016,7 +3076,7 @@
 <name>Mérk (omme_merk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3028,7 +3088,7 @@
 <name>Mernye (mernye)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3040,7 +3100,7 @@
 <name>Mezőberény (mbereny46)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3052,7 +3112,7 @@
 <name>Mezőberény (psgidokep)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3064,7 +3124,7 @@
 <name>Mezőpeterd (papmiklos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3076,7 +3136,7 @@
 <name>Mindszent (omme_mindszent)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3088,7 +3148,7 @@
 <name>Miskolc Repülőtér (lhmc)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3100,7 +3160,7 @@
 <name>Miskolc (bw_miskolc)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3112,7 +3172,7 @@
 <name>Miskolc (delimotors)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3124,19 +3184,7 @@
 <name>Miskolc (miskolci_turisztikai_kft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Miskolc (panasonic)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3148,7 +3196,7 @@
 <name>Miskolctapolca (baylogi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3160,7 +3208,7 @@
 <name>Mogyoród (kami73)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3172,7 +3220,7 @@
 <name>Mogyoród (mogyorod)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3184,7 +3232,7 @@
 <name>Mohács (torok50)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3196,7 +3244,7 @@
 <name>Monor (jozsefattilagimnazium_monor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3208,7 +3256,7 @@
 <name>Monor (oaziskerteszet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3220,7 +3268,7 @@
 <name>Monorierdő (DTibcsy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3232,7 +3280,7 @@
 <name>Mór (szomy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3244,7 +3292,7 @@
 <name>Mórahalom (plafty2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3256,7 +3304,7 @@
 <name>Mosonmagyaróvár (antiszalka)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3268,7 +3316,7 @@
 <name>Nádasd (derifarm)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3280,7 +3328,7 @@
 <name>Nagy Hideg-hegy (nhh)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3292,7 +3340,7 @@
 <name>Nagyatád  (nagyatadmed)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3304,7 +3352,7 @@
 <name>Nagyatád (omme_nagyatad)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3316,7 +3364,7 @@
 <name>Nagycserkesz (cserkesz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3328,7 +3376,7 @@
 <name>Nagyharsány (blueskyse_szarsomlyo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3340,7 +3388,7 @@
 <name>Nagyigmánd (karsai)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3352,7 +3400,7 @@
 <name>Nagykanizsa Sportrepülőtér (nse)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3364,7 +3412,7 @@
 <name>Nagykanizsa (hidrofilt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3376,7 +3424,7 @@
 <name>Nagykanizsa (ksasi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3388,7 +3436,7 @@
 <name>Nagykapos (ocsenasbarna)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3400,7 +3448,7 @@
 <name>Nagykarácsony (mkknagykaracsony)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3412,7 +3460,7 @@
 <name>Nagykarácsony (omme_nagykaracsony)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3424,7 +3472,7 @@
 <name>Nagykőrös (madacsavo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3436,7 +3484,19 @@
 <name>Nagykozár (jaroandras)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Nagymagyar (tothgabor69)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3448,7 +3508,7 @@
 <name>Nagymányok (terccokft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3460,7 +3520,7 @@
 <name>Nagypaka (gasparek1)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3472,7 +3532,7 @@
 <name>Nagyszentjános (krisztincs)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3484,7 +3544,7 @@
 <name>Nagytarcsa (winterfell)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3496,7 +3556,7 @@
 <name>Nagyvenyim (venyim_gyumolcskert)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3508,7 +3568,7 @@
 <name>Nemesgörzsöny (omme_nemesgorzsony)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3520,7 +3580,7 @@
 <name>Nemesvita (omme_Nemesvita)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3532,7 +3592,7 @@
 <name>Németkér (volaricsi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3544,7 +3604,7 @@
 <name>Nógrádsipek (arnold21)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3556,7 +3616,7 @@
 <name>Nyáregyháza (nyaregyhaza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3568,7 +3628,7 @@
 <name>Nyergesújfalu (klezol)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3580,7 +3640,7 @@
 <name>Nyírábrány (omme_nyirabrany)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3592,7 +3652,7 @@
 <name>Nyírtelek (laganus)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3604,7 +3664,7 @@
 <name>Nyírtura (omme_nyirtura)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3616,7 +3676,7 @@
 <name>Nyúl (soska13)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3628,7 +3688,7 @@
 <name>Óbarok (muki94)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3640,7 +3700,7 @@
 <name>Őcsény Repülőtér (lhoy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3652,7 +3712,7 @@
 <name>Old (omme_old)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3664,7 +3724,7 @@
 <name>Őrbottyán (orbottyan_eszak)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3676,7 +3736,7 @@
 <name>Ordacsehi (fucsi51)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3688,7 +3748,7 @@
 <name>Orfű - Pécsi tó (orfuiszorfklub)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3700,19 +3760,7 @@
 <name>Orfű (onkormanyzat_orfu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Orosháza (omegas)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3724,7 +3772,7 @@
 <name>Örvényes (huszar)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3736,7 +3784,7 @@
 <name>Ostoros (grg)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3748,7 +3796,7 @@
 <name>Ózd (JozsefAttilaGimn)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3760,7 +3808,7 @@
 <name>Panyola (panyola)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3772,7 +3820,19 @@
 <name>Pásztó (nyikom)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>PásztóSertéstelep (agro_product)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3784,7 +3844,7 @@
 <name>Patak (omme_patak)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3796,7 +3856,7 @@
 <name>Pázmánd (zveliczky)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3808,7 +3868,7 @@
 <name>Pécel (FayAndras_MKSZKI_Pecel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3820,7 +3880,7 @@
 <name>Pécel (pecelinfo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3832,7 +3892,7 @@
 <name>Pécs (blueskyse_tvt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3844,7 +3904,7 @@
 <name>Pécs (pte)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3856,7 +3916,7 @@
 <name>Perbete (misuli)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3868,7 +3928,7 @@
 <name>Pétfürdő (omme_petfurdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3880,7 +3940,7 @@
 <name>Petőháza (kuslics)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3892,7 +3952,7 @@
 <name>Pilis-tető (pilismeteor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3904,7 +3964,7 @@
 <name>Pilis (meggyespista)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3916,7 +3976,7 @@
 <name>Pilisborosjenő (ingyennapelemponthu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3928,7 +3988,7 @@
 <name>Piliscsaba (csabagyoengye)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3940,7 +4000,7 @@
 <name>Pilisjászfalu (omme_pilisjaszfalu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3952,7 +4012,7 @@
 <name>Pilisszentiván (havasiz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3964,7 +4024,19 @@
 <name>Piszkéstető (piszkesteto)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Pókaszepetk (csasziszerviz)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -3976,19 +4048,7 @@
 <name>Polány (weerstationhongarije)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Pornóapáti (atlasz)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4000,7 +4060,7 @@
 <name>Póstelek (korosklub)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4012,7 +4072,7 @@
 <name>Pötréte (potrete)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4024,7 +4084,7 @@
 <name>Pozsonyvezekény (rpetike)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4036,7 +4096,7 @@
 <name>Pusztaszentlászló (aquabarbara)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4048,7 +4108,7 @@
 <name>Pusztavám (bandyy2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4060,7 +4120,19 @@
 <name>Pusztazámor (tolgyesa)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Rácalmás (HelianthusKFT)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4072,7 +4144,7 @@
 <name>Ráckeresztúr (molant)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4084,7 +4156,7 @@
 <name>Rechnitz (androsch)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4096,7 +4168,7 @@
 <name>Romhány (pothariel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4108,7 +4180,7 @@
 <name>Saalfelden (Hausnikolaus)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4120,7 +4192,7 @@
 <name>Ságújfalu (sanyaman)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4132,7 +4204,7 @@
 <name>Sajóörös (orokmozgo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4144,7 +4216,7 @@
 <name>Salgótarján (omme_salgotarjan)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4156,7 +4228,7 @@
 <name>Sárkeszi (omme_sarkeszi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4168,7 +4240,7 @@
 <name>Sárospatak (avgkmet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4180,7 +4252,7 @@
 <name>Sarród (omme_nyarliget)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4192,7 +4264,7 @@
 <name>Sárvár (dzsinn)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4204,7 +4276,7 @@
 <name>Sárvár (tinodisebestyengimn_sarvar)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4216,7 +4288,7 @@
 <name>Sátoraljaújhely (iski)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4228,7 +4300,7 @@
 <name>Sátoraljaújhely (kalandpark_also)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4240,7 +4312,7 @@
 <name>Sátoraljaújhely (kalandpark_kozepso)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4252,7 +4324,7 @@
 <name>Siklós (ha3mq)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4264,7 +4336,7 @@
 <name>Siófok (Autobonto_Siofok)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4276,7 +4348,7 @@
 <name>Siófok (BeachHotelSiofok)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4288,7 +4360,7 @@
 <name>Siófok (club218)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4300,7 +4372,7 @@
 <name>Sitke (omme_sitke)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4312,7 +4384,7 @@
 <name>Somogysárd (pokter)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4324,7 +4396,7 @@
 <name>Soponya (vadex)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4336,7 +4408,7 @@
 <name>Sopron (ggki)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4348,7 +4420,7 @@
 <name>Sopron (s_zita)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4360,7 +4432,7 @@
 <name>Sopron (szechenyi_gimnazium)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4372,7 +4444,7 @@
 <name>Sopron (szentorsolya2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4384,7 +4456,7 @@
 <name>Sormás (stopcsiga)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4396,7 +4468,7 @@
 <name>Sóskút (kvarchomok)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4408,7 +4480,7 @@
 <name>Sóskút (silyesandor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4420,7 +4492,7 @@
 <name>St. Andrä am Zicksee (kemenczy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4432,7 +4504,7 @@
 <name>Sutomore (mne_sutomore)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4444,7 +4516,7 @@
 <name>Szabadbattyán (zsolti7615)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4456,7 +4528,7 @@
 <name>Szabadkígyós (metkigyos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4468,7 +4540,7 @@
 <name>Szabadszállás (szabadszallasido)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4480,7 +4552,7 @@
 <name>Szákszend (KatonaLaci)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4492,7 +4564,7 @@
 <name>Szarvas (informatika)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4504,7 +4576,7 @@
 <name>Százhalombatta (kiraly)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4516,7 +4588,7 @@
 <name>Szedres (omme_szedres)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4528,7 +4600,7 @@
 <name>Szeged-Gyálarét (omme_szeged_gyalaret)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4540,7 +4612,7 @@
 <name>Szeged (aquapolis)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4552,7 +4624,7 @@
 <name>Szeged (szegedplaza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4564,7 +4636,7 @@
 <name>Székesfehérvár  (hoimre2013)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4576,19 +4648,7 @@
 <name>Székesfehérvár Maroshegy (maroshegy1)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Székesfehérvár, Börgöndi Repülőtér (LHBD)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4600,7 +4660,7 @@
 <name>Székesfehérvár, Öreghegy (herczogtamas)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4612,7 +4672,7 @@
 <name>Székesfehérvár, Palotaváros (palotavaros)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4624,7 +4684,7 @@
 <name>Székesfehérvár, Szárazrét (szarazret1)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4636,7 +4696,7 @@
 <name>Székesfehérvár (mentavill)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4648,7 +4708,7 @@
 <name>Szekszárd (murexin)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4660,7 +4720,7 @@
 <name>Szekszárd (szltiszk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4672,7 +4732,7 @@
 <name>Szentendre (REC)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4684,7 +4744,7 @@
 <name>Szentendre (timaran)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4696,7 +4756,7 @@
 <name>Szentes (hulladekkezelo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4708,7 +4768,7 @@
 <name>Szentes (isaac)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4720,7 +4780,7 @@
 <name>Szentes (kissbalint)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4732,7 +4792,7 @@
 <name>Szentes (omme_Szentes)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4744,7 +4804,7 @@
 <name>Szentlászló (omme_szentlaszlo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4756,7 +4816,7 @@
 <name>Szentlélek (szentlelek)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4768,7 +4828,7 @@
 <name>Szentmártonkáta (talaci)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4780,7 +4840,7 @@
 <name>Szikszó (esoft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4792,7 +4852,7 @@
 <name>Szirák (addam)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4804,7 +4864,7 @@
 <name>Szokolya-Kőhegy (kopi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4816,7 +4876,7 @@
 <name>Szolnok (nke_krlt)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4828,7 +4888,7 @@
 <name>Szombathely Szentkirály (kata74)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4840,7 +4900,7 @@
 <name>Szombathely (Savaria90)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4852,7 +4912,7 @@
 <name>Szombathely (markusovszky)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4864,7 +4924,7 @@
 <name>Szombathely (omme_szombathely)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4876,7 +4936,7 @@
 <name>Szombathely (prenor)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4888,7 +4948,7 @@
 <name>Szombathely (szherdeszet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4900,7 +4960,7 @@
 <name>Szombathely (z3d)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4912,7 +4972,7 @@
 <name>Taliándörögd (tokes)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4924,7 +4984,7 @@
 <name>Tállya (deco05)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4936,7 +4996,7 @@
 <name>Tamási-Rácvölgy (Tamasi_Erdeszet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4948,7 +5008,7 @@
 <name>Tamási (mtbsrac)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4960,7 +5020,7 @@
 <name>Tamási (omme_tamasi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4972,7 +5032,7 @@
 <name>Tápióság (beresk)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4984,7 +5044,7 @@
 <name>Tapolca (batsanyi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -4993,10 +5053,10 @@
 <ratio>1</ratio>
 </Station>
 <Station>
-<name>Tar (omme_tar)</name>
+<name>Tapolca (lalapapa57)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5008,19 +5068,7 @@
 <name>Tardos (Abrog)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Tát (Zolti_65)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5032,7 +5080,19 @@
 <name>Tát (osztanti)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Tát (zolti_65)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5044,7 +5104,7 @@
 <name>Tata (uwel)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5056,7 +5116,7 @@
 <name>Tatabánya (gyemant_furdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5068,7 +5128,7 @@
 <name>Teklafalu (omme_teklafalu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5080,7 +5140,7 @@
 <name>Telki (mlsz_edzocentrum)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5092,7 +5152,7 @@
 <name>Temesvár (drobescu)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5104,7 +5164,7 @@
 <name>Tereske (urbanp5506)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5116,7 +5176,7 @@
 <name>Tét (sokoro)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5128,7 +5188,7 @@
 <name>Tihany (limnologia)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5140,7 +5200,7 @@
 <name>Tihany (thesail)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5152,7 +5212,7 @@
 <name>Tiszadob (mikef)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5164,7 +5224,7 @@
 <name>Tiszafüred (borsodweb7)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5176,7 +5236,7 @@
 <name>Tiszafüred (kungabi)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5188,7 +5248,7 @@
 <name>Tiszainoka (geofer)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5200,7 +5260,7 @@
 <name>Tiszakécske (omme_tiszakecske)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5212,7 +5272,7 @@
 <name>Tiszakürt (nagysziget)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5224,7 +5284,7 @@
 <name>Tiszalök (kosztam)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5236,7 +5296,7 @@
 <name>Tiszaújváros (tiszaiballonclub)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5248,7 +5308,7 @@
 <name>Tiszavasvári (ahoj)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5260,7 +5320,7 @@
 <name>Tiszavasvári (omme_tiszavasvari)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5272,7 +5332,7 @@
 <name>Tokod (oporto)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5284,7 +5344,7 @@
 <name>Tököl (alison888)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5296,7 +5356,7 @@
 <name>Tököl (lhts)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5308,7 +5368,7 @@
 <name>Tököl (papau)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5320,7 +5380,7 @@
 <name>Törökkoppány (gorban)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5332,19 +5392,7 @@
 <name>Túrkeve (turkevetermal)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Újkígyós (kruat)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5356,7 +5404,7 @@
 <name>Újszilvás (omme_ujszilvas)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5368,7 +5416,7 @@
 <name>Üllő (ullo_mol)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5380,7 +5428,7 @@
 <name>Und (lendvaimilanpro)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5392,7 +5440,7 @@
 <name>Uszód (tajfotos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5404,7 +5452,7 @@
 <name>Vác-Nyulas (meteorita2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5416,7 +5464,7 @@
 <name>Vác (meteorita)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5428,7 +5476,7 @@
 <name>Vágáshuta (suj)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5440,7 +5488,7 @@
 <name>Valkó (omme_valko)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5452,7 +5500,7 @@
 <name>Váralja (varaljamet)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5464,7 +5512,7 @@
 <name>Váralja (varaljatelehaz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5476,7 +5524,7 @@
 <name>Vaskút (dunasparga)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5488,7 +5536,7 @@
 <name>Vecsés (vecses_viztorony)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5500,7 +5548,7 @@
 <name>Veresegyház (wov)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5512,7 +5560,7 @@
 <name>Verőce (bboy)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5524,7 +5572,7 @@
 <name>Veszprém (Nova)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5536,7 +5584,7 @@
 <name>Veszprém (pemik)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5548,7 +5596,7 @@
 <name>Veszprém (phjz)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5560,19 +5608,7 @@
 <name>Vindornyaszőlős (kory)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Vir (vir)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5584,19 +5620,7 @@
 <name>Visegrád (pilispark_visegrad)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
-<maxinbw>1000</maxinbw>
-<maxoutbw>1000</maxoutbw>
-<diskbw>1000</diskbw>
-<torepo>ceph</torepo>
-<reposize>60000</reposize>
-<ratio>1</ratio>
-</Station>
-<Station>
-<name>Visegrád (visegradsikozep)</name>
-<freq>60000</freq>
-<snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5608,7 +5632,7 @@
 <name>Visegrád (visegradsipalya)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5620,7 +5644,7 @@
 <name>Visonta (visonta_onkormanyzat)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5632,7 +5656,7 @@
 <name>Vizsoly (omme_vizsoly)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5644,7 +5668,7 @@
 <name>Vonyarcvashegy (bajcos)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5656,7 +5680,19 @@
 <name>Záhony (stefisoft)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Zákányszék (geka)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5668,7 +5704,7 @@
 <name>Zalaegerszeg Andráshida Repülőtér (lhza)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5680,7 +5716,7 @@
 <name>Zalaegerszeg (ZuggoEpGe)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5692,7 +5728,7 @@
 <name>Zalaegerszeg (bendi9605)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5704,7 +5740,7 @@
 <name>Zalaháshágy (hzsolt8)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5716,7 +5752,7 @@
 <name>Zalakaros (Agricola)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5728,7 +5764,7 @@
 <name>Zalakaros (ksasi2)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5740,7 +5776,19 @@
 <name>Zalakaros (zalakarosifurdo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+<Station>
+<name>Zamárdi (SZANCSO)</name>
+<freq>60000</freq>
+<snumber>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5752,7 +5800,7 @@
 <name>Závod (szaszgabor4)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5764,7 +5812,7 @@
 <name>Zirc (zirc_onkorm)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5776,7 +5824,7 @@
 <name>Zirc (zircmeteo)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
@@ -5788,7 +5836,7 @@
 <name>Zselickisfalud (zselicicsillagpark)</name>
 <freq>60000</freq>
 <snumber>8</snumber>
-<time starttime='0' stoptime='864000'>864000</time>
+<time starttime='0' stoptime='86400000'>86400000</time>
 <maxinbw>1000</maxinbw>
 <maxoutbw>1000</maxoutbw>
 <diskbw>1000</diskbw>
