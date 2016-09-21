@@ -114,7 +114,6 @@ public class Scenario {
 			// hasznos infok:
 			if(print==1){
 				System.out.println("Scenario finished at: "+Timed.getFireCount());
-				System.out.println("All byte: "+Station.allstationsize);
 				int i=0;
 				int j=0;
 				for(VmCollector vmcl : Application.vmlist){
