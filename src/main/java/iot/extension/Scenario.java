@@ -108,7 +108,6 @@ public class Scenario {
 				}
 			}
 			
-			//Application.getInstance(60,new VirtualAppliance("Base", 0, 0, false, 1000),1);
 			Application.getInstance(60000,1);
 			Timed.simulateUntilLastEvent();
 			
@@ -123,9 +122,14 @@ public class Scenario {
 						j++;
 						i+=vmcl.tasknumber;
 					}
-					
-					
 				}
+				System.out.println("~~~~~~~~~~~~");
+				for(VmCollector vmcl : Application.vmlist){
+					if(vmcl.worked && vmcl.tasknumber>0){
+						System.out.println(vmcl.vm+" : "+vmcl.tasknumber);
+					}
+				}
+				System.out.println("~~~~~~~~~~~~");
 				System.out.println("VM: "+j + " tasks: "+i);
 				System.out.println("~~~~~~~~~~~~");
 				System.out.println(Cloud.iaas.repositories.toString());
@@ -152,7 +156,7 @@ public class Scenario {
 			String datafile=args[0];
 			String cloudfile=args[1];
 			int print=Integer.parseInt(args[2]);
-			new Scenario(null,  223,datafile,cloudfile,print);	
+			new Scenario(null,200,datafile,cloudfile,print);	
 		}
 }
 

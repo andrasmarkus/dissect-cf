@@ -1,6 +1,9 @@
 package iot.extension;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
@@ -60,8 +63,18 @@ public class Application extends Timed {
 				if(Application.i==0){
 					Application.i++;
 					System.out.println("Scenario started at: "+Timed.getFireCount());
-					for(Station s: Station.stations){
-						s.startMeter(s.sd.freq);
+					for(final Station s: Station.stations){
+						Random randomGenerator = new Random();
+						int randomInt = randomGenerator.nextInt(21);
+						new DeferredEvent((long)randomInt*60*1000) {
+							
+							@Override
+							protected void eventAction() {
+								s.startMeter(s.sd.freq);
+								
+							}
+						};
+						
 					}
 				}
 				return vmc;
@@ -88,10 +101,6 @@ public class Application extends Timed {
 
 	@Override
 	public void tick(long fires) {
-		// kilepesi feltetel az app szamara
-		if (Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
-			unsubscribe();
-		}
 		if (Application.vmlist.isEmpty()) {
 			this.generateAndAddVM();
 		} else {
@@ -115,9 +124,13 @@ public class Application extends Timed {
 							long ii = Application.localfilesize;
 							@Override
 							public void conComplete() {
+								// kilepesi feltetel az app szamara
 								vml.isworking = false;
 								vml.worked=true;
 								vml.tasknumber++;
+								if (Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
+									unsubscribe();
+								}
 								if (print == 1) {
 									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
 									
