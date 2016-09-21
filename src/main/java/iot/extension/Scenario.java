@@ -1,6 +1,8 @@
 package iot.extension;
 
 import java.io.File;
+import java.io.PrintWriter;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
@@ -108,7 +110,7 @@ public class Scenario {
 				}
 			}
 			
-			Application.getInstance(60000,1);
+			Application.getInstance(60000,true,1);
 			Timed.simulateUntilLastEvent();
 			
 			// hasznos infok:
@@ -145,7 +147,7 @@ public class Scenario {
 			}
 			
 		}
-	
+
 		/**
 		 * 
 		 * @param args Az elso argumentumkent adhato meg a Station-okat leiro XML eleresi utvonala

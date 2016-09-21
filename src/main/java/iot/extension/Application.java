@@ -31,22 +31,24 @@ public class Application extends Timed {
 	public static Application app;
 	public static ArrayList<VmCollector> vmlist;
 	private int print;
+	private boolean delay;
 	private static long allgenerateddatasize = 0;
 	private static long localfilesize = 0;
 
-	public static Application getInstance(final long freq, int print) {
+	public static Application getInstance(final long freq,boolean delay, int print) {
 		if (app == null) {
-			app = new Application(freq, print);
+			app = new Application(freq,delay, print);
 		} else {
 			System.out.println("you can't create a second app!");
 		}
 		return Application.app;
 	}
 
-	private Application(final long freq, int print) {
+	private Application(final long freq,boolean delay, int print) {
 		subscribe(freq);
 		this.print = print;
 		Application.vmlist = new ArrayList<VmCollector>();
+		this.delay=delay;
 	}
 
 	/**
@@ -66,14 +68,18 @@ public class Application extends Timed {
 					for(final Station s: Station.stations){
 						Random randomGenerator = new Random();
 						int randomInt = randomGenerator.nextInt(21);
-						new DeferredEvent((long)randomInt*60*1000) {
-							
-							@Override
-							protected void eventAction() {
-								s.startMeter(s.sd.freq);
+						if(this.delay){
+							new DeferredEvent((long)randomInt*60*1000) {
 								
-							}
-						};
+								@Override
+								protected void eventAction() {
+									s.startMeter(s.sd.freq);
+								}
+							};
+						}else{
+							s.startMeter(s.sd.freq);
+						}
+						
 						
 					}
 				}
@@ -113,51 +119,53 @@ public class Application extends Timed {
 	public void tick(long fires) {
 		if (Application.vmlist.isEmpty()) {
 			this.generateAndAddVM();
-		} else {
-			final VmCollector vml = this.VmSearch();
-			if (vml == null) {
-				this.generateAndAddVM();
-			} else {
-			/*	if ((Station.allstationsize - Application.allgenerateddatasize) > 3864000) {
-					Application.localfilesize = 3864000;
-				} else {
-					Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
-				}*/
-				Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
-				try {
-					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+fires);
-					if (Application.localfilesize != 0) {
-						System.out.println(vml.vm+" started at "+Timed.getFireCount());
+		}
+		Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
+		try {
+			if (Application.localfilesize != 0) {
+				long temp = 0;
+				while (temp<Application.localfilesize) {
+					temp+=240000;
+					final VmCollector vml = this.VmSearch();
+					if (vml == null) {
+						this.generateAndAddVM();
+					}else{
+						System.out.println(vml.vm + " started at " + Timed.getFireCount());
 						vml.isworking = true;
 						vml.vm.newComputeTask(2400 /* 10000 */
-						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
-							long i = Timed.getFireCount();
-							long ii = Application.localfilesize;
-							@Override
-							public void conComplete() {
-								vml.isworking = false;
-								vml.worked=true;
-								vml.tasknumber++;
-								
-								if (print == 1) {
-									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
-								}
-								// kilepesi feltetel az app szamara
-								if (checkStationState() && Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
-									unsubscribe();
-								}
-							}
-						});
+								, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
+									long i = Timed.getFireCount();
+									long ii = Application.localfilesize;
+
+									@Override
+									public void conComplete() {
+										vml.isworking = false;
+										vml.worked = true;
+										vml.tasknumber++;
+
+										if (print == 1) {
+											System.out.println(vml.vm + " finished at " + Timed.getFireCount()
+													+ " with " + ii + " bytes,lasted " + (Timed.getFireCount() - i));
+										}
+										// kilepesi feltetel az app szamara
+										if (checkStationState()
+												&& Station.allstationsize == Application.allgenerateddatasize
+												&& Application.allgenerateddatasize != 0) {
+											unsubscribe();
+										}
+									}
+								});
 					}
-				} catch (NetworkException e) {
-					e.printStackTrace();
 				}
-				
-				Application.allgenerateddatasize += Application.localfilesize; // kilepesi
-																				// feltetelhez
-
 			}
+		} catch (NetworkException e) {
+			e.printStackTrace();
 		}
-
+		Application.allgenerateddatasize += Application.localfilesize; // kilepesi
+																		// feltetel
 	}
+		
+		
+				
+
 }
