@@ -99,6 +99,16 @@ public class Application extends Timed {
 		return b;
 	}
 
+	private boolean checkStationState(){
+		boolean i=true;
+		for(Station s : Station.stations){
+			if(s.isSubscribed()){
+				i=false;
+			}
+		}
+		return i;
+	}
+	
 	@Override
 	public void tick(long fires) {
 		if (Application.vmlist.isEmpty()) {
@@ -108,32 +118,33 @@ public class Application extends Timed {
 			if (vml == null) {
 				this.generateAndAddVM();
 			} else {
-				if ((Station.allstationsize - Application.allgenerateddatasize) > 5000000) {
-					Application.localfilesize = 5000000;
+			/*	if ((Station.allstationsize - Application.allgenerateddatasize) > 3864000) {
+					Application.localfilesize = 3864000;
 				} else {
 					Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
-				}
+				}*/
+				Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
 				try {
-					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+ vml.vm+" : "+fires);
+					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+fires);
 					if (Application.localfilesize != 0) {
 						System.out.println(vml.vm+" started at "+Timed.getFireCount());
 						vml.isworking = true;
-						vml.vm.newComputeTask(Application.localfilesize /* 10000 */
+						vml.vm.newComputeTask(2400 /* 10000 */
 						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
 							long i = Timed.getFireCount();
 							long ii = Application.localfilesize;
 							@Override
 							public void conComplete() {
-								// kilepesi feltetel az app szamara
 								vml.isworking = false;
 								vml.worked=true;
 								vml.tasknumber++;
-								if (Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
-									unsubscribe();
-								}
+								
 								if (print == 1) {
 									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
-									
+								}
+								// kilepesi feltetel az app szamara
+								if (checkStationState() && Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
+									unsubscribe();
 								}
 							}
 						});
