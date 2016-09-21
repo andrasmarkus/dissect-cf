@@ -132,6 +132,8 @@ public class Scenario {
 				System.out.println("~~~~~~~~~~~~");
 				System.out.println("VM: "+j + " tasks: "+i);
 				System.out.println("~~~~~~~~~~~~");
+				System.out.println("All filesize: "+Station.allstationsize);
+				System.out.println("~~~~~~~~~~~~");
 				System.out.println(Cloud.iaas.repositories.toString());
 				System.out.println("~~~~~~~~~~~~");
 				for (PhysicalMachine p : Cloud.iaas.machines) {
