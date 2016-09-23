@@ -2,6 +2,8 @@ package iot.extension;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -143,7 +145,16 @@ public class Scenario {
 						System.out.println(p);
 					}
 				}
-				
+				System.out.println("~~~~~~~~~~~~");
+				RandomAccessFile raf = new RandomAccessFile("tasks.csv", "rw");
+				int isd=0;
+				for( Long s : Application.hmap.keySet() )
+				{
+				raf.writeBytes(s + "," + Application.hmap.get(s)+"\n"); 
+				  isd+=Application.hmap.get(s);
+				}
+				//System.out.println("asdasd: "+isd);
+				raf.close();
 			}
 			
 		}
