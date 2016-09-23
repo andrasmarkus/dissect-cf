@@ -37,7 +37,7 @@ public class Application extends Timed {
 
 	public static Application getInstance(final long freq,boolean delay, int print) {
 		if (app == null) {
-			app = new Application(freq,delay, print);
+			app = new Application(freq, delay,print);
 		} else {
 			System.out.println("you can't create a second app!");
 		}
@@ -68,7 +68,7 @@ public class Application extends Timed {
 					for(final Station s: Station.stations){
 						Random randomGenerator = new Random();
 						int randomInt = randomGenerator.nextInt(21);
-						if(this.delay){
+						if(delay){
 							new DeferredEvent((long)randomInt*60*1000) {
 								
 								@Override
@@ -76,11 +76,10 @@ public class Application extends Timed {
 									s.startMeter(s.sd.freq);
 								}
 							};
-						}else{
+						}
+						else{
 							s.startMeter(s.sd.freq);
 						}
-						
-						
 					}
 				}
 				return vmc;
@@ -119,53 +118,51 @@ public class Application extends Timed {
 	public void tick(long fires) {
 		if (Application.vmlist.isEmpty()) {
 			this.generateAndAddVM();
-		}
-		Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
-		try {
-			if (Application.localfilesize != 0) {
-				long temp = 0;
-				while (temp<Application.localfilesize) {
-					temp+=240000;
-					final VmCollector vml = this.VmSearch();
-					if (vml == null) {
-						this.generateAndAddVM();
-					}else{
-						System.out.println(vml.vm + " started at " + Timed.getFireCount());
+		} else {
+			final VmCollector vml = this.VmSearch();
+			if (vml == null) {
+				this.generateAndAddVM();
+			} else {
+			/*	if ((Station.allstationsize - Application.allgenerateddatasize) > 3864000) {
+					Application.localfilesize = 3864000;
+				} else {
+					Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
+				}*/
+				Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
+				try {
+					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+fires);
+					if (Application.localfilesize != 0) {
+						System.out.println(vml.vm+" started at "+Timed.getFireCount());
 						vml.isworking = true;
 						vml.vm.newComputeTask(2400 /* 10000 */
-								, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
-									long i = Timed.getFireCount();
-									long ii = Application.localfilesize;
-
-									@Override
-									public void conComplete() {
-										vml.isworking = false;
-										vml.worked = true;
-										vml.tasknumber++;
-
-										if (print == 1) {
-											System.out.println(vml.vm + " finished at " + Timed.getFireCount()
-													+ " with " + ii + " bytes,lasted " + (Timed.getFireCount() - i));
-										}
-										// kilepesi feltetel az app szamara
-										if (checkStationState()
-												&& Station.allstationsize == Application.allgenerateddatasize
-												&& Application.allgenerateddatasize != 0) {
-											unsubscribe();
-										}
-									}
-								});
+						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
+							long i = Timed.getFireCount();
+							long ii = Application.localfilesize;
+							@Override
+							public void conComplete() {
+								vml.isworking = false;
+								vml.worked=true;
+								vml.tasknumber++;
+								
+								if (print == 1) {
+									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
+								}
+								// kilepesi feltetel az app szamara
+								if (checkStationState() && Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
+									unsubscribe();
+								}
+							}
+						});
 					}
+				} catch (NetworkException e) {
+					e.printStackTrace();
 				}
-			}
-		} catch (NetworkException e) {
-			e.printStackTrace();
-		}
-		Application.allgenerateddatasize += Application.localfilesize; // kilepesi
-																		// feltetel
-	}
-		
-		
 				
+				Application.allgenerateddatasize += Application.localfilesize; // kilepesi
+																				// feltetelhez
 
+			}
+		}
+
+	}
 }
