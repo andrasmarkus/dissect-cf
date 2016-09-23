@@ -10,6 +10,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceCons
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
+import iot.extension.Application.VmCollector;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
 
 public class Application extends Timed {
@@ -116,6 +117,15 @@ public class Application extends Timed {
 	
 	@Override
 	public void tick(long fires) {
+	/*	if(print==0){
+			int i=0;
+			for(VmCollector vmcl : Application.vmlist){
+				if(vmcl.worked){
+					i+=vmcl.tasknumber;
+				}
+			}
+			System.out.println(fires + "tasknumber: "+i);
+		}*/
 		if (Application.vmlist.isEmpty()) {
 			this.generateAndAddVM();
 		} else {
@@ -131,8 +141,9 @@ public class Application extends Timed {
 				Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
 				try {
 					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+fires);
-					if (Application.localfilesize != 0) {
-						System.out.println(vml.vm+" started at "+Timed.getFireCount());
+					if (Application.localfilesize > 3000000) {
+						//System.out.println(vml.vm+" started at "+Timed.getFireCount());
+						final String printtart=vml.vm+" started at "+Timed.getFireCount();
 						vml.isworking = true;
 						vml.vm.newComputeTask(2400 /* 10000 */
 						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
@@ -145,7 +156,7 @@ public class Application extends Timed {
 								vml.tasknumber++;
 								
 								if (print == 1) {
-									System.out.println(vml.vm+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
+									System.out.println(printtart+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
 								}
 								// kilepesi feltetel az app szamara
 								if (checkStationState() && Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
@@ -153,16 +164,17 @@ public class Application extends Timed {
 								}
 							}
 						});
+						Application.allgenerateddatasize += Application.localfilesize; // kilepesi
+						// feltetelhez
 					}
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
 				
-				Application.allgenerateddatasize += Application.localfilesize; // kilepesi
-																				// feltetelhez
+				
 
 			}
 		}
-
+		
 	}
 }
