@@ -35,6 +35,7 @@ public class Application extends Timed {
 	private boolean delay;
 	private static long allgenerateddatasize = 0;
 	private static long localfilesize = 0;
+	private static long temp;
 
 	public static Application getInstance(final long freq,boolean delay, int print) {
 		if (app == null) {
@@ -63,32 +64,35 @@ public class Application extends Timed {
 			if (Application.vmlist.get(i).isworking == false
 					&& Application.vmlist.get(i).vm.getState().equals(VirtualMachine.State.RUNNING)) {
 				vmc = Application.vmlist.get(i);
-				if(Application.i==0){
-					Application.i++;
-					System.out.println("Scenario started at: "+Timed.getFireCount());
-					for(final Station s: Station.stations){
-						Random randomGenerator = new Random();
-						int randomInt = randomGenerator.nextInt(21);
-						if(delay){
-							new DeferredEvent((long)randomInt*60*1000) {
-								
-								@Override
-								protected void eventAction() {
-									s.startMeter(s.sd.freq);
-								}
-							};
-						}
-						else{
-							s.startMeter(s.sd.freq);
-						}
-					}
-				}
 				return vmc;
 			}
 		}
 		return vmc;
 	}
 
+	
+	private void startStation(){
+		if(Application.i==0){
+			Application.i++;
+			System.out.println("Scenario started at: "+Timed.getFireCount());
+			for(final Station s: Station.stations){
+				Random randomGenerator = new Random();
+				int randomInt = randomGenerator.nextInt(21);
+				if(delay){
+					new DeferredEvent((long)randomInt*60*1000) {
+						
+						@Override
+						protected void eventAction() {
+							s.startMeter(s.sd.freq);
+						}
+					};
+				}
+				else{
+					s.startMeter(s.sd.freq);
+				}
+			}
+		}
+	}
 	/**
 	 * it makes a new VM with default false working variable
 	 * 
@@ -117,28 +121,81 @@ public class Application extends Timed {
 	
 	@Override
 	public void tick(long fires) {
-	/*	if(print==0){
-			int i=0;
-			for(VmCollector vmcl : Application.vmlist){
-				if(vmcl.worked){
-					i+=vmcl.tasknumber;
-				}
-			}
-			System.out.println(fires + "tasknumber: "+i);
-		}*/
 		if (Application.vmlist.isEmpty()) {
-			this.generateAndAddVM();
-		} else {
+			this.generateAndAddVM(); //
+		}
+		if(this.VmSearch()!=null){
+			this.startStation();
+		}
+		/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+		Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // tickben mennyi adatom erkezett feldolgozasra
+		
+		if(Application.localfilesize>0){ // ha van adat
+			long processed = 0;
+			while(Application.localfilesize!=processed){ //akkor addig inditsunk vm-eken feladatot
+				if(Application.localfilesize-processed>250000){
+					Application.temp=250000; // maximalis feldolgozott meret
+				}else{
+					Application.temp=(Application.localfilesize-processed);
+				}
+				processed+=Application.temp;
+				/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+				//System.out.println(Application.temp+" : "+processed+ " : "+Application.localfilesize+" : "+fires);
+				final VmCollector vml = this.VmSearch();
+				if (vml == null) {
+					this.generateAndAddVM();
+				}else{
+					try {
+						final String printtart=vml.vm+" started at "+Timed.getFireCount();
+						vml.isworking = true;
+						vml.vm.newComputeTask(2400, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
+								long i = Timed.getFireCount();
+								long ii = Application.temp;
+								@Override
+								public void conComplete() {
+									vml.isworking = false;
+									vml.worked=true;
+									vml.tasknumber++;
+									
+									if (print == 1) {
+										System.out.println(printtart+" finished at "+Timed.getFireCount()+ " with "+ii+" bytes,lasted "+(Timed.getFireCount()-i));
+									}
+									// kilepesi feltetel az app szamara
+									if (checkStationState() && Station.allstationsize == Application.allgenerateddatasize && Application.allgenerateddatasize != 0) {
+										unsubscribe();
+									}
+								}
+							});
+						Application.allgenerateddatasize += Application.temp; // kilepesi
+							// feltetelhez
+						
+					} catch (NetworkException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+			
+		}
+		
+		
+	}
+}
+		
+		
+		
+		
+		
+		/*else {
 			final VmCollector vml = this.VmSearch();
-			if (vml == null) {
-				this.generateAndAddVM();
-			} else {
+			 else {
 			/*	if ((Station.allstationsize - Application.allgenerateddatasize) > 3864000) {
 					Application.localfilesize = 3864000;
 				} else {
 					Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
 				}*/
-				Application.localfilesize = (Station.allstationsize - Application.allgenerateddatasize); // feladathoz
+/*	
 				try {
 					//System.out.println(Station.allstationsize + " : " + Application.allgenerateddatasize+ " : "+fires);
 					if (Application.localfilesize > 3000000) {
@@ -146,7 +203,7 @@ public class Application extends Timed {
 						final String printtart=vml.vm+" started at "+Timed.getFireCount();
 						vml.isworking = true;
 						vml.vm.newComputeTask(2400 /* 10000 */
-						, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
+						/*, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
 							long i = Timed.getFireCount();
 							long ii = Application.localfilesize;
 							@Override
@@ -170,11 +227,6 @@ public class Application extends Timed {
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
-				
+				*/
 				
 
-			}
-		}
-		
-	}
-}
