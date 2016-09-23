@@ -177,7 +177,9 @@ public class Application extends Timed {
 										unsubscribe();
 										for(VmCollector vmcl : Application.vmlist){
 											try {
-												vmcl.vm.switchoff(true);
+												if(vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)){
+													vmcl.vm.switchoff(true);											
+												}
 											} catch (StateChangeException e) {
 												// TODO Auto-generated catch block
 												e.printStackTrace();
@@ -195,6 +197,29 @@ public class Application extends Timed {
 				}
 			}
 		}
+		int reqshutdown=0;
+		for(VmCollector vmcl : Application.vmlist){
+			if(vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) &&  !vmcl.worked && !vmcl.isworking ){
+				reqshutdown++;
+			}
+		}
+		
+			for(VmCollector vmcl : Application.vmlist){
+				if(reqshutdown>1){
+				if(vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) &&  !vmcl.worked && !vmcl.isworking ){
+					reqshutdown--;
+					try {
+						vmcl.vm.switchoff(true);
+					} catch (StateChangeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		
+		/* ------------------------------------*/
 		int task=0;
 		for(VmCollector vmcl : Application.vmlist){
 			if(vmcl.tasknumber>0 && vmcl.worked && vmcl.isworking && vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)){
