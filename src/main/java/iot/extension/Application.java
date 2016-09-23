@@ -236,6 +236,7 @@ public class Application extends Timed {
 		for (VmCollector vmcl : Application.vmlist) {
 			if (vmcl.tasknumber > 0 && vmcl.worked && vmcl.isworking
 					&& vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
+				task++;
 			}
 		}
 		Application.hmap.put(Timed.getFireCount(), task);
