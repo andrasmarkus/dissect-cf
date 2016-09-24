@@ -155,6 +155,7 @@ public class Application extends Timed {
 					Application.temp = (Application.localfilesize - processed);
 				}
 				processed += Application.temp;
+				final double noi = Application.temp == 250000 ? 2400 : (double) (2400 * Application.temp / 250000);
 				/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 				// System.out.println(Application.temp+" : "+processed+ " :
 				// "+Application.localfilesize+" : "+fires);
@@ -166,10 +167,11 @@ public class Application extends Timed {
 						final String printtart = vml.vm + " started at " + Timed.getFireCount();
 						vml.isworking = true;
 						Application.feladatszam++;
-						vml.vm.newComputeTask(2400, ResourceConsumption.unlimitedProcessing,
+						vml.vm.newComputeTask(noi, ResourceConsumption.unlimitedProcessing,
 								new ConsumptionEventAdapter() {
 									long i = Timed.getFireCount();
 									long ii = Application.temp;
+									double iii = noi;
 
 									@Override
 									public void conComplete() {
@@ -179,26 +181,11 @@ public class Application extends Timed {
 										Application.feladatszam--;
 										if (print == 1) {
 											System.out.println(printtart + " finished at " + Timed.getFireCount()
-													+ " with " + ii + " bytes,lasted " + (Timed.getFireCount() - i));
+													+ " with " + ii + " bytes,lasted " + (Timed.getFireCount() - i)
+													+ " ,noi: " + iii);
 
 										}
-										// kilepesi feltetel az app szamara
-										if (Application.feladatszam == 0 && checkStationState()
-												&& Station.allstationsize == Application.allgenerateddatasize
-												&& Application.allgenerateddatasize != 0) {
-											unsubscribe();
-											for (VmCollector vmcl : Application.vmlist) {
-												try {
-													if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
-														vmcl.vm.switchoff(true);
-													}
-												} catch (StateChangeException e) {
-													// TODO Auto-generated catch
-													// block
-													e.printStackTrace();
-												}
-											}
-										}
+
 									}
 								});
 						Application.allgenerateddatasize += Application.temp; // kilepesi
@@ -212,14 +199,14 @@ public class Application extends Timed {
 		}
 		int reqshutdown = 0;
 		for (VmCollector vmcl : Application.vmlist) {
-			if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) &&  vmcl.isworking==false) {
+			if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
 				reqshutdown++;
 			}
 		}
 
 		for (VmCollector vmcl : Application.vmlist) {
 			if (reqshutdown > 1) {
-				if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)  &&  vmcl.isworking==false) {
+				if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
 					reqshutdown--;
 					try {
 						vmcl.vm.switchoff(true);
@@ -240,5 +227,23 @@ public class Application extends Timed {
 			}
 		}
 		Application.hmap.put(Timed.getFireCount(), task);
+
+		// kilepesi feltetel az app szamara
+		if (Application.feladatszam == 0 && checkStationState()
+				&& Station.allstationsize == Application.allgenerateddatasize
+				&& Application.allgenerateddatasize != 0) {
+			unsubscribe();
+			for (VmCollector vmcl : Application.vmlist) {
+				try {
+					if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
+						vmcl.vm.switchoff(true);
+					}
+				} catch (StateChangeException e) {
+					// TODO Auto-generated catch
+					// block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
