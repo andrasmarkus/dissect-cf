@@ -233,6 +233,9 @@ public class Application extends Timed {
 				&& Station.allstationsize == Application.allgenerateddatasize
 				&& Application.allgenerateddatasize != 0) {
 			unsubscribe();
+			System.out.println("~~~~~~~~~~~~");
+			System.out.println("Scenario finished at: "+Timed.getFireCount());
+			System.out.println("~~~~~~~~~~~~");
 			for (VmCollector vmcl : Application.vmlist) {
 				try {
 					if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {

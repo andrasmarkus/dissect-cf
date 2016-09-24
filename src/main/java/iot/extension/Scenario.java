@@ -117,7 +117,7 @@ public class Scenario {
 			
 			// hasznos infok:
 			if(print==1){
-				System.out.println("Scenario finished at: "+Timed.getFireCount());
+				
 				int i=0;
 				int j=0;
 				for(VmCollector vmcl : Application.vmlist){
@@ -146,15 +146,12 @@ public class Scenario {
 					}
 				}
 				System.out.println("~~~~~~~~~~~~");
-				RandomAccessFile raf = new RandomAccessFile("tasks.csv", "rw");
-				int isd=0;
+				PrintWriter writer = new PrintWriter("tasks.csv", "UTF-8");	
 				for( Long s : Application.hmap.keySet() )
 				{
-				raf.writeBytes(s + "," + Application.hmap.get(s)+"\n"); 
-				  isd+=Application.hmap.get(s);
+					writer.println(s + "," + Application.hmap.get(s));
 				}
-				//System.out.println("asdasd: "+isd);
-				raf.close();
+				writer.close();
 			}
 			
 		}
