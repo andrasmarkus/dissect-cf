@@ -10,6 +10,8 @@ import java.util.TreeMap;
 
 import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.StateChangeException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
@@ -22,16 +24,24 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
 public class Application extends Timed {
 
 	public static class VmCollector {
+		@Override
+		public String toString() {
+			return "VmCollector [vm=" + vm + ", isworking=" + isworking + ", tasknumber=" + tasknumber + ", worked="
+					+ worked + ", pm=" + pm + "]";
+		}
+
 		public VirtualMachine vm;
 		public boolean isworking;
 		public int tasknumber;
 		public boolean worked;
+		public PhysicalMachine pm;
 
 		public VmCollector(VirtualMachine vm, boolean isworking) {
 			this.vm = vm;
 			this.isworking = isworking;
 			this.tasknumber = 0;
 			this.worked = false;
+			//this.pm=this.vm.getResourceAllocation().getHost();
 		}
 	}
 
@@ -101,20 +111,43 @@ public class Application extends Timed {
 		}
 	}
 
+	
+	private boolean turnonVM(){
+		for (int i = 0; i < Application.vmlist.size(); i++) {
+			//System.out.println(Application.vmlist.get(i).pm);
+			if ((Application.vmlist.get(i).vm.getState().equals(VirtualMachine.State.SHUTDOWN) /*||
+					Application.vmlist.get(i).vm.getState().equals(VirtualMachine.State.DESTROYED)*/)
+					&& Application.vmlist.get(i).pm!=null) {
+				try {
+					Application.vmlist.get(i).vm.switchOn(
+							Application.vmlist.get(i).pm.allocateResources(Cloud.getArc(), false, PhysicalMachine.defaultAllocLen),
+							Cloud.iaas.repositories.get(0));
+				} catch (VMManagementException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NetworkException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return true;
+			}
+		}
+		return false;
+	}
 	/**
 	 * it makes a new VM with default false working variable
 	 * 
 	 * @return
 	 */
-	private boolean generateAndAddVM() {
-		boolean b = false;
+	private void generateAndAddVM() {
 		try {
-			b = Application.vmlist.add(new VmCollector(
-					Cloud.iaas.requestVM(Cloud.getVa(), Cloud.getArc(), Cloud.iaas.repositories.get(0), 1)[0], false));
+			if(turnonVM()==false){
+				Application.vmlist.add(new VmCollector(
+					Cloud.iaas.requestVM(Cloud.getVa(), Cloud.getArc(), Cloud.iaas.repositories.get(0), 1)[0], false));	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return b;
 	}
 
 	private boolean checkStationState() {
@@ -167,6 +200,7 @@ public class Application extends Timed {
 						final String printtart = vml.vm + " started at " + Timed.getFireCount();
 						vml.isworking = true;
 						Application.feladatszam++;
+						vml.pm=vml.vm.getResourceAllocation().getHost();
 						vml.vm.newComputeTask(noi, ResourceConsumption.unlimitedProcessing,
 								new ConsumptionEventAdapter() {
 									long i = Timed.getFireCount();
@@ -183,7 +217,6 @@ public class Application extends Timed {
 											System.out.println(printtart + " finished at " + Timed.getFireCount()
 													+ " with " + ii + " bytes,lasted " + (Timed.getFireCount() - i)
 													+ " ,noi: " + iii);
-
 										}
 
 									}
@@ -235,7 +268,6 @@ public class Application extends Timed {
 			unsubscribe();
 			System.out.println("~~~~~~~~~~~~");
 			System.out.println("Scenario finished at: "+Timed.getFireCount());
-			System.out.println("~~~~~~~~~~~~");
 			for (VmCollector vmcl : Application.vmlist) {
 				try {
 					if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
