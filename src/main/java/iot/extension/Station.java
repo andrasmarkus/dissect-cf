@@ -2,6 +2,8 @@ package iot.extension;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+
 import hu.mta.sztaki.lpds.cloud.simulator.io.*;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.*;
@@ -230,7 +232,10 @@ public class Station extends Timed {
 		if (Timed.getFireCount() < (sd.lifetime+this.time) && Timed.getFireCount() >= (sd.starttime+this.time)
 				&& Timed.getFireCount() <= (sd.stoptime+this.time)) {
 			for (int i = 0; i < sd.sensornumber; i++) {
-				new Metering(sd.name, i, sd.filesize);
+				Random randomGenerator = new Random();
+				int randomInt = randomGenerator.nextInt(61);		
+				new Metering(sd.name, i, sd.filesize,1000*randomInt);
+
 			}
 		} else if (Timed.getFireCount() > (sd.stoptime+this.time)) {
 			isMetering = false;

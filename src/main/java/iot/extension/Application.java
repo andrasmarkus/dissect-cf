@@ -55,21 +55,23 @@ public class Application extends Timed {
 	private static long temp;
 	public static TreeMap<Long, Integer> hmap = new TreeMap();
 	private static int feladatszam = 0;
+	private long tasksize;
 
-	public static Application getInstance(final long freq, boolean delay, int print) {
+	public static Application getInstance(final long freq,long tasksize, boolean delay, int print) {
 		if (app == null) {
-			app = new Application(freq, delay, print);
+			app = new Application(freq,tasksize, delay, print);
 		} else {
 			System.out.println("you can't create a second app!");
 		}
 		return Application.app;
 	}
 
-	private Application(final long freq, boolean delay, int print) {
+	private Application(final long freq,long tasksize, boolean delay, int print) {
 		subscribe(freq);
 		this.print = print;
 		Application.vmlist = new ArrayList<VmCollector>();
 		this.delay = delay;
+		this.tasksize=tasksize;
 	}
 
 	/**
@@ -182,8 +184,8 @@ public class Application extends Timed {
 																// inditsunk
 																// vm-eken
 																// feladatot
-				if (Application.localfilesize - processed > 250000) {
-					Application.temp = 250000; // maximalis feldolgozott meret
+				if (Application.localfilesize - processed > this.tasksize) {
+					Application.temp = this.tasksize; // maximalis feldolgozott meret
 				} else {
 					Application.temp = (Application.localfilesize - processed);
 				}

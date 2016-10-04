@@ -9,16 +9,19 @@ public class Metering extends DeferredEvent {
 	private int i;
 	private String sName;
 	private int filesize;
+	private long delay;
 
-	public Metering(String sName, int i, int filesize) {
-		super(1);
+	public Metering(String sName, int i, int filesize,long delay) {
+		super(delay);
 		this.i = i;
 		this.filesize = filesize;
 		this.sName = sName;
+		this.delay=delay;
 	}
 
 	@Override
 	protected void eventAction() {
+		//System.out.println(Timed.getFireCount()+" . "+delay);
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yy:MM:dd:HH:mm:ss:SS");
 		StorageObject so = new StorageObject(this.sName + " " + this.filesize + " " + this.i + " "

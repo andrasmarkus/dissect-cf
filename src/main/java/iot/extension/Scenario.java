@@ -10,6 +10,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import at.ac.uibk.dps.cloud.simulator.test.simple.cloud.vmscheduler.BasicSchedulingTest.AssertFulScheduler;
+
 import org.w3c.dom.Node;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
@@ -26,15 +29,12 @@ public class Scenario {
 	 * @param datafile
 	 * @throws Exception
 	 */
-	public Scenario(VirtualAppliance va, int filesize, String datafile,String cloudfile,int print) throws Exception {
+	public Scenario(VirtualAppliance va, String datafile,String cloudfile,int print) throws Exception {
+		long tasksize=-1;
 		if (va == null) {
 			new Cloud(Cloud.v,cloudfile); // IaaS letrehozasa defaulta VA-val
 		} else {
 			new Cloud(va,cloudfile);
-		}
-		if (filesize <= 0) {
-			System.out.println("Filesize nem lehet 0-nal kisebb");
-			System.exit(0);
 		}
 		if (datafile.isEmpty()) {
 			System.out.println("Datafile nem lehet null");
@@ -45,6 +45,12 @@ public class Scenario {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
+			NodeList NL = doc.getElementsByTagName("gather");
+			tasksize = Long.parseLong(NL.item(0).getAttributes().item(0).getNodeValue());
+			 if(tasksize<=0){
+				 System.out.println("rossz tasksize ertek! ");
+					System.exit(0);
+			 }
 			NodeList nList = doc.getElementsByTagName("Station");
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Node nNode = nList.item(temp);
@@ -75,6 +81,13 @@ public class Scenario {
 						System.out.println("rossz snumber ertek! ");
 						System.exit(0);
 					}
+					final int filesize=Integer.parseInt(eElement.getElementsByTagName("snumber").item(0)
+							.getAttributes().item(0).getNodeValue());
+					if (filesize < 1) {
+						System.out.println("rossz filesize ertek! ");
+						System.exit(0);
+					}
+					
 					final long maxinbw = Long
 							.parseLong(eElement.getElementsByTagName("maxinbw").item(0).getTextContent());
 					if (maxinbw <= 0) {
@@ -104,16 +117,29 @@ public class Scenario {
 						System.out.println("rossz ratio ertek! ");
 						System.exit(0);
 					}
+					
+					final int stationnumber=Integer.parseInt(eElement.getElementsByTagName("name")
+								.item(0).getAttributes().item(0).getNodeValue());
+					if (stationnumber < 1) {
+						System.out.println("rossz stationnumber ertek! ");
+						System.exit(0);
+					}
+					for(int i=0;i<stationnumber;i++){
 						Stationdata sd = new Stationdata(time, starttime, stoptime, filesize, snumber, freq,
-								eElement.getElementsByTagName("name").item(0).getTextContent(),
+								eElement.getElementsByTagName("name").item(0).getTextContent()+" "+i,
 								eElement.getElementsByTagName("torepo").item(0).getTextContent(), ratio);
 						Station.stations.add(new Station(maxinbw, maxoutbw, diskbw, reposize, sd));
+					}
+
 					}
 				}
 			}
 			
-			Application.getInstance(60000,true,1);
-			Timed.simulateUntilLastEvent();
+			if(tasksize!=-1){
+				Application.getInstance(60000,tasksize,true,1);
+				Timed.simulateUntilLastEvent();
+			}
+						
 			
 			// hasznos infok:
 			if(print==1){
@@ -145,6 +171,10 @@ public class Scenario {
 						System.out.println(p);
 					}
 				}
+				/*System.out.println("~~~~~~~~~~~~");
+				for(Station s: Station.stations){
+					System.out.println(s);
+				}*/
 				System.out.println("~~~~~~~~~~~~");
 				PrintWriter writer = new PrintWriter("tasks.csv", "UTF-8");	
 				for( Long s : Application.hmap.keySet() )
@@ -164,10 +194,12 @@ public class Scenario {
 		 * @throws Exception
 		 */
 		public static void main(String[] args) throws Exception {
+	
 			String datafile=args[0];
 			String cloudfile=args[1];
 			int print=Integer.parseInt(args[2]);
-			new Scenario(null,200,datafile,cloudfile,print);	
+			new Scenario(null,datafile,cloudfile,print);	
+			
 		}
 }
 
