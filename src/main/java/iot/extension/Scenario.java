@@ -45,7 +45,7 @@ public class Scenario {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
-			NodeList NL = doc.getElementsByTagName("gather");
+			NodeList NL = doc.getElementsByTagName("application");
 			tasksize = Long.parseLong(NL.item(0).getAttributes().item(0).getNodeValue());
 			 if(tasksize<=0){
 				 System.out.println("rossz tasksize ertek! ");

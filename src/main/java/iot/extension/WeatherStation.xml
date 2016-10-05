@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<gather tasksize='250000'>
+<application tasksize='250000'>
 <Station>
 <name number='1'>Abádszalók (oatti)</name>
 <freq>60000</freq>
@@ -5844,4 +5844,4 @@
 <reposize>60000</reposize>
 <ratio>1</ratio>
 </Station>
-</gather>
+</application>
