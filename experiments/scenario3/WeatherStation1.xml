@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<application tasksize='250000'>
+<Station>
+<name number='600'>Abádszalók (oatti)</name>
+<freq>60000</freq>
+<snumber size='50'>8</snumber>
+<time starttime='0' stoptime='86400000'>86400000</time>
+<maxinbw>1000</maxinbw>
+<maxoutbw>1000</maxoutbw>
+<diskbw>1000</diskbw>
+<torepo>ceph</torepo>
+<reposize>60000</reposize>
+<ratio>1</ratio>
+</Station>
+</application>
