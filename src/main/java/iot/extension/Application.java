@@ -162,6 +162,29 @@ public class Application extends Timed {
 		return i;
 	}
 
+	
+	private void turnoffVM(){
+		int reqshutdown = 0;
+		for (VmCollector vmcl : Application.vmlist) {
+			if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
+				reqshutdown++;
+			}
+		}
+
+		for (VmCollector vmcl : Application.vmlist) {
+			if (reqshutdown > 1) {
+				if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
+					reqshutdown--;
+					try {
+						vmcl.vm.switchoff(true);
+					} catch (StateChangeException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 	@Override
 	public void tick(long fires) {
 
@@ -232,26 +255,7 @@ public class Application extends Timed {
 				}
 			}
 		}
-		int reqshutdown = 0;
-		for (VmCollector vmcl : Application.vmlist) {
-			if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
-				reqshutdown++;
-			}
-		}
-
-		for (VmCollector vmcl : Application.vmlist) {
-			if (reqshutdown > 1) {
-				if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && vmcl.isworking == false) {
-					reqshutdown--;
-					try {
-						vmcl.vm.switchoff(true);
-					} catch (StateChangeException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}
-		}
+		this.turnoffVM();
 
 		/* ------------------------------------ */
 		int task = 0;
