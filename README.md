@@ -2,10 +2,6 @@
 <img src="http://users.iit.uni-miskolc.hu/~kecskemeti/DISSECT-CF/logo.jpg"/>
 </p>
 
-<p align="center">
-<img src="http://users.iit.uni-miskolc.hu/~kecskemeti/DISSECT-CF/logo.jpg"/>
-</p>
-
 ## Attention
 This branch is no longer used, if you have any question: markusa@inf.u-szeged.hu
 
