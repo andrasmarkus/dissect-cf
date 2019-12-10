@@ -4,5 +4,7 @@ bin
 .settings
 .project
 .DS_Store
+.idea
+*.iml
 /target
 *.html
