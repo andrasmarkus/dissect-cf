@@ -64,8 +64,8 @@ public class IoTSimulation {
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
 	for(int i=0;i<500;i++) {
-		DeviceNetwork dn  = new DeviceNetwork(10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, 0, 0).startMeter();
+		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+		new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, 0, 0).startMeter();
 	}
 	
 	// Setting up the IoT pricing

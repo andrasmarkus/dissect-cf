@@ -116,6 +116,8 @@ public class ComputingAppliance {
 		if (loadfile != null) {
 			//Cloudloader is in charge for create the appropiate machines
 			this.iaas = CloudLoader.loadNodes(loadfile);
+			
+			
 			this.name = name;
 			this.applications = new ArrayList<Application>();
 			

@@ -32,6 +32,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
+import hu.u_szeged.inf.fog.simulator.demo.DeferredEventTest;
 import hu.u_szeged.inf.fog.simulator.loaders.DeviceModel;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
@@ -54,6 +55,7 @@ public class Station extends Device {
      */
     private long freq;
 
+    private long delay;
     /**
      * Getter for the number of the sensors.
      */
@@ -61,6 +63,7 @@ public class Station extends Device {
         return sensorNum;
     }
 
+    private int reInstall;
     /**
      * The constructor is to create new static, one-way entity for data generation.
      * @param dn The network settings including the local repository.
@@ -73,16 +76,17 @@ public class Station extends Device {
      * @param x The X coordinate of the position.
      * @param y The Y coordinate of the position.
      */
-    public Station(DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+    public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
         long freq, double x, double y) {
     	// TODO: fix this delay value
-        long delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
+        this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorNum;
         this.strategy = strategy;
         this.dn = dn;
         this.sensorNum = sensorNum;
+        this.reInstall=reInstall;
         this.freq = freq;
         this.sumOfGeneratedData = 0;
         this.x = x;
@@ -124,6 +128,16 @@ public class Station extends Device {
     private void stopMeter() {
         unsubscribe();
     }
+    
+    private void reInstall(final Station s) {
+    	new DeferredEvent(this.reInstall+this.delay) {
+			
+			@Override
+			protected void eventAction() {
+				installionProcess(s);
+			}
+		};
+    }
 
     /**
      * This method is called when time elapsed defined in the freq variable.
@@ -164,15 +178,15 @@ public class Station extends Device {
      * Load the defined devices from XML file.
      * @param file The path of the XML file.
      */
-    public static void loadDevice(String stationfile) throws Exception {
+    /*public static void loadDevice(String stationfile) throws Exception {
         for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
             for (int i = 0; i < dm.number; i++) {
-                DeviceNetwork dn = new DeviceNetwork(dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name + i, null, null);
+                DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name + i, null, null);
                 new Station(dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
             }
 
         }
-    }
+    }*/
 
     /**
      * The installation process depends on the value defined in the strategy variable.
@@ -192,7 +206,7 @@ public class Station extends Device {
         } else if (this.strategy.equals("fuzzy")) {
             new FuzzyStrategy(this);
         }
-
+        reInstall(s);
     }
 
     /**

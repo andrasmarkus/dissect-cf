@@ -54,7 +54,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -110,7 +110,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -165,7 +165,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -220,7 +220,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -276,7 +276,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -331,7 +331,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -386,7 +386,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -441,7 +441,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -495,7 +495,7 @@
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -551,7 +551,7 @@
 			<latency towards="io" value="5" />
 			<latency towards="europa" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -607,7 +607,7 @@
 			<latency towards="io" value="5" />
 			<latency towards="callisto" value="5" />
 			<latency towards="ganymede" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
@@ -663,13 +663,13 @@
 			<latency towards="io" value="5" />
 			<latency towards="callisto" value="5" />
 			<latency towards="europa" value="5" />
-			<latency towards="ceph" value="5" />
+			<latency towards="ceph4" value="5" />
 			<latency towards="iscsi-izabel" value="5" />
 		</repository>
 	</machine>
 
 	<!-- bandwidthes are unknown -->
-	<repository id="ceph" capacity="38000000000000" inBW="250000"
+	<repository id="ceph4" capacity="38000000000000" inBW="250000"
 		outBW="250000" diskBW="100000">
 		<powerstates kind="storage">
 			<!-- Not measured! http://www.buildcomputers.net/power-consumption-of-pc-components.html -->
@@ -745,6 +745,6 @@
 		<latency towards="callisto" value="5" />
 		<latency towards="europa" value="5" />
 		<latency towards="ganymede" value="5" />
-		<latency towards="ceph" value="5" />
+		<latency towards="ceph4" value="5" />
 	</repository>
 </cloud>

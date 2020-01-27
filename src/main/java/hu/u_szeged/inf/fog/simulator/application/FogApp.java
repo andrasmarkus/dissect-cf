@@ -39,6 +39,7 @@ public class FogApp extends Application {
 		if (this.computingAppliance.parentApp.isSubscribed()) {
 
 			final long unprocessed = unprocessedData;
+			
 			NetworkNode.initTransfer(unprocessedData, ResourceConsumption.unlimitedProcessing,
 					this.computingAppliance.iaas.repositories.get(0),
 					this.getParentDeviceOfApp().iaas.repositories.get(0), new ConsumptionEvent() {

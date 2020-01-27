@@ -62,8 +62,8 @@ public abstract class InstallationStrategy {
     public void makeConnection(Device d, Application app) {
         d.setApp(app);
         app.ownStations.add(d);
-        Device.lmap.put(d.getDn().repoName, Device.latency);
-        Device.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), Device.latency);
+        d.dn.lmap.put(d.getDn().repoName, d.dn.latency);
+        d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
     }
 
 }
@@ -317,8 +317,7 @@ class FuzzyStrategy extends InstallationStrategy {
 
                 makeConnection(s, Application.applications.get(rsIdx));
 
-                Device.lmap.put(d.getDn().repoName, Device.latency);
-                Device.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), Device.latency);
+
                 if (!s.app.isSubscribed()) {
                     try {
                         s.app.restartApplication();
