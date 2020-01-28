@@ -11,8 +11,7 @@ import org.xml.sax.SAXException;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
-import hu.u_szeged.inf.fog.simulator.application.CloudApp;
-import hu.u_szeged.inf.fog.simulator.application.FogApp;
+import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.demo.ScenarioBase;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
@@ -31,7 +30,7 @@ import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
  */
 public class FogSimulation {
 	
-	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws Exception {
 	
 	// creating vm images and its resource needs
 	
@@ -51,26 +50,33 @@ public class FogSimulation {
 	String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";	
 	
 	// we create our clouds using predefined cloud schema
-	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5,null);
-	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2",4,5,null);
+	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5);
+	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2",4,5);
 	
 	// creating the cloud application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
-	CloudApp ca1 = new CloudApp(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, cloud1);
-	CloudApp ca2 = new CloudApp(5*60*1000, 256000, "instance1", "Cloud-app2", 2400.0, cloud2);
+	Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
+	Application ca2 = new Application(5*60*1000, 256000, "instance1", "Cloud-app2", 2400.0, 1, "random", false);
 
 	// we create our fog nodes using predefined fog schema
-	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0,ca1);
-	ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0,ca1);
-	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0,ca2);
-	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",6,0,ca2);
+	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0);
+	ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0);
+	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0);
+	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",6,0);
 
 	
 	
 	// creating the fog application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
-	FogApp fa1 = new FogApp(5*60*1000, 179200, "instance2", "Fog-app3", 2400.0, fog1);
-	FogApp fa2 = new FogApp(5*60*1000, 179200, "instance2", "Fog-app4", 2400.0, fog2);
-	FogApp fa3 = new FogApp(5*60*1000, 179200, "instance2", "Fog-app5", 2400.0, fog3);
-	FogApp fa4 = new FogApp(5*60*1000, 179200, "instance2", "Fog-app6", 2400.0, fog4);
+	Application fa1 = new Application(5*60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
+	Application fa2 = new Application(5*60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true);
+	Application fa3 = new Application(5*60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
+	Application fa4 = new Application(5*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
+	
+	cloud1.addApplication(ca1);
+	cloud2.addApplication(ca2);
+	fog1.addApplication(fa1);
+	fog2.addApplication(fa2);
+	fog3.addApplication(fa3);
+	fog4.addApplication(fa4);
 	
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,

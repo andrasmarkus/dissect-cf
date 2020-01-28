@@ -80,7 +80,7 @@ public class OracleProvider extends Provider {
 	public void tick(long fires) {
 
 		if(this.amMessagesPerMonthPerDevice>0){
-				for(Device s : this.app.ownStations){
+				for(Device s : this.app.deviceList){
 					long month = s.getStopTime()/(this.getFrequency());
 					if(month==0){
 						month=1;

@@ -43,7 +43,7 @@ public class DISSECT_vs_iFogSim {
 		
 		// we call the loader functions
 		Instance.loadInstance(instancefile);
-		ComputingAppliance.loadAppliances(appliancefile, iaasloaders);
+		//ComputingAppliance.loadAppliances(appliancefile, iaasloaders);
 		//Station.loadDevice(stationfile);
 		
 		// Start the simulation

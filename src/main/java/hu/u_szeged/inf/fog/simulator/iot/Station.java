@@ -196,15 +196,21 @@ public class Station extends Device {
     public void installionProcess(final Station s) {
 
         if (this.strategy.equals("load")) {
-            new RuntimeStrategy(this);
+            new RuntimeDeviceStrategy(this);
         } else if (this.strategy.equals("random")) {
-            new RandomStrategy(this);
+            new RandomDeviceStrategy(this);
         } else if (this.strategy.equals("distance")) {
-            new DistanceStrategy(this);
+            new DistanceDeviceStrategy(this);
         } else if (this.strategy.equals("cost")) {
-            new CostStrategy(this);
+            new CostDeviceStrategy(this);
         } else if (this.strategy.equals("fuzzy")) {
-            new FuzzyStrategy(this);
+            new FuzzyDeviceStrategy(this);
+        }else {
+        	try {
+				throw new Exception("This device strategy does not exist!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
         reInstall(s);
     }

@@ -83,13 +83,13 @@ public class AzureProvider extends Provider{
 	 */
 	public long avarageFileSize() {
 		long tmp=0;
-		for(Device s : this.app.ownStations) {
+		for(Device s : this.app.deviceList) {
 			tmp+=s.getFilesize();
 		}
-		if(this.app.ownStations.size()==0) {
+		if(this.app.deviceList.size()==0) {
 			return 0;
 		}
-		return tmp/this.app.ownStations.size();
+		return tmp/this.app.deviceList.size();
 	}
 	
 	/**

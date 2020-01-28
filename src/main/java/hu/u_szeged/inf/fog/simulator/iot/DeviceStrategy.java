@@ -46,7 +46,7 @@ import hu.u_szeged.inf.fog.simulator.pliant.Sigmoid;
  * @author Jozsef Daniel Dombi (dombijd@inf.u-szeged.hu)
  * @author Peter Gacsi (gacsi.peti95@gmail.com)
  */
-public abstract class InstallationStrategy {
+public abstract class DeviceStrategy {
 
     /**
      * This method needs to be overrode. It should pair an application with a device.
@@ -61,7 +61,7 @@ public abstract class InstallationStrategy {
      */
     public void makeConnection(Device d, Application app) {
         d.setApp(app);
-        app.ownStations.add(d);
+        app.deviceList.add(d);
         d.dn.lmap.put(d.getDn().repoName, d.dn.latency);
         d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
     }
@@ -74,13 +74,13 @@ public abstract class InstallationStrategy {
  * @author Andras Markus (markusa@inf.u-szeged.hu)
  * @author Peter Gacsi (gacsi.peti95@gmail.com)
  */
-class RandomStrategy extends InstallationStrategy {
+class RandomDeviceStrategy extends DeviceStrategy {
 
     /**
      * The constructor calls installation process.
      * @param d The device which needs to be installed.
      */
-    public RandomStrategy(Device d) {
+    public RandomDeviceStrategy(Device d) {
         this.install(d);
     }
 
@@ -93,24 +93,23 @@ class RandomStrategy extends InstallationStrategy {
         int rnd;
         Random randomGenerator = new Random();
 
-        List < Application > fogApplications = new ArrayList < Application > ();
-        List < Application > cloudApplications = new ArrayList < Application > ();
+        List < Application > possibleApplications = new ArrayList < Application > ();
 
-        for (Application app: Application.applications) {
-            if (app.getClass().getSimpleName().equals("FogApp")) {
-                fogApplications.add(app);
-            }
-            if (app.getClass().getSimpleName().equals("CloudApp")) {
-                cloudApplications.add(app);
+        for (Application app: Application.allApplication) {
+            if (app.canJoin) {
+            	possibleApplications.add(app);
             }
         }
 
-        if (fogApplications.size() == 0) {
-            rnd = randomGenerator.nextInt(cloudApplications.size());
-            makeConnection(d, cloudApplications.get(rnd));
+        if (possibleApplications.size() > 0) {
+            rnd = randomGenerator.nextInt(possibleApplications.size());
+            makeConnection(d, possibleApplications.get(rnd));
         } else {
-            rnd = randomGenerator.nextInt(fogApplications.size());
-            makeConnection(d, fogApplications.get(rnd));
+            try {
+				throw new Exception("There is no possible application for the data transfer!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
 
         if (!d.app.isSubscribed()) {
@@ -132,13 +131,13 @@ class RandomStrategy extends InstallationStrategy {
  * Distance-aware strategy always installs station to the nearest application.
  * @author Peter Gacsi (gacsi.peti95@gmail.com)
  */
-class DistanceStrategy extends InstallationStrategy {
+class DistanceDeviceStrategy extends DeviceStrategy {
 
     /**
      * The constructor calls installation process.
      * @param d The device which needs to be installed.
      */
-    public DistanceStrategy(Device d) {
+    public DistanceDeviceStrategy(Device d) {
         this.install(d);
     }
 
@@ -149,11 +148,18 @@ class DistanceStrategy extends InstallationStrategy {
     public Application getNearestDevice(Device d) {
         double minDistance = Double.MAX_VALUE;
         Application nearestApplication = null;
-        for (Application app: Application.applications) {
-            if (minDistance >= d.calculateDistance(app)) {
+        for (Application app: Application.allApplication) {
+            if (minDistance >= d.calculateDistance(app) && app.canJoin) {
                 minDistance = d.calculateDistance(app);
                 nearestApplication = app;
             }
+        }
+        if(nearestApplication==null) {
+        	try {
+				throw new Exception("There is no possible application for the data transfer!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
         return nearestApplication;
     }
@@ -188,13 +194,13 @@ class DistanceStrategy extends InstallationStrategy {
  * Cost-aware strategy prefers the cheapest application.
  * @author Andras Markus (markusa@inf.u-szeged.hu)
  */
-class CostStrategy extends InstallationStrategy {
+class CostDeviceStrategy extends DeviceStrategy {
 
     /**
      * The constructor calls installation process.
      * @param d The device which needs to be installed.
      */
-    public CostStrategy(Device d) {
+    public CostDeviceStrategy(Device d) {
         this.install(d);
     }
 
@@ -205,14 +211,21 @@ class CostStrategy extends InstallationStrategy {
     public void install(Device s) {
         double min = Integer.MAX_VALUE - 1.0;
         int choosen = -1;
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            if (Application.applications.get(i).instance.getPricePerTick() < min) {
-                min = Application.applications.get(i).instance.getPricePerTick();
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            if (Application.allApplication.get(i).instance.getPricePerTick() < min && Application.allApplication.get(i).canJoin) {
+                min = Application.allApplication.get(i).instance.getPricePerTick();
                 choosen = i;
             }
         }
-
-        makeConnection(s, Application.applications.get(choosen));
+        
+        if(Application.allApplication.get(choosen)==null) {
+        	try {
+				throw new Exception("There is no possible application for the data transfer!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+        makeConnection(s, Application.allApplication.get(choosen));
 
         if (!s.app.isSubscribed()) {
             try {
@@ -234,13 +247,13 @@ class CostStrategy extends InstallationStrategy {
  * Runtime-aware strategy calculates the ratio of the number of connected devices and the number of physical machines and chooses the less loaded application. 
  * @author Andras Markus (markusa@inf.u-szeged.hu)
  */
-class RuntimeStrategy extends InstallationStrategy {
+class RuntimeDeviceStrategy extends DeviceStrategy {
 
     /**
      * The constructor calls installation process.
      * @param d The device which needs to be installed.
      */
-    public RuntimeStrategy(Device s) {
+    public RuntimeDeviceStrategy(Device s) {
         this.install(s);
     }
 
@@ -255,15 +268,22 @@ class RuntimeStrategy extends InstallationStrategy {
             protected void eventAction() {
                 double min = Double.MAX_VALUE - 1.0;
                 int choosen = -1;
-                for (int i = 0; i < Application.applications.size(); i++) {
-                    double loadRatio = (Application.applications.get(i).ownStations.size()) / (Application.applications.get(i).computingAppliance.iaas.machines.size());
+                for (int i = 0; i < Application.allApplication.size(); i++) {
+                    double loadRatio = (Application.allApplication.get(i).deviceList.size()) / (Application.allApplication.get(i).computingAppliance.iaas.machines.size());
                     if (loadRatio < min) {
                         min = loadRatio;
                         choosen = i;
                     }
                 }
 
-                makeConnection(s, Application.applications.get(choosen));
+                if(Application.allApplication.get(choosen)==null) {
+                	try {
+        				throw new Exception("There is no possible application for the data transfer!");
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        			}
+                }
+                makeConnection(s, Application.allApplication.get(choosen));
 
 
                 if (!s.app.isSubscribed()) {
@@ -291,7 +311,7 @@ class RuntimeStrategy extends InstallationStrategy {
  * TODO: refactoring needed! 
  * @author Jozsef Daniel Dombi (dombijd@inf.u-szeged.hu)
  */
-class FuzzyStrategy extends InstallationStrategy {
+class FuzzyDeviceStrategy extends DeviceStrategy {
 
     /**
      * The local copy of the device which needs to be installed.
@@ -302,7 +322,7 @@ class FuzzyStrategy extends InstallationStrategy {
      * The constructor calls installation process.
      * @param d The device which needs to be installed.
      */
-    public FuzzyStrategy(Device d) {
+    public FuzzyDeviceStrategy(Device d) {
         this.d = d;
         this.install(d);
     }
@@ -315,7 +335,14 @@ class FuzzyStrategy extends InstallationStrategy {
             protected void eventAction() {
                 int rsIdx = fuzzyDecision(d);
 
-                makeConnection(s, Application.applications.get(rsIdx));
+                if(Application.allApplication.get(rsIdx)==null) {
+                	try {
+        				throw new Exception("There is no possible application for the data transfer!");
+        			} catch (Exception e) {
+        				e.printStackTrace();
+        			}
+                }
+                makeConnection(s, Application.allApplication.get(rsIdx));
 
 
                 if (!s.app.isSubscribed()) {
@@ -346,15 +373,15 @@ class FuzzyStrategy extends InstallationStrategy {
 
         Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 96.0), Double.valueOf(15));
         Vector < Double > price = new Vector < Double > ();
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            price.add(kappa.getAt(sig.getat(Application.applications.get(i).instance.getPricePerTick() * 1000000000)));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            price.add(kappa.getAt(sig.getat(Application.allApplication.get(i).instance.getPricePerTick() * 1000000000)));
 
         }
 
         double minprice = Double.MAX_VALUE;
         double maxprice = Double.MIN_VALUE;
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            double currentprice = Application.applications.get(i).getCurrentCostofApp();
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            double currentprice = Application.allApplication.get(i).getCurrentCost();
             if (currentprice > maxprice)
                 maxprice = currentprice;
             if (currentprice < minprice)
@@ -365,8 +392,8 @@ class FuzzyStrategy extends InstallationStrategy {
         Vector < Double > currentprice = new Vector < Double > ();
 
         sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf((maxprice - minprice) / 2.0));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            currentprice.add(kappa.getAt(sig.getat(Application.applications.get(i).getCurrentCostofApp())));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            currentprice.add(kappa.getAt(sig.getat(Application.allApplication.get(i).getCurrentCost())));
         }
 
 
@@ -374,8 +401,8 @@ class FuzzyStrategy extends InstallationStrategy {
 
         double minworkload = Double.MAX_VALUE;
         double maxworkload = Double.MIN_VALUE;
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            double workload = Application.applications.get(i).getLoadOfCloud();
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            double workload = Application.allApplication.get(i).getloadOfResource();
             if (workload > maxworkload)
                 maxworkload = workload;
             if (workload < minworkload)
@@ -385,8 +412,8 @@ class FuzzyStrategy extends InstallationStrategy {
         Vector < Double > workload = new Vector < Double > ();
 
         sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf(maxworkload));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            workload.add(kappa.getAt(sig.getat(Application.applications.get(i).getLoadOfCloud())));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            workload.add(kappa.getAt(sig.getat(Application.allApplication.get(i).getloadOfResource())));
 
         }
 
@@ -394,29 +421,29 @@ class FuzzyStrategy extends InstallationStrategy {
 
         Vector < Double > numberofvm = new Vector < Double > ();
         sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 8.0), Double.valueOf(3));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            numberofvm.add(kappa.getAt(sig.getat(Double.valueOf(Application.applications.get(i).vmlist.size()))));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            numberofvm.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).vmManagerlist.size()))));
 
         }
 
 
         double sum_stations = 0.0;
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            sum_stations += Application.applications.get(i).ownStations.size();
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            sum_stations += Application.allApplication.get(i).deviceList.size();
         }
 
         Vector < Double > numberofstation = new Vector < Double > ();
-        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (Application.applications.size())));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            numberofstation.add(kappa.getAt(sig.getat(Double.valueOf(Application.applications.get(i).ownStations.size()))));
+        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (Application.allApplication.size())));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            numberofstation.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).deviceList.size()))));
 
         }
 
         Vector < Double > numberofActiveStation = new Vector < Double > ();
-        for (int i = 0; i < Application.applications.size(); ++i) {
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
             double sum = 0.0;
-            for (int j = 0; j < Application.applications.get(i).ownStations.size(); j++) {
-                Station stat = (Station) Application.applications.get(i).ownStations.get(j);
+            for (int j = 0; j < Application.allApplication.get(i).deviceList.size(); j++) {
+                Station stat = (Station) Application.allApplication.get(i).deviceList.get(j);
                 long time = Timed.getFireCount();
                 if (stat.startTime >= time && stat.stopTime >= time)
                     sum += 1;
@@ -441,15 +468,15 @@ class FuzzyStrategy extends InstallationStrategy {
 
         Vector < Double > preferVM = new Vector < Double > ();
         sig = new Sigmoid<Object>(Double.valueOf(1.0 / 32), Double.valueOf(3));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            preferVM.add(kappa.getAt(sig.getat(Double.valueOf(Application.applications.get(i).instance.getArc().getRequiredCPUs()))));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            preferVM.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).instance.getArc().getRequiredCPUs()))));
         }
 
 
         Vector < Double > preferVMMem = new Vector < Double > ();
         sig = new Sigmoid<Object>(Double.valueOf(1.0 / 256.0), Double.valueOf(350.0));
-        for (int i = 0; i < Application.applications.size(); ++i) {
-            preferVMMem.add(kappa.getAt(sig.getat(Double.valueOf(Application.applications.get(i).instance.getArc().getRequiredMemory() / 10000000))));
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
+            preferVMMem.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).instance.getArc().getRequiredMemory() / 10000000))));
         }
 
 
@@ -470,7 +497,7 @@ class FuzzyStrategy extends InstallationStrategy {
             score.add(FuzzyIndicators.getAggregation(temp) * 100);
         }
         Vector < Integer > finaldecision = new Vector < Integer > ();
-        for (int i = 0; i < Application.applications.size(); ++i) {
+        for (int i = 0; i < Application.allApplication.size(); ++i) {
             finaldecision.add(i);
         }
         for (int i = 0; i < score.size(); ++i) {
