@@ -63,7 +63,8 @@ public class FogSimulation {
 	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0);
 	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",6,0);
 
-	
+	fog1.setParentNode(cloud1);
+	fog2.addNeighbour(fog3);
 	
 	// creating the fog application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
 	Application fa1 = new Application(5*60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
