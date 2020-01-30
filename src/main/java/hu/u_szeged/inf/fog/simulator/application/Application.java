@@ -1,24 +1,29 @@
 package hu.u_szeged.inf.fog.simulator.application;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.ResourceAllocation;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.StateChangeException;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption.ConsumptionEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
+import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
+import hu.u_szeged.inf.fog.simulator.iot.Actuator;
+import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
+import hu.u_szeged.inf.fog.simulator.iot.DataCapsule;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public abstract class Application extends Timed {
 
@@ -77,7 +82,8 @@ public abstract class Application extends Timed {
 	protected long freq;
 	protected VmCollector broker;
 	public int incomingData;
-	public double dataLoad;	
+    public double dataLoad;
+    protected DataCapsule dataCapsule;
 
 	public Application(final long freq, long tasksize, String instance, String name, double noi ,ComputingAppliance computingAppliance) {
 		if(noi>0) {
@@ -91,9 +97,9 @@ public abstract class Application extends Timed {
 		//create relation between a device and its apps
 		this.computingAppliance = computingAppliance;
 		this.computingAppliance.applications.add(this);
-		
-		
-		
+
+
+        dataCapsule = null;
 		Application.applications.add(this);
 		
 		
@@ -154,7 +160,7 @@ public abstract class Application extends Timed {
 	}
 		
 	public void initiateDataTransferToNeighbourAppliance(long unprocessedData, ComputingAppliance ca,
-			Application application) throws NetworkException {
+                                                         final Application application) throws NetworkException {
 
 		final Application app = application;
 		
@@ -169,6 +175,7 @@ public abstract class Application extends Timed {
 						public void conComplete() {
 							app.sumOfArrivedData += unprocessed;
 							app.incomingData--;
+                            moveDataCapsule(app);
 						}
 
 						@Override
@@ -310,7 +317,75 @@ public abstract class Application extends Timed {
 		}
 	}
 
-	public double getLoadOfCloud(){
+    protected long processData(final VmCollector vml, long processedData) throws NetworkException {
+        final double noi = this.allocatedData == this.tasksize ? defaultNoi : (double) (2400 * this.allocatedData / this.tasksize);
+        //final double noi = 2500000; -> this is only for iFogSim comparison
+        processedData += this.allocatedData;
+        vml.isWorking = true;
+        this.currentTask++;
+
+        vml.vm.newComputeTask(noi, ResourceConsumption.unlimitedProcessing,
+                new ConsumptionEventAdapter() {
+                    long vmStartTime = Timed.getFireCount();
+                    long allocatedDataTemp = allocatedData;
+                    double noiTemp = noi;
+
+                    @Override
+                    public void conComplete() {
+                        vml.isWorking = false;
+                        vml.taskCounter++;
+                        currentTask--;
+                        stopTime = Timed.getFireCount();
+                        timelineList.add(new TimelineCollector(vmStartTime, Timed.getFireCount(), vml.id));
+                        System.out.println(name + " " + vml.id + " started@ " + vmStartTime + " finished@ "
+                                + Timed.getFireCount() + " with " + allocatedDataTemp + " bytes, lasted "
+                                + (Timed.getFireCount() - vmStartTime) + " ,noi: " + noiTemp);
+                        if(dataCapsule != null) {
+                            if (dataCapsule.getSource() != null && dataCapsule.getSource().isSubscribed() && ownStations.contains(dataCapsule.getSource())) {
+                                //Different strategies could be calculated before
+                                new Actuator(new ActuatorRandomStrategy(), dataCapsule.getSource(), 1);
+                            }
+                        }
+                    }
+                });
+        this.sumOfProcessedData += this.allocatedData;
+        return processedData;
+    }
+
+    protected void unsubscribeApplication() {
+        unsubscribe();
+        for (Provider p : this.providers) {
+            if (p.isSubscribed()) {
+                p.shouldStop = true;
+            }
+        }
+        StorageObject so = new StorageObject(this.name, this.sumOfProcessedData, false);
+        if (!this.computingAppliance.iaas.repositories.get(0).registerObject(so)) {
+            this.computingAppliance.iaas.repositories.get(0).deregisterObject(so);
+            this.computingAppliance.iaas.repositories.get(0).registerObject(so);
+        }
+
+        for (VmCollector vmcl : this.vmlist) {
+            try {
+                if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
+                    if (vmcl.id.equals("broker")) {
+                        vmcl.pm = vmcl.vm.getResourceAllocation().getHost();
+                    }
+                    vmcl.vm.switchoff(true);
+
+                }
+            } catch (StateChangeException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    protected boolean canUnsubscribe() {
+        return this.currentTask == 0 && this.incomingData == 0 && this.sumOfProcessedData == this.sumOfArrivedData && this.checkStationState();
+    }
+
+    public double getLoadOfCloud(){
 		double usedCPU=0.0;
 		for(VirtualMachine vm : this.computingAppliance.iaas.listVMs()) {
 			if(vm.getResourceAllocation() == null) {
@@ -329,8 +404,14 @@ public abstract class Application extends Timed {
 		*/
 		return (usedCPU / this.computingAppliance.iaas.getRunningCapacities().getRequiredCPUs())*100;
 	}
-	
-	
+
+    protected void moveDataCapsule(Application application) {
+        if (dataCapsule != null) {
+            dataCapsule.setDestination(application);
+            application.setDataCapsule(dataCapsule);
+            dataCapsule = null;
+        }
+    }
 	
 	
 	public double getCurrentCostofApp() {
@@ -361,7 +442,14 @@ public abstract class Application extends Timed {
 				);
 		return result;
 	}
-	
+
+    public DataCapsule getDataCapsule() {
+        return this.dataCapsule;
+    }
+
+    public void setDataCapsule(DataCapsule dataCapsule) {
+        this.dataCapsule = dataCapsule;
+    }
 			
 	public abstract void tick(long fires);
 
