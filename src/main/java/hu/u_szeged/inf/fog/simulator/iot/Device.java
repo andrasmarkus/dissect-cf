@@ -143,6 +143,11 @@ public abstract class Device extends Timed {
      */
     public abstract void shutdownProcess();
 
+    //I need to access frequency changing in the actuator
+    public void changeFrequency(final long freq) {
+        updateFrequency(freq);
+    }
+
     /**
      * Getter for the local repository and its network settings.
      */
