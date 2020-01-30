@@ -134,7 +134,9 @@ public class Station extends Device {
 			
 			@Override
 			protected void eventAction() {
-				installionProcess(s);
+				if((Timed.getFireCount()+reInstall+delay)<s.stopTime) {
+					installionProcess(s);
+				}
 			}
 		};
     }

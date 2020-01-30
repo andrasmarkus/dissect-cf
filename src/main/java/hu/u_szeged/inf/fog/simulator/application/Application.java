@@ -408,7 +408,6 @@ public class Application extends Timed {
 				e.printStackTrace();
 			}
         }
-		
         if(this.strategyApplication!=null) {
         	this.transferToApplication(unprocessedData);
         }

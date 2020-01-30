@@ -48,7 +48,6 @@ public class BrokerCheck extends DeferredEvent {
 			} catch (NetworkException e) {
 				e.printStackTrace();
 			} 
-			//this.cancel();
 		}else {
 			if(this.delay==1) {
 				new BrokerCheck(this.fromApp,this.toApp,this.unprocessedData, 1);

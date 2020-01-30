@@ -25,11 +25,12 @@ class RandomApplicationStrategy extends ApplicationStrategy {
 		if(a.computingAppliance.parentNode!=null) {
 			caList.add(a.computingAppliance.parentNode);
 		}
-		Random randomGenerator = new Random();
-		rnd1 = randomGenerator.nextInt(caList.size());
-		rnd2 = randomGenerator.nextInt(caList.get(rnd1).applicationList.size());
-		a.strategyApplication=caList.get(rnd1).applicationList.get(rnd2);
-		
+		if(caList.size()>0) {
+			Random randomGenerator = new Random();
+			rnd1 = randomGenerator.nextInt(caList.size());
+			rnd2 = randomGenerator.nextInt(caList.get(rnd1).applicationList.size());
+			a.strategyApplication=caList.get(rnd1).applicationList.get(rnd2);
+		}
 	}   
 
 
