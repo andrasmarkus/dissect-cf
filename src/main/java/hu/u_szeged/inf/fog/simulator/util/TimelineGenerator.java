@@ -59,7 +59,7 @@ public abstract class TimelineGenerator {
 		writer.println("dataTable.addRows([");
 		
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
-			for (Application a : c.applications) {
+			for (Application a : c.applicationList) {
 				for(TimelineCollector tc : a.timelineList) {
 					writer.println("[ '"+a.name+"', '"+tc.vmId+"', new Date(0,0,0,0,0,0,"+tc.start +"), new Date(0,0,0,0,0,0,"+tc.stop+")],");
 				}

@@ -228,6 +228,20 @@ public class NetworkNode {
 			// Not expected
 		}
 	}
+	
+	/**
+	 * Determines the latency values of the nodes
+	 */
+	public Map<String, Integer> getLatencies() {
+		return this.latencies;
+	}
+	
+	/**
+	 * Updates or adds a new latency connection 
+	 */
+	public void addLatencies(String repository,int latencyValue) {
+		this.latencies.put(repository, latencyValue);
+	}
 
 	/**
 	 * Determines the total output bandwidth available for the node

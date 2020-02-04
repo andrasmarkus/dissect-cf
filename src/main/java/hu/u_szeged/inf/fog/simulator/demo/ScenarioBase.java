@@ -40,22 +40,22 @@ public abstract class ScenarioBase {
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
 			System.out.println("computingAppliance: " + c.name);
 			//long highestStationStoptime=Long.MIN_VALUE;
-			for (Application a : c.applications) {
+			for (Application a : c.applicationList) {
 				System.out.println(a.name);
 				totalCost+=a.instance.calculateCloudCost(a.sumOfWorkTime);
 				processedData+=a.sumOfProcessedData;
 				arrivedData+=a.sumOfArrivedData;
-				usedVM+=a.vmlist.size();
+				usedVM+=a.vmManagerlist.size();
 				
 				
-				for (VmCollector vmcl : a.vmlist) {
+				for (VmCollector vmcl : a.vmManagerlist) {
 						tasks += vmcl.taskCounter;
 						System.out.println(vmcl.id +" "+vmcl.vm + " tasks: " + vmcl.taskCounter + " worktime: " + vmcl.workingTime + " installed at: "
 								+ vmcl.installed+" restarted: "+vmcl.restarted);
 				}
 				
 				
-				for(Device d : a.ownStations) {
+				for(Device d : a.deviceList) {
 					generatedData+=d.getSumOfGeneratedData();
 						
 					if(d.stopTime>highestStationStoptime) {
@@ -67,7 +67,7 @@ public abstract class ScenarioBase {
 					highestApplicationStopTime = a.stopTime;
 				}
 				
-				System.out.println(a.name+" stations: " + a.ownStations.size()+ " cost:"+a.instance.calculateCloudCost(a.sumOfWorkTime));
+				System.out.println(a.name+" stations: " + a.deviceList.size()+ " cost:"+a.instance.calculateCloudCost(a.sumOfWorkTime));
 				if(iotpricing) {
 					System.out.println(a.providers);
 					bluemix+=a.providers.get(0).cost;	

@@ -34,7 +34,6 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
-import hu.u_szeged.inf.fog.simulator.loaders.DeviceModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,6 +57,15 @@ public class Station extends Device {
      */
     private long freq;
 
+    private long delay;
+    /**
+     * Getter for the number of the sensors.
+     */
+    public int getSensorNum() {
+        return sensorNum;
+    }
+
+    private int reInstall;
     /**
      * The constructor is to create new static, one-way entity for data generation.
      *
@@ -71,16 +79,17 @@ public class Station extends Device {
      * @param x         The X coordinate of the position.
      * @param y         The Y coordinate of the position.
      */
-    public Station(DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
-                   long freq, double x, double y) {
-        // TODO: fix this delay value
-        long delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
+    public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+        long freq, double x, double y) {
+    	// TODO: fix this delay value
+        this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorNum;
         this.strategy = strategy;
         this.dn = dn;
         this.sensorNum = sensorNum;
+        this.reInstall=reInstall;
         this.freq = freq;
         this.sumOfGeneratedData = 0;
         this.x = x;
@@ -89,29 +98,6 @@ public class Station extends Device {
         this.startMeter();
         this.setMessageCount(0);
     }
-
-    /**
-     * Load the defined devices from XML file.
-     *
-     * @param file The path of the XML file.
-     */
-    public static void loadDevice(String stationfile) throws Exception {
-        for (DeviceModel dm : DeviceModel.loadDeviceXML(stationfile)) {
-            for (int i = 0; i < dm.number; i++) {
-                DeviceNetwork dn = new DeviceNetwork(dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name + i, null, null);
-                new Station(dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
-            }
-
-        }
-    }
-
-    /**
-     * Getter for the number of the sensors.
-     */
-    public int getSensorNum() {
-        return sensorNum;
-    }
-
 
     /**
      * This method sends all of the generated data (called StorageObject) to the node repository.
@@ -155,6 +141,18 @@ public class Station extends Device {
     public void stopMeter() {
         unsubscribe();
     }
+    
+    private void reInstall(final Station s) {
+    	new DeferredEvent(this.reInstall+this.delay) {
+			
+			@Override
+			protected void eventAction() {
+				if((Timed.getFireCount()+reInstall+delay)<s.stopTime) {
+					installionProcess(s);
+				}
+			}
+		};
+    }
 
     /**
      * This method is called when time elapsed defined in the freq variable.
@@ -192,6 +190,20 @@ public class Station extends Device {
     }
 
     /**
+     * Load the defined devices from XML file.
+     * @param file The path of the XML file.
+     */
+    /*public static void loadDevice(String stationfile) throws Exception {
+        for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
+            for (int i = 0; i < dm.number; i++) {
+                DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name + i, null, null);
+                new Station(dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
+            }
+
+        }
+    }*/
+
+    /**
      * The installation process depends on the value defined in the strategy variable.
      * Based on the chosen strategy different application would processes the generated data.
      *
@@ -200,17 +212,23 @@ public class Station extends Device {
     public void installionProcess(final Station s) {
 
         if (this.strategy.equals("load")) {
-            new RuntimeStrategy(this);
+            new RuntimeDeviceStrategy(this);
         } else if (this.strategy.equals("random")) {
-            new RandomStrategy(this);
+            new RandomDeviceStrategy(this);
         } else if (this.strategy.equals("distance")) {
-            new DistanceStrategy(this);
+            new DistanceDeviceStrategy(this);
         } else if (this.strategy.equals("cost")) {
-            new CostStrategy(this);
+            new CostDeviceStrategy(this);
         } else if (this.strategy.equals("fuzzy")) {
-            new FuzzyStrategy(this);
+            new FuzzyDeviceStrategy(this);
+        }else {
+        	try {
+				throw new Exception("This device strategy does not exist!");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         }
-
+        reInstall(s);
     }
 
     /**

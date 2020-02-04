@@ -10,7 +10,7 @@ import org.xml.sax.SAXException;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
-import hu.u_szeged.inf.fog.simulator.application.CloudApp;
+import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.demo.ScenarioBase;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
@@ -29,13 +29,13 @@ import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
  */
 public class IoTSimulation {
 	
-	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws Exception {
 			
 	// we create our clouds using predefined cloud schemas
 	String cloudfile = ScenarioBase.resourcePath+"LPDS_original.xml";	
 			
-	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1");
-	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2");
+	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",0,0);
+	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2",0,0);
 	
 	// creating vm images and its resource needs
 	
@@ -55,17 +55,19 @@ public class IoTSimulation {
 	new Instance(va,arc4,0.000000025,"instance4");
 	
 	// creating the application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-	CloudApp ca1 = new CloudApp(5*60*1000, 256000, "instance1", "app1", 2400.0, cloud1);
-	CloudApp ca2 = new CloudApp(5*60*1000, 256000, "instance3", "app2", 2400.0, cloud1);
-	CloudApp ca3 = new CloudApp(5*60*1000, 256000, "instance2", "app3", 2400.0, cloud2);
-	CloudApp ca4 = new CloudApp(5*60*1000, 256000, "instance4", "app4", 2400.0, cloud2);
+	Application ca1 = new Application(5*60*1000, 256000, "instance1", "app1", 2400.0,1, "random", true);
+	Application ca2 = new Application(5*60*1000, 256000, "instance3", "app2", 2400.0,1, "random", true);
+	Application ca3 = new Application(5*60*1000, 256000, "instance2", "app3", 2400.0,1, "random", true);
+	Application ca4 = new Application(5*60*1000, 256000, "instance4", "app4", 2400.0,1, "random", true);
 	
+	cloud1.addApplication(ca1,ca2);
+	cloud2.addApplication(ca3,ca4);
 	// we create 500 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
 	for(int i=0;i<500;i++) {
-		DeviceNetwork dn  = new DeviceNetwork(10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, 0, 0).startMeter();
+		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+		new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, 0, 0).startMeter();
 	}
 	
 	// Setting up the IoT pricing
