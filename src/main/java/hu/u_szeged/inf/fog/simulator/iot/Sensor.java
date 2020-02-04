@@ -55,10 +55,10 @@ class Sensor extends DeferredEvent {
      */
     @Override
     protected void eventAction() {
-        DataCapsule dataCapsule = new DataCapsule(this.s.getDn().repoName + " " + this.s.filesize + " " + this.s.getSensorNum() +
-                " "+ Timed.getFireCount(), this.s.filesize, false, this.s, null);
+        StorageObject so = new StorageObject(this.s.getDn().repoName + " " + this.s.filesize + " " + this.s.getSensorNum() + " " + Timed.getFireCount(),
+                this.s.filesize, false);
 
-        if (this.s.dn.localRepository.registerObject(dataCapsule)) {
+        if (this.s.dn.localRepository.registerObject(so)) {
             this.s.incSumOfGeneratedData(this.s.filesize);
             this.s.messageCount += 1;
         } else {
