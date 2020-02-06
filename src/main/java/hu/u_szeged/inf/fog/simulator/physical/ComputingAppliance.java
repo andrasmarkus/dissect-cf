@@ -64,5 +64,9 @@ public class ComputingAppliance {
 		this.parentNode=ca;
 	}
 	
+	public void setLatency(ComputingAppliance that, int latency) {
+		this.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
+		that.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
+	}
 	
 }

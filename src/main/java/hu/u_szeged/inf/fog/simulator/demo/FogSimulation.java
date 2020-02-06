@@ -63,6 +63,14 @@ public class FogSimulation {
 	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0);
 	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",6,0);
 
+	System.out.println(fog1.iaas.repositories.get(0).getLatencies());
+	System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
+	
+	fog1.setLatency(cloud1, 20);
+	
+	System.out.println(fog1.iaas.repositories.get(0).getLatencies());
+	System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
+	
 	fog1.setParentNode(cloud1);
 	fog2.addNeighbour(fog3);
 	
@@ -78,6 +86,8 @@ public class FogSimulation {
 	fog2.addApplication(fa2);
 	fog3.addApplication(fa3);
 	fog4.addApplication(fa4);
+	
+	 
 	
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
