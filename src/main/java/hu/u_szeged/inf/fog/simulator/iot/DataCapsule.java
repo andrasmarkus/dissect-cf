@@ -12,18 +12,21 @@ public class DataCapsule extends StorageObject {
     private Application destination;
     private Stack<Application> dataFlowPath;
     private Collection<StorageObject> bulkStorageObject;
+    private int eventSize;
 
-    public DataCapsule(String myid, Station source, Application destination) {
+    public DataCapsule(String myid, Station source, Application destination, int eventSize) {
         super(myid);
         this.source = source;
         this.destination = destination;
+        this.eventSize = eventSize;
         this.dataFlowPath = new Stack<Application>();
     }
 
-    public DataCapsule(String myid, long mysize, boolean vary, Station source, Application destination) {
+    public DataCapsule(String myid, long mysize, boolean vary, Station source, Application destination, int eventSize) {
         super(myid, mysize, vary);
         this.source = source;
         this.destination = destination;
+        this.eventSize = eventSize;
         this.dataFlowPath = new Stack<Application>();
     }
 
@@ -71,6 +74,14 @@ public class DataCapsule extends StorageObject {
 
     public void addToBulkStorageObject(StorageObject storageObject) {
         this.bulkStorageObject.add(storageObject);
+    }
+
+    public int getEventSize() {
+        return eventSize;
+    }
+
+    public void setEventSize(int eventSize) {
+        this.eventSize = eventSize;
     }
 
 
