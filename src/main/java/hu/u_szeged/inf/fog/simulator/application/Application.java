@@ -14,10 +14,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
-import hu.u_szeged.inf.fog.simulator.iot.Actuator;
-import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
-import hu.u_szeged.inf.fog.simulator.iot.DataCapsule;
-import hu.u_szeged.inf.fog.simulator.iot.Device;
+import hu.u_szeged.inf.fog.simulator.iot.*;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
@@ -66,7 +63,7 @@ public class Application extends Timed {
 	protected VmCollector broker;
 
 	protected long freq;
-	
+
 	public Application strategyApplication;
 
 	public long sumOfWorkTime;
@@ -78,35 +75,35 @@ public class Application extends Timed {
 	protected long allocatedData;
 
 	protected int currentTask;
-	
+
 	public long stopTime;
-	
+
 	public int threshold;
-	
+
 	public int incomingData;
 
     private DataCapsule dataCapsule;
-	
+
 	public long allocatedDta;
-	
+
 	public String strategy;
-	
+
 	public ArrayList<Provider> providers;
-	
+
 	public boolean canJoin;
-	
+
 	public ArrayList<TimelineCollector> timelineList = new ArrayList<TimelineCollector>();
-	
+
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
-	
-	
-	
+
+
+
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
 	    this.dataCapsule = null;
 
 		Application.allApplication.add(this);
-		
+
 		this.deviceList = new ArrayList<Device>();
 
 		this.vmManagerlist = new ArrayList<VmCollector>();
@@ -118,7 +115,7 @@ public class Application extends Timed {
 		this.threshold = threshold;
 
 		this.numberOfInstruction = numberOfInstruction;
-		
+
 		this.strategy = strategy;
 
 		this.name = name;
@@ -126,7 +123,7 @@ public class Application extends Timed {
 		this.freq = freq;
 
 		this.canJoin = canJoin;
-		
+
 		subscribe(this.freq);
 
 		this.instance = Instance.getInstances().get(instance);
@@ -274,11 +271,13 @@ public class Application extends Timed {
 		return (usedCPU / this.computingAppliance.iaas.getRunningCapacities().getRequiredCPUs()) * 100;
 	}
 
-    public void moveDataCapsule(Application application) {
+    public void moveDataCapsule(Application application, final int direction) {
         if (dataCapsule != null) {
             dataCapsule.setDestination(application);
             application.setDataCapsule(dataCapsule);
-            dataCapsule.addToDataPath(application);
+            if(direction != -1) {
+				dataCapsule.addToDataPath(application);
+			}
             this.dataCapsule = null;
         }
     }
@@ -336,10 +335,10 @@ public class Application extends Timed {
 
 					double ratio = (int) ((double) unprocessedData / this.taskSize);
 
-					
+
 					if (ratio > this.threshold) {
 						strategy(unprocessedData - alreadyProcessedData);
-						
+
 					}
 
 					System.out
@@ -370,9 +369,12 @@ public class Application extends Timed {
 							stopTime = Timed.getFireCount();
                             if(dataCapsule != null) {
                                 if (dataCapsule.getSource() != null && dataCapsule.getSource().isSubscribed()) {
-                                    //Different strategies could be calculated before
-                                    new Actuator(new ActuatorRandomStrategy(), dataCapsule.getSource(), 1);
-                                }
+									try {
+										transferBackToStation();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
                             }
 							timelineList.add(new TimelineCollector(vmStartTime, Timed.getFireCount(), vml.id));
 							System.out.println(name + " " + vml.id + " started@ " + vmStartTime + " finished@ "
@@ -446,22 +448,7 @@ public class Application extends Timed {
 			if (this.strategyApplication.isSubscribed()) {
 				final long unprocessed = unprocessedData;
 				try {
-					NetworkNode.initTransfer(unprocessedData, ResourceConsumption.unlimitedProcessing,
-							this.computingAppliance.iaas.repositories.get(0), this.strategyApplication.computingAppliance.iaas.repositories.get(0),
-							new ConsumptionEvent() {
-
-								@Override
-								public void conComplete() {
-									strategyApplication.sumOfArrivedData += unprocessed;
-									strategyApplication.incomingData--;
-									moveDataCapsule(strategyApplication);
-								}
-
-								@Override
-								public void conCancelled(ResourceConsumption problematic) {
-									
-								}
-							});
+					initiateDataTransfer(unprocessed, this, this.strategyApplication, 1);
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
@@ -471,11 +458,63 @@ public class Application extends Timed {
 					this.strategyApplication.restartApplication();
 				} catch (Exception e) {
 					e.printStackTrace();
-				} 
+				}
 				new BrokerCheck(this, this.strategyApplication, unprocessedData, (this.strategyApplication.freq / 2));
 			}
 		}
 
-		
+
 	}
+
+	private void transferBackToStation() throws Exception {
+
+	    Application currentApplication = this;
+	    if(this.dataCapsule != null) {
+	        while(!dataCapsule.getDataFlowPath().isEmpty()) {
+	            Application nextApplication = dataCapsule.getDataFlowPath().pop();
+	            if(nextApplication != currentApplication) {
+					if(nextApplication.isSubscribed()) {
+						try {
+							initiateDataTransfer(dataCapsule.getEventSize(), currentApplication, nextApplication, -1);
+							currentApplication = nextApplication;
+						} catch (NetworkException e) {
+							e.printStackTrace();
+						}
+					}
+                }
+            }
+            //the data is at the application connected to the station
+			if(currentApplication != dataCapsule.getSource().getApp()) {
+				//something went wrong
+				throw new Exception("The station cannot be reached");
+			} else {
+				NetworkNode.initTransfer(dataCapsule.getEventSize(), ResourceConsumption.unlimitedProcessing,
+						currentApplication.computingAppliance.iaas.repositories.get(0), dataCapsule.getSource().getDn().localRepository,
+						new Station.ActualizationEvent(dataCapsule.getSource()));
+			}
+
+        } else {
+	        throw new NetworkException("Datacapsule is null");
+        }
+    }
+
+	private void initiateDataTransfer(final long dataSize, final Application source, final Application destination, final int direction) throws NetworkException {
+		NetworkNode.initTransfer(dataSize, ResourceConsumption.unlimitedProcessing,
+				source.computingAppliance.iaas.repositories.get(0), destination.computingAppliance.iaas.repositories.get(0),
+				new ConsumptionEvent() {
+
+					@Override
+					public void conComplete() {
+						destination.sumOfArrivedData += dataSize;
+						destination.incomingData--;
+						moveDataCapsule(destination, direction);
+					}
+
+					@Override
+					public void conCancelled(ResourceConsumption problematic) {
+
+					}
+				});
+	}
+
 }
