@@ -17,8 +17,7 @@ class RestartStationEvent implements ActuatorEvent {
     @Override
     public void actuate(Station station) {
         //Kinda hacky
-        station.stopMeter();
-        station.startMeter();
+        station.restart();
     }
 
     @Override
