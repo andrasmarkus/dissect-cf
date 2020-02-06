@@ -66,10 +66,16 @@ public class Station extends Device {
     }
 
     private int reInstall;
+
+    private int eventSize;
+
+    private Actuator actuator;
+
+    private int arrivedActuatorEvents;
     /**
      * The constructor is to create new static, one-way entity for data generation.
-     *
-     * @param dn        The network settings including the local repository.
+     *  @param dn        The network settings including the local repository.
+     * @param actuator
      * @param startTime The simulated time when the data generation starts (e.g. in ms).
      * @param stopTime  The simulated time when the data generation stops (e.g. in ms).
      * @param filesize  The size of the generated data (e.g. in byte).
@@ -79,10 +85,12 @@ public class Station extends Device {
      * @param x         The X coordinate of the position.
      * @param y         The Y coordinate of the position.
      */
-    public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
-        long freq, double x, double y) {
-    	// TODO: fix this delay value
+    public Station(int reInstall, int evenSize, DeviceNetwork dn, Actuator actuator, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+                   long freq, double x, double y) {
+        this.actuator = actuator;
+        // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
+        this.eventSize = evenSize;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorNum;
@@ -92,6 +100,7 @@ public class Station extends Device {
         this.reInstall=reInstall;
         this.freq = freq;
         this.sumOfGeneratedData = 0;
+        this.arrivedActuatorEvents = 0;
         this.x = x;
         this.y = y;
         installionProcess(this);
@@ -112,7 +121,7 @@ public class Station extends Device {
             storageObjects.add(so);
         }
         if (bulkDataSize > 0) {
-            DataCapsule bulkDataCapsule = new DataCapsule(bulkDataId.toString().substring(0, bulkDataId.toString().length() > 0 ? bulkDataId.toString().length() - 1 : 0), bulkDataSize, false, this, null);
+            DataCapsule bulkDataCapsule = new DataCapsule(bulkDataId.toString().substring(0, bulkDataId.toString().length() > 0 ? bulkDataId.toString().length() - 1 : 0), bulkDataSize, false, this, null, this.eventSize);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
@@ -140,6 +149,18 @@ public class Station extends Device {
      */
     public void stopMeter() {
         unsubscribe();
+    }
+
+    public void restart() {
+        stopMeter();
+        long time = Timed.getFireCount();
+        new DeferredEvent(time + delay) {
+
+            @Override
+            protected void eventAction() {
+                subscribe(freq);
+            }
+        };
     }
     
     private void reInstall(final Station s) {
@@ -238,6 +259,10 @@ public class Station extends Device {
     public void shutdownProcess() {
     }
 
+    public Actuator getActuator() {
+        return actuator;
+    }
+
 
     /**
      * Private class to represent the successful or unsuccessful data sending events.
@@ -254,7 +279,7 @@ public class Station extends Device {
         /**
          * Constructor is for a new event of data sending.
          *
-         * @param so File is under sending.
+         * @param dataCapsule File is under sending.
          */
         private StorObjEvent(DataCapsule dataCapsule) {
             this.dataCapsule = dataCapsule;
@@ -287,6 +312,27 @@ public class Station extends Device {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static class ActualizationEvent implements ConsumptionEvent {
+
+        private Station station;
+
+        public ActualizationEvent(Station station) {
+            this.station = station;
+        }
+
+        @Override
+        public void conComplete() {
+            station.arrivedActuatorEvents++;
+            station.getActuator().executeEventOn(station);
+
+        }
+
+        @Override
+        public void conCancelled(ResourceConsumption problematic) {
+
         }
     }
 }
