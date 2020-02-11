@@ -123,7 +123,7 @@ public class NewFogSimulation   {
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Athen-app", 2400.0, 1, "random", false);
+		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 2400.0, 1, "random", false);
 		
 		cloud1.addApplication(cloudapp1);
 	
@@ -164,31 +164,35 @@ public class NewFogSimulation   {
 		cloud1.setLatency(fog14, 48);
 		
 		fog1.addNeighbour(fog3, fog4);
+		fog3.addNeighbour(fog4);
 		fog1.setParentNode(fog2);
 		fog3.setParentNode(fog2);
 		fog4.setParentNode(fog2);
 	
 		fog5.addNeighbour(fog7, fog8);	
+		fog7.addNeighbour(fog8);
 		fog5.setParentNode(fog6);
 		fog7.setParentNode(fog6);
 		fog8.setParentNode(fog6);
 		
 		fog10.addNeighbour(fog11, fog12);
+		fog11.addNeighbour(fog12);
 		fog10.setParentNode(fog9);
 		fog11.setParentNode(fog9);
 		fog12.setParentNode(fog9);
 		
 		fog2.addNeighbour(fog6, fog9, fog13, fog14);
+		fog6.addNeighbour(fog9, fog13, fog14);
+		fog9.addNeighbour(fog13, fog14);
+		fog13.addNeighbour(fog14);
 		
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
-		
-		
 
 		// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 		// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 		// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
-		for(int i=0;i<1000;i++) {
+		for(int i=0;i<10000;i++) {
 			int x,y;
 			Random randomGenerator = new Random();
 			x = randomGenerator.nextInt(49)-8;
