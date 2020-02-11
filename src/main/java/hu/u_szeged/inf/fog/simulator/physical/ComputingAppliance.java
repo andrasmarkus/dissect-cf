@@ -11,7 +11,7 @@ public class ComputingAppliance {
 	public static List<ComputingAppliance> allComputingAppliance = new ArrayList<ComputingAppliance>();
 
 	public ComputingAppliance parentNode;
-	
+
 	public IaaSService iaas;
 	
 	public List<Application> applicationList;
@@ -50,6 +50,7 @@ public class ComputingAppliance {
 	public void addNeighbour(ComputingAppliance... appliances) {
 		for(ComputingAppliance ca : appliances) {
 			this.neighbourList.add(ca);
+			ca.neighbourList.add(this);
 		}
 	}
 	
@@ -64,5 +65,11 @@ public class ComputingAppliance {
 		this.parentNode=ca;
 	}
 	
+	public void setLatency(ComputingAppliance that, int latency) {
+		this.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
+		that.iaas.repositories.get(0).addLatencies(this.iaas.repositories.get(0).getName(), latency);
+	}
+
+
 	
 }
