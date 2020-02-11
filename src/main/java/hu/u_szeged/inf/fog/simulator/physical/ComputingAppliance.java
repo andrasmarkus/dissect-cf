@@ -50,6 +50,7 @@ public class ComputingAppliance {
 	public void addNeighbour(ComputingAppliance... appliances) {
 		for(ComputingAppliance ca : appliances) {
 			this.neighbourList.add(ca);
+			ca.neighbourList.add(this);
 		}
 	}
 	
@@ -66,7 +67,7 @@ public class ComputingAppliance {
 	
 	public void setLatency(ComputingAppliance that, int latency) {
 		this.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
-		that.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
+		that.iaas.repositories.get(0).addLatencies(this.iaas.repositories.get(0).getName(), latency);
 	}
 	
 }

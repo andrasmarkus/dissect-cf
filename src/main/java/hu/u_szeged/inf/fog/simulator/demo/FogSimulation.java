@@ -44,7 +44,6 @@ public class FogSimulation {
 	// and now we make join them into 1 object called Instance with different hourly price (~0.036$)
 	new Instance(va,arc1,0.00000001,"instance1");
 	new Instance(va,arc2,0.000000015,"instance2");
-
 	
 	String cloudfile = ScenarioBase.resourcePath+"LPDS_original.xml";	
 	String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";	
