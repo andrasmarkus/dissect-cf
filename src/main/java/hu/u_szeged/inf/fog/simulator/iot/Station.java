@@ -214,7 +214,7 @@ public class Station extends Device {
 				e.printStackTrace();
 			}
         }
-        reInstall(s);
+        //reInstall(s);
     }
 
     /**

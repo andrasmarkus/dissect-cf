@@ -194,9 +194,10 @@ public class NewFogSimulation   {
 			x = randomGenerator.nextInt(49)-8;
 			y = randomGenerator.nextInt(21)+40;
 			
-			DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
 			new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();
 		}
+		
 		
 		// we start the simulation
 		long starttime = System.nanoTime();
@@ -205,7 +206,7 @@ public class NewFogSimulation   {
 		
 		// Print some information to the monitor / in file
 		TimelineGenerator.generate();
-		ScenarioBase.printInformation((stopttime-starttime),true);
+		ScenarioBase.printInformation((stopttime-starttime),false);
 	}
 	
 }
