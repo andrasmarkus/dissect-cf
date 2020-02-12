@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,22 +18,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class ApplianceModel {
 	
-	
 	public String name;
+	
 	public double xcoord;
+	
 	public double ycoord;
-	public String parentApp;
-	public ArrayList<ApplicationModel> applications;
-	public ArrayList<ComputingDevice> neighbourAppliances; 
+		
 	public String file;
+	
+	public ArrayList<ApplicationModel> applications;
+	
+	public ArrayList<NeigbourAppliancesModel> neighbours; 
+	
 	
 	@Override
 	public String toString() {
-		return "ApplianceModel [name=" + name + ", xcoord=" + xcoord + ", ycoord=" + ycoord + ", applications="
-				+ applications + ", neighbourAppliances=" + neighbourAppliances + "]";
+		return "ApplianceModel [name=" + name + ", xcoord=" + xcoord + ", ycoord=" + ycoord + ", file=" + file
+				+ ", applications=" + applications + ", neighbours=" + neighbours + "]";
 	}
-	
-	
+
 	@XmlElement(name = "name" )
 	public void setName(String name) {
 		this.name = name;
@@ -48,13 +52,9 @@ public class ApplianceModel {
 		this.ycoord = ycoord;
 	}
 	
-	@XmlElement(name = "parentApp")
-	public void setParentApp(String parentApp) {
-		this.parentApp = parentApp;
-	}
 	
-	//to read applications from xml
-	//-----
+
+
 	public ArrayList<ApplicationModel> getApplications(){
 		return applications;
 	}
@@ -71,35 +71,29 @@ public class ApplianceModel {
 		}
 		this.applications.add(applicationModel);
 	}
-	//-----
 	
-	
-	//to read neighbourappliances from xml
-	//-----
-	public ArrayList<ComputingDevice> getNeighbourAppliances(){
-		return neighbourAppliances;
+	public ArrayList<NeigbourAppliancesModel> getNeighbourAppliances(){
+		return neighbours;
 	}
 	
-	@XmlElementWrapper( name = "neighbourAppliances")
-	@XmlElement( name = "device")
-	public void setNeighbourAppliances(ArrayList<ComputingDevice> neighbourAppliances) {
-		this.neighbourAppliances = neighbourAppliances;
+	@XmlElementWrapper( name = "neighbours")
+	@XmlElement( name = "neighbour")
+	public void setNeighbourAppliances(ArrayList<NeigbourAppliancesModel> neighbours) {
+		this.neighbours = neighbours;
 	}
 	
-	public void add ( ComputingDevice device) {
-		if (this.neighbourAppliances == null) {
-			this.neighbourAppliances = new ArrayList<ComputingDevice>();
+	public void add ( NeigbourAppliancesModel device) {
+		if (this.neighbours == null) {
+			this.neighbours = new ArrayList<NeigbourAppliancesModel>();
 		}
-		this.neighbourAppliances.add(device);
+		this.neighbours.add(device);
 	}
 	
 	@XmlElement(name = "file")
 	public void setFile(String file) {
 		this.file = file;
+		
 	}
-	
-	//-----
-	
 	public static ArrayList<ApplianceModel> loadAppliancesXML(String appliancefile) throws JAXBException {
 		File file = new File(appliancefile);
 		JAXBContext jaxbContext = JAXBContext.newInstance( AppliancesModel.class );

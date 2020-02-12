@@ -22,14 +22,6 @@ public class DevicesModel
         this.deviceList = devices;
     }
 
-    public void add( DeviceModel device ){
-        if( this.deviceList == null )
-        {
-            this.deviceList = new ArrayList<DeviceModel>();
-        }
-        this.deviceList.add( device );
-
-    }
 
     @Override
     public String toString(){

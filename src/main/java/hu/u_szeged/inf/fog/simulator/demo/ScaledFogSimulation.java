@@ -18,11 +18,11 @@ public class ScaledFogSimulation {
 
 		// cloud and fog nodes
 		String cloudfile=ScenarioBase.resourcePath+"LPDS_original.xml";
-		String fogfile_type1=ScenarioBase.resourcePath+"LPDS_Fog_T1.xml"; 
-		String fogfile_type2=ScenarioBase.resourcePath+"LPDS_Fog_T2.xml"; 
+		String fogfile1=ScenarioBase.resourcePath+"LPDS_Fog_T1.xml"; 
+		String fogfile2=ScenarioBase.resourcePath+"LPDS_Fog_T2.xml"; 
 		
 		// application modules
-		String appliancefile = ScenarioBase.resourcePath+"Scenario_3_30_80.xml";
+		String appliancefile = ScenarioBase.resourcePath+"new.xml";
 		
 		// stations  (100 000 * 5 sensors)
 		String stationfile = ScenarioBase.resourcePath+"Stations.xml";
@@ -34,13 +34,13 @@ public class ScaledFogSimulation {
 		// we map the files to the IDs
 		Map<String, String> iaasloaders = new HashMap<String, String>();
 		iaasloaders.put("cloud", cloudfile);
-		iaasloaders.put("fog_type1", fogfile_type1);
-		iaasloaders.put("fog_type2", fogfile_type2);
+		iaasloaders.put("fogfile1", fogfile1);
+		iaasloaders.put("fogfile2", fogfile2);
 		
 		// we call the loader functions
 		Instance.loadInstance(instancefile);
-		//ComputingAppliance.loadAppliances(appliancefile, iaasloaders);
-		//Station.loadDevice(stationfile);
+		ComputingAppliance.loadAppliance(appliancefile, iaasloaders);
+		Station.loadDevice(stationfile);
 		Provider.loadProvider(providerfile); 
 
 		// Start the simulation

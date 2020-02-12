@@ -2,9 +2,16 @@ package hu.u_szeged.inf.fog.simulator.physical;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.xml.bind.JAXBException;
+
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
+import hu.u_szeged.inf.fog.simulator.loaders.ApplianceModel;
+import hu.u_szeged.inf.fog.simulator.loaders.ApplicationModel;
+import hu.u_szeged.inf.fog.simulator.loaders.NeigbourAppliancesModel;
 
 public class ComputingAppliance {
 	
@@ -68,6 +75,39 @@ public class ComputingAppliance {
 	public void setLatency(ComputingAppliance that, int latency) {
 		this.iaas.repositories.get(0).addLatencies(that.iaas.repositories.get(0).getName(), latency);
 		that.iaas.repositories.get(0).addLatencies(this.iaas.repositories.get(0).getName(), latency);
+	}
+
+	public static void loadAppliance(String appliancefile, Map<String, String> iaasLoader) throws Exception {
+		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {
+			System.out.println(am);
+			ComputingAppliance ca = new ComputingAppliance(iaasLoader.get(am.file), am.name, am.xcoord, am.ycoord);			
+			for(ApplicationModel a : am.getApplications()){
+				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin));
+			}
+		}
+		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {
+				ComputingAppliance ca = getComputingApplianceByName(am.name);
+				for(NeigbourAppliancesModel nam : am.getNeighbourAppliances()) {
+					ComputingAppliance friend = getComputingApplianceByName(nam.name);
+					if(Boolean.parseBoolean(nam.parent)) {
+						ca.setParentNode(friend);
+						ca.setLatency(friend, nam.latency);
+					}else {
+						ca.addNeighbour(friend);
+						ca.setLatency(friend, nam.latency);
+					}
+				}
+		}
+	}
+	
+	private static ComputingAppliance getComputingApplianceByName(String name) {
+		for(ComputingAppliance ca : ComputingAppliance.allComputingAppliance) {
+			if(ca.name.equals(name)) {
+				return ca;
+			}
+		}
+		return null;
+		
 	}
 
 

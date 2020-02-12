@@ -19,18 +19,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ApplicationModel {
 
 		public long tasksize;
-		public String type;
-		public String parentDevice;
 		public String instance;
-		public String provider;
 		public long freq;
 		public String name;
+		public double numOfInstruction;
+		public int threshold;
+		public String strategy;
+		public boolean canJoin;
 		
 		@Override
 		public String toString() {
-			return "ApplicationModel [tasksize=" + tasksize + ", type=" + type + ", instance=" + instance
-					+ ", iotPricing=" + provider + ", freq=" + freq + ", name=" + name + "]";
+			return "ApplicationModel [tasksize=" + tasksize + ", instance=" + instance + ", freq=" + freq + ", name="
+					+ name + "]";
 		}
+
 		@XmlElement( name = "name" )
 		public void setName(String name) {
 			this.name = name;
@@ -39,33 +41,38 @@ public class ApplicationModel {
 		@XmlAttribute( name = "tasksize", required = true )
 		public void setTasksize(long tasksize) {
 			this.tasksize = tasksize;
-		}
-
-		@XmlElement( name = "type" )
-		public void setType(String type) {
-			this.type = type;
-		}
-		
-		@XmlElement( name = "parentDevice" )
-		public void setParentDevice(String parentDevice) {
-			this.parentDevice = parentDevice;
-		}
-		
+		}		
 		
 		@XmlElement( name = "instance" )
 		public void setInstance(String instance) {
 			this.instance = instance;
-		}
-
-		@XmlElement( name = "provider" )
-		public void setIotPricing(String provider) {
-			this.provider = provider;
 		}
 		
 		@XmlElement( name = "freq" )
 		public void setFreq(long freq) {
 			this.freq = freq;
 		}
+		
+		@XmlElement( name = "numOfInstruction" )
+		public void setNumOfInstruction(double numOfInstruction) {
+			this.numOfInstruction = numOfInstruction;
+		}
+		
+		@XmlElement( name = "threshold" )
+		public void setThreshold(int threshold) {
+			this.threshold = threshold;
+		}
+		
+		@XmlElement( name = "strategy" )
+		public void setStrategy(String strategy) {
+			this.strategy = strategy;
+		}
+		
+		@XmlElement( name = "canJoin" )
+		public void setCanJoin(boolean canJoin) {
+			this.canJoin = canJoin;
+		}
+		
 
 		public static ArrayList<ApplicationModel> loadApplicationXML(String appfile)throws JAXBException{
 				 File file = new File( appfile);

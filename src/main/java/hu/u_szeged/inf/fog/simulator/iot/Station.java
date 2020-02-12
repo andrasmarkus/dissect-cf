@@ -24,6 +24,8 @@
 
 package hu.u_szeged.inf.fog.simulator.iot;
 
+import javax.xml.bind.JAXBException;
+
 import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
@@ -268,4 +270,18 @@ public class Station extends Device {
             }
         }
     }
+
+
+	public static void loadDevice(String stationfile) throws JAXBException {
+		for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
+			System.out.println(dm);
+            for (int i = 0; i < dm.number; i++) {
+                DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name+i, null, null);
+                // TODO: remove constain vlaue!
+                new Station(50, dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
+            }
+
+        }
+		
+	}
 }

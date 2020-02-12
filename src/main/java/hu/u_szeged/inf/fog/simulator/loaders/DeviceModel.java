@@ -27,21 +27,24 @@ public class DeviceModel {
 	public long maxoutbw;
 	public long diskbw;
 	public long reposize;
-	public double ratio;
+	public int latency;
 	public String strategy;
-	public ShutdownModel sm;
 	public double xCoord;
 	public double yCoord;
 		
-		
-		
+
+
 		@Override
-		public String toString() {
-			return "DeviceModel [name=" + name + ", number=" + number + ", freq=" + freq + ", sensor=" + sensor
-					+ ", filesize=" + filesize + ", starttime=" + starttime + ", stoptime=" + stoptime + ", maxinbw="
-					+ maxinbw + ", maxoutbw=" + maxoutbw + ", diskbw=" + diskbw + ", reposize=" + reposize + ", ratio="
-					+ ratio + ", strategy=" + strategy + ", sm=" + sm + ", xCoord=" + xCoord + ", yCoord=" + yCoord
-					+ "]";
+	public String toString() {
+		return "DeviceModel [name=" + name + ", number=" + number + ", freq=" + freq + ", sensor=" + sensor
+				+ ", filesize=" + filesize + ", starttime=" + starttime + ", stoptime=" + stoptime + ", maxinbw="
+				+ maxinbw + ", maxoutbw=" + maxoutbw + ", diskbw=" + diskbw + ", reposize=" + reposize + ", latency="
+				+ latency + ", strategy=" + strategy + ", xCoord=" + xCoord + ", yCoord=" + yCoord + "]";
+	}
+
+		@XmlElement( name = "latency" )
+		public void setLatency(int latency) {
+			this.latency = latency;
 		}
 
 		@XmlElement( name = "name" )
@@ -49,10 +52,6 @@ public class DeviceModel {
 			this.name = name;
 		}
 
-		@XmlElement( name = "shutdown" )
-		public void setSm(ShutdownModel sm) {
-			this.sm = sm;
-		}
 
 		@XmlElement( name = "freq" )
 		public void setFreq(long freq) {
@@ -85,10 +84,6 @@ public class DeviceModel {
 			this.reposize = reposize;
 		}
 		
-		@XmlElement( name = "ratio" )
-		public void setRatio(double ratio) {
-			this.ratio = ratio;
-		}
 		
 		@XmlElement( name = "strategy" )
 		public void setStrategy(String strategy) {
@@ -125,13 +120,12 @@ public class DeviceModel {
 			this.stoptime = stoptime;
 		}
 		
-
 		public static ArrayList<DeviceModel>  loadDeviceXML(String stationfile) throws JAXBException {
-			  File file = new File( stationfile );
+			  File file = new File( "/home/markus/Documents/dissect-cf/src/main/resources/demo/Stations.xml" );
 			  JAXBContext jaxbContext = JAXBContext.newInstance( DevicesModel.class );
 			  Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			  DevicesModel device = (DevicesModel)jaxbUnmarshaller.unmarshal( file );
 			  return device.deviceList;
-
+	
 		}
 }

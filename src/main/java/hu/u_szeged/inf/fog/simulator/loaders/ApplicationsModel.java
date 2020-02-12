@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.PROPERTY) 
 public class ApplicationsModel
 {
-    ArrayList<ApplicationModel> applicationList;
+   ArrayList<ApplicationModel> applicationList;
 
     public ArrayList<ApplicationModel> getApplications(){
         return applicationList;
@@ -22,14 +22,7 @@ public class ApplicationsModel
         this.applicationList = application;
     }
 
-    public void add( ApplicationModel application ){
-        if( this.applicationList == null )
-        {
-            this.applicationList = new ArrayList<ApplicationModel>();
-        }
-        this.applicationList.add( application );
-
-    }
+    
 
     @Override
     public String toString(){

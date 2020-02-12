@@ -22,13 +22,6 @@ public class AppliancesModel {
 		this.applianceList = appliances;
 	}
 	
-	public void add( ApplianceModel appliance ) {
-		if (this.applianceList == null) {
-			
-			this.applianceList = new ArrayList<ApplianceModel>();
-		}
-		this.applianceList.add( appliance );
-	}
 	
 	
 	
