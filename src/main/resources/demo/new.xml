@@ -47,7 +47,7 @@
         </applications>
         <neighbours>
 		<neighbour>
-                <name>fog2</name>
+                <name>cloud1</name>
 		<latency>35</latency>
 		<parent>true</parent>
             </neighbour>
