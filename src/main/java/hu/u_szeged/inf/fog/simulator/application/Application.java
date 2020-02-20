@@ -1,7 +1,5 @@
 package hu.u_szeged.inf.fog.simulator.application;
 
-import java.util.ArrayList;
-import java.util.List;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.ResourceAllocation;
@@ -14,11 +12,15 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
-import hu.u_szeged.inf.fog.simulator.iot.*;
+import hu.u_szeged.inf.fog.simulator.iot.DataCapsule;
+import hu.u_szeged.inf.fog.simulator.iot.Device;
+import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
+
+import java.util.*;
 
 public class Application extends Timed {
 
@@ -82,8 +84,6 @@ public class Application extends Timed {
 
 	public int incomingData;
 
-    private DataCapsule dataCapsule;
-
 	public long allocatedDta;
 
 	public String strategy;
@@ -96,11 +96,14 @@ public class Application extends Timed {
 
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
 
+	public Queue<DataCapsule> forwardDataCapsules;
+	public Queue<DataCapsule> backwardDataCapsules;
 
 
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
-	    this.dataCapsule = null;
+		forwardDataCapsules = new LinkedList<DataCapsule>();
+		backwardDataCapsules = new LinkedList<DataCapsule>();
 
 		Application.allApplication.add(this);
 
@@ -271,15 +274,31 @@ public class Application extends Timed {
 		return (usedCPU / this.computingAppliance.iaas.getRunningCapacities().getRequiredCPUs()) * 100;
 	}
 
-    public void moveDataCapsule(Application application, final int direction) {
-        if (dataCapsule != null) {
-            dataCapsule.setDestination(application);
-            application.setDataCapsule(dataCapsule);
-            if(direction != -1) {
-				dataCapsule.addToDataPath(application);
+	//Moving a given amount of datacapsules from one application to an other
+	//TODO should we send these datacapsules one-by-one with initTransfer ?
+	public static void moveDataCapsule(Application source, Application destination, long dataSize, int direction) {
+		long counter = 0;
+		DataCapsule toSend;
+		while (counter < dataSize) {
+			if(direction != -1) {
+				toSend = source.forwardDataCapsules.poll();
+			} else {
+				toSend = source.backwardDataCapsules.poll();
 			}
-            this.dataCapsule = null;
-        }
+			if (toSend != null) {
+				toSend.setDestination(destination);
+				if (direction != -1) {
+					toSend.addToDataPath(destination);
+					counter += toSend.size;
+					destination.forwardDataCapsules.add(toSend);
+				} else {
+					destination.backwardDataCapsules.add(toSend);
+					counter += toSend.getEventSize();
+				}
+			} else {
+				break;
+			}
+		}
     }
 
 	public double getCurrentCost() {
@@ -306,23 +325,14 @@ public class Application extends Timed {
 		return Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
 	}
 
-    public DataCapsule getDataCapsule() {
-        return this.dataCapsule;
-    }
-
-    public void setDataCapsule(DataCapsule dataCapsule) {
-        this.dataCapsule = dataCapsule;
-    }
-
 	public void tick(long fires) {
 		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
-
 		if (unprocessedData > 0) {
 
 			long alreadyProcessedData = 0;
 
+			//As long as we have unprocessed data
 			while (unprocessedData != alreadyProcessedData) {
-
 				if (unprocessedData - alreadyProcessedData > this.taskSize) {
 					allocatedData = this.taskSize;
 				} else {
@@ -330,15 +340,14 @@ public class Application extends Timed {
 				}
 
 				final VmCollector vml = this.VmSearch();
-
+				//Is there a virtual machine that can process the data?
 				if (vml == null) {
 
 					double ratio = (int) ((double) unprocessedData / this.taskSize);
 
-
+					//Send it over
 					if (ratio > this.threshold) {
 						strategy(unprocessedData - alreadyProcessedData);
-
 					}
 
 					System.out
@@ -348,9 +357,10 @@ public class Application extends Timed {
 					break;
 				}
 
+				//We can process the data
 				try {
 					final double noi = this.allocatedData == this.taskSize ? this.numberOfInstruction
-							: (double) (this.numberOfInstruction * this.allocatedData / this.taskSize);
+							: (this.numberOfInstruction * this.allocatedData / this.taskSize);
 
 					alreadyProcessedData += this.allocatedData;
 					vml.isWorking = true;
@@ -366,16 +376,8 @@ public class Application extends Timed {
 							vml.isWorking = false;
 							vml.taskCounter++;
 							currentTask--;
+
 							stopTime = Timed.getFireCount();
-                            if(dataCapsule != null) {
-                                if (dataCapsule.getSource() != null && dataCapsule.getSource().isSubscribed()) {
-									try {
-										transferBackToStation();
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
-								}
-                            }
 							timelineList.add(new TimelineCollector(vmStartTime, Timed.getFireCount(), vml.id));
 							System.out.println(name + " " + vml.id + " started@ " + vmStartTime + " finished@ "
 									+ Timed.getFireCount() + " with " + allocatedDataTemp + " bytes, lasted "
@@ -384,6 +386,11 @@ public class Application extends Timed {
 						}
 					});
 					this.sumOfProcessedData += this.allocatedData;
+					try {
+						transferBackToStation(allocatedData);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
@@ -393,7 +400,6 @@ public class Application extends Timed {
 		}
 		this.countVmRunningTime();
 		this.turnoffVM();
-
 		if (this.currentTask == 0 && this.incomingData == 0 && this.sumOfProcessedData == this.sumOfArrivedData
 				&& this.checkDeviceState()) {
 			unsubscribe();
@@ -448,7 +454,24 @@ public class Application extends Timed {
 			if (this.strategyApplication.isSubscribed()) {
 				final long unprocessed = unprocessedData;
 				try {
-					initiateDataTransfer(unprocessed, this, this.strategyApplication, 1);
+					final Application source = this;
+					final Application destination = this.strategyApplication;
+					NetworkNode.initTransfer(unprocessedData, ResourceConsumption.unlimitedProcessing,
+							this.computingAppliance.iaas.repositories.get(0), this.strategyApplication.computingAppliance.iaas.repositories.get(0),
+							new ConsumptionEvent() {
+
+								@Override
+								public void conComplete() {
+									strategyApplication.sumOfArrivedData += unprocessed;
+									strategyApplication.incomingData--;
+									moveDataCapsule(source, destination, unprocessed, 1);
+								}
+
+								@Override
+								public void conCancelled(ResourceConsumption problematic) {
+
+								}
+							});
 				} catch (NetworkException e) {
 					e.printStackTrace();
 				}
@@ -466,37 +489,72 @@ public class Application extends Timed {
 
 	}
 
-	private void transferBackToStation() throws Exception {
+	private void transferBackToStation(long allocatedData) throws Exception {
+		copyForwardToBackward(allocatedData);
+		long sent = 0;
+		Application currentApp = this;
+		while (sent < allocatedData) {
+			DataCapsule toSend = backwardDataCapsules.poll();
+			if (toSend != null) {
+				if(toSend.isActuatorNeeded()) {
+					while (!toSend.getDataFlowPath().isEmpty()) {
+						Application nextApp = toSend.getDataFlowPath().pop();
+						if (nextApp != currentApp) {
+							if (nextApp.isSubscribed()) {
+								try {
+									long toProcess = toSend.getEventSize();
+									initiateDataTransfer(toProcess, currentApp, nextApp, -1);
+									currentApp = nextApp;
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							} else {
+								try {
+									nextApp.restartApplication();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								new BrokerCheck(currentApp, nextApp, toSend.getEventSize(), (nextApp.freq / 2));
+							}
 
-	    Application currentApplication = this;
-	    if(this.dataCapsule != null) {
-	        while(!dataCapsule.getDataFlowPath().isEmpty()) {
-	            Application nextApplication = dataCapsule.getDataFlowPath().pop();
-	            if(nextApplication != currentApplication) {
-					if(nextApplication.isSubscribed()) {
-						try {
-							initiateDataTransfer(dataCapsule.getEventSize(), currentApplication, nextApplication, -1);
-							currentApplication = nextApplication;
-						} catch (NetworkException e) {
-							e.printStackTrace();
 						}
 					}
-                }
-            }
-            //the data is at the application connected to the station
-			if(currentApplication != dataCapsule.getSource().getApp()) {
-				//something went wrong
-				throw new Exception("The station cannot be reached");
+
+					if (currentApp != toSend.getSource().getApp()) {
+						throw new Exception("Station cannot be reached!");
+					} else {
+
+						NetworkNode.initTransfer(toSend.getEventSize(), ResourceConsumption.unlimitedProcessing,
+								currentApp.computingAppliance.iaas.repositories.get(0), toSend.getSource().getDn().localRepository,
+								new Station.ActualizationEvent(toSend.getSource()));
+						currentApp.backwardDataCapsules.remove(toSend);
+
+					}
+
+					sent += toSend.size;
+				}
+
 			} else {
-				NetworkNode.initTransfer(dataCapsule.getEventSize(), ResourceConsumption.unlimitedProcessing,
-						currentApplication.computingAppliance.iaas.repositories.get(0), dataCapsule.getSource().getDn().localRepository,
-						new Station.ActualizationEvent(dataCapsule.getSource()));
+				break;
 			}
 
-        } else {
-	        throw new NetworkException("Datacapsule is null");
-        }
-    }
+		}
+
+	}
+
+	private void copyForwardToBackward(long allocatedData) {
+		long tmp=0;
+		for(DataCapsule dc : forwardDataCapsules) {
+			if(!backwardDataCapsules.contains(dc)) {
+				backwardDataCapsules.add(dc);
+				tmp += dc.size;
+			}
+			if(tmp >= allocatedData) {
+				break;
+			}
+		}
+		forwardDataCapsules.removeAll(backwardDataCapsules);
+	}
 
 	private void initiateDataTransfer(final long dataSize, final Application source, final Application destination, final int direction) throws NetworkException {
 		NetworkNode.initTransfer(dataSize, ResourceConsumption.unlimitedProcessing,
@@ -505,9 +563,7 @@ public class Application extends Timed {
 
 					@Override
 					public void conComplete() {
-						destination.sumOfArrivedData += dataSize;
-						destination.incomingData--;
-						moveDataCapsule(destination, direction);
+						moveDataCapsule(source, destination, dataSize, direction);
 					}
 
 					@Override

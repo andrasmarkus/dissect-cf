@@ -71,6 +71,9 @@ public class Station extends Device {
 
     private Actuator actuator;
 
+    public long maxFreqLimit;
+    public long minFreqLimit;
+
     private int arrivedActuatorEvents;
     /**
      * The constructor is to create new static, one-way entity for data generation.
@@ -99,6 +102,8 @@ public class Station extends Device {
         this.sensorNum = sensorNum;
         this.reInstall=reInstall;
         this.freq = freq;
+        this.maxFreqLimit = freq * 2;
+        this.minFreqLimit = freq / 3;
         this.sumOfGeneratedData = 0;
         this.arrivedActuatorEvents = 0;
         this.x = x;
@@ -112,16 +117,14 @@ public class Station extends Device {
      * This method sends all of the generated data (called StorageObject) to the node repository.
      */
     private void startCommunicate() throws NetworkException {
-        StringBuilder bulkDataId = new StringBuilder();
         Collection<StorageObject> storageObjects = new ArrayList<StorageObject>();
         long bulkDataSize = 0;
         for (StorageObject so : this.dn.localRepository.contents()) {
-            bulkDataId.append(so.id).append("-");
             bulkDataSize += so.size;
             storageObjects.add(so);
         }
         if (bulkDataSize > 0) {
-            DataCapsule bulkDataCapsule = new DataCapsule(bulkDataId.toString().substring(0, bulkDataId.toString().length() > 0 ? bulkDataId.toString().length() - 1 : 0), bulkDataSize, false, this, null, this.eventSize);
+            DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
@@ -298,7 +301,7 @@ public class Station extends Device {
             app.sumOfArrivedData += this.dataCapsule.size;
             dataCapsule.setDestination(app);
             dataCapsule.addToDataPath(app);
-            app.setDataCapsule(dataCapsule);
+            app.forwardDataCapsules.add(dataCapsule);
         }
 
         /**

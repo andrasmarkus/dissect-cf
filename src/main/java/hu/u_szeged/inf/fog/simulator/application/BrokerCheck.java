@@ -38,6 +38,7 @@ public class BrokerCheck extends DeferredEvent {
 							public void conComplete() {
 								toApp.sumOfArrivedData += unprocessed;
 								toApp.incomingData--;
+								Application.moveDataCapsule(fromApp, toApp, unprocessed, 1);
 							}
 
 							@Override

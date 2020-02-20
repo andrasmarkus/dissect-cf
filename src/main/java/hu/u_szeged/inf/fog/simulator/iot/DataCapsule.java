@@ -4,23 +4,20 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 
 import java.util.Collection;
+import java.util.Random;
 import java.util.Stack;
 
 public class DataCapsule extends StorageObject {
+
+    private static final int TOTAL = 200;
+    private static final int CHANCE_FOR_ACTUATOR = 1;
 
     private Station source;
     private Application destination;
     private Stack<Application> dataFlowPath;
     private Collection<StorageObject> bulkStorageObject;
     private int eventSize;
-
-    public DataCapsule(String myid, Station source, Application destination, int eventSize) {
-        super(myid);
-        this.source = source;
-        this.destination = destination;
-        this.eventSize = eventSize;
-        this.dataFlowPath = new Stack<Application>();
-    }
+    private boolean actuatorNeeded;
 
     public DataCapsule(String myid, long mysize, boolean vary, Station source, Application destination, int eventSize) {
         super(myid, mysize, vary);
@@ -28,17 +25,13 @@ public class DataCapsule extends StorageObject {
         this.destination = destination;
         this.eventSize = eventSize;
         this.dataFlowPath = new Stack<Application>();
+        setActuatorNeeded();
     }
 
     public void addToDataPath(Application element) {
         this.dataFlowPath.push(element);
     }
 
-    public void removeFromDataPath(Application element) {
-        if (dataFlowPath.contains(element)) {
-            this.dataFlowPath.remove(element);
-        }
-    }
 
     public Station getSource() {
         return source;
@@ -46,10 +39,6 @@ public class DataCapsule extends StorageObject {
 
     public void setSource(Station source) {
         this.source = source;
-    }
-
-    public Application getDestination() {
-        return destination;
     }
 
     public void setDestination(Application destination) {
@@ -60,10 +49,6 @@ public class DataCapsule extends StorageObject {
         return dataFlowPath;
     }
 
-    public void setDataFlowPath(Stack<Application> dataFlowPath) {
-        this.dataFlowPath = dataFlowPath;
-    }
-
     public Collection<StorageObject> getBulkStorageObject() {
         return bulkStorageObject;
     }
@@ -72,18 +57,17 @@ public class DataCapsule extends StorageObject {
         this.bulkStorageObject = bulkStorageObject;
     }
 
-    public void addToBulkStorageObject(StorageObject storageObject) {
-        this.bulkStorageObject.add(storageObject);
-    }
-
     public int getEventSize() {
         return eventSize;
     }
 
-    public void setEventSize(int eventSize) {
-        this.eventSize = eventSize;
+    public boolean isActuatorNeeded() {
+        return actuatorNeeded;
     }
 
+    private void setActuatorNeeded() {
+        Random random = new Random();
+        actuatorNeeded = random.nextInt(TOTAL) <= CHANCE_FOR_ACTUATOR;
+    }
 
-    //In case we need an actual tree, maybe an inner class would be handy.
 }
