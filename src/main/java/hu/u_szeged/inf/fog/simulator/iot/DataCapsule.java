@@ -17,7 +17,7 @@ public class DataCapsule extends StorageObject {
     private Stack<Application> dataFlowPath;
     private Collection<StorageObject> bulkStorageObject;
     private int eventSize;
-    private boolean actuatorNeeded;
+    private boolean actuationNeeded;
 
     public DataCapsule(String myid, long mysize, boolean vary, Station source, Application destination, int eventSize) {
         super(myid, mysize, vary);
@@ -25,7 +25,7 @@ public class DataCapsule extends StorageObject {
         this.destination = destination;
         this.eventSize = eventSize;
         this.dataFlowPath = new Stack<Application>();
-        setActuatorNeeded();
+        setActuationNeeded();
     }
 
     public void addToDataPath(Application element) {
@@ -61,13 +61,13 @@ public class DataCapsule extends StorageObject {
         return eventSize;
     }
 
-    public boolean isActuatorNeeded() {
-        return actuatorNeeded;
+    public boolean isActuationNeeded() {
+        return actuationNeeded;
     }
 
-    private void setActuatorNeeded() {
+    private void setActuationNeeded() {
         Random random = new Random();
-        actuatorNeeded = random.nextInt(TOTAL) <= CHANCE_FOR_ACTUATOR;
+        actuationNeeded = random.nextInt(TOTAL) <= CHANCE_FOR_ACTUATOR;
     }
 
 }

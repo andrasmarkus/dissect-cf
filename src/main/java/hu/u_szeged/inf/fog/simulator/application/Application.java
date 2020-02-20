@@ -496,7 +496,7 @@ public class Application extends Timed {
 		while (sent < allocatedData) {
 			DataCapsule toSend = backwardDataCapsules.poll();
 			if (toSend != null) {
-				if(toSend.isActuatorNeeded()) {
+				if(toSend.isActuationNeeded()) {
 					while (!toSend.getDataFlowPath().isEmpty()) {
 						Application nextApp = toSend.getDataFlowPath().pop();
 						if (nextApp != currentApp) {
