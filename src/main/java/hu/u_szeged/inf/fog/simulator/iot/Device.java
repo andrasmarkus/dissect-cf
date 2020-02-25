@@ -130,6 +130,14 @@ public abstract class Device extends Timed {
     }
 
     /**
+     * Setter for the size of the generated data (e.g. in byte).
+     * @param filesize
+     */
+    public void setFilesize(long filesize) {
+        this.filesize = filesize;
+    }
+
+    /**
      * This method performs the shutdown-restart process of a device. 
      * TODO: not implemented yet.
      */
