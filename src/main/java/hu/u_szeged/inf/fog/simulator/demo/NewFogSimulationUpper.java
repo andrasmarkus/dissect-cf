@@ -44,10 +44,10 @@ public class NewFogSimulationUpper   {
 	ComputingAppliance fog4 = new ComputingAppliance(westfile4, "Paris", 2, 49);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp1 = new Application(5*60*1000, 256000, "a1.large", "London-app", 2400.0, 1, "upper", true);
-		Application fogapp2 = new Application(5*60*1000, 256000, "a1.xlarge", "Brussels-app", 2400.0, 1, "upper", false);
-		Application fogapp3 = new Application(5*60*1000, 256000, "a1.large", "Amsterdam-app", 2400.0, 1, "upper", true);
-		Application fogapp4 = new Application(5*60*1000, 256000, "a1.large", "Paris-app", 2400.0, 1, "upper", true);
+		Application fogapp1 = new Application(5*60*1000, 256000, "a1.large", "London-app", 1000.0, 1, "upper", true);
+		Application fogapp2 = new Application(5*60*1000, 256000, "a1.xlarge", "Brussels-app", 1000.0, 1, "upper", false);
+		Application fogapp3 = new Application(5*60*1000, 256000, "a1.large", "Amsterdam-app", 1000.0, 1, "upper", true);
+		Application fogapp4 = new Application(5*60*1000, 256000, "a1.large", "Paris-app", 1000.0, 1, "upper", true);
 		
 		// mapping applications to the resources
 		fog1.addApplication(fogapp1);
@@ -68,10 +68,10 @@ public class NewFogSimulationUpper   {
 	ComputingAppliance fog8 = new ComputingAppliance(centrefile4, "Vienna", 16, 48);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp5 = new Application(5*60*1000, 256000, "a1.large", "Bratislava-app", 2400.0, 1, "upper", true);
-		Application fogapp6 = new Application(5*60*1000, 256000, "a1.xlarge", "Budapest-app", 2400.0, 1, "upper", false);
-		Application fogapp7 = new Application(5*60*1000, 256000, "a1.large", "Prague-app", 2400.0, 1, "upper", true);
-		Application fogapp8 = new Application(5*60*1000, 256000, "a1.large", "Vienna-app", 2400.0, 1, "upper", true);
+		Application fogapp5 = new Application(5*60*1000, 256000, "a1.large", "Bratislava-app", 1000.0, 1, "upper", true);
+		Application fogapp6 = new Application(5*60*1000, 256000, "a1.xlarge", "Budapest-app", 1000.0, 1, "upper", false);
+		Application fogapp7 = new Application(5*60*1000, 256000, "a1.large", "Prague-app", 1000.0, 1, "upper", true);
+		Application fogapp8 = new Application(5*60*1000, 256000, "a1.large", "Vienna-app", 1000.0, 1, "upper", true);
 		
 		// mapping applications to the resources
 			fog5.addApplication(fogapp5);
@@ -91,10 +91,10 @@ public class NewFogSimulationUpper   {
 	ComputingAppliance fog12 = new ComputingAppliance(eastfile4, "Warsaw", 21, 52);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp9 = new Application(5*60*1000, 256000, "a1.xlarge", "Kiev-app", 2400.0, 1, "upper", false);
-		Application fogapp10 = new Application(5*60*1000, 256000, "a1.large", "Moscow-app", 2400.0, 1, "upper", true);
-		Application fogapp11 = new Application(5*60*1000, 256000, "a1.large", "Vilnius-app", 2400.0, 1, "upper", true);
-		Application fogapp12 = new Application(5*60*1000, 256000, "a1.large", "Warsaw-app", 2400.0, 1, "upper", true);
+		Application fogapp9 = new Application(5*60*1000, 256000, "a1.xlarge", "Kiev-app", 1000.0, 1, "upper", false);
+		Application fogapp10 = new Application(5*60*1000, 256000, "a1.large", "Moscow-app", 1000.0, 1, "upper", true);
+		Application fogapp11 = new Application(5*60*1000, 256000, "a1.large", "Vilnius-app", 1000.0, 1, "upper", true);
+		Application fogapp12 = new Application(5*60*1000, 256000, "a1.large", "Warsaw-app", 1000.0, 1, "upper", true);
 
 		// mapping applications to the resources
 		fog9.addApplication(fogapp9);
@@ -110,8 +110,8 @@ public class NewFogSimulationUpper   {
 	ComputingAppliance fog14 = new ComputingAppliance(upperfogfile2, "Stockholm", 18, 59);
 		
 			// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-			Application fogapp13 = new Application(5*60*1000, 256000, "a1.xlarge", "Athen-app", 2400.0, 1, "upper", false);
-			Application fogapp14 = new Application(5*60*1000, 256000, "a1.xlarge", "Stockholm-app", 2400.0, 1, "upper", false);
+			Application fogapp13 = new Application(5*60*1000, 256000, "a1.xlarge", "Athen-app", 1000.0, 1, "upper", false);
+			Application fogapp14 = new Application(5*60*1000, 256000, "a1.xlarge", "Stockholm-app", 1000.0, 1, "upper", false);
 			
 			// mapping applications to the resources
 			fog13.addApplication(fogapp13);
@@ -123,7 +123,7 @@ public class NewFogSimulationUpper   {
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 2400.0, 1, "upper", false);
+		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 1000.0, 1, "upper", false);
 		
 		cloud1.addApplication(cloudapp1);
 	
