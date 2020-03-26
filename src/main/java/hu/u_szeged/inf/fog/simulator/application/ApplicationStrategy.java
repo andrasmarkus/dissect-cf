@@ -35,3 +35,39 @@ class RandomApplicationStrategy extends ApplicationStrategy {
 
 
 }
+
+
+class NeverSendOverStrategy extends ApplicationStrategy {
+
+	public NeverSendOverStrategy(Application a) {
+		this.install(a);
+	}
+	@Override
+	public void install(Application a) {
+		a.strategyApplication=null;
+	}   
+
+
+}
+
+class AlwaysUpStrategy extends ApplicationStrategy {
+
+	public AlwaysUpStrategy(Application a) {
+		this.install(a);
+	}
+	@Override
+	public void install(Application a) {
+		int rnd1;
+		ArrayList<ComputingAppliance> caList = new ArrayList<ComputingAppliance>();
+		if(a.computingAppliance.parentNode!=null) {
+			caList.add(a.computingAppliance.parentNode);
+		}
+		if(caList.size()>0) {
+			Random randomGenerator = new Random();
+			rnd1 = randomGenerator.nextInt(caList.get(0).applicationList.size());
+			a.strategyApplication=caList.get(0).applicationList.get(rnd1);
+		}
+	}   
+
+
+}

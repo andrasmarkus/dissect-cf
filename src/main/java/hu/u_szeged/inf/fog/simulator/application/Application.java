@@ -94,7 +94,7 @@ public class Application extends Timed {
 	
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
 	
-	
+	public static long sumOfOnNetwork = 0;
 	
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
@@ -401,7 +401,11 @@ public class Application extends Timed {
 
       if (this.strategy.equals("random")) {
             new RandomApplicationStrategy(this);
-        } else {
+      } else if(this.strategy.equals("never")){
+    	  new NeverSendOverStrategy(this);
+      } else if(this.strategy.equals("upper")){
+    	  new AlwaysUpStrategy(this);
+      } else{
         	try {
 				throw new Exception("This application strategy does not exist!");
 			} catch (Exception e) {
@@ -414,7 +418,8 @@ public class Application extends Timed {
 	}
 
 	public void transferToApplication(long unprocessedData) {
-		if(this.strategyApplication!=null) {
+			
+			final long onNetwork = Timed.getFireCount();
 			this.strategyApplication.incomingData++;
 			this.sumOfArrivedData -= unprocessedData;
 			if (this.strategyApplication.isSubscribed()) {
@@ -428,6 +433,8 @@ public class Application extends Timed {
 								public void conComplete() {
 									strategyApplication.sumOfArrivedData += unprocessed;
 									strategyApplication.incomingData--;
+									
+									Application.sumOfOnNetwork+=(Timed.getFireCount()-onNetwork);
 								}
 
 								@Override
@@ -447,8 +454,6 @@ public class Application extends Timed {
 				} 
 				new BrokerCheck(this, this.strategyApplication, unprocessedData, (this.strategyApplication.freq / 2));
 			}
-		}
-
-		
+			
 	}
 }

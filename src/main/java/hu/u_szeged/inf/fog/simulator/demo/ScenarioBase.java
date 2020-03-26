@@ -83,10 +83,12 @@ public abstract class ScenarioBase {
 			System.out.println();
 		}
 		timeout = highestApplicationStopTime - highestStationStoptime;
+		
 		System.out.println("VMs " + usedVM + " tasks: " + tasks);
 		System.out.println("Generated/processed/arrived data: " + generatedData + "/" + processedData+ "/"+arrivedData+ " bytes (~"+(arrivedData/1024/1024)+" MB)");
 		System.out.println("Cloud cost: "+totalCost);
 		System.out.println("IoT cost: Bluemix: "+bluemix+ " Amazon: "+ amazon +" Azure: "+azure+ " Oracle: "+ oracle);
+		System.out.println("Network: "+TimeUnit.SECONDS.convert(Application.sumOfOnNetwork, TimeUnit.MILLISECONDS)+ " seconds");
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
 		System.out.println("Runtime: "+TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS)+ " seconds");
 		

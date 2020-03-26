@@ -1,0 +1,30 @@
+NeverSendOver:
+
+VMs 96 tasks: 14056
+Generated/processed/arrived data: 3597500000/3597500000/3597500000 bytes (~3430 MB)
+Cloud cost: 332.4987507821701
+IoT cost: Bluemix: 0.0 Amazon: 0.0 Azure: 0.0 Oracle: 0.0
+Network: 0 seconds
+Timeout: 3151.0 minutes
+Runtime: 107 seconds
+
+Random:
+
+VMs 124 tasks: 14057
+Generated/processed/arrived data: 3597500000/3597500000/3597500000 bytes (~3430 MB)
+Cloud cost: 455.36200040826003
+IoT cost: Bluemix: 0.0 Amazon: 0.0 Azure: 0.0 Oracle: 0.0
+Network: 159 seconds
+Timeout: 3451.0 minutes
+Runtime: 104 seconds
+
+
+Upper:
+
+VMs 120 tasks: 14055
+Generated/processed/arrived data: 3597500000/3597500000/3597500000 bytes (~3430 MB)
+Cloud cost: 449.71375042089005
+IoT cost: Bluemix: 0.0 Amazon: 0.0 Azure: 0.0 Oracle: 0.0
+Network: 81 seconds
+Timeout: 3501.0 minutes
+Runtime: 127 seconds
