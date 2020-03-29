@@ -402,7 +402,7 @@ class FuzzyDeviceStrategy extends DeviceStrategy {
         double minworkload = Double.MAX_VALUE;
         double maxworkload = Double.MIN_VALUE;
         for (int i = 0; i < Application.allApplication.size(); ++i) {
-            double workload = Application.allApplication.get(i).getloadOfResource();
+            double workload = Application.allApplication.get(i).computingAppliance.getloadOfResource();
             if (workload > maxworkload)
                 maxworkload = workload;
             if (workload < minworkload)
@@ -413,7 +413,7 @@ class FuzzyDeviceStrategy extends DeviceStrategy {
 
         sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf(maxworkload));
         for (int i = 0; i < Application.allApplication.size(); ++i) {
-            workload.add(kappa.getAt(sig.getat(Application.allApplication.get(i).getloadOfResource())));
+            workload.add(kappa.getAt(sig.getat(Application.allApplication.get(i).computingAppliance.getloadOfResource())));
 
         }
 

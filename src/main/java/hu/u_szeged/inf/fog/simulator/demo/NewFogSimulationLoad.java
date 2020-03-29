@@ -12,7 +12,7 @@ import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
-public class NewFogSimulationNever   {
+public class NewFogSimulationLoad   {
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -44,10 +44,10 @@ public class NewFogSimulationNever   {
 	ComputingAppliance fog4 = new ComputingAppliance(westfile4, "Paris", 2, 49);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp1 = new Application(5*60*1000, 256000, "a1.large", "London-app", 1000.0, 1, "never", true);
-		Application fogapp2 = new Application(5*60*1000, 256000, "a1.xlarge", "Brussels-app", 1000.0, 1, "never", false);
-		Application fogapp3 = new Application(5*60*1000, 256000, "a1.large", "Amsterdam-app", 1000.0, 1, "never", true);
-		Application fogapp4 = new Application(5*60*1000, 256000, "a1.large", "Paris-app", 1000.0, 1, "never", true);
+		Application fogapp1 = new Application(5*60*1000, 256000, "a1.large", "London-app", 1000.0, 1, "load", true);
+		Application fogapp2 = new Application(5*60*1000, 256000, "a1.xlarge", "Brussels-app", 1000.0, 1, "load", false);
+		Application fogapp3 = new Application(5*60*1000, 256000, "a1.large", "Amsterdam-app", 1000.0, 1, "load", true);
+		Application fogapp4 = new Application(5*60*1000, 256000, "a1.large", "Paris-app", 1000.0, 1, "load", true);
 		
 		// mapping applications to the resources
 		fog1.addApplication(fogapp1);
@@ -68,10 +68,10 @@ public class NewFogSimulationNever   {
 	ComputingAppliance fog8 = new ComputingAppliance(centrefile4, "Vienna", 16, 48);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp5 = new Application(5*60*1000, 256000, "a1.large", "Bratislava-app", 1000.0, 1, "never", true);
-		Application fogapp6 = new Application(5*60*1000, 256000, "a1.xlarge", "Budapest-app", 1000.0, 1, "never", false);
-		Application fogapp7 = new Application(5*60*1000, 256000, "a1.large", "Prague-app", 1000.0, 1, "never", true);
-		Application fogapp8 = new Application(5*60*1000, 256000, "a1.large", "Vienna-app", 1000.0, 1, "never", true);
+		Application fogapp5 = new Application(5*60*1000, 256000, "a1.large", "Bratislava-app", 1000.0, 1, "load", true);
+		Application fogapp6 = new Application(5*60*1000, 256000, "a1.xlarge", "Budapest-app", 1000.0, 1, "load", false);
+		Application fogapp7 = new Application(5*60*1000, 256000, "a1.large", "Prague-app", 1000.0, 1, "load", true);
+		Application fogapp8 = new Application(5*60*1000, 256000, "a1.large", "Vienna-app", 1000.0, 1, "load", true);
 		
 		// mapping applications to the resources
 			fog5.addApplication(fogapp5);
@@ -91,10 +91,10 @@ public class NewFogSimulationNever   {
 	ComputingAppliance fog12 = new ComputingAppliance(eastfile4, "Warsaw", 21, 52);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp9 = new Application(5*60*1000, 256000, "a1.xlarge", "Kiev-app", 1000.0, 1, "never", false);
-		Application fogapp10 = new Application(5*60*1000, 256000, "a1.large", "Moscow-app", 1000.0, 1, "never", true);
-		Application fogapp11 = new Application(5*60*1000, 256000, "a1.large", "Vilnius-app", 1000.0, 1, "never", true);
-		Application fogapp12 = new Application(5*60*1000, 256000, "a1.large", "Warsaw-app", 1000.0, 1, "never", true);
+		Application fogapp9 = new Application(5*60*1000, 256000, "a1.xlarge", "Kiev-app", 1000.0, 1, "load", false);
+		Application fogapp10 = new Application(5*60*1000, 256000, "a1.large", "Moscow-app", 1000.0, 1, "load", true);
+		Application fogapp11 = new Application(5*60*1000, 256000, "a1.large", "Vilnius-app", 1000.0, 1, "load", true);
+		Application fogapp12 = new Application(5*60*1000, 256000, "a1.large", "Warsaw-app", 1000.0, 1, "load", true);
 
 		// mapping applications to the resources
 		fog9.addApplication(fogapp9);
@@ -102,16 +102,16 @@ public class NewFogSimulationNever   {
 		fog11.addApplication(fogapp11);
 		fog12.addApplication(fogapp12);
 		
-	// never level fog nodes
-	String neverfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athen.xml";	
-	String neverfogfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_stockholm.xml";	
+	// load level fog nodes
+	String loadfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athen.xml";	
+	String loadfogfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_stockholm.xml";	
 		
-	ComputingAppliance fog13 = new ComputingAppliance(neverfogfile1, "Athen", 24, 38);
-	ComputingAppliance fog14 = new ComputingAppliance(neverfogfile2, "Stockholm", 18, 59);
+	ComputingAppliance fog13 = new ComputingAppliance(loadfogfile1, "Athen", 24, 38);
+	ComputingAppliance fog14 = new ComputingAppliance(loadfogfile2, "Stockholm", 18, 59);
 		
 			// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-			Application fogapp13 = new Application(5*60*1000, 256000, "a1.xlarge", "Athen-app", 1000.0, 1, "never", false);
-			Application fogapp14 = new Application(5*60*1000, 256000, "a1.xlarge", "Stockholm-app", 1000.0, 1, "never", false);
+			Application fogapp13 = new Application(5*60*1000, 256000, "a1.xlarge", "Athen-app", 1000.0, 1, "load", false);
+			Application fogapp14 = new Application(5*60*1000, 256000, "a1.xlarge", "Stockholm-app", 1000.0, 1, "load", false);
 			
 			// mapping applications to the resources
 			fog13.addApplication(fogapp13);
@@ -123,7 +123,7 @@ public class NewFogSimulationNever   {
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
 		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 1000.0, 1, "never", false);
+		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 1000.0, 1, "load", false);
 		
 		cloud1.addApplication(cloudapp1);
 	
@@ -195,14 +195,14 @@ public class NewFogSimulationNever   {
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
 		
-		// we create 1000 smart device with never installation strategy, 10kB storage, 10000 bandwidth, 
+		// we create 1000 smart device with load installation strategy, 10kB storage, 10000 bandwidth, 
 		// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 		// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
 		for(int i=0;i<10000;i++) {
 			int x,y;
-			Random neverGenerator = new Random();
-			x = neverGenerator.nextInt(49)-8;
-			y = neverGenerator.nextInt(21)+40;
+			Random loadGenerator = new Random();
+			x = loadGenerator.nextInt(49)-8;
+			y = loadGenerator.nextInt(21)+40;
 			
 			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
 			new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();

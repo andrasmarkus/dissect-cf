@@ -36,10 +36,56 @@ class RandomApplicationStrategy extends ApplicationStrategy {
 
 }
 
+class LoadApplicationStrategy extends ApplicationStrategy{
+	
+	public LoadApplicationStrategy(Application a) {
+		this.install(a);
+	}
 
-class NeverSendOverStrategy extends ApplicationStrategy {
+	@Override
+	public void install(Application a) {
+		
+		ArrayList<ComputingAppliance> caList = new ArrayList<ComputingAppliance>();
+		caList.addAll(a.computingAppliance.neighbourList);
+		if(a.computingAppliance.parentNode!=null) {
+			caList.add(a.computingAppliance.parentNode);
+		}
+		if(caList.size()>0) {
+			ComputingAppliance chosen=caList.get(0);
+			
+			for(ComputingAppliance ca :  caList) {
+				int lat1 = chosen.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName());
+				int lat2 = ca.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName());
+				if(chosen.getloadOfResource()>ca.getloadOfResource() && lat2<lat1) {
+					chosen = ca;
+				}
+				
+				/*
+				if(chosen.getloadOfResource()>ca.getloadOfResource()) {
+					chosen = ca;
+				}
+				
+				System.out.println("resource usage(%): "+ca.getloadOfResource());
+				System.out.println("unprocessed data / tasksize: "+(ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData)/ca.applicationList.get(0).taskSize);
+				System.out.println("distance: "+a.computingAppliance.calculateDistance(ca));
+				System.out.println("latency: "+a.computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()));
+				System.out.println("num of devices: "+ca.applicationList.get(0).deviceList.size());
+				System.out.println("currentCost: "+ca.applicationList.get(0).getCurrentCost());
+				System.out.println("price per tick: "+ca.applicationList.get(0).instance.getPricePerTick());
+				System.out.println("VM CPUs: "+ca.applicationList.get(0).instance.getArc().getRequiredCPUs());
+				*/
+			}
+			a.strategyApplication=chosen.applicationList.get(0);
+		}
+		
+		
+	}
+	
+}
 
-	public NeverSendOverStrategy(Application a) {
+class HoldDownApplicationStrategy extends ApplicationStrategy {
+
+	public HoldDownApplicationStrategy(Application a) {
 		this.install(a);
 	}
 	@Override
@@ -50,9 +96,9 @@ class NeverSendOverStrategy extends ApplicationStrategy {
 
 }
 
-class AlwaysUpStrategy extends ApplicationStrategy {
+class PushUpApplicationStrategy extends ApplicationStrategy {
 
-	public AlwaysUpStrategy(Application a) {
+	public PushUpApplicationStrategy(Application a) {
 		this.install(a);
 	}
 	@Override

@@ -94,7 +94,9 @@ public class Application extends Timed {
 	
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
 	
-	public static long sumOfOnNetwork = 0;
+	public static long sumOfTimeOnNetwork = 0;
+	
+	public static long sumOfByteOnNetwork = 0;
 	
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
@@ -259,16 +261,7 @@ public class Application extends Timed {
 		}
 	}
 
-	public double getloadOfResource() {
-		double usedCPU = 0.0;
-		for (VirtualMachine vm : this.computingAppliance.iaas.listVMs()) {
-			if (vm.getResourceAllocation() != null) {
-				usedCPU += vm.getResourceAllocation().allocated.getRequiredCPUs();
-			}
-		}
-		// TODO: why IaaS runningCapacities isn't equals with pm's capacities?
-		return (usedCPU / this.computingAppliance.iaas.getRunningCapacities().getRequiredCPUs()) * 100;
-	}
+	
 
 	public double getCurrentCost() {
 		return this.instance.calculateCloudCost(this.sumOfWorkTime);
@@ -290,10 +283,7 @@ public class Application extends Timed {
 		this.startBroker();
 	}
 
-	public double calculateDistance(ComputingAppliance one, ComputingAppliance other) {
-		double result = Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
-		return result;
-	}
+	
 
 	public void tick(long fires) {
 		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
@@ -361,7 +351,7 @@ public class Application extends Timed {
 				}
 
 			}
-			System.out.println(" load(%): " + this.getloadOfResource());
+			System.out.println(" load(%): " + this.computingAppliance.getloadOfResource());
 		}
 		this.countVmRunningTime();
 		this.turnoffVM();
@@ -401,10 +391,12 @@ public class Application extends Timed {
 
       if (this.strategy.equals("random")) {
             new RandomApplicationStrategy(this);
-      } else if(this.strategy.equals("never")){
-    	  new NeverSendOverStrategy(this);
-      } else if(this.strategy.equals("upper")){
-    	  new AlwaysUpStrategy(this);
+      } else if(this.strategy.equals("hold")){
+    	  new HoldDownApplicationStrategy(this);
+      } else if(this.strategy.equals("push")){
+    	  new PushUpApplicationStrategy(this);
+      } else if(this.strategy.equals("load")) {
+    	  new LoadApplicationStrategy(this);
       } else{
         	try {
 				throw new Exception("This application strategy does not exist!");
@@ -434,7 +426,8 @@ public class Application extends Timed {
 									strategyApplication.sumOfArrivedData += unprocessed;
 									strategyApplication.incomingData--;
 									
-									Application.sumOfOnNetwork+=(Timed.getFireCount()-onNetwork);
+									Application.sumOfTimeOnNetwork+=(Timed.getFireCount()-onNetwork);
+									Application.sumOfByteOnNetwork+=unprocessed;
 								}
 
 								@Override

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.xml.bind.JAXBException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.loaders.ApplianceModel;
@@ -110,6 +111,21 @@ public class ComputingAppliance {
 		
 	}
 
+	public double getloadOfResource() {
+		double usedCPU = 0.0;
+		for (VirtualMachine vm : this.iaas.listVMs()) {
+			if (vm.getResourceAllocation() != null) {
+				usedCPU += vm.getResourceAllocation().allocated.getRequiredCPUs();
+			}
+		}
+		// TODO: why IaaS runningCapacities isn't equals with pm's capacities?
+		return (usedCPU / this.iaas.getRunningCapacities().getRequiredCPUs()) * 100;
+	}
+	
+	public double calculateDistance(ComputingAppliance other) {
+		double result = Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y), 2));
+		return result;
+	}
 
 	
 }
