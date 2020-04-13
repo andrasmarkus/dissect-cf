@@ -368,148 +368,159 @@ class FuzzyDeviceStrategy extends DeviceStrategy {
 
     private int fuzzyDecision(Device s) {
 
+    	//possible applications.
+    	List < Application > possibleApplications = new ArrayList < Application > ();
 
-        Kappa kappa = new Kappa(3.0, 0.4);
-
-        Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 96.0), Double.valueOf(15));
-        Vector < Double > price = new Vector < Double > ();
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            price.add(kappa.getAt(sig.getat(Application.allApplication.get(i).instance.getPricePerTick() * 1000000000)));
-
-        }
-
-        double minprice = Double.MAX_VALUE;
-        double maxprice = Double.MIN_VALUE;
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            double currentprice = Application.allApplication.get(i).getCurrentCost();
-            if (currentprice > maxprice)
-                maxprice = currentprice;
-            if (currentprice < minprice)
-                minprice = currentprice;
-        }
-
-
-        Vector < Double > currentprice = new Vector < Double > ();
-
-        sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf((maxprice - minprice) / 2.0));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            currentprice.add(kappa.getAt(sig.getat(Application.allApplication.get(i).getCurrentCost())));
-        }
-
-
-
-
-        double minworkload = Double.MAX_VALUE;
-        double maxworkload = Double.MIN_VALUE;
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            double workload = Application.allApplication.get(i).computingAppliance.getloadOfResource();
-            if (workload > maxworkload)
-                maxworkload = workload;
-            if (workload < minworkload)
-                minworkload = workload;
-        }
-
-        Vector < Double > workload = new Vector < Double > ();
-
-        sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf(maxworkload));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            workload.add(kappa.getAt(sig.getat(Application.allApplication.get(i).computingAppliance.getloadOfResource())));
-
-        }
-
-
-
-        Vector < Double > numberofvm = new Vector < Double > ();
-        sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 8.0), Double.valueOf(3));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            numberofvm.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).vmManagerlist.size()))));
-
-        }
-
-
-        double sum_stations = 0.0;
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            sum_stations += Application.allApplication.get(i).deviceList.size();
-        }
-
-        Vector < Double > numberofstation = new Vector < Double > ();
-        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (Application.allApplication.size())));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            numberofstation.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).deviceList.size()))));
-
-        }
-
-        Vector < Double > numberofActiveStation = new Vector < Double > ();
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            double sum = 0.0;
-            for (int j = 0; j < Application.allApplication.get(i).deviceList.size(); j++) {
-                Station stat = (Station) Application.allApplication.get(i).deviceList.get(j);
-                long time = Timed.getFireCount();
-                if (stat.startTime >= time && stat.stopTime >= time)
-                    sum += 1;
+        for (Application app: Application.allApplication) {
+            if (app.canJoin) {
+            	possibleApplications.add(app);
             }
-            numberofActiveStation.add(sum);
+        }    	
+    	
+        //what happens if possibleApplications = 0;
+        
+        if(possibleApplications.size() > 0)	{
+        	
+        	Kappa kappa = new Kappa(3.0, 0.4);
+
+	        Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 96.0), Double.valueOf(15));
+	        Vector < Double > price = new Vector < Double > ();
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            price.add(kappa.getAt(sig.getat(possibleApplications.get(i).instance.getPricePerTick() * 1000000000)));
+	
+	        }
+
+	        double minprice = Double.MAX_VALUE;
+	        double maxprice = Double.MIN_VALUE;
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            double currentprice = possibleApplications.get(i).getCurrentCost();
+	            if (currentprice > maxprice)
+	                maxprice = currentprice;
+	            if (currentprice < minprice)
+	                minprice = currentprice;
+	        }
+
+
+	        Vector < Double > currentprice = new Vector < Double > ();
+	
+	        sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf((maxprice - minprice) / 2.0));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            currentprice.add(kappa.getAt(sig.getat(possibleApplications.get(i).getCurrentCost())));
+	        }
+
+	        double minworkload = Double.MAX_VALUE;
+	        double maxworkload = Double.MIN_VALUE;
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            double workload = possibleApplications.get(i).computingAppliance.getloadOfResource();
+	            if (workload > maxworkload)
+	                maxworkload = workload;
+	            if (workload < minworkload)
+	                minworkload = workload;
+	        }
+	
+	        Vector < Double > workload = new Vector < Double > ();
+	
+	        sig = new Sigmoid<Object>(Double.valueOf(-1.0), Double.valueOf(maxworkload));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            workload.add(kappa.getAt(sig.getat(possibleApplications.get(i).computingAppliance.getloadOfResource())));
+	
+	        }
+
+
+
+	        Vector < Double > numberofvm = new Vector < Double > ();
+	        sig = new Sigmoid<Object>(Double.valueOf(-1.0 / 8.0), Double.valueOf(3));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            numberofvm.add(kappa.getAt(sig.getat(Double.valueOf(possibleApplications.get(i).vmManagerlist.size()))));
+	
+	        }
+	
+	
+	        double sum_stations = 0.0;
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            sum_stations += possibleApplications.get(i).deviceList.size();
+	        }
+	
+	        Vector < Double > numberofstation = new Vector < Double > ();
+	        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (possibleApplications.size())));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            numberofstation.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).deviceList.size()))));
+	
+	        }
+
+	        Vector < Double > numberofActiveStation = new Vector < Double > ();
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            double sum = 0.0;
+	            for (int j = 0; j < possibleApplications.get(i).deviceList.size(); j++) {
+	                Station stat = (Station) possibleApplications.get(i).deviceList.get(j);
+	                long time = Timed.getFireCount();
+	                if (stat.startTime >= time && stat.stopTime >= time)
+	                    sum += 1;
+	            }
+	            numberofActiveStation.add(sum);
+	        }
+	        sum_stations = 0.0;
+	        for (int i = 0; i < numberofActiveStation.size(); ++i) {
+	            sum_stations += numberofActiveStation.get(i);
+	        }
+	
+	        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (numberofActiveStation.size())));
+	        for (int i = 0; i < numberofActiveStation.size(); ++i) {
+	            double a = numberofActiveStation.get(i);
+	            double b = sig.getat(a);
+	            double c = kappa.getAt(b);
+	            numberofActiveStation.set(i, c);
+	        }
+
+	        Vector < Double > preferVM = new Vector < Double > ();
+	        sig = new Sigmoid<Object>(Double.valueOf(1.0 / 32), Double.valueOf(3));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            preferVM.add(kappa.getAt(sig.getat(Double.valueOf(possibleApplications.get(i).instance.getArc().getRequiredCPUs()))));
+	        }
+	
+	
+	        Vector < Double > preferVMMem = new Vector < Double > ();
+	        sig = new Sigmoid<Object>(Double.valueOf(1.0 / 256.0), Double.valueOf(350.0));
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            preferVMMem.add(kappa.getAt(sig.getat(Double.valueOf(possibleApplications.get(i).instance.getArc().getRequiredMemory() / 10000000))));
+	        }
+
+
+
+
+
+	        Vector < Double > score = new Vector < Double > ();
+	        for (int i = 0; i < price.size(); ++i) {
+	            Vector < Double > temp = new Vector < Double > ();
+	            temp.add(price.get(i));
+	
+	            temp.add(numberofstation.get(i));
+	            temp.add(numberofActiveStation.get(i));
+	            temp.add(preferVM.get(i));
+	            temp.add(workload.get(i));
+	            temp.add(currentprice.get(i));
+	
+	            score.add(FuzzyIndicators.getAggregation(temp) * 100);
+	        }
+	        Vector < Integer > finaldecision = new Vector < Integer > ();
+	        for (int i = 0; i < possibleApplications.size(); ++i) {
+	            finaldecision.add(i);
+	        }
+	        for (int i = 0; i < score.size(); ++i) {
+	            for (int j = 0; j < score.get(i); j++) {
+	                finaldecision.add(i);
+	            }
+	        }
+	        Random rnd = new Random();
+	        Collections.shuffle(finaldecision);
+	        int temp = rnd.nextInt(finaldecision.size());
+	        
+	        return finaldecision.elementAt(temp);
+        
         }
-        sum_stations = 0.0;
-        for (int i = 0; i < numberofActiveStation.size(); ++i) {
-            sum_stations += numberofActiveStation.get(i);
+        else {
+        	//TODO throw exception
+        	return 0;
         }
-
-        sig = new Sigmoid<Object>(Double.valueOf(-0.125), Double.valueOf(sum_stations / (numberofActiveStation.size())));
-        for (int i = 0; i < numberofActiveStation.size(); ++i) {
-            double a = numberofActiveStation.get(i);
-            double b = sig.getat(a);
-            double c = kappa.getAt(b);
-            numberofActiveStation.set(i, c);
         }
-
-
-
-
-        Vector < Double > preferVM = new Vector < Double > ();
-        sig = new Sigmoid<Object>(Double.valueOf(1.0 / 32), Double.valueOf(3));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            preferVM.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).instance.getArc().getRequiredCPUs()))));
-        }
-
-
-        Vector < Double > preferVMMem = new Vector < Double > ();
-        sig = new Sigmoid<Object>(Double.valueOf(1.0 / 256.0), Double.valueOf(350.0));
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            preferVMMem.add(kappa.getAt(sig.getat(Double.valueOf(Application.allApplication.get(i).instance.getArc().getRequiredMemory() / 10000000))));
-        }
-
-
-
-
-
-        Vector < Double > score = new Vector < Double > ();
-        for (int i = 0; i < price.size(); ++i) {
-            Vector < Double > temp = new Vector < Double > ();
-            temp.add(price.get(i));
-
-            temp.add(numberofstation.get(i));
-            temp.add(numberofActiveStation.get(i));
-            temp.add(preferVM.get(i));
-            temp.add(workload.get(i));
-            temp.add(currentprice.get(i));
-
-            score.add(FuzzyIndicators.getAggregation(temp) * 100);
-        }
-        Vector < Integer > finaldecision = new Vector < Integer > ();
-        for (int i = 0; i < Application.allApplication.size(); ++i) {
-            finaldecision.add(i);
-        }
-        for (int i = 0; i < score.size(); ++i) {
-            for (int j = 0; j < score.get(i); j++) {
-                finaldecision.add(i);
-            }
-        }
-        Random rnd = new Random();
-        Collections.shuffle(finaldecision);
-        int temp = rnd.nextInt(finaldecision.size());
-        return finaldecision.elementAt(temp);
-
-
-    }
 }
