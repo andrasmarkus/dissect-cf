@@ -18,6 +18,8 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
+import hu.u_szeged.inf.fog.simulator.task_schedule.TaskScheduler;
+import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
 
 import java.util.*;
@@ -96,14 +98,14 @@ public class Application extends Timed {
 
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
 
-	public Queue<DataCapsule> forwardDataCapsules;
-	public Queue<DataCapsule> backwardDataCapsules;
-
+	public PriorityQueue<DataCapsule> forwardDataCapsules;
+	public PriorityQueue<DataCapsule> backwardDataCapsules;
+	public TaskScheduler taskScheduler;
 
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
-		forwardDataCapsules = new LinkedList<DataCapsule>();
-		backwardDataCapsules = new LinkedList<DataCapsule>();
+		forwardDataCapsules = new PriorityQueue<DataCapsule>();
+		backwardDataCapsules = new PriorityQueue<DataCapsule>();
 
 		Application.allApplication.add(this);
 
@@ -141,6 +143,10 @@ public class Application extends Timed {
 
 		this.incomingData = 0;
 
+	}
+
+	public void setTaskScheduler(TaskScheduler taskScheduler) {
+		this.taskScheduler = taskScheduler;
 	}
 
 	public void setComputingAppliance(ComputingAppliance ca) {
@@ -323,6 +329,14 @@ public class Application extends Timed {
 
 	public double calculateDistance(ComputingAppliance one, ComputingAppliance other) {
 		return Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
+	}
+
+	public void registerDataCapsule(DataCapsule dataCapsule) {
+		if(taskScheduler != null) {
+			taskScheduler.assign(dataCapsule);
+		} else {
+			System.err.println("ASDASD");
+		}
 	}
 
 	public void tick(long fires) {
@@ -526,7 +540,7 @@ public class Application extends Timed {
 
 						NetworkNode.initTransfer(toSend.getEventSize(), ResourceConsumption.unlimitedProcessing,
 								currentApp.computingAppliance.iaas.repositories.get(0), toSend.getSource().getDn().localRepository,
-								new Station.ActualizationEvent(toSend.getSource()));
+								new Station.ActualizationEvent(toSend.getSource(), toSend));
 						currentApp.backwardDataCapsules.remove(toSend);
 
 					}

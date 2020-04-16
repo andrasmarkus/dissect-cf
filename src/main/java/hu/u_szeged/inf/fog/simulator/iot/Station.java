@@ -37,6 +37,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 /**
  * The Station is an realization of the Device class, it represents a simple, one-way entity which operates only on sensors.
@@ -62,8 +63,10 @@ public class Station extends Device {
      * Getter for the number of the sensors.
      */
     public int getSensorNum() {
-        return sensorNum;
+        return sensorCharacteristics.getSensorNum() ;
     }
+
+    public SensorCharacteristics sensorCharacteristics;
 
     private int reInstall;
 
@@ -71,8 +74,6 @@ public class Station extends Device {
 
     private Actuator actuator;
 
-    public long maxFreqLimit;
-    public long minFreqLimit;
 
     private int arrivedActuatorEvents;
     /**
@@ -88,22 +89,21 @@ public class Station extends Device {
      * @param x         The X coordinate of the position.
      * @param y         The Y coordinate of the position.
      */
-    public Station(int reInstall, int evenSize, DeviceNetwork dn, Actuator actuator, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+    public Station(int reInstall, int evenSize, DeviceNetwork dn, Actuator actuator, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
                    long freq, double x, double y) {
         this.actuator = actuator;
+        this.sensorCharacteristics = sensorCharacteristics;
         // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
         this.eventSize = evenSize;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
-        this.filesize = filesize * sensorNum;
+        this.filesize = filesize * sensorCharacteristics.getSensorNum();
         this.strategy = strategy;
         this.dn = dn;
-        this.sensorNum = sensorNum;
+        this.sensorNum = sensorCharacteristics.getSensorNum();
         this.reInstall=reInstall;
         this.freq = freq;
-        this.maxFreqLimit = freq * 2;
-        this.minFreqLimit = freq / 3;
         this.sumOfGeneratedData = 0;
         this.arrivedActuatorEvents = 0;
         this.x = x;
@@ -117,6 +117,7 @@ public class Station extends Device {
      * This method sends all of the generated data (called StorageObject) to the node repository.
      */
     private void startCommunicate() throws NetworkException {
+        Random random = new Random();
         Collection<StorageObject> storageObjects = new ArrayList<StorageObject>();
         long bulkDataSize = 0;
         for (StorageObject so : this.dn.localRepository.contents()) {
@@ -124,7 +125,11 @@ public class Station extends Device {
             storageObjects.add(so);
         }
         if (bulkDataSize > 0) {
-            DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize);
+            boolean inFog = false;
+            if(sensorCharacteristics.getFogDataRatio() <= random.nextDouble()) {
+                inFog = true;
+            }
+            DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize, inFog, Timed.getFireCount(), random.nextInt(4)+1, random.nextInt(3)+1);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
@@ -302,6 +307,7 @@ public class Station extends Device {
             dataCapsule.setDestination(app);
             dataCapsule.addToDataPath(app);
             app.forwardDataCapsules.add(dataCapsule);
+            app.registerDataCapsule(dataCapsule);
         }
 
         /**
@@ -321,15 +327,18 @@ public class Station extends Device {
     public static class ActualizationEvent implements ConsumptionEvent {
 
         private Station station;
+        private DataCapsule dataCapsule;
 
-        public ActualizationEvent(Station station) {
+        public ActualizationEvent(Station station, DataCapsule dataCapsule) {
             this.station = station;
+            this.dataCapsule = dataCapsule;
         }
 
         @Override
         public void conComplete() {
             station.arrivedActuatorEvents++;
             station.getActuator().executeEventOn(station);
+            //System.err.println("Time: " + (dataCapsule.getStartTime() - dataCapsule.getEndTime()));
 
         }
 

@@ -29,7 +29,7 @@ class IncreaseFrequencyEvent implements ActuatorEvent {
     @Override
     public void actuate(Station station) {
         long newFrequency = measure + station.getFrequency();
-        if (newFrequency >= station.minFreqLimit && newFrequency <= station.maxFreqLimit) {
+        if (newFrequency >= station.sensorCharacteristics.getMinFreq() && newFrequency <= station.sensorCharacteristics.getMaxFreq()) {
             station.changeFrequency(newFrequency);
             System.out.println("Frequency of station " + station +" has been changed to: " + newFrequency);
         }
@@ -48,7 +48,7 @@ class ReduceFrequencyEvent implements ActuatorEvent {
     @Override
     public void actuate(Station station) {
         long newFrequency = station.getFrequency() - measure;
-        if (newFrequency >= station.minFreqLimit && newFrequency <= station.maxFreqLimit) {
+        if (newFrequency >= station.sensorCharacteristics.getMinFreq() && newFrequency <= station.sensorCharacteristics.getMaxFreq()) {
             station.changeFrequency(newFrequency);
             System.out.println("Frequency of station " + station +" has been changed to: " + newFrequency);
         }

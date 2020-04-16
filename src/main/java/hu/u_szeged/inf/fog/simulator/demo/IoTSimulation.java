@@ -9,6 +9,7 @@ import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.iot.Actuator;
 import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
+import hu.u_szeged.inf.fog.simulator.iot.SensorCharacteristics;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.AmazonProvider;
@@ -63,7 +64,7 @@ public class IoTSimulation {
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
 	for(int i=0;i<500;i++) {
 		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(10*60*1000, 50,dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000,50, "random", 5, 60*1000, 0, 0).startMeter();
+		new Station(10*60*1000, 50,dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000,50, "random", new SensorCharacteristics(5, 5,30000, 60000, 0.3), 60*1000, 0, 0).startMeter();
 	}
 	
 	// Setting up the IoT pricing

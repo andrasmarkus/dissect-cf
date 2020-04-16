@@ -14,7 +14,7 @@ public class ActuatorRandomStrategy implements ActuatorStrategy {
 
 
     @Override
-    public ActuatorEvent selectEvent() {
+    public ActuatorEvent selectEvent(Station station) {
         Random rand = new Random();
         int chosenEvent = rand.nextInt(NUMBER_OF_EVENTS);
 

@@ -9,7 +9,7 @@ public class Actuator{
     }
 
     public void executeEventOn(Station station) {
-        ActuatorEvent event = strategy.selectEvent();
+        ActuatorEvent event = strategy.selectEvent(station);
         if(event != null) {
             event.actuate(station);
         }

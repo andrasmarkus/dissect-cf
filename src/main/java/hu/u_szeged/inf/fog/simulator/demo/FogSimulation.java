@@ -10,6 +10,7 @@ import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.iot.Actuator;
 import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
+import hu.u_szeged.inf.fog.simulator.iot.SensorCharacteristics;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.AmazonProvider;
@@ -18,6 +19,7 @@ import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider;
 import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider.Bluemix;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.OracleProvider;
+import hu.u_szeged.inf.fog.simulator.task_schedule.PrioritizedTaskScheduler;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
 /**
@@ -50,9 +52,12 @@ public class FogSimulation {
 	
 	// creating the cloud application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
 	Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
+	ca1.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 10000, 12000, 4000));
 	Application ca2 = new Application(5*60*1000, 256000, "instance1", "Cloud-app2", 2400.0, 1, "random", false);
+	ca2.setTaskScheduler(new PrioritizedTaskScheduler(ca2, 2, 4, 10000, 12000, 4000));
 
-	// we create our fog nodes using predefined fog schema
+
+		// we create our fog nodes using predefined fog schema
 	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0);
 	ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0);
 	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0);
@@ -74,7 +79,12 @@ public class FogSimulation {
 	Application fa2 = new Application(5*60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true);
 	Application fa3 = new Application(5*60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
 	Application fa4 = new Application(5*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-	
+
+	fa1.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
+	fa2.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
+	fa3.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1002000, 400000));
+	fa4.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
+
 	cloud1.addApplication(ca1);
 	cloud2.addApplication(ca2);
 	fog1.addApplication(fa1);
@@ -94,7 +104,7 @@ public class FogSimulation {
 		y = randomGenerator.nextInt(9)-10;
 		
 		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(10*60*1000, 50, dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();
+		new Station(10*60*1000, 50, dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 3, 30000, 60000, 0.3), 60*1000, x, y).startMeter();
 	}
 	
 	// Setting up the IoT pricing
