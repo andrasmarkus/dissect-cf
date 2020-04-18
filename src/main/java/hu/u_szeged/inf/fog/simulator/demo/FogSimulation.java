@@ -86,6 +86,13 @@ public class FogSimulation {
 	fog3.addApplication(fa3);
 	fog4.addApplication(fa4);
 	
+	cloud1.readEnergy(5*60*1000, 24*60*60*1000);
+	cloud2.readEnergy(5*60*1000, 24*60*60*1000);
+	fog1.readEnergy(5*60*1000, 24*60*60*1000);
+	fog2.readEnergy(5*60*1000, 24*60*60*1000);
+	fog3.readEnergy(5*60*1000, 24*60*60*1000);
+	fog4.readEnergy(5*60*1000, 24*60*60*1000);
+	
 	 
 	
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 

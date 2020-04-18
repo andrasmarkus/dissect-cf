@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBException;
-
+import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.PhysicalMachineEnergyMeter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
@@ -52,6 +53,37 @@ public class ComputingAppliance {
 			
 		}else {
 			throw new Exception("Description file of the resources is required!");
+		}
+	}
+	
+	public void readEnergy(final long freq, final long freq2) {
+		for(PhysicalMachine pm: this.iaas.machines) {
+			final PhysicalMachineEnergyMeter pmm = new PhysicalMachineEnergyMeter(pm);
+			final ArrayList<Long> readingtime = new ArrayList<Long>();
+			final ArrayList<Double> readingpm = new ArrayList<Double>();
+			class MeteredDataCollector extends Timed {
+				public void start() {
+					subscribe(freq);
+				}
+				public void stop() {
+					unsubscribe();
+				}
+				@Override
+				public void tick(final long fires) {
+					readingtime.add(fires);
+					readingpm.add(pmm.getTotalConsumption());
+					if(Timed.getFireCount()>(freq2)) {
+						this.stop();
+						pmm.stopMeter();
+					}
+				}
+			}
+			final MeteredDataCollector mdc = new MeteredDataCollector();
+			pmm.startMeter(freq, true);
+			mdc.start();
+			for(int i=0;i<readingtime.size();i++) {
+				System.out.println("PhysichalMachine-"+i+": "+readingtime.get(i)+", "+readingpm.get(i)+"\n");
+			}
 		}
 	}
 	
