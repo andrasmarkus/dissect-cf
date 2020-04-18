@@ -19,36 +19,15 @@ import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
 import hu.u_szeged.inf.fog.simulator.task_schedule.TaskScheduler;
-import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class Application extends Timed {
 
-	public class VmCollector {
-
-		PhysicalMachine pm;
-		public VirtualMachine vm;
-		boolean isWorking;
-		public int taskCounter;
-		long lastWorked;
-		public long workingTime;
-		public String id;
-		public long installed;
-		public int restarted;
-
-		VmCollector(VirtualMachine vm) {
-			this.vm = vm;
-			this.isWorking = false;
-			this.taskCounter = 0;
-			this.workingTime = 0;
-			this.lastWorked = Timed.getFireCount();
-			this.installed = Timed.getFireCount();
-			this.id = Integer.toString(vmManagerlist.size());
-			this.restarted = 0;
-		}
-	}
+	public long allocatedData;
 
 	public List<Device> deviceList;
 
@@ -66,7 +45,7 @@ public class Application extends Timed {
 
 	protected VmCollector broker;
 
-	protected long freq;
+	public long freq;
 
 	public Application strategyApplication;
 
@@ -75,18 +54,22 @@ public class Application extends Timed {
 	public long sumOfProcessedData;
 
 	public long sumOfArrivedData;
+	public int currentTask;
 
-	protected long allocatedData;
-
-	protected int currentTask;
+	public boolean checkDeviceState() {
+		for (Device d : this.deviceList) {
+			if (d.isSubscribed()) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	public long stopTime;
 
 	public int threshold;
 
 	public int incomingData;
-
-	public long allocatedDta;
 
 	public String strategy;
 
@@ -159,13 +142,20 @@ public class Application extends Timed {
 		}
 	}
 
-	protected boolean checkDeviceState() {
-		for (Device d : this.deviceList) {
-			if (d.isSubscribed()) {
-				return false;
-			}
-		}
-		return true;
+	public void unsub() {
+		unsubscribe();
+	}
+
+	public VmCollector VmSearch() {
+        for (VmCollector aVmManagerlist : this.vmManagerlist) {
+            if ((!aVmManagerlist.isWorking
+                    && aVmManagerlist.vm.getState().equals(VirtualMachine.State.RUNNING)
+                    && !aVmManagerlist.id.equals("broker"))) {
+                return aVmManagerlist;
+
+            }
+        }
+		return null;
 	}
 
 	private void startBroker() throws VMManagementException, NetworkException {
@@ -198,19 +188,7 @@ public class Application extends Timed {
 
 	}
 
-	protected VmCollector VmSearch() {
-        for (VmCollector aVmManagerlist : this.vmManagerlist) {
-            if ((!aVmManagerlist.isWorking
-                    && aVmManagerlist.vm.getState().equals(VirtualMachine.State.RUNNING)
-                    && !aVmManagerlist.id.equals("broker"))) {
-                return aVmManagerlist;
-
-            }
-        }
-		return null;
-	}
-
-	protected boolean generateAndAddVM() {
+	public boolean generateAndAddVM() {
 
 		try {
 			if (!this.turnonVM()) {
@@ -236,7 +214,7 @@ public class Application extends Timed {
 		return false;
 	}
 
-	protected boolean turnonVM() {
+	public boolean turnonVM() {
         for (VmCollector aVmManagerlist : this.vmManagerlist) {
             if (aVmManagerlist.vm.getState().equals(VirtualMachine.State.SHUTDOWN)
                     && aVmManagerlist.pm.isReHostableRequest(this.instance.getArc())) {
@@ -256,7 +234,7 @@ public class Application extends Timed {
 		return false;
 	}
 
-	protected void turnoffVM() {
+	public void turnoffVM() {
 		for (VmCollector vmcl : this.vmManagerlist) {
 			if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING) && !vmcl.id.equals("broker")
 					&& !vmcl.isWorking) {
@@ -265,6 +243,16 @@ public class Application extends Timed {
 				} catch (StateChangeException e) {
 					e.printStackTrace();
 				}
+			}
+		}
+	}
+
+	public void countVmRunningTime() {
+		for (VmCollector vmc : this.vmManagerlist) {
+			if (vmc.vm.getState().equals(VirtualMachine.State.RUNNING)) {
+				vmc.workingTime += (Timed.getFireCount() - vmc.lastWorked);
+				sumOfWorkTime += (Timed.getFireCount() - vmc.lastWorked);
+				vmc.lastWorked = Timed.getFireCount();
 			}
 		}
 	}
@@ -311,35 +299,13 @@ public class Application extends Timed {
 		return this.instance.calculateCloudCost(this.sumOfWorkTime);
 	}
 
-	protected void countVmRunningTime() {
-		for (VmCollector vmc : this.vmManagerlist) {
-			if (vmc.vm.getState().equals(VirtualMachine.State.RUNNING)) {
-				vmc.workingTime += (Timed.getFireCount() - vmc.lastWorked);
-				sumOfWorkTime += (Timed.getFireCount() - vmc.lastWorked);
-				vmc.lastWorked = Timed.getFireCount();
-			}
-		}
-	}
-
-	public void restartApplication() throws VMManagementException, NetworkException {
-		System.out.println("\n" + this.name + " application has been restarted at " + Timed.getFireCount());
-		subscribe(this.freq);
-		this.startBroker();
-	}
-
-	public double calculateDistance(ComputingAppliance one, ComputingAppliance other) {
-		return Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
-	}
-
-	public void registerDataCapsule(DataCapsule dataCapsule) {
-		if(taskScheduler != null) {
-			taskScheduler.assign(dataCapsule);
-		} else {
-			System.err.println("ASDASD");
-		}
-	}
-
 	public void tick(long fires) {
+
+		if(taskScheduler != null) {
+			taskScheduler.process();
+			return;
+		}
+
 		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
 		if (unprocessedData > 0) {
 
@@ -412,6 +378,7 @@ public class Application extends Timed {
 			}
 			System.out.println(" load(%): " + this.getloadOfResource());
 		}
+
 		this.countVmRunningTime();
 		this.turnoffVM();
 		if (this.currentTask == 0 && this.incomingData == 0 && this.sumOfProcessedData == this.sumOfArrivedData
@@ -445,7 +412,26 @@ public class Application extends Timed {
 
 	}
 
-	private void strategy(long unprocessedData) {
+	public void restartApplication() throws VMManagementException, NetworkException {
+		System.out.println("\n" + this.name + " application has been restarted at " + Timed.getFireCount());
+		subscribe(this.freq);
+		this.startBroker();
+	}
+
+	public double calculateDistance(ComputingAppliance one, ComputingAppliance other) {
+		return Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
+	}
+
+	public void registerDataCapsule(DataCapsule dataCapsule) {
+		if(taskScheduler != null) {
+			taskScheduler.assign(dataCapsule);
+		} else {
+			//TODO: Fix this buy adding default scheduler
+			System.err.println("Default task scheduler is in charge!");
+		}
+	}
+
+	public void strategy(long unprocessedData) {
 
       if (this.strategy.equals("random")) {
             new RandomApplicationStrategy(this);
@@ -459,6 +445,30 @@ public class Application extends Timed {
         if(this.strategyApplication!=null) {
         	this.transferToApplication(unprocessedData);
         }
+	}
+
+	public class VmCollector {
+
+		public PhysicalMachine pm;
+		public VirtualMachine vm;
+		public boolean isWorking;
+		public int taskCounter;
+		long lastWorked;
+		public long workingTime;
+		public String id;
+		public long installed;
+		public int restarted;
+
+		VmCollector(VirtualMachine vm) {
+			this.vm = vm;
+			this.isWorking = false;
+			this.taskCounter = 0;
+			this.workingTime = 0;
+			this.lastWorked = Timed.getFireCount();
+			this.installed = Timed.getFireCount();
+			this.id = Integer.toString(vmManagerlist.size());
+			this.restarted = 0;
+		}
 	}
 
 	public void transferToApplication(long unprocessedData) {
@@ -478,7 +488,11 @@ public class Application extends Timed {
 								public void conComplete() {
 									strategyApplication.sumOfArrivedData += unprocessed;
 									strategyApplication.incomingData--;
-									moveDataCapsule(source, destination, unprocessed, 1);
+									if(taskScheduler != null) {
+										taskScheduler.moveDataCapsule(unprocessed, source, destination, 1);
+									} else {
+										moveDataCapsule(source, destination, unprocessed, 1);
+									}
 								}
 
 								@Override
@@ -535,6 +549,7 @@ public class Application extends Timed {
 					}
 
 					if (currentApp != toSend.getSource().getApp()) {
+						System.err.println(currentApp + " - " + toSend.getSource().getApp());
 						throw new Exception("Station cannot be reached!");
 					} else {
 
@@ -570,21 +585,30 @@ public class Application extends Timed {
 		forwardDataCapsules.removeAll(backwardDataCapsules);
 	}
 
-	private void initiateDataTransfer(final long dataSize, final Application source, final Application destination, final int direction) throws NetworkException {
+	public void initiateDataTransfer(final long dataSize, final Application source, final Application destination, final int direction) throws NetworkException {
+		final TaskScheduler taskScheduler = this.taskScheduler;
 		NetworkNode.initTransfer(dataSize, ResourceConsumption.unlimitedProcessing,
 				source.computingAppliance.iaas.repositories.get(0), destination.computingAppliance.iaas.repositories.get(0),
 				new ConsumptionEvent() {
 
 					@Override
 					public void conComplete() {
-						moveDataCapsule(source, destination, dataSize, direction);
+						if(taskScheduler != null) {
+							taskScheduler.moveDataCapsule(dataSize, source, destination, direction);
+						} else {
+							moveDataCapsule(source, destination, dataSize, direction);
+						}
 					}
 
 					@Override
 					public void conCancelled(ResourceConsumption problematic) {
-
+						System.err.println("Unsuccessful sending!");
 					}
 				});
 	}
 
+	@Override
+	public String toString() {
+		return name + strategyApplication;
+	}
 }

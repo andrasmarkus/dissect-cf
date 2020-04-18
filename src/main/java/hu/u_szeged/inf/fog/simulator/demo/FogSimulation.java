@@ -52,9 +52,9 @@ public class FogSimulation {
 	
 	// creating the cloud application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
 	Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
-	ca1.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 10000, 12000, 4000));
+	ca1.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4));
 	Application ca2 = new Application(5*60*1000, 256000, "instance1", "Cloud-app2", 2400.0, 1, "random", false);
-	ca2.setTaskScheduler(new PrioritizedTaskScheduler(ca2, 2, 4, 10000, 12000, 4000));
+	ca2.setTaskScheduler(new PrioritizedTaskScheduler(ca2, 2, 4));
 
 
 		// we create our fog nodes using predefined fog schema
@@ -80,10 +80,10 @@ public class FogSimulation {
 	Application fa3 = new Application(5*60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
 	Application fa4 = new Application(5*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
 
-	fa1.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
-	fa2.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
-	fa3.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1002000, 400000));
-	fa4.setTaskScheduler(new PrioritizedTaskScheduler(ca1, 2, 4, 1000000, 1200000, 400000));
+	fa1.setTaskScheduler(new PrioritizedTaskScheduler(fa1, 2, 4));
+	fa2.setTaskScheduler(new PrioritizedTaskScheduler(fa2, 2, 4));
+	fa3.setTaskScheduler(new PrioritizedTaskScheduler(fa3, 2, 4));
+	fa4.setTaskScheduler(new PrioritizedTaskScheduler(fa4, 2, 4));
 
 	cloud1.addApplication(ca1);
 	cloud2.addApplication(ca2);
@@ -104,7 +104,7 @@ public class FogSimulation {
 		y = randomGenerator.nextInt(9)-10;
 		
 		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(10*60*1000, 50, dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 3, 30000, 60000, 0.3), 60*1000, x, y).startMeter();
+		new Station(10*60*1000, 50, dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 3, 30000, 60000, 0.3, 0.1), 60*1000, x, y).startMeter();
 	}
 	
 	// Setting up the IoT pricing

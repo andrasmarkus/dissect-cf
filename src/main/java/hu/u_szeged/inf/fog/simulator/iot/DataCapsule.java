@@ -4,13 +4,9 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 
 import java.util.Collection;
-import java.util.Random;
 import java.util.Stack;
 
 public class DataCapsule extends StorageObject implements Comparable<DataCapsule> {
-
-    private static final int TOTAL = 200;
-    private static final int CHANCE_FOR_ACTUATOR = 1;
 
     private Station source;
     private Application destination;
@@ -19,7 +15,7 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
     private int eventSize;
     private Boolean actuationNeeded;
     private Boolean fogProcess;
-    private long startTime, endTime;
+    private long startTime, processTime, endTime;
     //0-4 : 0=no delay, 1=minimal delay, 2=medium delay, 3=high delay, 4=very high delay
     private int maxToleratedDelay;
     //1-3: 1=high, 2=mid, 3=low
@@ -50,7 +46,6 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
             this.maxToleratedDelay = maxToleratedDelay;
         }
         this.dataFlowPath = new Stack<Application>();
-        setActuationNeeded();
     }
 
     public void addToDataPath(Application element) {
@@ -93,13 +88,12 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
         return eventSize;
     }
 
-    public boolean isActuationNeeded() {
+    public Boolean isActuationNeeded() {
         return actuationNeeded;
     }
 
-    private void setActuationNeeded() {
-        Random random = new Random();
-        actuationNeeded = random.nextInt(TOTAL) <= CHANCE_FOR_ACTUATOR;
+    public void setActuationNeeded(Boolean actuationNeeded) {
+        this.actuationNeeded = actuationNeeded;
     }
 
     public boolean isFogProcess() {
@@ -118,12 +112,12 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
         this.startTime = startTime;
     }
 
-    public long getEndTime() {
-        return endTime;
+    public long getProcessTime() {
+        return processTime;
     }
 
-    public void setEndTime(long endTime) {
-        this.endTime = endTime;
+    public void setProcessTime(long processTime) {
+        this.processTime = processTime;
     }
 
     public int getMaxToleratedDelay() {
@@ -140,5 +134,13 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
 
     public void setPriorityLevel(int priorityLevel) {
         this.priorityLevel = priorityLevel;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 }

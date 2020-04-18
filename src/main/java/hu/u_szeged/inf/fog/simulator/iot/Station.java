@@ -126,11 +126,12 @@ public class Station extends Device {
         }
         if (bulkDataSize > 0) {
             boolean inFog = false;
-            if(sensorCharacteristics.getFogDataRatio() <= random.nextDouble()) {
+            if(sensorCharacteristics.getFogDataRatio() >= random.nextDouble()) {
                 inFog = true;
             }
             DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize, inFog, Timed.getFireCount(), random.nextInt(4)+1, random.nextInt(3)+1);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
+            bulkDataCapsule.setActuationNeeded(sensorCharacteristics.getActuatorRatio() <= random.nextDouble());
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
         }
@@ -338,7 +339,8 @@ public class Station extends Device {
         public void conComplete() {
             station.arrivedActuatorEvents++;
             station.getActuator().executeEventOn(station);
-            //System.err.println("Time: " + (dataCapsule.getStartTime() - dataCapsule.getEndTime()));
+            dataCapsule.setEndTime(Timed.getFireCount());
+            //System.err.println("Time: " + (dataCapsule.getStartTime() - dataCapsule.getProcessTime()));
 
         }
 

@@ -7,12 +7,20 @@ public class SensorCharacteristics {
     private int minFreq, maxFreq;
     //This gives the ratio of data that has to be processed in the fog (in average)
     private double fogDataRatio;
+    private double actuatorRatio;
 
-    public SensorCharacteristics(int sensorNum, int mttf, int minFreq, int maxFreq, double fogDataRatio) {
+    public SensorCharacteristics(int sensorNum, int mttf, int minFreq, int maxFreq, double fogDataRatio, double actuatorRatio) {
         this.sensorNum = sensorNum;
         this.mttf = mttf;
         this.minFreq = minFreq;
         this.maxFreq = maxFreq;
+        if(actuatorRatio > 1) {
+            this.actuatorRatio = 1;
+        } else if(actuatorRatio < 0) {
+            this.actuatorRatio = 0;
+        } else {
+            this.actuatorRatio = actuatorRatio;
+        }
         if(fogDataRatio < 0) {
             this.fogDataRatio = 0;
         }
@@ -63,5 +71,13 @@ public class SensorCharacteristics {
 
     public void setFogDataRatio(double fogDataRatio) {
         this.fogDataRatio = fogDataRatio;
+    }
+
+    public double getActuatorRatio() {
+        return actuatorRatio;
+    }
+
+    public void setActuatorRatio(double actuatorRatio) {
+        this.actuatorRatio = actuatorRatio;
     }
 }
