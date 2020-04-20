@@ -7,10 +7,10 @@ public class ActuatorRandomStrategy implements ActuatorStrategy {
     private static final int NUMBER_OF_EVENTS = 4;
     private static final int TOTAL_STOP = 100;
     private static final int ACTUAL_STOP = 5;
-    private static final int FREQ_CHANGE_RATIO = 9;
+    private static final int FREQ_CHANGE_RATIO = 4;
 
-    private static final long MAX_FILESIZE = 2000;
-    private static final long MIN_FILESIZE = 10;
+    private static final int MAX_FILESIZE = 750;
+    private static final int MIN_FILESIZE = 50;
 
 
     @Override
@@ -21,7 +21,7 @@ public class ActuatorRandomStrategy implements ActuatorStrategy {
         switch (chosenEvent) {
             case 0:
                 if(rand.nextInt(TOTAL_STOP) <= ACTUAL_STOP) {
-                    return new StopStationEvent();
+                    //return new StopStationEvent();
                 }
                 break;
             case 1:
@@ -29,7 +29,7 @@ public class ActuatorRandomStrategy implements ActuatorStrategy {
             case 2:
                 return new ReduceFrequencyEvent((rand.nextInt(FREQ_CHANGE_RATIO)+1)*1000);
             case 3:
-                return new ChangeFileSize((rand.nextLong() % (MAX_FILESIZE - MIN_FILESIZE)) + MIN_FILESIZE);
+                return new ChangeFileSize((long) rand.nextInt(MAX_FILESIZE - MIN_FILESIZE) + 1+ MIN_FILESIZE);
 
         }
         return null;

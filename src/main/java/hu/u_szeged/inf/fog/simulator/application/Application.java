@@ -6,18 +6,17 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.ResourceAllocatio
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine.StateChangeException;
-import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ConsumptionEventAdapter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption.ConsumptionEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
-import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.u_szeged.inf.fog.simulator.iot.DataCapsule;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.Provider;
+import hu.u_szeged.inf.fog.simulator.task_schedule.DefaultTaskScheduler;
 import hu.u_szeged.inf.fog.simulator.task_schedule.TaskScheduler;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
 
@@ -125,6 +124,8 @@ public class Application extends Timed {
 		this.sumOfArrivedData = 0;
 
 		this.incomingData = 0;
+
+		this.taskScheduler = new DefaultTaskScheduler(this);
 
 	}
 
@@ -300,116 +301,7 @@ public class Application extends Timed {
 	}
 
 	public void tick(long fires) {
-
-		if(taskScheduler != null) {
-			taskScheduler.process();
-			return;
-		}
-
-		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
-		if (unprocessedData > 0) {
-
-			long alreadyProcessedData = 0;
-
-			//As long as we have unprocessed data
-			while (unprocessedData != alreadyProcessedData) {
-				if (unprocessedData - alreadyProcessedData > this.taskSize) {
-					allocatedData = this.taskSize;
-				} else {
-					allocatedData = (unprocessedData - alreadyProcessedData);
-				}
-
-				final VmCollector vml = this.VmSearch();
-				//Is there a virtual machine that can process the data?
-				if (vml == null) {
-
-					double ratio = (int) ((double) unprocessedData / this.taskSize);
-
-					//Send it over
-					if (ratio > this.threshold) {
-						strategy(unprocessedData - alreadyProcessedData);
-					}
-
-					System.out
-							.print("data/VM: " + ratio + " unprocessed after exit: " + unprocessedData + " decision:");
-					this.generateAndAddVM();
-
-					break;
-				}
-
-				//We can process the data
-				try {
-					final double noi = this.allocatedData == this.taskSize ? this.numberOfInstruction
-							: (this.numberOfInstruction * this.allocatedData / this.taskSize);
-
-					alreadyProcessedData += this.allocatedData;
-					vml.isWorking = true;
-					this.currentTask++;
-
-					vml.vm.newComputeTask(noi, ResourceConsumption.unlimitedProcessing, new ConsumptionEventAdapter() {
-						long vmStartTime = Timed.getFireCount();
-						long allocatedDataTemp = allocatedData;
-						double noiTemp = noi;
-
-						@Override
-						public void conComplete() {
-							vml.isWorking = false;
-							vml.taskCounter++;
-							currentTask--;
-
-							stopTime = Timed.getFireCount();
-							timelineList.add(new TimelineCollector(vmStartTime, Timed.getFireCount(), vml.id));
-							System.out.println(name + " " + vml.id + " started@ " + vmStartTime + " finished@ "
-									+ Timed.getFireCount() + " with " + allocatedDataTemp + " bytes, lasted "
-									+ (Timed.getFireCount() - vmStartTime) + " ,noi: " + noiTemp);
-
-						}
-					});
-					this.sumOfProcessedData += this.allocatedData;
-					try {
-						transferBackToStation(allocatedData);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				} catch (NetworkException e) {
-					e.printStackTrace();
-				}
-
-			}
-			System.out.println(" load(%): " + this.getloadOfResource());
-		}
-
-		this.countVmRunningTime();
-		this.turnoffVM();
-		if (this.currentTask == 0 && this.incomingData == 0 && this.sumOfProcessedData == this.sumOfArrivedData
-				&& this.checkDeviceState()) {
-			unsubscribe();
-
-			for (Provider p : this.providers) {
-				if (p.isSubscribed()) {
-					p.shouldStop = true;
-				}
-			}
-			StorageObject so = new StorageObject(this.name, this.sumOfProcessedData, false);
-			if (!this.computingAppliance.iaas.repositories.get(0).registerObject(so)) {
-				this.computingAppliance.iaas.repositories.get(0).deregisterObject(so);
-				this.computingAppliance.iaas.repositories.get(0).registerObject(so);
-			}
-
-			for (VmCollector vmcl : this.vmManagerlist) {
-				try {
-					if (vmcl.vm.getState().equals(VirtualMachine.State.RUNNING)) {
-						if (vmcl.id.equals("broker")) {
-							vmcl.pm = vmcl.vm.getResourceAllocation().getHost();
-						}
-						vmcl.vm.switchoff(false);
-					}
-				} catch (StateChangeException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
+		taskScheduler.process();
 	}
 
 	public void restartApplication() throws VMManagementException, NetworkException {
@@ -423,12 +315,7 @@ public class Application extends Timed {
 	}
 
 	public void registerDataCapsule(DataCapsule dataCapsule) {
-		if(taskScheduler != null) {
-			taskScheduler.assign(dataCapsule);
-		} else {
-			//TODO: Fix this buy adding default scheduler
-			System.err.println("Default task scheduler is in charge!");
-		}
+		taskScheduler.assign(dataCapsule);
 	}
 
 	public void strategy(long unprocessedData) {
@@ -488,11 +375,7 @@ public class Application extends Timed {
 								public void conComplete() {
 									strategyApplication.sumOfArrivedData += unprocessed;
 									strategyApplication.incomingData--;
-									if(taskScheduler != null) {
-										taskScheduler.moveDataCapsule(unprocessed, source, destination, 1);
-									} else {
-										moveDataCapsule(source, destination, unprocessed, 1);
-									}
+									taskScheduler.moveDataCapsule(unprocessed, source, destination, 1);
 								}
 
 								@Override
@@ -593,11 +476,7 @@ public class Application extends Timed {
 
 					@Override
 					public void conComplete() {
-						if(taskScheduler != null) {
-							taskScheduler.moveDataCapsule(dataSize, source, destination, direction);
-						} else {
-							moveDataCapsule(source, destination, dataSize, direction);
-						}
+						taskScheduler.moveDataCapsule(dataSize, source, destination, direction);
 					}
 
 					@Override

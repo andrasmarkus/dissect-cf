@@ -75,7 +75,7 @@ public class Station extends Device {
     private Actuator actuator;
 
 
-    private int arrivedActuatorEvents;
+
     /**
      * The constructor is to create new static, one-way entity for data generation.
      *  @param dn        The network settings including the local repository.
@@ -131,7 +131,7 @@ public class Station extends Device {
             }
             DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize, inFog, Timed.getFireCount(), random.nextInt(4)+1, random.nextInt(3)+1);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
-            bulkDataCapsule.setActuationNeeded(sensorCharacteristics.getActuatorRatio() <= random.nextDouble());
+            bulkDataCapsule.setActuationNeeded(sensorCharacteristics.getActuatorRatio() >= random.nextDouble());
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
         }
@@ -307,8 +307,9 @@ public class Station extends Device {
             app.sumOfArrivedData += this.dataCapsule.size;
             dataCapsule.setDestination(app);
             dataCapsule.addToDataPath(app);
-            app.forwardDataCapsules.add(dataCapsule);
+            //app.forwardDataCapsules.add(dataCapsule);
             app.registerDataCapsule(dataCapsule);
+            sentCapsule++;
         }
 
         /**

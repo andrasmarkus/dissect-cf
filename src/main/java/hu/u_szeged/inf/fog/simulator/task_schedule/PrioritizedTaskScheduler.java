@@ -347,8 +347,9 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
     }
 
     private void sendToStation(DataCapsule dataCapsule) throws Exception {
-        this.application.backwardDataCapsules.add(dataCapsule);
-        Application currentApp = this.application;
+
+        Application currentApp = dataCapsule.getDestination();
+        currentApp.backwardDataCapsules.add(dataCapsule);
         while (!dataCapsule.getDataFlowPath().isEmpty()) {
             Application nextApp = dataCapsule.getDataFlowPath().pop();
             if(nextApp != currentApp) {

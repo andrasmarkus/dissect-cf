@@ -3,6 +3,7 @@ package hu.u_szeged.inf.fog.simulator.demo;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.application.Application.VmCollector;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
@@ -36,7 +37,9 @@ public abstract class ScenarioBase {
 		double amazon=0;
 		double azure=0;
 		double oracle=0;
-		
+		long actuatorEvents = 0;
+		long sentCapsule = 0;
+
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
 			System.out.println("computingAppliance: " + c.name);
 			//long highestStationStoptime=Long.MIN_VALUE;
@@ -61,6 +64,10 @@ public abstract class ScenarioBase {
 					if(d.stopTime>highestStationStoptime) {
 						highestStationStoptime=d.stopTime;
 					}
+
+					actuatorEvents += d.arrivedActuatorEvents;
+					sentCapsule += d.sentCapsule;
+
 				}
 				
 				if (a.stopTime > highestApplicationStopTime) {
@@ -89,7 +96,9 @@ public abstract class ScenarioBase {
 		System.out.println("IoT cost: Bluemix: "+bluemix+ " Amazon: "+ amazon +" Azure: "+azure+ " Oracle: "+ oracle);
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
 		System.out.println("Runtime: "+TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS)+ " seconds");
-		
+		System.out.println("Number of actuator events: " + actuatorEvents);
+		System.out.println("Number of sent capsules: " + sentCapsule);
+
 
 	}
 }

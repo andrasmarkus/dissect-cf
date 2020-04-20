@@ -143,4 +143,8 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
+
+    public Application getDestination() {
+        return destination;
+    }
 }

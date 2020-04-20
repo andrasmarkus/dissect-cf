@@ -15,6 +15,10 @@ public class Actuator{
         }
     }
 
+    public void executeSingleEvent(ActuatorEvent event, Station station) {
+        event.actuate(station);
+    }
+
     public ActuatorStrategy getStrategy() {
         return strategy;
     }
