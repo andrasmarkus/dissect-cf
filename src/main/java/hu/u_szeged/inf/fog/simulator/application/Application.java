@@ -401,6 +401,8 @@ public class Application extends Timed {
     	  new LoadApplicationStrategy(this);
       } else if(this.strategy.equals("fuzzy")){
     	  new FuzzyApplicationStrategy(this);
+      } else if(this.strategy.equals("push2")){
+    	  new PushUp2ApplicationStrategy(this);
       } else{
         	try {
 				throw new Exception("This application strategy does not exist!");
