@@ -32,7 +32,7 @@ public class NewFogSimulationPush   {
 	final long freq = 5*60*1000;
 	
 	//  smart devices' characteristics
-	final int numberOfDevices = 10000;
+	final int numberOfDevices = 5000;
 	final long deviceFreq = 60*1000; // -> 1 min
 	final long deviceStart = 0;
 	final long deviceStop = 24*60*60*1000; // -> 24 hours
@@ -214,9 +214,6 @@ public class NewFogSimulationPush   {
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
 		
-		// we create 1000 smart device with hold installation strategy, 10kB storage, 10000 bandwidth, 
-		// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
-		// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
 		for(int i=0;i<numberOfDevices;i++) {
 			int x,y;
 			Random holdGenerator = new Random();

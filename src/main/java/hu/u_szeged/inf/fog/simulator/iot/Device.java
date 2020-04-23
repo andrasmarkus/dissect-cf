@@ -168,12 +168,12 @@ public abstract class Device extends Timed {
      * It can be useful for distance-aware algorithms.
      * @param app The application which this device can connected to.
      */
-    protected double calculateDistance(Application app) {
+    protected int calculateDistance(Application app) {
         double result = Math.sqrt(
             Math.pow((this.x - app.computingAppliance.x), 2) +
             Math.pow((this.y - app.computingAppliance.y), 2)
         );
-        return result;
+        return (int) result;
     }
 
     /**
