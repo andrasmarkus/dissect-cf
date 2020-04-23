@@ -32,7 +32,7 @@ public class NewFogSimulationPush2   {
 	final long freq = 5*60*1000;
 	
 	//  smart devices' characteristics
-	final int numberOfDevices = 5000;
+	final int numberOfDevices = 10000;
 	final long deviceFreq = 60*1000; // -> 1 min
 	final long deviceStart = 0;
 	final long deviceStop = 24*60*60*1000; // -> 24 hours
@@ -214,6 +214,7 @@ public class NewFogSimulationPush2   {
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
 		
+		/* 0-24 */
 		for(int i=0;i<numberOfDevices;i++) {
 			int x,y;
 			Random holdGenerator = new Random();
@@ -223,7 +224,50 @@ public class NewFogSimulationPush2   {
 			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
 			new Station(dn, deviceStart, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
 		}
+		/*
+		// 5-24 
+		for(int i=0;i<2000;i++) {
+			int x,y;
+			Random holdGenerator = new Random();
+			x = holdGenerator.nextInt(49)-8;
+			y = holdGenerator.nextInt(21)+40;
+			
+			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+			new Station(dn, 5*60*60*1000, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
+		}
 		
+		// 10-24 
+		for(int i=0;i<2000;i++) {
+			int x,y;
+			Random holdGenerator = new Random();
+			x = holdGenerator.nextInt(49)-8;
+			y = holdGenerator.nextInt(21)+40;
+			
+			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+			new Station(dn, 10*60*60*1000, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
+		}
+		
+		// 15-24 
+		for(int i=0;i<2000;i++) {
+			int x,y;
+			Random holdGenerator = new Random();
+			x = holdGenerator.nextInt(49)-8;
+			y = holdGenerator.nextInt(21)+40;
+			
+			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+			new Station(dn, 15*60*60*1000, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
+		}
+		
+		// 20-24
+		for(int i=0;i<2000;i++) {
+			int x,y;
+			Random holdGenerator = new Random();
+			x = holdGenerator.nextInt(49)-8;
+			y = holdGenerator.nextInt(21)+40;
+			
+			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+			new Station(dn, 20*60*60*1000, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
+		} */
 		
 		// we start the simulation
 		long starttime = System.nanoTime();
