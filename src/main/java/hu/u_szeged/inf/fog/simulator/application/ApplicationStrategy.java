@@ -126,15 +126,8 @@ class PushUpApplicationStrategy extends ApplicationStrategy {
 	}
 	@Override
 	public void install(Application a) {
-		int rnd1;
-		ArrayList<ComputingAppliance> caList = new ArrayList<ComputingAppliance>();
 		if(a.computingAppliance.parentNode!=null) {
-			caList.add(a.computingAppliance.parentNode);
-		}
-		if(caList.size()>0) {
-			Random randomGenerator = new Random();
-			rnd1 = randomGenerator.nextInt(caList.get(0).applicationList.size());
-			a.strategyApplication=caList.get(0).applicationList.get(rnd1);
+			a.strategyApplication=a.computingAppliance.parentNode.applicationList.get(0);
 		}
 	}   
 }

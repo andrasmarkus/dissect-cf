@@ -191,6 +191,9 @@ public class Application extends Timed {
 	}
 
 	protected VmCollector VmSearch() {
+		if(this.threshold==0) {
+			return null;
+		}
 		for (int i = 0; i < this.vmManagerlist.size(); i++) {
 			if ((this.vmManagerlist.get(i).isWorking == false
 					&& this.vmManagerlist.get(i).vm.getState().equals(VirtualMachine.State.RUNNING)
@@ -199,6 +202,7 @@ public class Application extends Timed {
 
 			}
 		}
+		
 		return null;
 	}
 
@@ -301,15 +305,13 @@ public class Application extends Timed {
 				}
 
 				final VmCollector vml = this.VmSearch();
-
+				
 				if (vml == null) {
 
-					double ratio = (int) ((double) unprocessedData / this.taskSize);
+					int ratio = (int) (unprocessedData / this.taskSize);
 
-					
-					if (ratio > this.threshold) {
-						strategy(unprocessedData - alreadyProcessedData);
-						
+					if (ratio >= this.threshold) {
+						strategy(unprocessedData - alreadyProcessedData);			
 					}
 
 					System.out
@@ -397,6 +399,8 @@ public class Application extends Timed {
     	  new PushUpApplicationStrategy(this);
       } else if(this.strategy.equals("load")) {
     	  new LoadApplicationStrategy(this);
+      } else if(this.strategy.equals("fuzzy")){
+    	  new FuzzyApplicationStrategy(this);
       } else{
         	try {
 				throw new Exception("This application strategy does not exist!");

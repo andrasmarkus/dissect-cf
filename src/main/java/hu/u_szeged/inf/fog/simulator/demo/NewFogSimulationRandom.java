@@ -15,18 +15,38 @@ import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 public class NewFogSimulationRandom   {
 	
 	public static void main(String[] args) throws Exception {
-		
-	// creating vm images and its resource needs
+	
+	// app strategy
+	final String strategy = "random";
+	
+	// device strategy
+	final String deviceStrategy = "random";
+	
+	// num. of the instruction
+	final long numberOfInstruction = 600;
+	
+	// tasksize -> 250kB
+	final long tasksize = 256000;
+	
+	// app frequency ->5 min
+	final long freq = 5*60*1000;
+	
+	//  smart devices' characteristics
+	final int numberOfDevices = 10000;
+	
+	final long deviceFreq = 60*1000; // -> 1 min
+	final long deviceStart = 0;
+	final long deviceStop = 24*60*60*1000; // -> 24 hours
 		
 	// for a VM, first we need a virtual machine image, it needs 100 instruction for creating a VM from it, and it needs 1 GB of free space on a PM
 	VirtualAppliance va = new VirtualAppliance("va", 100, 0, false, 1073741824L);
 			
-	// we have to define the resource needs of the VM, we use 4-8 CPU cores, 0.001 core processing power and 4 GB RAM
+	// we have to define the resource needs of the VM
 	AlterableResourceConstraints arc1 = new AlterableResourceConstraints(2,0.001,4294967296L);
 	AlterableResourceConstraints arc2 = new AlterableResourceConstraints(4,0.001,8589934592L);
 	AlterableResourceConstraints arc3 = new AlterableResourceConstraints(8,0.001,17179869184L);
 			
-	// and now we make join them into 1 object called Instance with different hourly price (~0.036$)
+	// and now we make join them into 1 object called Instance with different hourly price
 	new Instance(va,arc1,0.0000000141666667,"a1.large");
 	new Instance(va,arc2,0.0000000283333333,"a1.xlarge");
 	new Instance(va,arc3,0.0000000566666667,"a2.xlarge");	
@@ -43,11 +63,11 @@ public class NewFogSimulationRandom   {
 	ComputingAppliance fog3 = new ComputingAppliance(westfile3, "Amsterdam", 5, 52);
 	ComputingAppliance fog4 = new ComputingAppliance(westfile4, "Paris", 2, 49);
 	
-		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp1 = new Application(5*60*1000, 256000, "a1.large", "London-app", 500.0, 1, "random", true);
-		Application fogapp2 = new Application(5*60*1000, 256000, "a1.xlarge", "Brussels-app", 500.0, 1, "random", false);
-		Application fogapp3 = new Application(5*60*1000, 256000, "a1.large", "Amsterdam-app", 500.0, 1, "random", true);
-		Application fogapp4 = new Application(5*60*1000, 256000, "a1.large", "Paris-app", 500.0, 1, "random", true);
+		// creating the cloud application modules
+		Application fogapp1 = new Application(freq, tasksize, "a1.large", "London-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp2 = new Application(freq, tasksize, "a1.xlarge", "Brussels-app", numberOfInstruction, 1, strategy, false);
+		Application fogapp3 = new Application(freq, tasksize, "a1.large", "Amsterdam-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp4 = new Application(freq, tasksize, "a1.large", "Paris-app", numberOfInstruction, 1, strategy, true);
 		
 		// mapping applications to the resources
 		fog1.addApplication(fogapp1);
@@ -67,11 +87,11 @@ public class NewFogSimulationRandom   {
 	ComputingAppliance fog7 = new ComputingAppliance(centrefile3, "Prague", 14, 50);
 	ComputingAppliance fog8 = new ComputingAppliance(centrefile4, "Vienna", 16, 48);
 	
-		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp5 = new Application(5*60*1000, 256000, "a1.large", "Bratislava-app", 500.0, 1, "random", true);
-		Application fogapp6 = new Application(5*60*1000, 256000, "a1.xlarge", "Budapest-app", 500.0, 1, "random", false);
-		Application fogapp7 = new Application(5*60*1000, 256000, "a1.large", "Prague-app", 500.0, 1, "random", true);
-		Application fogapp8 = new Application(5*60*1000, 256000, "a1.large", "Vienna-app", 500.0, 1, "random", true);
+		// creating the cloud application modules
+		Application fogapp5 = new Application(freq, tasksize, "a1.large", "Bratislava-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp6 = new Application(freq, tasksize, "a1.xlarge", "Budapest-app", numberOfInstruction, 1, strategy, false);
+		Application fogapp7 = new Application(freq, tasksize, "a1.large", "Prague-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp8 = new Application(freq, tasksize, "a1.large", "Vienna-app", numberOfInstruction, 1, strategy, true);
 		
 		// mapping applications to the resources
 			fog5.addApplication(fogapp5);
@@ -90,11 +110,11 @@ public class NewFogSimulationRandom   {
 	ComputingAppliance fog11 = new ComputingAppliance(eastfile3, "Vilnius", 25, 55);
 	ComputingAppliance fog12 = new ComputingAppliance(eastfile4, "Warsaw", 21, 52);
 	
-		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application fogapp9 = new Application(5*60*1000, 256000, "a1.xlarge", "Kiev-app", 500.0, 1, "random", false);
-		Application fogapp10 = new Application(5*60*1000, 256000, "a1.large", "Moscow-app", 500.0, 1, "random", true);
-		Application fogapp11 = new Application(5*60*1000, 256000, "a1.large", "Vilnius-app", 500.0, 1, "random", true);
-		Application fogapp12 = new Application(5*60*1000, 256000, "a1.large", "Warsaw-app", 500.0, 1, "random", true);
+		// creating the cloud application modules
+		Application fogapp9 = new Application(freq, tasksize, "a1.xlarge", "Kiev-app", numberOfInstruction, 1, strategy, false);
+		Application fogapp10 = new Application(freq, tasksize, "a1.large", "Moscow-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp11 = new Application(freq, tasksize, "a1.large", "Vilnius-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp12 = new Application(freq, tasksize, "a1.large", "Warsaw-app", numberOfInstruction, 1, strategy, true);
 
 		// mapping applications to the resources
 		fog9.addApplication(fogapp9);
@@ -102,16 +122,16 @@ public class NewFogSimulationRandom   {
 		fog11.addApplication(fogapp11);
 		fog12.addApplication(fogapp12);
 		
-	// random level fog nodes
-	String randomfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athen.xml";	
-	String randomfogfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_stockholm.xml";	
+	// hold level fog nodes
+	String holdfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athen.xml";	
+	String holdfogfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_stockholm.xml";	
 		
-	ComputingAppliance fog13 = new ComputingAppliance(randomfogfile1, "Athen", 24, 38);
-	ComputingAppliance fog14 = new ComputingAppliance(randomfogfile2, "Stockholm", 18, 59);
+	ComputingAppliance fog13 = new ComputingAppliance(holdfogfile1, "Athen", 24, 38);
+	ComputingAppliance fog14 = new ComputingAppliance(holdfogfile2, "Stockholm", 18, 59);
 		
-			// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-			Application fogapp13 = new Application(5*60*1000, 256000, "a1.xlarge", "Athen-app", 500.0, 1, "random", false);
-			Application fogapp14 = new Application(5*60*1000, 256000, "a1.xlarge", "Stockholm-app", 500.0, 1, "random", false);
+			// creating the cloud application modules
+			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athen-app", numberOfInstruction, 1, strategy, false);
+			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, 1, strategy, false);
 			
 			// mapping applications to the resources
 			fog13.addApplication(fogapp13);
@@ -122,8 +142,8 @@ public class NewFogSimulationRandom   {
 	
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
-		// creating the cloud application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-		Application cloudapp1 = new Application(5*60*1000, 256000, "a2.xlarge", "Frankfurt-app", 500.0, 1, "random", false);
+		// creating the cloud application modules
+		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, 1, strategy, false);
 		
 		cloud1.addApplication(cloudapp1);
 	
@@ -195,17 +215,17 @@ public class NewFogSimulationRandom   {
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
 		
-		// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
+		// we create 1000 smart device with hold installation strategy, 10kB storage, 10000 bandwidth, 
 		// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 		// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
-		for(int i=0;i<10000;i++) {
+		for(int i=0;i<numberOfDevices;i++) {
 			int x,y;
-			Random randomGenerator = new Random();
-			x = randomGenerator.nextInt(49)-8;
-			y = randomGenerator.nextInt(21)+40;
+			Random holdGenerator = new Random();
+			x = holdGenerator.nextInt(49)-8;
+			y = holdGenerator.nextInt(21)+40;
 			
 			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-			new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();
+			new Station(dn, deviceStart, deviceStop, 50, deviceStrategy, 5, deviceFreq, x, y).startMeter();
 		}
 		
 		

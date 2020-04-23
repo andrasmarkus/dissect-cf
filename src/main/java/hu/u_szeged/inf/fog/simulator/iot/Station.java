@@ -65,7 +65,6 @@ public class Station extends Device {
         return sensorNum;
     }
 
-    private int reInstall;
     /**
      * The constructor is to create new static, one-way entity for data generation.
      * @param dn The network settings including the local repository.
@@ -78,7 +77,7 @@ public class Station extends Device {
      * @param x The X coordinate of the position.
      * @param y The Y coordinate of the position.
      */
-    public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+    public Station(DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
         long freq, double x, double y) {
     	// TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
@@ -88,7 +87,6 @@ public class Station extends Device {
         this.strategy = strategy;
         this.dn = dn;
         this.sensorNum = sensorNum;
-        this.reInstall=reInstall;
         this.freq = freq;
         this.sumOfGeneratedData = 0;
         this.x = x;
@@ -131,18 +129,6 @@ public class Station extends Device {
         unsubscribe();
     }
     
-    private void reInstall(final Station s) {
-    	new DeferredEvent(this.reInstall+this.delay) {
-			
-			@Override
-			protected void eventAction() {
-				if((Timed.getFireCount()+reInstall+delay)<s.stopTime) {
-					installionProcess(s);
-				}
-			}
-		};
-    }
-
     /**
      * This method is called when time elapsed defined in the freq variable.
      * The task of the method is control data generating and sending.
@@ -278,7 +264,7 @@ public class Station extends Device {
             for (int i = 0; i < dm.number; i++) {
                 DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name+i, null, null);
                 // TODO: remove constain vlaue!
-                new Station(50, dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
+                new Station(dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
             }
 
         }
