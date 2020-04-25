@@ -19,6 +19,7 @@ import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider;
 import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider.Bluemix;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.OracleProvider;
+//import hu.u_szeged.inf.fog.simulator.task_schedule.PrioritizedTaskScheduler;
 import hu.u_szeged.inf.fog.simulator.task_schedule.PrioritizedTaskScheduler;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
@@ -106,7 +107,9 @@ public class FogSimulation {
 		y = randomGenerator.nextInt(9)-10;
 		
 		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		new Station(10*60*1000, 50, dn, new Actuator(new ActuatorRandomStrategy()), 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 3, 30000, 90000, 0.7, 0.8), 60*1000, x, y).startMeter();
+		Station s = new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 1000L*60*60*24, 30000, 90000, 0.7, 0.3), 60*1000, x, y);
+		s.setActuator(new Actuator(new ActuatorRandomStrategy(), 10, s));
+
 	}
 	
 	// Setting up the IoT pricing

@@ -184,6 +184,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
         DataCapsule toSend;
 
         while (counter < size) {
+
             if(direction == -1) {
                 toSend = source.backwardDataCapsules.poll();
                 if(toSend != null) {
@@ -306,6 +307,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
                     DataCapsule dc = high.poll();
                     if (dc != null) {
                         dc.setProcessTime(Timed.getFireCount());
+                        dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
                         sizeToRemove -= dc.size;
                         currentHighSize -= dc.size;
@@ -321,6 +323,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
                     DataCapsule dc = mid.poll();
                     if (dc != null) {
                         dc.setProcessTime(Timed.getFireCount());
+                        dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
                         sizeToRemove -= dc.size;
                         currentMidSize -= dc.size;
@@ -336,6 +339,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
                     DataCapsule dc = low.poll();
                     if (dc != null) {
                         dc.setProcessTime(Timed.getFireCount());
+                        dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
                         sizeToRemove -= dc.size;
                         currentLowSize -= dc.size;

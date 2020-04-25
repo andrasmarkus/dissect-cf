@@ -74,6 +74,9 @@ public class Station extends Device {
 
     private Actuator actuator;
 
+    private Random random = new Random();
+    private static double FAIL_RATE = 0.001;
+
 
 
     /**
@@ -89,9 +92,8 @@ public class Station extends Device {
      * @param x         The X coordinate of the position.
      * @param y         The Y coordinate of the position.
      */
-    public Station(int reInstall, int evenSize, DeviceNetwork dn, Actuator actuator, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
+    public Station(int reInstall, int evenSize, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
                    long freq, double x, double y) {
-        this.actuator = actuator;
         this.sensorCharacteristics = sensorCharacteristics;
         // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
@@ -131,7 +133,9 @@ public class Station extends Device {
             }
             DataCapsule bulkDataCapsule = new DataCapsule(Timed.getFireCount() + " - data capsule", bulkDataSize, false, this, null, this.eventSize, inFog, Timed.getFireCount(), random.nextInt(4)+1, random.nextInt(3)+1);
             bulkDataCapsule.setBulkStorageObject(storageObjects);
-            bulkDataCapsule.setActuationNeeded(sensorCharacteristics.getActuatorRatio() >= random.nextDouble());
+            if(actuator != null) {
+                bulkDataCapsule.setActuationNeeded(sensorCharacteristics.getActuatorRatio() >= random.nextDouble());
+            }
             StorObjEvent soe = new StorObjEvent(bulkDataCapsule);
             NetworkNode.initTransfer(bulkDataCapsule.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
         }
@@ -193,6 +197,17 @@ public class Station extends Device {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
             // TODO: fix this delay value
             new Sensor(this, 1);
+
+            double fail = random.nextDouble();
+            if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
+                FAIL_RATE *= 1.1;
+            }
+
+            if(FAIL_RATE >= fail) {
+                if(actuator != null) {
+                    actuator.executeSingleEvent(new StopStationEvent(), this, actuator.getLatency());
+                }
+            }
         }
 
         if (this.dn.localRepository.getFreeStorageCapacity() == this.dn.localRepository.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
@@ -272,6 +287,9 @@ public class Station extends Device {
         return actuator;
     }
 
+    public void setActuator(Actuator actuator) {
+        this.actuator = actuator;
+    }
 
     /**
      * Private class to represent the successful or unsuccessful data sending events.
@@ -304,12 +322,13 @@ public class Station extends Device {
                 dn.localRepository.deregisterObject(so);
             }
             // TODO: fix this "cheat"
-            app.sumOfArrivedData += this.dataCapsule.size;
+            //app.sumOfArrivedData += this.dataCapsule.size;
             dataCapsule.setDestination(app);
             dataCapsule.addToDataPath(app);
             //app.forwardDataCapsules.add(dataCapsule);
-            app.registerDataCapsule(dataCapsule);
-            sentCapsule++;
+            if(app.registerDataCapsule(dataCapsule)){
+                sentCapsule++;
+            }
         }
 
         /**
@@ -338,11 +357,11 @@ public class Station extends Device {
 
         @Override
         public void conComplete() {
-            station.arrivedActuatorEvents++;
-            station.getActuator().executeEventOn(station);
-            dataCapsule.setEndTime(Timed.getFireCount());
-            //System.err.println("Time: " + (dataCapsule.getStartTime() - dataCapsule.getProcessTime()));
-
+            if(station.actuator != null) {
+                station.arrivedActuatorEvents++;
+                dataCapsule.setEndTime(Timed.getFireCount());
+                station.getActuator().executeEvent(dataCapsule.getActuatorEvent());
+            }
         }
 
         @Override

@@ -3,13 +3,14 @@ package hu.u_szeged.inf.fog.simulator.iot;
 public class SensorCharacteristics {
 
     private int sensorNum;
-    private int mttf;
+    //mean time to failure (eg in hours, or seconds etc.. must be similar to to frequency)
+    private long mttf;
     private int minFreq, maxFreq;
     //This gives the ratio of data that has to be processed in the fog (in average)
     private double fogDataRatio;
     private double actuatorRatio;
 
-    public SensorCharacteristics(int sensorNum, int mttf, int minFreq, int maxFreq, double fogDataRatio, double actuatorRatio) {
+    public SensorCharacteristics(int sensorNum, long mttf, int minFreq, int maxFreq, double fogDataRatio, double actuatorRatio) {
         this.sensorNum = sensorNum;
         this.mttf = mttf;
         this.minFreq = minFreq;
@@ -41,11 +42,11 @@ public class SensorCharacteristics {
         this.sensorNum = sensorNum;
     }
 
-    public int getMttf() {
+    public long getMttf() {
         return mttf;
     }
 
-    public void setMttf(int mttf) {
+    public void setMttf(long mttf) {
         this.mttf = mttf;
     }
 

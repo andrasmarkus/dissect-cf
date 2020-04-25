@@ -13,13 +13,14 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
     private Stack<Application> dataFlowPath;
     private Collection<StorageObject> bulkStorageObject;
     private int eventSize;
-    private Boolean actuationNeeded;
+    private Boolean actuationNeeded = false;
     private Boolean fogProcess;
     private long startTime, processTime, endTime;
     //0-4 : 0=no delay, 1=minimal delay, 2=medium delay, 3=high delay, 4=very high delay
     private int maxToleratedDelay;
     //1-3: 1=high, 2=mid, 3=low
     private int priorityLevel;
+    private ActuatorEvent actuatorEvent;
 
 
 
@@ -146,5 +147,13 @@ public class DataCapsule extends StorageObject implements Comparable<DataCapsule
 
     public Application getDestination() {
         return destination;
+    }
+
+    public ActuatorEvent getActuatorEvent() {
+        return actuatorEvent;
+    }
+
+    public void setActuatorEvent(ActuatorEvent actuatorEvent) {
+        this.actuatorEvent = actuatorEvent;
     }
 }
