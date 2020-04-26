@@ -202,7 +202,7 @@ public class NewFogSimulation   {
 			y = randomGenerator.nextInt(21)+40;
 			
 			DeviceNetwork dn  = new DeviceNetwork(50, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-			new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5,3,30000,60000, 0.3, 0.1), 60*1000, x, y).startMeter();
+			//new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5,3,30000,60000, 0.3, 0.1), 60*1000, x, y).startMeter();
 		}
 		
 		

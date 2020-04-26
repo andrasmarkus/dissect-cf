@@ -34,6 +34,8 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.MobilityStrategy;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -76,7 +78,9 @@ public class Station extends Device {
 
     private Random random = new Random();
     private static double FAIL_RATE = 0.001;
-
+    public MobilityStrategy mobilityStrategy;
+    //TODO: constructor , setter, getter.
+    public GeoLocation geoLocation;
 
 
     /**
@@ -93,7 +97,9 @@ public class Station extends Device {
      * @param y         The Y coordinate of the position.
      */
     public Station(int reInstall, int evenSize, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
-                   long freq, double x, double y) {
+                   long freq, double x, double y, GeoLocation location, MobilityStrategy mobilityStrategy) {
+        this.geoLocation = location;
+        this.mobilityStrategy = mobilityStrategy;
         this.sensorCharacteristics = sensorCharacteristics;
         // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
@@ -197,7 +203,12 @@ public class Station extends Device {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
             // TODO: fix this delay value
             new Sensor(this, 1);
-
+            if(mobilityStrategy != null) {
+                GeoLocation location = mobilityStrategy.move(freq);
+                if(location != null) {
+                    actuator.executeEvent(new ChangePosition(location));
+                }
+            }
             double fail = random.nextDouble();
             if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
                 FAIL_RATE *= 1.1;
@@ -289,6 +300,10 @@ public class Station extends Device {
 
     public void setActuator(Actuator actuator) {
         this.actuator = actuator;
+    }
+
+    public void setGeoLocation(GeoLocation location) {
+        this.geoLocation = location;
     }
 
     /**

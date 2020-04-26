@@ -1,5 +1,7 @@
 package hu.u_szeged.inf.fog.simulator.iot;
 
+import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
+
 import java.util.Random;
 
 public interface ActuatorEvent {
@@ -81,5 +83,21 @@ class ChangeFileSize implements ActuatorEvent {
             station.setFilesize(filesize);
             System.out.println(station + " station's filesize has been changed to " + filesize);
         }
+    }
+}
+
+class ChangePosition implements ActuatorEvent {
+
+    private GeoLocation newLocation;
+
+    ChangePosition(GeoLocation geoLocation) {
+        this.newLocation = geoLocation;
+    }
+
+    @Override
+    public void actuate(Station station) {
+        System.out.println("Location has been changed from " +station.geoLocation.getLongitude() + " - " + station.geoLocation.getLatitude() + " TO: " +
+                newLocation.getLongitude() + " - " + newLocation.getLatitude());
+        station.setGeoLocation(newLocation);
     }
 }

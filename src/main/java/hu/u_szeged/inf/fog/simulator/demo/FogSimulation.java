@@ -12,6 +12,8 @@ import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.iot.SensorCharacteristics;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.RandomMobilityStrategy;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.AmazonProvider;
 import hu.u_szeged.inf.fog.simulator.providers.AzureProvider;
@@ -107,7 +109,7 @@ public class FogSimulation {
 		y = randomGenerator.nextInt(9)-10;
 		
 		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		Station s = new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 1000L*60*60*24, 30000, 90000, 0.7, 0.3), 60*1000, x, y);
+		Station s = new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 1000L*60*60*24, 30000, 90000, 0.7, 0.3), 60*1000, x, y, new GeoLocation(25.03, 20.01), new RandomMobilityStrategy(new GeoLocation(25.03, 20.01), 20000,0.014 ));
 		s.setActuator(new Actuator(new ActuatorRandomStrategy(), 10, s));
 
 	}
