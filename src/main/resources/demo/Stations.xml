@@ -9,7 +9,6 @@
         <diskbw>1000</diskbw>
         <reposize>60000</reposize>
         <strategy>distance</strategy>
-
         <xCoord>-3</xCoord>
         <yCoord>-99</yCoord>
         

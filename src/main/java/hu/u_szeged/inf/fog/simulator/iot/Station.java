@@ -80,7 +80,7 @@ public class Station extends Device {
     public Station(DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
         long freq, double x, double y) {
     	// TODO: fix this delay value
-        this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
+        this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 5) * 60 * 1000;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorNum;
@@ -259,10 +259,8 @@ public class Station extends Device {
 
 	public static void loadDevice(String stationfile) throws JAXBException {
 		for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
-			System.out.println(dm);
             for (int i = 0; i < dm.number; i++) {
                 DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name+i, null, null);
-                // TODO: remove constain vlaue!
                 new Station(dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
             }
 

@@ -121,7 +121,7 @@ public class DeviceModel {
 		}
 		
 		public static ArrayList<DeviceModel>  loadDeviceXML(String stationfile) throws JAXBException {
-			  File file = new File( "/home/markus/Documents/dissect-cf/src/main/resources/demo/Stations.xml" );
+			  File file = new File( stationfile );
 			  JAXBContext jaxbContext = JAXBContext.newInstance( DevicesModel.class );
 			  Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			  DevicesModel device = (DevicesModel)jaxbUnmarshaller.unmarshal( file );
