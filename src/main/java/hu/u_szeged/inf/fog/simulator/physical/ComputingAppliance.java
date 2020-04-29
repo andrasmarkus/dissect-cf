@@ -5,6 +5,7 @@ import java.util.List;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
 
 public class ComputingAppliance {
 	
@@ -20,12 +21,11 @@ public class ComputingAppliance {
 
 	public String name;
 
-	public double x;
-	
-	public double y;
-	
-	
-	public ComputingAppliance(String loadfile, String name, double x, double y) throws Exception {
+	public GeoLocation location;
+
+	public double range; //in m
+
+	public ComputingAppliance(String loadfile, String name, GeoLocation location, double range) throws Exception {
 		if (loadfile != null) {
 			
 			this.iaas = CloudLoader.loadNodes(loadfile);
@@ -36,10 +36,10 @@ public class ComputingAppliance {
 			
 			this.neighbourList = new ArrayList<ComputingAppliance>();
 			
-			this.x = x;
-			
-			this.y = y;
-			
+			this.location = location;
+
+			this.range = range;
+
 			ComputingAppliance.allComputingAppliance.add(this);
 			
 		}else {

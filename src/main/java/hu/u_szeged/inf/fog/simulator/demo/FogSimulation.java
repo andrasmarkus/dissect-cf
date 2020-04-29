@@ -7,8 +7,8 @@ import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
 import hu.u_szeged.inf.fog.simulator.application.Application;
-import hu.u_szeged.inf.fog.simulator.iot.Actuator;
-import hu.u_szeged.inf.fog.simulator.iot.ActuatorRandomStrategy;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.Actuator;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.ActuatorRandomStrategy;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.iot.SensorCharacteristics;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
@@ -50,8 +50,8 @@ public class FogSimulation {
 	String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";	
 	
 	// we create our clouds using predefined cloud schema
-	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5);
-	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2",4,5);
+	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(20.042, 31.001),500*1000);
+	ComputingAppliance cloud2 = new ComputingAppliance(cloudfile, "cloud2",new GeoLocation(44.2131, 87.3345),500*1000);
 	
 	// creating the cloud application modules: 5 minutes frequency, 175kB task size and max. 2400 instruction / task
 	Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
@@ -59,10 +59,10 @@ public class FogSimulation {
 
 
 		// we create our fog nodes using predefined fog schema
-	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0);
-	ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0);
-	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",2,0);
-	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",6,0);
+	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(75.234, 102.33),20*1000);
+	ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",new GeoLocation(12.123, 22.445),15*1000);
+	ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",new GeoLocation(12.44, 32.444),30*1000);
+	ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",new GeoLocation(21.443, 23.554),30*1000);
 
 	System.out.println(fog1.iaas.repositories.get(0).getLatencies());
 	System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
@@ -108,8 +108,8 @@ public class FogSimulation {
 		x = randomGenerator.nextInt(21)-10;
 		y = randomGenerator.nextInt(9)-10;
 		
-		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
-		Station s = new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 1000L*60*60*24, 30000, 90000, 0.7, 0.3), 60*1000, x, y, new GeoLocation(25.03, 20.01), new RandomMobilityStrategy(new GeoLocation(25.03, 20.01), 20000,0.014 ));
+		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 200000000, "dnRepository"+i, null, null);
+		Station s = new Station(10*60*1000, 50, dn, 0, 24*60*60*1000, 50, "random", new SensorCharacteristics(5, 1000L*60*60*24*2, 30000, 90000, 0.7, 0.3, 40), 60*1000, new GeoLocation(25.03, 20.01), new RandomMobilityStrategy(new GeoLocation(25.03, 20.01), 20000,0.014 ));
 		s.setActuator(new Actuator(new ActuatorRandomStrategy(), 10, s));
 
 	}

@@ -34,6 +34,10 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.Actuator;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.ChangePosition;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.StopStationEvent;
+import hu.u_szeged.inf.fog.simulator.iot.mobility.DecisionMaker;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.MobilityStrategy;
 
@@ -79,8 +83,6 @@ public class Station extends Device {
     private Random random = new Random();
     private static double FAIL_RATE = 0.001;
     public MobilityStrategy mobilityStrategy;
-    //TODO: constructor , setter, getter.
-    public GeoLocation geoLocation;
 
 
     /**
@@ -97,7 +99,7 @@ public class Station extends Device {
      * @param y         The Y coordinate of the position.
      */
     public Station(int reInstall, int evenSize, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
-                   long freq, double x, double y, GeoLocation location, MobilityStrategy mobilityStrategy) {
+                   long freq, GeoLocation location, MobilityStrategy mobilityStrategy) {
         this.geoLocation = location;
         this.mobilityStrategy = mobilityStrategy;
         this.sensorCharacteristics = sensorCharacteristics;
@@ -114,8 +116,6 @@ public class Station extends Device {
         this.freq = freq;
         this.sumOfGeneratedData = 0;
         this.arrivedActuatorEvents = 0;
-        this.x = x;
-        this.y = y;
         installionProcess(this);
         this.startMeter();
         this.setMessageCount(0);
@@ -203,21 +203,23 @@ public class Station extends Device {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
             // TODO: fix this delay value
             new Sensor(this, 1);
-            if(mobilityStrategy != null) {
-                GeoLocation location = mobilityStrategy.move(freq);
-                if(location != null) {
-                    actuator.executeEvent(new ChangePosition(location));
-                }
-            }
-            double fail = random.nextDouble();
-            if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
-                FAIL_RATE *= 1.1;
-            }
+        }
 
-            if(FAIL_RATE >= fail) {
-                if(actuator != null) {
-                    actuator.executeSingleEvent(new StopStationEvent(), this, actuator.getLatency());
-                }
+        if(mobilityStrategy != null) {
+            GeoLocation location = mobilityStrategy.move(freq);
+            if(location != null) {
+                actuator.executeEvent(new ChangePosition(location));
+                new DecisionMaker(this);
+            }
+        }
+        double fail = random.nextDouble();
+        if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
+            FAIL_RATE *= 1.1;
+        }
+
+        if(FAIL_RATE >= fail) {
+            if(actuator != null) {
+                actuator.executeSingleEvent(new StopStationEvent(), this, actuator.getLatency());
             }
         }
 
@@ -227,20 +229,24 @@ public class Station extends Device {
 
         try {
             if (this.nodeRepository.getCurrState().equals(Repository.State.RUNNING)) {
-                this.startCommunicate();
+                if(this.app != null) {
+                    this.startCommunicate();
+                }
             }
         } catch (NetworkException e) {
             e.printStackTrace();
         }
-        if (!this.app.isSubscribed()) {
-            try {
-                this.app.restartApplication();
+        if(this.app != null) {
+            if (!this.app.isSubscribed()) {
+                try {
+                    this.app.restartApplication();
 
-            } catch (VMManagementException e) {
+                } catch (VMManagementException e) {
 
-                e.printStackTrace();
-            } catch (NetworkException e) {
-                e.printStackTrace();
+                    e.printStackTrace();
+                } catch (NetworkException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -333,6 +339,7 @@ public class Station extends Device {
          */
         @Override
         public void conComplete() {
+
             for (StorageObject so : this.dataCapsule.getBulkStorageObject()) {
                 dn.localRepository.deregisterObject(so);
             }

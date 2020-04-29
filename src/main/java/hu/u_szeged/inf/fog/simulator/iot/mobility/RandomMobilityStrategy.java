@@ -9,6 +9,8 @@ public class RandomMobilityStrategy implements MobilityStrategy {
     double radius;
     double speed;
     Random random = new Random();
+    static final long LONG_RATIO = 40075000;
+    static final long LAT_RATIO = 111320;
 
     public RandomMobilityStrategy(GeoLocation currentPosition, double radius, double speed) {
         this.currentPosition = currentPosition;
@@ -19,7 +21,7 @@ public class RandomMobilityStrategy implements MobilityStrategy {
 
     @Override
     public GeoLocation move(long freq) {
-        double angle = (random.nextDouble() * 360) * Math.PI / 180; //in radians
+        double angle = (random.nextDouble() * 360) * Math.PI / 180;
         double posX = currentPosition.getLongitude();
         double posY = currentPosition.getLatitude();
         posX += Math.cos(angle) * movedLong(freq, posX);
@@ -29,7 +31,7 @@ public class RandomMobilityStrategy implements MobilityStrategy {
         if(distance < radius) {
             currentPosition.setLongitude(posX);
             currentPosition.setLongitude(posY);
-            System.err.println("OLD : " + startPosition.getLongitude() + " - " + startPosition.getLatitude() + " NEW: " + posX + " - " + posY);
+            //System.err.println("OLD : " + startPosition.getLongitude() + " - " + startPosition.getLatitude() + " NEW: " + posX + " - " + posY);
             return currentPosition;
         } else {
             return null;
@@ -39,12 +41,11 @@ public class RandomMobilityStrategy implements MobilityStrategy {
 
     private double movedLong(long freq, double latitude) {
         double d = freq * speed;
-        return (d/40075000) * Math.cos(latitude * Math.PI/180) / 360;
+        return (d/LONG_RATIO) * Math.cos(latitude * Math.PI/180) / 360;
     }
 
     private double movedLat(long freq) {
-        //1 degree = 111.32km
-        return freq * speed / 111320;
+        return freq * speed / LAT_RATIO;
     }
 
 }

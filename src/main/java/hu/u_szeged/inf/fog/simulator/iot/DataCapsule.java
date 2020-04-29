@@ -2,6 +2,7 @@ package hu.u_szeged.inf.fog.simulator.iot;
 
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.u_szeged.inf.fog.simulator.application.Application;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.ActuatorEvent;
 
 import java.util.Collection;
 import java.util.Stack;

@@ -346,16 +346,13 @@ public class Application extends Timed {
 		this.startBroker();
 	}
 
-	public double calculateDistance(ComputingAppliance one, ComputingAppliance other) {
-		return Math.sqrt(Math.pow((one.x - other.x), 2) + Math.pow((one.y - other.y), 2));
-	}
-
 	public void tick(long fires) {
 
-		if(taskScheduler != null) {
-			taskScheduler.process();
-			return;
-		}
+//		if(taskScheduler != null) {
+//			taskScheduler.process();
+//			return;
+//		}
+
 
 		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
 		if (unprocessedData > 0) {

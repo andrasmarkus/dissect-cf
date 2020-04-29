@@ -150,8 +150,8 @@ class DistanceDeviceStrategy extends DeviceStrategy {
         double minDistance = Double.MAX_VALUE;
         Application nearestApplication = null;
         for (Application app: Application.allApplication) {
-            if (minDistance >= d.calculateDistance(app) && app.canJoin) {
-                minDistance = d.calculateDistance(app);
+            if (minDistance >= d.geoLocation.calculateDistance(app.computingAppliance.location) && app.canJoin) {
+                minDistance = d.geoLocation.calculateDistance(app.computingAppliance.location);
                 nearestApplication = app;
             }
         }
