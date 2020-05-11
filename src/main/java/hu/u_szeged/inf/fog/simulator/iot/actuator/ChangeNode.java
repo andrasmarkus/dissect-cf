@@ -13,10 +13,14 @@ public class ChangeNode implements ActuatorEvent {
     }
 
     @Override
-    public void actuate(Station station) {
-        from.deviceList.remove(station);
-        station.setApp(to);
-        to.deviceList.add(station);
-        System.out.println("Application of station " + station + " has been changed");
+    public void actuate(Station d) {
+        from.deviceList.remove(d);
+
+        d.setApp(to);
+        to.deviceList.add(d);
+        d.dn.lmap.put(d.getDn().repoName, d.dn.latency);
+        d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
+        d.app.computingAppliance.iaas.repositories.get(0).getLatencies().put(d.getDn().repoName, d.dn.latency);
+        System.out.println("Application of station " + d + " has been changed");
     }
 }

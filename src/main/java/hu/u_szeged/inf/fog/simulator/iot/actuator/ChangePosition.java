@@ -13,8 +13,6 @@ public class ChangePosition implements ActuatorEvent {
 
     @Override
     public void actuate(Station station) {
-        System.out.println("Location has been changed from " +station.geoLocation.getLongitude() + " - " + station.geoLocation.getLatitude() + " TO: " +
-                newLocation.getLongitude() + " - " + newLocation.getLatitude());
         station.setGeoLocation(newLocation);
     }
 }

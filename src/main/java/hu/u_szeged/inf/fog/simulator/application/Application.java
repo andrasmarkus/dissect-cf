@@ -21,7 +21,10 @@ import hu.u_szeged.inf.fog.simulator.providers.Provider;
 import hu.u_szeged.inf.fog.simulator.task_schedule.TaskScheduler;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator.TimelineCollector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class Application extends Timed {
 
@@ -348,10 +351,10 @@ public class Application extends Timed {
 
 	public void tick(long fires) {
 
-//		if(taskScheduler != null) {
-//			taskScheduler.process();
-//			return;
-//		}
+		if (taskScheduler != null) {
+			taskScheduler.process();
+			return;
+		}
 
 
 		long unprocessedData = (this.sumOfArrivedData - this.sumOfProcessedData);
@@ -549,17 +552,15 @@ public class Application extends Timed {
 
 						}
 					}
-
-					if (currentApp != toSend.getSource().getApp()) {
-						throw new Exception("Station cannot be reached!");
-					} else {
-
+					try {
 						NetworkNode.initTransfer(toSend.getEventSize(), ResourceConsumption.unlimitedProcessing,
 								currentApp.computingAppliance.iaas.repositories.get(0), toSend.getSource().getDn().localRepository,
 								new Station.ActualizationEvent(toSend.getSource(), toSend));
 						currentApp.backwardDataCapsules.remove(toSend);
-
+					}catch (NetworkException e) {
+						e.printStackTrace();
 					}
+
 
 					sent += toSend.size;
 				}

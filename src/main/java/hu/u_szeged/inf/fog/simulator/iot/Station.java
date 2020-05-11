@@ -37,6 +37,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
 import hu.u_szeged.inf.fog.simulator.iot.actuator.Actuator;
 import hu.u_szeged.inf.fog.simulator.iot.actuator.ChangePosition;
 import hu.u_szeged.inf.fog.simulator.iot.actuator.StopStationEvent;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.TimeoutEvent;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.DecisionMaker;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.MobilityStrategy;
@@ -81,8 +82,10 @@ public class Station extends Device {
     private Actuator actuator;
 
     private Random random = new Random();
-    private static double FAIL_RATE = 0.001;
+    private double FAIL_RATE = 0;
+    private double FAIL_RATIO = 0.0000006;
     public MobilityStrategy mobilityStrategy;
+    public int noAppTime = 0;
 
 
     /**
@@ -119,6 +122,7 @@ public class Station extends Device {
         installionProcess(this);
         this.startMeter();
         this.setMessageCount(0);
+        FAIL_RATIO = (double)freq / sensorCharacteristics.getMttf();
     }
 
     /**
@@ -201,20 +205,27 @@ public class Station extends Device {
     @Override
     public void tick(long fires) {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
-            // TODO: fix this delay value
-            new Sensor(this, 1);
+            new Sensor(this, sensorCharacteristics.getDelay());
         }
 
         if(mobilityStrategy != null) {
             GeoLocation location = mobilityStrategy.move(freq);
-            if(location != null) {
+            if(location != null && actuator != null) {
                 actuator.executeEvent(new ChangePosition(location));
                 new DecisionMaker(this);
             }
         }
+        if(this.app == null) {
+            ++this.noAppTime;
+            if(this.noAppTime >= 60) {
+                actuator.executeSingleEvent(new TimeoutEvent(), this, actuator.getLatency());
+            }
+        } else {
+            this.noAppTime = 0;
+        }
         double fail = random.nextDouble();
         if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
-            FAIL_RATE *= 1.1;
+            FAIL_RATE += FAIL_RATIO;
         }
 
         if(FAIL_RATE >= fail) {
@@ -224,7 +235,7 @@ public class Station extends Device {
         }
 
         if (this.dn.localRepository.getFreeStorageCapacity() == this.dn.localRepository.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
-            this.stopMeter();
+            stopMeter();
         }
 
         try {

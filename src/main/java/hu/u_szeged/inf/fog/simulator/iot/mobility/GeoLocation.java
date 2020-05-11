@@ -14,15 +14,15 @@ public class GeoLocation {
     public double calculateDistance(GeoLocation other) {
         double o_longitude = other.getLongitude();
         double o_latitude = other.getLatitude();
-        double d_lat = o_latitude *Math.PI / 180 - this.latitude * Math.PI / 180;
-        double d_long = o_longitude *Math.PI / 180 - this.longitude * Math.PI / 180;
-        double a = Math.sin(d_lat/2) * Math.sin(d_lat/2) + Math.cos(this.latitude * Math.PI / 180) * Math.cos(o_latitude * Math.PI / 180) *
+        double d_lat = o_latitude * Math.PI / 180 - this.latitude * Math.PI / 180;
+        double d_long = o_longitude * Math.PI / 180 - this.longitude * Math.PI / 180;
+        double a = Math.sin(d_lat/2) * Math.sin(d_lat/2) +
+                Math.cos(this.latitude * Math.PI / 180) * Math.cos(o_latitude * Math.PI / 180) *
                 Math.sin(d_long/2) * Math.sin(d_long/2);
-        double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         double d = EARTH_RADIUS * c;
         //So it returns in meters
         return d * 1000;
-
     }
 
     public double getLatitude() {

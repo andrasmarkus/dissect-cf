@@ -8,10 +8,15 @@ public class DisconnectFromNode implements ActuatorEvent {
     public DisconnectFromNode(){}
 
     @Override
-    public void actuate(Station station) {
-        Application application = station.getApp();
-        application.deviceList.remove(station);
-        station.setApp(null);
-        System.out.println(station + " disconnected from current application");
+    public void actuate(Station d) {
+        Application application = d.getApp();
+        application.deviceList.remove(d);
+
+//        d.dn.lmap.remove(d.getDn().repoName);
+//        d.dn.lmap.remove(d.app.computingAppliance.iaas.repositories.get(0).getName());
+//        d.app.computingAppliance.iaas.repositories.get(0).getLatencies().remove(d.getDn().repoName);
+        d.setApp(null);
+
+        System.out.println(d + " disconnected from current application");
     }
 }

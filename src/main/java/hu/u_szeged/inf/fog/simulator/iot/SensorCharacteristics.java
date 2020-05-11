@@ -2,7 +2,7 @@ package hu.u_szeged.inf.fog.simulator.iot;
 
 public class SensorCharacteristics {
 
-    private static final double CURRENT_MAX_LATENCY = 40.0; //4G latency
+    private static final double CURRENT_MAX_LATENCY = 75.0; //4G latency average is 40
     private int sensorNum;
     //mean time to failure (eg in hours, or seconds etc.. must be similar to to frequency)
     private long mttf;
@@ -11,9 +11,9 @@ public class SensorCharacteristics {
     private double fogDataRatio;
     private double actuatorRatio;
     private double maxLatency;
+    private long delay;
 
-
-    public SensorCharacteristics(int sensorNum, long mttf, int minFreq, int maxFreq, double fogDataRatio, double actuatorRatio, double maxLatency) {
+    public SensorCharacteristics(int sensorNum, long mttf, int minFreq, int maxFreq, double fogDataRatio, double actuatorRatio, double maxLatency, long delay) {
         this.sensorNum = sensorNum;
         this.mttf = mttf;
         this.minFreq = minFreq;
@@ -42,6 +42,7 @@ public class SensorCharacteristics {
         else {
             this.fogDataRatio = fogDataRatio;
         }
+        this.delay = delay;
     }
 
 
@@ -99,5 +100,13 @@ public class SensorCharacteristics {
 
     public void setMaxLatency(double maxLatency) {
         this.maxLatency = maxLatency;
+    }
+
+    public long getDelay() {
+        return delay;
+    }
+
+    public void setDelay(long delay) {
+        this.delay = delay;
     }
 }

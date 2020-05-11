@@ -24,7 +24,6 @@ public class LinearMobilityStrategy implements MobilityStrategy {
 
             if (dest != null) {
                 double distance = currentPosition.calculateDistance(dest);
-                System.err.println(distance + " m");
                 if (distance > movedDistance(freq)) {
                     double posX = dest.getLongitude() - currentPosition.getLongitude();
                     double posY = dest.getLatitude() - currentPosition.getLatitude();
@@ -38,7 +37,6 @@ public class LinearMobilityStrategy implements MobilityStrategy {
                 return currentPosition;
             }
         }
-        //System.err.println("Longitude " + currentPosition.getLongitude() + " - Latitude" + currentPosition.getLatitude() );
         return null;
     }
 

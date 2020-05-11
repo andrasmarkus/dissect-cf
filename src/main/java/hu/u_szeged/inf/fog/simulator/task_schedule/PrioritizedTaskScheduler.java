@@ -375,17 +375,16 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
                 }
             }
         }
-
-        if (currentApp != dataCapsule.getSource().getApp()) {
-            throw new Exception("Station cannot be reached!");
-        } else {
-
+        try {
             NetworkNode.initTransfer(dataCapsule.getEventSize(), ResourceConsumption.unlimitedProcessing,
                     currentApp.computingAppliance.iaas.repositories.get(0), dataCapsule.getSource().getDn().localRepository,
                     new Station.ActualizationEvent(dataCapsule.getSource(), dataCapsule));
             currentApp.backwardDataCapsules.remove(dataCapsule);
-
+        } catch (NetworkNode.NetworkException e) {
+            e.printStackTrace();
         }
+
+
     }
 
 

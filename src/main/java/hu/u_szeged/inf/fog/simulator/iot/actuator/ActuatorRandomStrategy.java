@@ -9,7 +9,7 @@ public class ActuatorRandomStrategy implements ActuatorStrategy {
     private static final int NUMBER_OF_EVENTS = 3;
     private static final int TOTAL_STOP = 100;
     private static final int ACTUAL_STOP = 5;
-    private static final int FREQ_CHANGE_RATIO = 4;
+    private static final int FREQ_CHANGE_RATIO = 5;
 
     private static final int MAX_FILESIZE = 750;
     private static final int MIN_FILESIZE = 50;

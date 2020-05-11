@@ -30,8 +30,7 @@ public class RandomMobilityStrategy implements MobilityStrategy {
 
         if(distance < radius) {
             currentPosition.setLongitude(posX);
-            currentPosition.setLongitude(posY);
-            //System.err.println("OLD : " + startPosition.getLongitude() + " - " + startPosition.getLatitude() + " NEW: " + posX + " - " + posY);
+            currentPosition.setLatitude(posY);
             return currentPosition;
         } else {
             return null;

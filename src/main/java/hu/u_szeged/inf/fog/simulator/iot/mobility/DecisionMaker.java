@@ -67,7 +67,8 @@ public class DecisionMaker {
     private boolean canConnectToApp() {
         Application closest = closestApp();
         return calculateLatency(closest.computingAppliance) <= station.sensorCharacteristics.getMaxLatency()
-                && station.geoLocation.calculateDistance(closest.computingAppliance.location) <= closest.computingAppliance.range;
+                && station.geoLocation.calculateDistance(closest.computingAppliance.location) <= closest.computingAppliance.range
+                && closest.getloadOfResource() < 70.0;
     }
 
     private Application closestApp() {
