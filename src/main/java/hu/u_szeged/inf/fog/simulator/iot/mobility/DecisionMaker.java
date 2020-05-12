@@ -42,7 +42,7 @@ public class DecisionMaker {
         Application current = station.getApp();
         Application closest = closestApp();
         if (current != null) {
-            if (closest != current && canConnectToApp()) {
+            if (closest != current && canConnectToApp(closest)) {
                 //Change node
                 try {
                     connectToApp(current, closest);
@@ -53,7 +53,7 @@ public class DecisionMaker {
         }
         //If it it currently NOT connected to a node
         else {
-            if(canConnectToApp()) {
+            if(canConnectToApp(closest)) {
                 try {
                     connectToApp(closest);
                 } catch (Exception e) {
@@ -64,8 +64,7 @@ public class DecisionMaker {
         }
     }
 
-    private boolean canConnectToApp() {
-        Application closest = closestApp();
+    private boolean canConnectToApp(Application closest) {
         return calculateLatency(closest.computingAppliance) <= station.sensorCharacteristics.getMaxLatency()
                 && station.geoLocation.calculateDistance(closest.computingAppliance.location) <= closest.computingAppliance.range
                 && closest.getloadOfResource() < 70.0;
