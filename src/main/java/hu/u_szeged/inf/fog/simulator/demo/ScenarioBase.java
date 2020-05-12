@@ -7,6 +7,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.application.Application.VmCollector;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.*;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 
 
@@ -37,7 +38,6 @@ public abstract class ScenarioBase {
 		double amazon=0;
 		double azure=0;
 		double oracle=0;
-		long actuatorEvents = 0;
 		long sentCapsule = 0;
 
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
@@ -65,7 +65,6 @@ public abstract class ScenarioBase {
 						highestStationStoptime=d.stopTime;
 					}
 
-					actuatorEvents += d.arrivedActuatorEvents;
 					sentCapsule += d.sentCapsule;
 
 				}
@@ -96,8 +95,19 @@ public abstract class ScenarioBase {
 		System.out.println("IoT cost: Bluemix: "+bluemix+ " Amazon: "+ amazon +" Azure: "+azure+ " Oracle: "+ oracle);
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
 		System.out.println("Runtime: "+TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS)+ " seconds");
-		System.out.println("Number of actuator events: " + actuatorEvents);
+		System.out.println("Number of actuator events: " + Actuator.counter);
 		System.out.println("Number of sent capsules: " + sentCapsule);
+		System.out.println("Number of actuator evens:\n" +
+				"ChangeFileSize: " + ChangeFileSize.counter  +
+				"\n\tChangeNode: " + ChangeNode.counter +
+				"\n\tChangePosition: " + ChangePosition.counter +
+				"\n\tConnectToNode: " + ConnectToNode.counter +
+				"\n\tDisconnectFromNode: " + DisconnectFromNode.counter +
+				"\n\tIncreaseFrequencyEvent: " + IncreaseFrequencyEvent.counter +
+				"\n\tReduceFrequencyEvent: " + ReduceFrequencyEvent.counter +
+				"\n\tRestartStationEvent: " + RestartStationEvent.counter +
+				"\n\tStopStationEvent: " + StopStationEvent.counter +
+				"\n\tTimeoutEvent: " + TimeoutEvent.counter);
 
 
 	}

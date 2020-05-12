@@ -7,6 +7,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ConnectToNode implements ActuatorEvent {
 
     Application application;
+    public static int counter = 0;
 
     public ConnectToNode(Application application) {
         this.application = application;
@@ -20,6 +21,7 @@ public class ConnectToNode implements ActuatorEvent {
         d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
         d.app.computingAppliance.iaas.repositories.get(0).getLatencies().put(d.getDn().repoName, d.dn.latency);
         System.out.println("Station " + d + " has been connected to a new node");
+        counter++;
 
     }
 }

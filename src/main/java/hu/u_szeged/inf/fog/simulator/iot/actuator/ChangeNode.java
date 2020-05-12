@@ -6,6 +6,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ChangeNode implements ActuatorEvent {
 
     Application from, to;
+    public static int counter = 0;
 
     public ChangeNode(Application from, Application to) {
         this.from = from;
@@ -22,5 +23,6 @@ public class ChangeNode implements ActuatorEvent {
         d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
         d.app.computingAppliance.iaas.repositories.get(0).getLatencies().put(d.getDn().repoName, d.dn.latency);
         System.out.println("Application of station " + d + " has been changed");
+        counter++;
     }
 }

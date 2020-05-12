@@ -3,7 +3,7 @@ package hu.u_szeged.inf.fog.simulator.iot.actuator;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 
 public class IncreaseFrequencyEvent implements ActuatorEvent {
-
+    public static int counter = 0;
     private long measure;
 
     public IncreaseFrequencyEvent(long measure) {
@@ -17,6 +17,7 @@ public class IncreaseFrequencyEvent implements ActuatorEvent {
             long old = station.getFrequency();
             station.changeFrequency(newFrequency);
             System.out.println("Frequency of station has been increased from: " + old + " to: " + newFrequency);
+            counter++;
         }
     }
 

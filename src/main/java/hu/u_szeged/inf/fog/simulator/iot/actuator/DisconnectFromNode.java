@@ -4,7 +4,7 @@ import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 
 public class DisconnectFromNode implements ActuatorEvent {
-
+    public static int counter = 0;
     public DisconnectFromNode(){}
 
     @Override
@@ -16,7 +16,7 @@ public class DisconnectFromNode implements ActuatorEvent {
 //        d.dn.lmap.remove(d.app.computingAppliance.iaas.repositories.get(0).getName());
 //        d.app.computingAppliance.iaas.repositories.get(0).getLatencies().remove(d.getDn().repoName);
         d.setApp(null);
-
+        counter++;
         System.out.println(d + " disconnected from current application");
     }
 }

@@ -8,6 +8,7 @@ public class Actuator{
     private ActuatorStrategy strategy;
     private long latency;
     private Station station;
+    public static int counter=0;
 
     public Actuator(ActuatorStrategy actuatorStrategy, long latency, Station station) {
         this.strategy = actuatorStrategy;
@@ -25,6 +26,7 @@ public class Actuator{
                 @Override
                 protected void eventAction() {
                     event.actuate(station);
+                    counter++;
                 }
             };
         }
@@ -36,6 +38,7 @@ public class Actuator{
                 @Override
                 protected void eventAction() {
                     event.actuate(station);
+                    counter++;
                 }
             };
         }
