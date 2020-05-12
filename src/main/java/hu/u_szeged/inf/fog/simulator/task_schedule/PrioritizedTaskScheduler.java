@@ -305,7 +305,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
             for (int i = 0; i < size; i++) {
                 if (sizeToRemove >= high.peek().size) {
                     DataCapsule dc = high.poll();
-                    if (dc != null) {
+                    if (dc != null && dc.isActuationNeeded()) {
                         dc.setProcessTime(Timed.getFireCount());
                         dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
@@ -321,7 +321,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
             for (int i = 0; i < size; i++) {
                 if (sizeToRemove >= mid.peek().size) {
                     DataCapsule dc = mid.poll();
-                    if (dc != null) {
+                    if (dc != null && dc.isActuationNeeded()) {
                         dc.setProcessTime(Timed.getFireCount());
                         dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
@@ -337,7 +337,7 @@ public class PrioritizedTaskScheduler implements TaskScheduler {
             for (int i = 0; i < size; i++) {
                 if (sizeToRemove >= low.peek().size) {
                     DataCapsule dc = low.poll();
-                    if (dc != null) {
+                    if (dc != null && dc.isActuationNeeded()) {
                         dc.setProcessTime(Timed.getFireCount());
                         dc.setActuatorEvent(dc.getSource().getActuator().selectStrategyEvent());
                         afterProcess(dc);
