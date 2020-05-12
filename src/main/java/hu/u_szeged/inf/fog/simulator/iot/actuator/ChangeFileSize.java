@@ -5,7 +5,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ChangeFileSize implements ActuatorEvent {
 
     private long filesize;
-    public static int counter = 0;
+    public static long counter = 0;
 
     public ChangeFileSize(long filesize) {
         this.filesize = filesize;

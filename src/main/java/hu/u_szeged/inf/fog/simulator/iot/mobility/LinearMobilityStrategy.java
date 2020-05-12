@@ -19,10 +19,10 @@ public class LinearMobilityStrategy implements MobilityStrategy {
     @Override
     public GeoLocation move(long freq) {
         double moved = movedDistance(freq);
-        return setPosition(moved, freq);
+        return setPosition(moved);
     }
 
-    private GeoLocation setPosition(double travelDistance, long freq) {
+    private GeoLocation setPosition(double travelDistance) {
         GeoLocation dest = null;
         if(!destinations.isEmpty()) {
             dest = destinations.peek();
@@ -36,14 +36,12 @@ public class LinearMobilityStrategy implements MobilityStrategy {
                     double norm_posY = posY / distance;
                     currentPosition.setLongitude(currentPosition.getLongitude() + norm_posX * travelDistance);
                     currentPosition.setLatitude(currentPosition.getLatitude() + norm_posY * travelDistance);
+                    return currentPosition;
                 } else {
                     double remained = travelDistance - distance;
                     currentPosition = destinations.poll();
-                    return setPosition(remained, freq);
+                    return setPosition(remained);
                 }
-                System.err.println(currentPosition.getLatitude() +"-" + currentPosition.getLongitude());
-                System.err.println("---------------------");
-                return currentPosition;
             }
         }
         return null;

@@ -5,7 +5,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ReduceFrequencyEvent implements ActuatorEvent {
 
     private long measure;
-    public static int counter = 0;
+    public static long counter = 0;
 
     public ReduceFrequencyEvent(long measure) {
         this.measure = measure;

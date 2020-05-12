@@ -6,7 +6,7 @@ import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
 public class ChangePosition implements ActuatorEvent {
 
     private GeoLocation newLocation;
-    public static int counter = 0;
+    public static long counter = 0;
 
     public ChangePosition(GeoLocation geoLocation) {
         this.newLocation = geoLocation;

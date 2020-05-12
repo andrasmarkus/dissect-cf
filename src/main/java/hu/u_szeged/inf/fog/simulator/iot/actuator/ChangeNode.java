@@ -6,7 +6,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ChangeNode implements ActuatorEvent {
 
     Application from, to;
-    public static int counter = 0;
+    public static long counter = 0;
 
     public ChangeNode(Application from, Application to) {
         this.from = from;

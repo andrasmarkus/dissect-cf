@@ -7,7 +7,7 @@ import hu.u_szeged.inf.fog.simulator.iot.Station;
 public class ConnectToNode implements ActuatorEvent {
 
     Application application;
-    public static int counter = 0;
+    public static long counter = 0;
 
     public ConnectToNode(Application application) {
         this.application = application;

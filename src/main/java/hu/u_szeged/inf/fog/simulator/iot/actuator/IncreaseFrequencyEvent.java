@@ -3,7 +3,7 @@ package hu.u_szeged.inf.fog.simulator.iot.actuator;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 
 public class IncreaseFrequencyEvent implements ActuatorEvent {
-    public static int counter = 0;
+    public static long counter = 0;
     private long measure;
 
     public IncreaseFrequencyEvent(long measure) {
