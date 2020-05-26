@@ -17,18 +17,24 @@ public class NewFogSimulation   {
 	public static void main(String[] args) throws Exception {
 	
 	// app strategy
-	final String strategy = "fuzzy";
+	
 	//final String strategy = "random";
 	//final String strategy = "hold";
 	//final String strategy = "load";
 	//final String strategy = "push";
-	//final String strategy = "push2";
+	
+	//  igazából ezt használjuk: 
+	final String strategy = "push2";
+	//final String strategy = "fuzzy";
 	
 	// device strategy
 	//final String deviceStrategy = "fuzzy";
 	//final String deviceStrategy = "load";
 	//final String deviceStrategy = "random";
-	final String deviceStrategy = "distance";
+	
+	// igazából ezt használjuk:
+	final String deviceStrategy = "mixed";
+	//final String deviceStrategy = "distance";
 	
 	//  smart devices' characteristics
 	String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";

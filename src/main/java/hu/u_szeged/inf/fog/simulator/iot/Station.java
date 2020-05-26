@@ -197,7 +197,7 @@ public class Station extends Device {
             new FuzzyDeviceStrategy(this);
         }else {
         	try {
-				throw new Exception("This device strategy does not exist!");
+				throw new Exception("This device strategy: "+this.strategy +"does not exist!");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
