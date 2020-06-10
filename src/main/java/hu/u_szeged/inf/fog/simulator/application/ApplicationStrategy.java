@@ -173,6 +173,11 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 			int deviceMax = Integer.MIN_VALUE;
 			double MinPrice = Double.MAX_VALUE;
 			double MaxPrice = Double.MIN_VALUE;
+			double MinLatency = Double.MAX_VALUE;
+			double MaxLatency = Double.MIN_VALUE;
+			double MinUnprocessedData = Double.MAX_VALUE;
+			double MaxUnprocessedData = Double.MIN_VALUE;
+			
 			
 			for(int i=0;i<caList.size();i++) {
 				ComputingAppliance ca = caList.get(i);
@@ -187,11 +192,28 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 					MinPrice = priceperTick;
 				if(priceperTick > MaxPrice)
 					MaxPrice = priceperTick;
+				
+				
+				double latency = ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()); 
+				if(latency < MinLatency)
+					MinLatency = latency;
+				if(latency > MaxLatency)
+					MaxLatency = latency;
+				
+				
+				double unprocesseddata = (ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize; 
+				if(unprocesseddata < MinUnprocessedData)
+					MinUnprocessedData = unprocesseddata;
+				if(unprocesseddata > MaxUnprocessedData)
+					MaxUnprocessedData = unprocesseddata;
 			}	
 			
 			Vector<Double> loadOfResource = new Vector<Double>();
 			Vector<Double> loadOfDevices = new Vector<Double>();
 			Vector<Double> price = new Vector<Double>();
+			Vector<Double> latency = new Vector<Double>();
+			Vector<Double> unprocesseddata = new Vector<Double>();
+			
 			for(int i=0;i<caList.size();i++) {
 				
 				ComputingAppliance ca = caList.get(i);
@@ -207,6 +229,15 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				
 				sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
 				price.add(sig.getat(ca.applicationList.get(0).instance.getPricePerTick()*100000000));
+				
+				
+				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((30)));
+				latency.add(sig.getat(new Double(ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()))));
+				
+				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
+				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));
+				
+				
 			}
 			
 			Vector < Integer > score = new Vector < Integer > ();
@@ -215,6 +246,8 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	            temp.add(loadOfResource.get(i));
 	            temp.add(loadOfDevices.get(i));
 	            temp.add(price.get(i));
+	            temp.add(latency.get(i));
+	            temp.add(unprocesseddata.get(i));
 	            score.add((int)(FuzzyIndicators.getAggregation(temp) * 100));
 	        }
 	        
