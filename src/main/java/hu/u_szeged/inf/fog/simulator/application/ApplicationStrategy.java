@@ -165,18 +165,20 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 		if(a.computingAppliance.parentNode!=null) {
 			caList.add(a.computingAppliance.parentNode);
 		}
+		ComputingAppliance currentCA = a.computingAppliance;
+		
 		
 		if(caList.size()>0) {
 		
 			//min max device size
-			int deviceMin = Integer.MAX_VALUE;
-			int deviceMax = Integer.MIN_VALUE;
-			double MinPrice = Double.MAX_VALUE;
-			double MaxPrice = Double.MIN_VALUE;
-			double MinLatency = Double.MAX_VALUE;
-			double MaxLatency = Double.MIN_VALUE;
-			double MinUnprocessedData = Double.MAX_VALUE;
-			double MaxUnprocessedData = Double.MIN_VALUE;
+			int deviceMin = currentCA.applicationList.get(0).deviceList.size();
+			int deviceMax = currentCA.applicationList.get(0).deviceList.size();
+			double MinPrice = currentCA.applicationList.get(0).instance.getPricePerTick()*100000000;
+			double MaxPrice = currentCA.applicationList.get(0).instance.getPricePerTick()*100000000;
+			double MinLatency = currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName());
+			double MaxLatency = currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName());
+			double MinUnprocessedData = (currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize;
+			double MaxUnprocessedData = (currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize;
 			
 			
 			for(int i=0;i<caList.size();i++) {
@@ -235,9 +237,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				latency.add(sig.getat(new Double(ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()))));
 				
 				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
-				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));
-				
-				
+				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));	
 			}
 			
 			Vector < Integer > score = new Vector < Integer > ();
@@ -251,22 +251,55 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	            score.add((int)(FuzzyIndicators.getAggregation(temp) * 100));
 	        }
 	        
+	        //current A calculation
+	        Integer currentCAscore;
+	        Vector < Double > temp = new Vector < Double > ();
+	        Kappa kappa = new Kappa(3.0, 0.4);				
+			
+	        Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 16.0), Double.valueOf(50));
+	        temp.add(sig.getat(currentCA.getloadOfResource()));
+	        
+	    	sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 64.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
+			temp.add(sig.getat(new Double(currentCA.applicationList.get(0).deviceList.size())));
+			
+			sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
+			temp.add(sig.getat(currentCA.applicationList.get(0).instance.getPricePerTick()*100000000));
+			
+			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((30)));
+			temp.add(sig.getat(new Double(currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName()))));
+			
+			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
+			temp.add(sig.getat(new Double(((currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize))));
+	        
+			currentCAscore = new Integer((int)(FuzzyIndicators.getAggregation(temp) * 100));
+		          
 	        Vector < Integer > finaldecision = new Vector < Integer > ();
 	        for (int i = 0; i < caList.size(); ++i) {
 	            finaldecision.add(i);
 	        }
-	            
+	        
+	        //-1 means that is the current CA.
+	        finaldecision.add(-1);
 	        
 	        for (int i = 0; i < score.size(); ++i) {
 	            for (int j = 0; j < score.get(i); j++) {
 	                finaldecision.add(i);
 	            }
 	        }
+	        
+	        for(int j=0;j<currentCAscore;j++)
+	        	finaldecision.add(-1);
+	        	
+	        
 	        Random rnd = new Random();
 	        Collections.shuffle(finaldecision);
-	        int temp = rnd.nextInt(finaldecision.size());
+	        int chooseIdx = rnd.nextInt(finaldecision.size());
 			
-	        a.strategyApplication = caList.get(finaldecision.get(temp)).applicationList.get(0);
+	        // finaldecision array contains -1 value that refers to the currentCA.
+	        if(finaldecision.get(chooseIdx) == -1)
+	        	a.strategyApplication = null;
+	        else	        	
+	        	a.strategyApplication = caList.get(finaldecision.get(chooseIdx)).applicationList.get(0);
 	        
 	        //question
 	        
