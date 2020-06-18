@@ -41,6 +41,10 @@ public class NewFogSimulation   {
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
+	
+	//borderline of the task forwarding
+	int borderline = 1;	
+
 	// num. of the instruction
 	final long numberOfInstruction = 600;
 	
@@ -77,10 +81,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog4 = new ComputingAppliance(westfile4, "Paris", 2, 49);
 	
 		// creating the cloud application modules
-		Application fogapp1 = new Application(freq, tasksize, "a1.large", "London-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp2 = new Application(freq, tasksize, "a1.xlarge", "Brussels-app", numberOfInstruction, 1, strategy, false);
-		Application fogapp3 = new Application(freq, tasksize, "a1.large", "Amsterdam-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp4 = new Application(freq, tasksize, "a1.large", "Paris-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp1 = new Application(freq, tasksize, "a1.large", "London-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp2 = new Application(freq, tasksize, "a1.xlarge", "Brussels-app", numberOfInstruction, borderline, strategy, false);
+		Application fogapp3 = new Application(freq, tasksize, "a1.large", "Amsterdam-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp4 = new Application(freq, tasksize, "a1.large", "Paris-app", numberOfInstruction, borderline, strategy, true);
 		
 		// mapping applications to the resources
 		fog1.addApplication(fogapp1);
@@ -101,10 +105,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog8 = new ComputingAppliance(centrefile4, "Vienna", 16, 48);
 	
 		// creating the cloud application modules
-		Application fogapp5 = new Application(freq, tasksize, "a1.large", "Bratislava-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp6 = new Application(freq, tasksize, "a1.xlarge", "Budapest-app", numberOfInstruction, 1, strategy, false);
-		Application fogapp7 = new Application(freq, tasksize, "a1.large", "Prague-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp8 = new Application(freq, tasksize, "a1.large", "Vienna-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp5 = new Application(freq, tasksize, "a1.large", "Bratislava-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp6 = new Application(freq, tasksize, "a1.xlarge", "Budapest-app", numberOfInstruction, borderline, strategy, false);
+		Application fogapp7 = new Application(freq, tasksize, "a1.large", "Prague-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp8 = new Application(freq, tasksize, "a1.large", "Vienna-app", numberOfInstruction, borderline, strategy, true);
 		
 		// mapping applications to the resources
 			fog5.addApplication(fogapp5);
@@ -124,10 +128,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog12 = new ComputingAppliance(eastfile4, "Warsaw", 21, 52);
 	
 		// creating the cloud application modules
-		Application fogapp9 = new Application(freq, tasksize, "a1.xlarge", "Kiev-app", numberOfInstruction, 1, strategy, false);
-		Application fogapp10 = new Application(freq, tasksize, "a1.large", "Moscow-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp11 = new Application(freq, tasksize, "a1.large", "Vilnius-app", numberOfInstruction, 1, strategy, true);
-		Application fogapp12 = new Application(freq, tasksize, "a1.large", "Warsaw-app", numberOfInstruction, 1, strategy, true);
+		Application fogapp9 = new Application(freq, tasksize, "a1.xlarge", "Kiev-app", numberOfInstruction, borderline, strategy, false);
+		Application fogapp10 = new Application(freq, tasksize, "a1.large", "Moscow-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp11 = new Application(freq, tasksize, "a1.large", "Vilnius-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp12 = new Application(freq, tasksize, "a1.large", "Warsaw-app", numberOfInstruction, borderline, strategy, true);
 
 		// mapping applications to the resources
 		fog9.addApplication(fogapp9);
@@ -143,8 +147,8 @@ public class NewFogSimulation   {
 	ComputingAppliance fog14 = new ComputingAppliance(holdfogfile2, "Stockholm", 18, 59);
 		
 			// creating the cloud application modules
-			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athen-app", numberOfInstruction, 1, strategy, false);
-			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, 1, strategy, false);
+			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athen-app", numberOfInstruction, borderline, strategy, false);
+			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, borderline, strategy, false);
 			
 			// mapping applications to the resources
 			fog13.addApplication(fogapp13);
@@ -156,7 +160,7 @@ public class NewFogSimulation   {
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
 		// creating the cloud application modules
-		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, 1, strategy, false);
+		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, borderline, strategy, false);
 		
 		cloud1.addApplication(cloudapp1);
 	

@@ -8,10 +8,13 @@ import java.util.Random;
 public class DeviceXMLGenerator {
 
 	public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-		
-		PrintWriter writer = new PrintWriter("stations.xml", "UTF-8");
+		String strategy = "mixed";
+		String path = "./src/main/resources/demo/fuzzy/";
+		String name = "I12"+strategy+".xml";
+		PrintWriter writer = new PrintWriter(path+name, "UTF-8");
 		writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
 		writer.println("<devices>");
+		
 		
 		for(int j=0;j<6;j++) {
 			long starttime = j*4*60*60*1000;
@@ -31,12 +34,19 @@ public class DeviceXMLGenerator {
 				writer.println("		<maxoutbw>10240</maxoutbw>");
 				writer.println("		<diskbw>10240</diskbw>");
 				writer.println("		<reposize>10240</reposize>");
-				writer.println("		<strategy>distance</strategy>");
+				
+				if(i%2==0) {
+					writer.println("		<strategy>load</strategy>");
+				}else {
+					writer.println("		<strategy>distance</strategy>");
+				}
+				
 				writer.println("		<xCoord>"+x+"</xCoord>");
 				writer.println("		<yCoord>"+y+"</yCoord>");
 				writer.println("	</device>");
 			}
 		}
+		
 		
 		
 		
