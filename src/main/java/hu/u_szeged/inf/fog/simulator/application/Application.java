@@ -306,6 +306,18 @@ public class Application extends Timed {
 
 				final VmCollector vml = this.VmSearch();
 				
+				/* 
+				VmCollector vmltemp;
+
+				if(this.computingAppliance.parentNode==null) {
+					vmltemp = this.VmSearch();
+				}else {
+					vmltemp = null;
+					this.strategyApplication=this.computingAppliance.parentNode.applicationList.get(0);
+				}
+				final VmCollector vml = vmltemp;
+				*/
+				
 				if (vml == null) {
 
 					int ratio = (int) (unprocessedData / this.taskSize);
@@ -320,7 +332,7 @@ public class Application extends Timed {
 
 					break;
 				}
-
+				
 				try {
 					final double noi = this.allocatedData == this.taskSize ? this.numberOfInstruction
 							: (double) (this.numberOfInstruction * this.allocatedData / this.taskSize);
@@ -401,9 +413,7 @@ public class Application extends Timed {
     	  new LoadApplicationStrategy(this);
       } else if(this.strategy.equals("fuzzy")){
     	  new FuzzyApplicationStrategy(this);
-      } else if(this.strategy.equals("push2")){
-    	  new PushUp2ApplicationStrategy(this);
-      } else{
+      }  else{
         	try {
 				throw new Exception("This application strategy does not exist!");
 			} catch (Exception e) {

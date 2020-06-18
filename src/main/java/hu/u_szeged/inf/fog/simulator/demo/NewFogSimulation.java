@@ -21,10 +21,7 @@ public class NewFogSimulation   {
 	//final String strategy = "random";
 	//final String strategy = "hold";
 	//final String strategy = "load";
-	//final String strategy = "push";
-	
-	//  igazából ezt használjuk: 
-	final String strategy = "push2";
+	final String strategy = "push"; // csak a szülőnek küld, de fel is dolgozza lokális nódon
 	//final String strategy = "fuzzy";
 	
 	// device strategy
@@ -37,8 +34,8 @@ public class NewFogSimulation   {
 	//final String deviceStrategy = "distance";
 	
 	//  smart devices' characteristics
-	String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
-	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
+	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
+	String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
 	

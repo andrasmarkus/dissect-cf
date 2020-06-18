@@ -56,7 +56,7 @@ public class Station extends Device {
      * The frequency of the data measurement and sending process (e.g. in ms).
      */
     private long freq;
-
+    
     private long delay;
     /**
      * Getter for the number of the sensors.
@@ -143,6 +143,7 @@ public class Station extends Device {
         if (this.dn.localRepository.getFreeStorageCapacity() == this.dn.localRepository.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
             this.stopMeter();
         }
+       
 
         try {
             if (this.nodeRepository.getCurrState().equals(Repository.State.RUNNING)) {

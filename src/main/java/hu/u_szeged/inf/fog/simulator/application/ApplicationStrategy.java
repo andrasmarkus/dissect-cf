@@ -128,29 +128,12 @@ class PushUpApplicationStrategy extends ApplicationStrategy {
 	public void install(Application a) {
 		if(a.computingAppliance.parentNode!=null) {
 			a.strategyApplication=a.computingAppliance.parentNode.applicationList.get(0);
+		}else {
+			a.strategyApplication=null;
 		}
-	}   
+	} 
 }
 
-class PushUp2ApplicationStrategy extends ApplicationStrategy {
-
-	public PushUp2ApplicationStrategy(Application a) {
-		this.install(a);
-	}
-	@Override
-	public void install(Application a) {
-		int rnd1;
-		ArrayList<ComputingAppliance> caList = new ArrayList<ComputingAppliance>();
-		if(a.computingAppliance.parentNode!=null) {
-			caList.add(a.computingAppliance.parentNode);
-		}
-		if(caList.size()>0) {
-			Random randomGenerator = new Random();
-			rnd1 = randomGenerator.nextInt(caList.get(0).applicationList.size());
-			a.strategyApplication=caList.get(0).applicationList.get(rnd1);
-		}
-	}   
-}
 
 class FuzzyApplicationStrategy extends ApplicationStrategy {
 
