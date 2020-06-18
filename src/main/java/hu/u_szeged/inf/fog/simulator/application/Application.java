@@ -306,7 +306,7 @@ public class Application extends Timed {
 
 				final VmCollector vml = this.VmSearch();
 				
-				/* 
+				/*
 				VmCollector vmltemp;
 
 				if(this.computingAppliance.parentNode==null) {

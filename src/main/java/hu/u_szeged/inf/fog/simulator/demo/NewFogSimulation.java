@@ -18,25 +18,21 @@ public class NewFogSimulation   {
 	
 	// app strategy
 	
-	//final String strategy = "random";
+	final String strategy = "random";
 	//final String strategy = "hold";
 	//final String strategy = "load";
-	final String strategy = "push"; // csak a szülőnek küld, de fel is dolgozza lokális nódon
+	//final String strategy = "push"; 
 	//final String strategy = "fuzzy";
 	
 	// device strategy
-	//final String deviceStrategy = "fuzzy";
-	//final String deviceStrategy = "load";
-	//final String deviceStrategy = "random";
-	
-	// igazából ezt használjuk:
-	final String deviceStrategy = "mixed";
+	//final String deviceStrategy = "mixed";
 	//final String deviceStrategy = "distance";
+	final String deviceStrategy = "load";
 	
 	//  smart devices' characteristics
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
-	String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
-	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
+	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
+	String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
 	
 	//borderline of the task forwarding
