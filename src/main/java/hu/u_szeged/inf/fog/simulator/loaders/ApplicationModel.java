@@ -26,6 +26,7 @@ public class ApplicationModel {
 		public int threshold;
 		public String strategy;
 		public boolean canJoin;
+		public boolean read;
 		
 		@Override
 		public String toString() {
@@ -71,6 +72,11 @@ public class ApplicationModel {
 		@XmlElement( name = "canJoin" )
 		public void setCanJoin(boolean canJoin) {
 			this.canJoin = canJoin;
+		}
+		
+		@XmlElement ( name = "read" )
+		public void setRead(boolean read) {
+			this.read = read;
 		}
 		
 

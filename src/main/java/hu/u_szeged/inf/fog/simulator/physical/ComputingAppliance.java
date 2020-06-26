@@ -8,7 +8,9 @@ import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.PhysicalMachineEnergyMeter;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
+import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.loaders.ApplianceModel;
@@ -33,6 +35,8 @@ public class ComputingAppliance {
 	
 	public double y;
 	
+	public double energyConsumption;
+	
 	
 	public ComputingAppliance(String loadfile, String name, double x, double y) throws Exception {
 		if (loadfile != null) {
@@ -49,21 +53,24 @@ public class ComputingAppliance {
 			
 			this.y = y;
 			
+			this.energyConsumption = 0;
+			
 			ComputingAppliance.allComputingAppliance.add(this);
 			
 		}else {
 			throw new Exception("Description file of the resources is required!");
 		}
 	}
+
 	
-	public void readEnergy(final long freq, final long freq2) {
+	public void readEnergy(final Application a) {
 		for(PhysicalMachine pm: this.iaas.machines) {
 			final PhysicalMachineEnergyMeter pmm = new PhysicalMachineEnergyMeter(pm);
 			final ArrayList<Long> readingtime = new ArrayList<Long>();
 			final ArrayList<Double> readingpm = new ArrayList<Double>();
 			class MeteredDataCollector extends Timed {
 				public void start() {
-					subscribe(freq);
+					subscribe(a.getFrequency());
 				}
 				public void stop() {
 					unsubscribe();
@@ -72,18 +79,22 @@ public class ComputingAppliance {
 				public void tick(final long fires) {
 					readingtime.add(fires);
 					readingpm.add(pmm.getTotalConsumption());
-					if(Timed.getFireCount()>(freq2)) {
+					//energyConsumption+=pmm.getTotalConsumption();
+					if(Timed.getFireCount()>(24*12*a.getFrequency())) {
 						this.stop();
 						pmm.stopMeter();
+						for(int i=0;i<readingtime.size();i++) {
+							energyConsumption+=readingpm.get(i);
+						}
 					}
 				}
 			}
 			final MeteredDataCollector mdc = new MeteredDataCollector();
-			pmm.startMeter(freq, true);
+			pmm.startMeter(a.getFrequency(), true);
 			mdc.start();
-			for(int i=0;i<readingtime.size();i++) {
-				System.out.println("PhysichalMachine-"+i+": "+readingtime.get(i)+", "+readingpm.get(i)+"\n");
-			}
+
+				
+
 		}
 	}
 	
@@ -115,7 +126,7 @@ public class ComputingAppliance {
 			System.out.println(am);
 			ComputingAppliance ca = new ComputingAppliance(iaasLoader.get(am.file), am.name, am.xcoord, am.ycoord);			
 			for(ApplicationModel a : am.getApplications()){
-				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin));
+				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin, a.read));
 			}
 		}
 		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {

@@ -90,6 +90,8 @@ public class Application extends Timed {
 	
 	public boolean canJoin;
 	
+	public boolean read;
+	
 	public ArrayList<TimelineCollector> timelineList = new ArrayList<TimelineCollector>();
 	
 	public static ArrayList<Application> allApplication = new ArrayList<Application>();
@@ -98,7 +100,7 @@ public class Application extends Timed {
 	
 	public static long sumOfByteOnNetwork = 0;
 	
-	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
+	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin, boolean read) {
 
 		Application.allApplication.add(this);
 		
@@ -122,6 +124,8 @@ public class Application extends Timed {
 
 		this.canJoin = canJoin;
 		
+		this.read = read;
+		
 		subscribe(this.freq);
 
 		this.instance = Instance.getInstances().get(instance);
@@ -144,6 +148,11 @@ public class Application extends Timed {
 	public void setComputingAppliance(ComputingAppliance ca) {
 		this.computingAppliance = ca;
 		this.computingAppliance.iaas.repositories.get(0).registerObject(this.instance.getVa());
+		//start of new code
+		if(this.read) {
+			this.computingAppliance.readEnergy(this);
+		}
+		//end of new code
 		try {
 			this.startBroker();
 		} catch (Exception e) {

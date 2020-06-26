@@ -55,10 +55,10 @@ public class IoTSimulation {
 	new Instance(va,arc4,0.000000025,"instance4");
 	
 	// creating the application modules: 5 minutes frequency, 250kB task size and max. 2400 instruction / task
-	Application ca1 = new Application(5*60*1000, 256000, "instance1", "app1", 2400.0,1, "random", true);
-	Application ca2 = new Application(5*60*1000, 256000, "instance3", "app2", 2400.0,1, "random", true);
-	Application ca3 = new Application(5*60*1000, 256000, "instance2", "app3", 2400.0,1, "random", true);
-	Application ca4 = new Application(5*60*1000, 256000, "instance4", "app4", 2400.0,1, "random", true);
+	Application ca1 = new Application(5*60*1000, 256000, "instance1", "app1", 2400.0,1, "random", true, false);
+	Application ca2 = new Application(5*60*1000, 256000, "instance3", "app2", 2400.0,1, "random", true, false);
+	Application ca3 = new Application(5*60*1000, 256000, "instance2", "app3", 2400.0,1, "random", true, false);
+	Application ca4 = new Application(5*60*1000, 256000, "instance4", "app4", 2400.0,1, "random", true, false);
 	
 	cloud1.addApplication(ca1,ca2);
 	cloud2.addApplication(ca3,ca4);

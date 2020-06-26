@@ -1,8 +1,10 @@
 package hu.u_szeged.inf.fog.simulator.demo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.application.Application.VmCollector;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
@@ -10,6 +12,9 @@ import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 
 
 public abstract class ScenarioBase {
+	
+	private static ArrayList<String> names = new ArrayList<String>();
+	private static ArrayList<Double> eCs = new ArrayList<Double>();
 	
 	public final static String resourcePath = new StringBuilder(System.getProperty("user.dir")).
 			append(File.separator).
@@ -36,6 +41,8 @@ public abstract class ScenarioBase {
 		double amazon=0;
 		double azure=0;
 		double oracle=0;
+		//String name = null;
+		//double eC = 0;
 		
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
 			System.out.println("computingAppliance: " + c.name);
@@ -73,9 +80,19 @@ public abstract class ScenarioBase {
 					bluemix+=a.providers.get(0).cost;	
 					amazon+=a.providers.get(1).cost;	
 					azure+=a.providers.get(2).cost;	
-					oracle+=a.providers.get(3).cost;	
+					oracle+=a.providers.get(3).cost;
+				} else {
+					if(a.read) {
+						//names.add(a.computingAppliance.iaas.machines.get(0).toString());
+						/*for(PhysicalMachine pm : a.computingAppliance.iaas.machines) {
+							names.add(pm.toString());
+							//pm.
+						}*/
+						names.add(a.computingAppliance.name);
+						eCs.add(a.computingAppliance.energyConsumption);
+					}
 				}
-
+				
 			}
 			
 			
@@ -92,6 +109,9 @@ public abstract class ScenarioBase {
 		System.out.println("Network: "+(Application.sumOfByteOnNetwork/1024/1024)+ " MB");
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
 		System.out.println("Runtime: "+TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS)+ " seconds");
+		for(int i=0;i<names.size();i++) {
+			System.out.println(names.get(i)+" => "+eCs.get(i));
+		}
 		
 
 	}
