@@ -212,7 +212,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 			Vector<Double> price = new Vector<Double>();
 			Vector<Double> latency = new Vector<Double>();
 			Vector<Double> unprocesseddata = new Vector<Double>();
-			
+			System.out.println();
 			for(int i=0;i<caList.size();i++) {
 				
 				ComputingAppliance ca = caList.get(i);
@@ -222,7 +222,8 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 						Double.valueOf(- 1.0 / 8.0), 
 						Double.valueOf((MaxLoadOfResource + MinLoadOfResource)/2.0));
 				loadOfResource.add(sig.getat(ca.getloadOfResource()));
-				System.out.println(ca.name + ca.getloadOfResource());
+				
+				System.out.println(ca.name + " Load Resource " + ca.getloadOfResource() + " Price: " + ca.applicationList.get(0).instance.getPricePerTick()*100000000 + " UnprocessedData: " + (ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize);
 				
 				// if we would like to use device we need to use different converter function. Like order the devices and give a value according to the order.
 				//sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 128.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
@@ -233,10 +234,10 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				
 				//System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
 				
-				sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
+				sig = new Sigmoid<Object>(Double.valueOf( 4.0 / 1.0), Double.valueOf((MinPrice)));
 				price.add(sig.getat(ca.applicationList.get(0).instance.getPricePerTick()*100000000));
 				
-				//System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
+				System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
 				
 				
 				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 8.0), Double.valueOf((Math.abs((MaxLatency - MinLatency))/2.0)));
@@ -258,6 +259,8 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	            temp.add(unprocesseddata.get(i));
 	            score.add((int)(FuzzyIndicators.getAggregation(temp) * 100));
 	        }
+	        System.out.println("Pontozás: " + score);
+	        
 	        
 	        //current A calculation
 	        Integer currentCAscore;
@@ -274,7 +277,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	    	//sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 64.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
 			//temp.add(sig.getat(new Double(currentCA.applicationList.get(0).deviceList.size())));
 			
-			sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
+			sig = new Sigmoid<Object>(Double.valueOf( 4.0 / 1.0), Double.valueOf((MinPrice)));
 			temp.add(sig.getat(currentCA.applicationList.get(0).instance.getPricePerTick()*100000000));
 			
 			//System.out.println(currentCA.applicationList.get(0).instance.getPricePerTick()*100000000);
@@ -290,7 +293,9 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 			//System.out.println(((currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize));
 	        
 			currentCAscore = new Integer((int)(FuzzyIndicators.getAggregation(temp) * 100));
-		          
+			System.out.println(currentCA.name + " Load Resource " + currentCA.getloadOfResource() + " Price: " + currentCA.applicationList.get(0).instance.getPricePerTick()*100000000 + " UnprocessedData: " + (currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize);
+			System.out.println("Score " + currentCAscore);
+			
 	        Vector < Integer > finaldecision = new Vector < Integer > ();
 	        for (int i = 0; i < caList.size(); ++i) {
 	            finaldecision.add(i);
@@ -319,22 +324,25 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	        int chooseIdx = rnd.nextInt(finaldecision.size());
 			
 	        // finaldecision array contains -1 value that refers to the currentCA.
-	        /*
+	        
+	        
 	        if(finaldecision.get(chooseIdx) == -1)
 	        	a.strategyApplication = null;
 	        else	        	
-	        	a.strategyApplication = caList.get(finaldecision.get(chooseIdx)).applicationList.get(0);
+	        	a.strategyApplication = caList.get(finaldecision.get(chooseIdx)).applicationList.get(0);	        
 	        
-	        */
-	        if(maxelement > currentCAscore)
+	        /*
+	        if(maxelement > currentCAscore) {
+		
 	        	a.strategyApplication = caList.get(maxelementidx).applicationList.get(0);
+	        	System.out.println("Send to " + caList.get(maxelementidx).name);
+	        }
 	        else
-	        	a.strategyApplication = null;
-	        	
-	        
-	        
-	        
-	        
+	        {
+	        	a.strategyApplication = null;	
+	        	System.out.println("Send to (remain) " + currentCA.name);
+	        }
+	        */
 	        //question
 	        
 	        //mindig csak egy van, a 0. kell visszaadni.
