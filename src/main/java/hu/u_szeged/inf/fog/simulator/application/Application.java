@@ -421,7 +421,7 @@ public class Application extends Timed {
 			}
         }
         if(this.strategyApplication!=null) {
-        	this.transferToApplication(unprocessedData/2);
+        	this.transferToApplication((long)(unprocessedData/2));
         }
 	}
 

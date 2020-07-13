@@ -25,14 +25,14 @@ public class NewFogSimulation   {
 	//final String strategy = "fuzzy";
 	
 	// device strategy
-	final String deviceStrategy = "mixed";
-	//final String deviceStrategy = "distance";
+	//final String deviceStrategy = "mixed";
+	final String deviceStrategy = "distance";
 	//final String deviceStrategy = "load";
 	
 	//  smart devices' characteristics
-	String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
+	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
-	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
+	String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
 	
 	//borderline of the task forwarding
@@ -41,10 +41,9 @@ public class NewFogSimulation   {
 	// num. of the instruction
 	final long numberOfInstruction = 600;
 	
-	// tasksize -> 250kB -> 0.5MB?
-	//final long tasksize = 256000;
+	// tasksize -> 0.5MB
 	final long tasksize = 524288;
-	
+		
 	// app frequency ->5 min
 	final long freq = 5*60*1000;
 	
@@ -153,7 +152,7 @@ public class NewFogSimulation   {
 	String cloudfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_bern.xml";	
 	
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
-
+	
 		// creating the cloud application modules
 		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, borderline, strategy, false);
 		
