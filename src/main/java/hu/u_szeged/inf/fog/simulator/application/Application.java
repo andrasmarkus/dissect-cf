@@ -206,23 +206,22 @@ public class Application extends Timed {
 		return null;
 	}
 
-	protected boolean generateAndAddVM(int numOfVM) {
+	protected boolean generateAndAddVM() {
 
 		try {
 			if (this.turnonVM() == false) {
-				for(int i=0;i<numOfVM;i++) {
-					
-					for (PhysicalMachine pm : this.computingAppliance.iaas.machines) {
-						if (pm.isReHostableRequest(this.instance.getArc())) {
-							VirtualMachine vm = pm.requestVM(this.instance.getVa(), this.instance.getArc(),
-									this.computingAppliance.iaas.repositories.get(0), 1)[0];
-							if (vm != null) {
-								VmCollector vmc = new VmCollector(vm);
-								vmc.pm = pm;
-								this.vmManagerlist.add(vmc);
-								//return true;
-							}
+				for (PhysicalMachine pm : this.computingAppliance.iaas.machines) {
+					if (pm.isReHostableRequest(this.instance.getArc())) {
+						VirtualMachine vm = pm.requestVM(this.instance.getVa(), this.instance.getArc(),
+								this.computingAppliance.iaas.repositories.get(0), 1)[0];
+						if (vm != null) {
+							VmCollector vmc = new VmCollector(vm);
+							vmc.pm = pm;
+							this.vmManagerlist.add(vmc);
+							System.out.print(" asked new VM");
+							return true;
 						}
+
 					}
 				}
 			}
@@ -329,7 +328,7 @@ public class Application extends Timed {
 
 					System.out
 							.print("data/VM: " + ratio + " unprocessed after exit: " + unprocessedData + " decision:");
-					this.generateAndAddVM(ratio);
+					this.generateAndAddVM();
 
 					break;
 				}
@@ -422,7 +421,7 @@ public class Application extends Timed {
 			}
         }
         if(this.strategyApplication!=null) {
-        	this.transferToApplication(unprocessedData);
+        	this.transferToApplication(unprocessedData/2);
         }
 	}
 

@@ -21,8 +21,8 @@ public class NewFogSimulation   {
 	//final String strategy = "random";
 	//final String strategy = "hold";
 	//final String strategy = "load";
-	//final String strategy = "push"; 
-	final String strategy = "fuzzy";
+	final String strategy = "push"; 
+	//final String strategy = "fuzzy";
 	
 	// device strategy
 	final String deviceStrategy = "mixed";
@@ -41,8 +41,9 @@ public class NewFogSimulation   {
 	// num. of the instruction
 	final long numberOfInstruction = 600;
 	
-	// tasksize -> 250kB
-	final long tasksize = 256000;
+	// tasksize -> 250kB -> 0.5MB?
+	//final long tasksize = 256000;
+	final long tasksize = 524288;
 	
 	// app frequency ->5 min
 	final long freq = 5*60*1000;
@@ -149,13 +150,16 @@ public class NewFogSimulation   {
 			
 	// cloud
 	String cloudfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_frankfurt.xml";	
+	String cloudfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_bern.xml";	
 	
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
-	
+
 		// creating the cloud application modules
 		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, borderline, strategy, false);
 		
+		
 		cloud1.addApplication(cloudapp1);
+
 	
 	/************ CONNECTIONS AND LATENCIES ************/ 					
 		fog1.setLatency(fog2, 8);
@@ -196,6 +200,7 @@ public class NewFogSimulation   {
 		cloud1.setLatency(fog6, 18);
 		cloud1.setLatency(fog9, 31);
 		
+		
 		fog1.addNeighbour(fog3, fog4);
 		fog3.addNeighbour(fog4);
 		fog1.setParentNode(fog2);
@@ -225,6 +230,7 @@ public class NewFogSimulation   {
 		fog13.setParentNode(cloud1);
 		fog14.setParentNode(cloud1);
 
+		
 		// stations
 		Station.loadDevice(stationfile);
 		
