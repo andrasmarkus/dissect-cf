@@ -222,7 +222,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 						Double.valueOf(- 1.0 / 8.0), 
 						Double.valueOf((MaxLoadOfResource + MinLoadOfResource)/2.0));
 				loadOfResource.add(sig.getat(ca.getloadOfResource()));
-				//System.out.println(ca.getloadOfResource());
+				System.out.println(ca.name + ca.getloadOfResource());
 				
 				// if we would like to use device we need to use different converter function. Like order the devices and give a value according to the order.
 				//sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 128.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
@@ -240,7 +240,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				
 				
 				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 8.0), Double.valueOf((Math.abs((MaxLatency - MinLatency))/2.0)));
-				latency.add(sig.getat(new Double(a.computingAppliance.iaas.repositories.get(0).getLatencies().get(caList.get(i).iaas.repositories.get(0).getName()))));
+				//latency.add(sig.getat(new Double(a.computingAppliance.iaas.repositories.get(0).getLatencies().get(caList.get(i).iaas.repositories.get(0).getName()))));
 				
 				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 4.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
 				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));
@@ -254,7 +254,7 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	            temp.add(loadOfResource.get(i));
 	            //temp.add(loadOfDevices.get(i));
 	            temp.add(price.get(i));
-	            temp.add(latency.get(i));
+	            //temp.add(latency.get(i));
 	            temp.add(unprocesseddata.get(i));
 	            score.add((int)(FuzzyIndicators.getAggregation(temp) * 100));
 	        }
@@ -281,7 +281,8 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 			//there is no latency if we don't send the data over network.
 			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 8.0), Double.valueOf((Math.abs((MaxLatency - MinLatency))/2.0)));
 			//temp.add(sig.getat(new Double(currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName()))));
-			temp.add(sig.getat(new Double(MinLatency / 100.0)));
+			
+			//temp.add(sig.getat(new Double(MinLatency / 100.0)));
 			
 			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 4.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
 			temp.add(sig.getat(new Double(((currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize))));
@@ -308,15 +309,31 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	        	finaldecision.add(-1);
 	        	
 	        
+	        //use the best score in fuzzy.
+	        int maxelement = Collections.max(score);
+	        int maxelementidx = score.indexOf(maxelement);	        
+	        
+	        
 	        Random rnd = new Random();
 	        Collections.shuffle(finaldecision);
 	        int chooseIdx = rnd.nextInt(finaldecision.size());
 			
 	        // finaldecision array contains -1 value that refers to the currentCA.
+	        /*
 	        if(finaldecision.get(chooseIdx) == -1)
 	        	a.strategyApplication = null;
 	        else	        	
 	        	a.strategyApplication = caList.get(finaldecision.get(chooseIdx)).applicationList.get(0);
+	        
+	        */
+	        if(maxelement > currentCAscore)
+	        	a.strategyApplication = caList.get(maxelementidx).applicationList.get(0);
+	        else
+	        	a.strategyApplication = null;
+	        	
+	        
+	        
+	        
 	        
 	        //question
 	        
