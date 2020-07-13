@@ -153,7 +153,9 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 		
 		if(caList.size()>0) {
 		
-			//min max device size
+			//min max calculation
+			double MinLoadOfResource = currentCA.getloadOfResource();
+			double MaxLoadOfResource = currentCA.getloadOfResource();
 			int deviceMin = currentCA.applicationList.get(0).deviceList.size();
 			int deviceMax = currentCA.applicationList.get(0).deviceList.size();
 			double MinPrice = currentCA.applicationList.get(0).instance.getPricePerTick()*100000000;
@@ -162,10 +164,21 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 			double MaxLatency = currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName());
 			double MinUnprocessedData = (currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize;
 			double MaxUnprocessedData = (currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize;
-			
-			
+						
+			//calculate the min and max values.
 			for(int i=0;i<caList.size();i++) {
 				ComputingAppliance ca = caList.get(i);
+				
+				//System.out.println("Ebben a node-ban vagyunk: "+a.computingAppliance.name);
+				//System.out.println("Ilyen kapcsolatai vannak (belső-külső): "+a.computingAppliance.iaas.repositories.get(0).getLatencies());
+				//System.out.println("Ezek a szomszéd node-k: "+caList.get(i).iaas.repositories.get(0).getName());
+				//System.out.println("Ez az adott szomszédhoz a latency érték: "+a.computingAppliance.iaas.repositories.get(0).getLatencies().get(caList.get(i).iaas.repositories.get(0).getName()));
+				double loadofresource = ca.getloadOfResource();
+				if(loadofresource < MinLoadOfResource)
+					MinLoadOfResource = loadofresource;
+				if(loadofresource > MaxLoadOfResource)
+					MaxLoadOfResource = loadofresource;
+				
 				int deviceSize = ca.applicationList.get(0).deviceList.size();
 				if(deviceSize < deviceMin)
 					deviceMin = deviceSize;
@@ -178,8 +191,9 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				if(priceperTick > MaxPrice)
 					MaxPrice = priceperTick;
 				
-				
-				double latency = ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()); 
+				//latency
+				//double latency = ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName());
+				double latency = a.computingAppliance.iaas.repositories.get(0).getLatencies().get(caList.get(i).iaas.repositories.get(0).getName());				
 				if(latency < MinLatency)
 					MinLatency = latency;
 				if(latency > MaxLatency)
@@ -203,31 +217,42 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 				
 				ComputingAppliance ca = caList.get(i);
 				Kappa kappa = new Kappa(3.0, 0.4);				
-				Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 16.0), Double.valueOf(50));
+				// Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 16.0), Double.valueOf(50));
+				Sigmoid<Object> sig = new Sigmoid<Object>(
+						Double.valueOf(- 1.0 / 8.0), 
+						Double.valueOf((MaxLoadOfResource + MinLoadOfResource)/2.0));
 				loadOfResource.add(sig.getat(ca.getloadOfResource()));
+				//System.out.println(ca.getloadOfResource());
+				
+				// if we would like to use device we need to use different converter function. Like order the devices and give a value according to the order.
+				//sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 128.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
+				//loadOfDevices.add(sig.getat(new Double(ca.applicationList.get(0).deviceList.size())));
+				//System.out.println(deviceMax-((deviceMax-deviceMin)/2.0));
+				//System.out.println(ca.applicationList.get(0).deviceList.size());
 				
 				
-				sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 64.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
-				loadOfDevices.add(sig.getat(new Double(ca.applicationList.get(0).deviceList.size())));
-				
-				System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
+				//System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
 				
 				sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
 				price.add(sig.getat(ca.applicationList.get(0).instance.getPricePerTick()*100000000));
 				
+				//System.out.println(ca.applicationList.get(0).instance.getPricePerTick()*100000000);
 				
-				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((30)));
-				latency.add(sig.getat(new Double(ca.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(ca.iaas.repositories.get(0).getName()))));
 				
-				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
-				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));	
+				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 8.0), Double.valueOf((Math.abs((MaxLatency - MinLatency))/2.0)));
+				latency.add(sig.getat(new Double(a.computingAppliance.iaas.repositories.get(0).getLatencies().get(caList.get(i).iaas.repositories.get(0).getName()))));
+				
+				sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 4.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
+				unprocesseddata.add(sig.getat(new Double(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize))));
+				
+				//System.out.println(((ca.applicationList.get(0).sumOfArrivedData - ca.applicationList.get(0).sumOfProcessedData) / ca.applicationList.get(0).taskSize));
 			}
 			
 			Vector < Integer > score = new Vector < Integer > ();
 	        for (int i = 0; i < caList.size(); ++i) {
 	            Vector < Double > temp = new Vector < Double > ();
 	            temp.add(loadOfResource.get(i));
-	            temp.add(loadOfDevices.get(i));
+	            //temp.add(loadOfDevices.get(i));
 	            temp.add(price.get(i));
 	            temp.add(latency.get(i));
 	            temp.add(unprocesseddata.get(i));
@@ -239,20 +264,29 @@ class FuzzyApplicationStrategy extends ApplicationStrategy {
 	        Vector < Double > temp = new Vector < Double > ();
 	        Kappa kappa = new Kappa(3.0, 0.4);				
 			
-	        Sigmoid<Object> sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 16.0), Double.valueOf(50));
+			Sigmoid<Object> sig = new Sigmoid<Object>(
+					Double.valueOf(- 1.0 / 8.0), 
+					Double.valueOf((MaxLoadOfResource + MinLoadOfResource)/2.0));
 	        temp.add(sig.getat(currentCA.getloadOfResource()));
+	        //System.out.println(currentCA.getloadOfResource());
 	        
-	    	sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 64.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
-			temp.add(sig.getat(new Double(currentCA.applicationList.get(0).deviceList.size())));
+	        
+	    	//sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 64.0), Double.valueOf((deviceMax-((deviceMax-deviceMin)/2.0))));
+			//temp.add(sig.getat(new Double(currentCA.applicationList.get(0).deviceList.size())));
 			
 			sig = new Sigmoid<Object>(Double.valueOf(- 1.0 / 2.0), Double.valueOf((MaxPrice)));
 			temp.add(sig.getat(currentCA.applicationList.get(0).instance.getPricePerTick()*100000000));
 			
-			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((30)));
-			temp.add(sig.getat(new Double(currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName()))));
+			//System.out.println(currentCA.applicationList.get(0).instance.getPricePerTick()*100000000);
+			//there is no latency if we don't send the data over network.
+			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 8.0), Double.valueOf((Math.abs((MaxLatency - MinLatency))/2.0)));
+			//temp.add(sig.getat(new Double(currentCA.applicationList.get(0).computingAppliance.iaas.repositories.get(0).getLatencies().get(currentCA.iaas.repositories.get(0).getName()))));
+			temp.add(sig.getat(new Double(MinLatency / 100.0)));
 			
-			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 2.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
+			sig = new Sigmoid<Object>(Double.valueOf( - 1.0 / 4.0), Double.valueOf((MaxUnprocessedData-MinUnprocessedData)));
 			temp.add(sig.getat(new Double(((currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize))));
+			
+			//System.out.println(((currentCA.applicationList.get(0).sumOfArrivedData - currentCA.applicationList.get(0).sumOfProcessedData) / currentCA.applicationList.get(0).taskSize));
 	        
 			currentCAscore = new Integer((int)(FuzzyIndicators.getAggregation(temp) * 100));
 		          
