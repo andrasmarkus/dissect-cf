@@ -132,14 +132,14 @@ public class NewFogSimulation   {
 		fog12.addApplication(fogapp12);
 		
 	// hold level fog nodes
-	String holdfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athen.xml";	
+	String holdfogfile1 = ScenarioBase.resourcePath+"/fuzzy/LPDS_athens.xml";	
 	String holdfogfile2 = ScenarioBase.resourcePath+"/fuzzy/LPDS_stockholm.xml";	
 		
-	ComputingAppliance fog13 = new ComputingAppliance(holdfogfile1, "Athen", 24, 38);
+	ComputingAppliance fog13 = new ComputingAppliance(holdfogfile1, "Athens", 24, 38);
 	ComputingAppliance fog14 = new ComputingAppliance(holdfogfile2, "Stockholm", 18, 59);
 		
 			// creating the cloud application modules
-			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athen-app", numberOfInstruction, borderline, strategy, false);
+			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athens-app", numberOfInstruction, borderline, strategy, false);
 			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, borderline, strategy, false);
 			
 			// mapping applications to the resources
