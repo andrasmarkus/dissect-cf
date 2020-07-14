@@ -98,6 +98,8 @@ public class Application extends Timed {
 	
 	public static long sumOfByteOnNetwork = 0;
 	
+	public static int numOfNetworkTraffic = 0;
+	
 	public Application(long freq, long taskSize, String instance, String name, double numberOfInstruction, int threshold, String strategy, boolean canJoin) {
 
 		Application.allApplication.add(this);
@@ -422,6 +424,7 @@ public class Application extends Timed {
         }
         if(this.strategyApplication!=null) {
         	this.transferToApplication((long)(unprocessedData/2));
+        	this.numOfNetworkTraffic++;
         }
 	}
 

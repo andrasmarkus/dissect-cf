@@ -21,8 +21,8 @@ public class NewFogSimulation   {
 	//final String strategy = "random";
 	//final String strategy = "hold";
 	//final String strategy = "load";
-	final String strategy = "push"; 
-	//final String strategy = "fuzzy";
+	//final String strategy = "push"; 
+	final String strategy = "fuzzy";
 	
 	// device strategy
 	//final String deviceStrategy = "mixed";
@@ -36,7 +36,7 @@ public class NewFogSimulation   {
 	
 	
 	//borderline of the task forwarding
-	int borderline = 1;	
+	int borderline = 2;	
 
 	// num. of the instruction
 	final long numberOfInstruction = 600;
