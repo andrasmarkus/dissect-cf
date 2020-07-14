@@ -88,7 +88,6 @@ public abstract class ScenarioBase {
 		System.out.println("Cloud cost: "+totalCost);
 		System.out.println("Network: "+TimeUnit.SECONDS.convert(Application.sumOfTimeOnNetwork, TimeUnit.MILLISECONDS)+ " seconds");
 		System.out.println("Network: "+(Application.sumOfByteOnNetwork/1024/1024)+ " MB");
-		System.out.println("Network: "+(Application.numOfNetworkTraffic)+ " pcs");
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
 		System.out.println("Stops-app: "+((double)highestApplicationStopTime/1000/60/60)  + " Stops-station:"+((double)highestStationStoptime/1000/60/60) );
 		System.out.println("Generated/processed/arrived data: " + generatedData + "/" + processedData+ "/"+arrivedData+ " bytes (~"+(arrivedData/1024/1024)+" MB)");
