@@ -29,9 +29,9 @@ public class NewFogSimulation   {
 	//final String deviceStrategy = "mixed";
 	
 	//  smart devices' characteristics
-	String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
+	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
-	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
+	String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
 	
 	//borderline of the task forwarding
@@ -40,11 +40,11 @@ public class NewFogSimulation   {
 	// num. of the instruction
 	final long numberOfInstruction = 600;
 	
-	// tasksize -> 0.5MB
-	final long tasksize = 524288;
+	// tasksize -> 524288? 262144?
+	final long tasksize = 262144;
 		
 	// app frequency ->5 min
-	final long freq = 5*60*1000;
+	final long freq = 5*30*1000;
 	
 
 		
