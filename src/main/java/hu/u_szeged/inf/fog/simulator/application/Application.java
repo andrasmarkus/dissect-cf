@@ -423,8 +423,8 @@ public class Application extends Timed {
 			}
         }
         if(this.strategyApplication!=null) {
-        	this.transferToApplication((long)(unprocessedData/2));
-        	this.numOfNetworkTraffic++;
+        	this.transferToApplication(unprocessedData/2);
+        	Application.numOfNetworkTraffic++;
         }
 	}
 

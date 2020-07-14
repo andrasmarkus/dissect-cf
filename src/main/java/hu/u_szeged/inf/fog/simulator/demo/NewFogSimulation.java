@@ -17,26 +17,25 @@ public class NewFogSimulation   {
 	public static void main(String[] args) throws Exception {
 	
 	// app strategy
-	
-	//final String strategy = "random";
 	//final String strategy = "hold";
+	//final String strategy = "random";
 	//final String strategy = "load";
-	//final String strategy = "push"; 
-	final String strategy = "fuzzy";
+	final String strategy = "push"; 
+	//final String strategy = "fuzzy";
 	
 	// device strategy
-	//final String deviceStrategy = "mixed";
-	final String deviceStrategy = "distance";
+	//final String deviceStrategy = "distance";
 	//final String deviceStrategy = "load";
+	final String deviceStrategy = "mixed";
 	
 	//  smart devices' characteristics
-	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
+	String stationfile = ScenarioBase.resourcePath+"fuzzy/S10"+deviceStrategy+".xml";
 	//String stationfile = ScenarioBase.resourcePath+"fuzzy/S5"+deviceStrategy+".xml";
-	String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
+	//String stationfile = ScenarioBase.resourcePath+"fuzzy/I12"+deviceStrategy+".xml";
 	
 	
 	//borderline of the task forwarding
-	int borderline = 2;	
+	int borderline = 1;	
 
 	// num. of the instruction
 	final long numberOfInstruction = 600;
