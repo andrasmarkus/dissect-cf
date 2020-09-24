@@ -80,17 +80,22 @@ public class ComputingAppliance {
 
 	public static void loadAppliance(String appliancefile, Map<String, String> iaasLoader) throws Exception {
 		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {
-			System.out.println(am);
+			System.out.println("? "+am);
 			ComputingAppliance ca = new ComputingAppliance(iaasLoader.get(am.file), am.name, am.xcoord, am.ycoord);			
 			for(ApplicationModel a : am.getApplications()){
 				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin));
 			}
 		}
 		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {
+			
 				ComputingAppliance ca = getComputingApplianceByName(am.name);
-				for(NeigbourAppliancesModel nam : am.getNeighbourAppliances()) {
+				System.out.println("! "+ca.name);
+				System.out.println("+ "+ am.neighbours);
+				for(NeigbourAppliancesModel nam : am.neighbours) {
+					System.out.println(nam);
 					ComputingAppliance friend = getComputingApplianceByName(nam.name);
-					if(Boolean.parseBoolean(nam.parent)) {
+					System.out.println("- " +friend.name);
+					if(Boolean.parseBoolean(nam.parent) && nam.parent!=null) {
 						ca.setParentNode(friend);
 						ca.setLatency(friend, nam.latency);
 					}else {
