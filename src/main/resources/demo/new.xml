@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <appliances>
     <appliance>
-        <name>cloud</name>
+        <name>cloud1</name>
         <xcoord>-1</xcoord>
         <ycoord>19</ycoord>
-        <file>cloud</file>
+        <file>LPDS_original</file>
         <applications>
             <application tasksize="2500000">
                 <name>cloud-app</name>
@@ -33,7 +33,7 @@
         <name>fog1</name>
         <xcoord>14</xcoord>
         <ycoord>-13</ycoord>
-        <file>fogfile1</file>
+        <file>LPDS_Fog_T1</file>
         <applications>
             <application tasksize="2500000">
                 <name>fog1-app</name>
@@ -66,7 +66,7 @@
         <name>fog2</name>
         <xcoord>14</xcoord>
         <ycoord>-13</ycoord>
-        <file>fogfile2</file>
+        <file>LPDS_Fog_T2</file>
         <applications>
             <application tasksize="2500000">
                 <name>fog2-app</name>
@@ -94,7 +94,7 @@
         <name>fog3</name>
         <xcoord>14</xcoord>
         <ycoord>-13</ycoord>
-        <file>fogfile2</file>
+        <file>LPDS_Fog_T2</file>
         <applications>
             <application tasksize="2500000">
                 <name>fog3-app</name>

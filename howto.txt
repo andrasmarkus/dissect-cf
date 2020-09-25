@@ -1,0 +1,8 @@
+a) DISSECT-CF-Fog leklónozása: https://github.com/andrasmarkus/dissect-cf
+b) checkout a 'refactor' branch-re
+c) kelleni fog a maven, amivel a futtatható állományunkat előállítjuk (debian alapú rendszeren telepítés update után: sudo apt-get install maven -y)
+d) a pom.xml-lel egy szinten: mvn clean install
+e) ez után így fogod tudni futtatni a fájlt:
+java -cp target/dissect-cf-0.9.7-SNAPSHOT-jar-with-dependencies.jar hu.u_szeged.inf.fog.simulator.demo.CLFogSimulation ARG1 ARG2
+ahol ARG1 = az appliance-okat leíró XML, ARG2 = a device-okat leíró XML
+f) a standart output-ot és a gyökérben létrejött .html fájlt kellene megjeleníteni a frontend-en
