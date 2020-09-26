@@ -49,7 +49,7 @@ public class CLFogSimulation {
 		long stopttime = System.nanoTime();
 		
 		// Print some information to the monitor / in file
-		TimelineGenerator.generate();
-		ScenarioBase.printInformation((stopttime-starttime),true);
+		TimelineGenerator.generate(args[2]);
+		ScenarioBase.printInformation((stopttime-starttime),true );
 	}
 }

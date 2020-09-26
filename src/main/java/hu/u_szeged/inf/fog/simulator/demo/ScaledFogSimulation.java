@@ -49,7 +49,7 @@ public class ScaledFogSimulation {
 		long stopttime = System.nanoTime();
 		
 		// Print some information to the monitor / in file
-		TimelineGenerator.generate();
+		TimelineGenerator.generate(null);
 		ScenarioBase.printInformation((stopttime-starttime),true);
 	}
 }

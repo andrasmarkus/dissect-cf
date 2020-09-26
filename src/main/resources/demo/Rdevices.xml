@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<devices>
+  <device starttime="3" stoptime="3000000" number="3" filesize="33">
+    <name>station1</name>
+    <freq>300</freq>
+    <sensor>3</sensor>
+    <maxinbw>33000</maxinbw>
+    <maxoutbw>30000</maxoutbw>
+    <diskbw>30000</diskbw>
+    <strategy>random</strategy>
+    <xCoord>610.8333333333334</xCoord>
+    <yCoord>206.66666666666666</yCoord>
+  </device>
+  <device starttime="3" stoptime="3000000" number="3" filesize="33">
+    <name>station1</name>
+    <freq>300</freq>
+  <sensor>3</sensor>
+    <maxinbw>33000</maxinbw>
+    <maxoutbw>30000</maxoutbw>
+    <diskbw>30000</diskbw>
+    <diskbw>3</diskbw>
+    <strategy>random</strategy>
+    <xCoord>610.8333333333334</xCoord>
+    <yCoord>206.66666666666666</yCoord>
+  </device>
+</devices>

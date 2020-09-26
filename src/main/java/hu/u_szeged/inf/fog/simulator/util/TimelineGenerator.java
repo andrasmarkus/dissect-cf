@@ -39,10 +39,16 @@ import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
  */
 public abstract class TimelineGenerator {
 
-	public static void generate() throws FileNotFoundException, UnsupportedEncodingException {
+	public static void generate(String path) throws FileNotFoundException, UnsupportedEncodingException {
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-		PrintWriter writer = new PrintWriter(sdf.format(cal.getTime())+".html", "UTF-8");
+        PrintWriter writer;
+        if(path==null) {
+        	writer = new PrintWriter(sdf.format(cal.getTime())+".html", "UTF-8");
+        }else {
+        	writer = new PrintWriter(path+sdf.format(cal.getTime())+".html", "UTF-8");
+        }
+
 		writer.println("<!DOCTYPE html><html><head>");
 		writer.println("<script type=\'text/javascript\' src=\'https://www.gstatic.com/charts/loader.js\'></script>");
 		writer.println("<script type=\'text/javascript\'>");

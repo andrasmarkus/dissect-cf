@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appliances>
+  <appliance>
+    <name>cloud1</name>
+    <xcoord>347.5</xcoord>
+    <ycoord>102.16666666666667</ycoord>
+    <file>LPDS_Fog_T2</file>
+    <applications>
+      <application tasksize="1">
+        <name>app1</name>
+        <freq>1</freq>
+        <instance>a1.xlarge</instance>
+        <numofinstruction>1</numofinstruction>
+        <threshold>11</threshold>
+        <strategy>distance</strategy>
+        <canJoin>true</canJoin>
+      </application>
+      <application tasksize="2">
+        <name>app2</name>
+        <freq>22</freq>
+        <instance>a1.xlarge</instance>
+        <numofinstruction>2</numofinstruction>
+        <threshold>2</threshold>
+        <strategy>distance</strategy>
+        <canJoin>true</canJoin>
+      </application>
+    </applications>
+    <neighbours>
+      <neighbour>
+        <name>fog1</name>
+        <latency>10</latency>
+      </neighbour>
+    </neighbours>
+  </appliance>
+  <appliance>
+    <name>fog1</name>
+    <xcoord>347.5</xcoord>
+    <ycoord>356.5</ycoord>
+    <file>LPDS_Fog_T1</file>
+    <applications>
+      <application tasksize="1">
+        <name>app1</name>
+        <freq>1</freq>
+        <instance>a1.xlarge</instance>
+        <numofinstruction>1</numofinstruction>
+        <threshold>11</threshold>
+        <strategy>distance</strategy>
+        <canJoin>true</canJoin>
+      </application>
+    </applications>
+    <neighbours>
+      <neighbour>
+        <name>cloud1</name>
+        <latency>10</latency>
+        <parent>true</parent>
+      </neighbour>
+    </neighbours>
+  </appliance>
+</appliances>
