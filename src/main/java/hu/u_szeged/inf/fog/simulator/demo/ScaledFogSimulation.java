@@ -33,9 +33,9 @@ public class ScaledFogSimulation {
 
 		// we map the files to the IDs
 		Map<String, String> iaasloaders = new HashMap<String, String>();
-		iaasloaders.put("cloud", cloudfile);
-		iaasloaders.put("fogfile1", fogfile1);
-		iaasloaders.put("fogfile2", fogfile2);
+		iaasloaders.put("LPDS_original", cloudfile);
+		iaasloaders.put("LPDS_Fog_T1", fogfile1);
+		iaasloaders.put("LPDS_Fog_T2", fogfile2);
 		
 		// we call the loader functions
 		Instance.loadInstance(instancefile);
