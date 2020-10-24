@@ -79,7 +79,7 @@ public class ComputingAppliance {
 				public void tick(final long fires) {
 					readingtime.add(fires);
 					readingpm.add(pmm.getTotalConsumption());
-					//energyConsumption+=pmm.getTotalConsumption();
+
 					if(Timed.getFireCount()>(24*12*a.getFrequency())) {
 						this.stop();
 						pmm.stopMeter();
@@ -90,11 +90,9 @@ public class ComputingAppliance {
 				}
 			}
 			final MeteredDataCollector mdc = new MeteredDataCollector();
+			
 			pmm.startMeter(a.getFrequency(), true);
 			mdc.start();
-
-				
-
 		}
 	}
 	
@@ -126,7 +124,7 @@ public class ComputingAppliance {
 			System.out.println(am);
 			ComputingAppliance ca = new ComputingAppliance(iaasLoader.get(am.file), am.name, am.xcoord, am.ycoord);			
 			for(ApplicationModel a : am.getApplications()){
-				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin, a.read));
+				ca.addApplication(new Application(a.freq, a.tasksize, a.instance, a.name, a.numOfInstruction, a.threshold, a.strategy, a.canJoin, a.canRead));
 			}
 		}
 		for (ApplianceModel am : ApplianceModel.loadAppliancesXML(appliancefile)) {

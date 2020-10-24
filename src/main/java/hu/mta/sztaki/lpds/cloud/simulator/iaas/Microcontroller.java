@@ -270,7 +270,28 @@ public class Microcontroller extends MaxMinProvider {
 				break;
 			case OFF:
 			case METERING:
-				// METERING
+				setState(State.OFF);
+				new Timed() {
+					@Override
+					public void tick(final long fires) {
+						if (State.OFF.equals(currentState)) {
+							ResourceSpreader.FreqSyncer syncer = getSyncer();
+							// Ensures that the switching off activities are only
+							// started once all runtime activities complete for the
+							// directConsumer
+							if (syncer != null && syncer.isSubscribed()
+									&& (underProcessing.size() + toBeAdded.size() - toBeRemoved.size() > 0)) {
+								updateFrequency(syncer.getNextEvent() - fires + 1);
+							} else {
+								unsubscribe();
+								new PowerStateDelayer(offTransition, State.OFF);
+							}
+						}
+						// else: Another transition dropped the switchoff task. do
+						// nothing
+					}
+				}.tick(Timed.getFireCount());
+				break;
 			}
 		} catch (NetworkException nex) {
 			// Should not happen as long as the network node don't have a SWITCHINGOFF state
@@ -335,7 +356,6 @@ public class Microcontroller extends MaxMinProvider {
 		stateListenerManager.unsubscribeFromEvents(sl);
 	}
 	
-	//EBBEN KELL JÁTSZANI A CUCCAL
 	private void setState(final State newState) throws NetworkException {
 		try {
 			localDisk.setState(NetworkNode.State.valueOf(newState.name()));
@@ -353,6 +373,28 @@ public class Microcontroller extends MaxMinProvider {
 	
 	public ResourceConstraints getCapacities() {
 		return totalCapacities;
+	}
+	
+	public void metering() {
+		switch (currentState) {
+		case OFF:
+			break;
+		case RUNNING:
+			try {
+				setState(State.METERING);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
+
+			if (onOffEvent == null) {
+				new PowerStateDelayer(onTransition, State.METERING);
+			} else {
+				onOffEvent.addFurtherTasks(onTransition);
+				onOffEvent.setNewState(State.METERING);
+			}
+		case METERING:
+			break;
+		}
 	}
 	
 

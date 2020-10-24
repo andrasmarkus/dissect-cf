@@ -22,6 +22,7 @@ import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider;
 import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider.Bluemix;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.OracleProvider;
+import hu.u_szeged.inf.fog.simulator.util.FogSimulationChart;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
 /**
@@ -125,6 +126,7 @@ public class FogSimulation {
 	
 	// Print some information to the monitor / in file
 	TimelineGenerator.generate();
+	FogSimulationChart.generate();
 	ScenarioBase.printInformation((stopttime-starttime),true);
 	ScenarioBase.printInformation(stopttime-starttime, false);
 	

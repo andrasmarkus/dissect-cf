@@ -82,7 +82,7 @@ public abstract class ScenarioBase {
 					azure+=a.providers.get(2).cost;	
 					oracle+=a.providers.get(3).cost;
 				} else {
-					if(a.read) {
+					if(a.canRead) {
 						//names.add(a.computingAppliance.iaas.machines.get(0).toString());
 						/*for(PhysicalMachine pm : a.computingAppliance.iaas.machines) {
 							names.add(pm.toString());
