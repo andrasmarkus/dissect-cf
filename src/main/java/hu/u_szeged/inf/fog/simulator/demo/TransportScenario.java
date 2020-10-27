@@ -154,7 +154,7 @@ public class TransportScenario {
         }
 
         Random random = new Random();
-        for (int i = 0; i < 365; i++ ) {
+        for (int i = 0; i < 2* 365; i++ ) {
             long startTime = i * 12 * 60* 60* 1000L;
             long stopTime = startTime + 12 * 60 * 60 * 1000L;
             for(int j = 0 ; j <numberOfDevices; j++) {
