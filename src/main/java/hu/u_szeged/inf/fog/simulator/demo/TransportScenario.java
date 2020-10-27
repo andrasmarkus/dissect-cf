@@ -161,7 +161,7 @@ public class TransportScenario {
                 double actuatorRatio = 0.2;
                 double fogRatio = random.nextDouble();
                 Device.DeviceNetwork dn = new Device.DeviceNetwork(10, 10240, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
-                Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance", new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 5 * 60 * 1000, pos1, new LinearMobilityStrategy(pos1, 0.022,
+                Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance", new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 5 * 60 * 1000, pos1, new LinearMobilityStrategy(pos1, 0.0202777,
                         pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
                         pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1));
                 s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
