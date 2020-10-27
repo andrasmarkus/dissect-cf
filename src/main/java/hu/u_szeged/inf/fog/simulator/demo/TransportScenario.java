@@ -77,15 +77,15 @@ public class TransportScenario {
         fog7.addNeighbour(fog8);
         fog8.addNeighbour(fog9);
 
-        Application fa1 = new Application(60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
-        Application fa2 = new Application(60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true);
-        Application fa3 = new Application(2*60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
-        Application fa4 = new Application(60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa5 = new Application(2*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa6 = new Application(2*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa7 = new Application(2*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa8 = new Application(2*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa9 = new Application(2*60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
+        Application fa1 = new Application(60*1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
+        Application fa2 = new Application(60*1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
+        Application fa3 = new Application(60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
+        Application fa4 = new Application(60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true);
+        Application fa5 = new Application(60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
+        Application fa6 = new Application(60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
+        Application fa7 = new Application(60*1000, 179200, "instance2", "Fog-app7", 2400.0, 1, "random", true);
+        Application fa8 = new Application(60*1000, 179200, "instance2", "Fog-app8", 2400.0, 1, "random", true);
+        Application fa9 = new Application(60*1000, 179200, "instance2", "Fog-app9", 2400.0, 1, "random", true);
 
 
 
