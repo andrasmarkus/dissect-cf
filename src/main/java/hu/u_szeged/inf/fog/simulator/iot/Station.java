@@ -101,14 +101,14 @@ public class Station extends Device {
      * @param x         The X coordinate of the position.
      * @param y         The Y coordinate of the position.
      */
-    public Station(int reInstall, int evenSize, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
+    public Station(int reInstall, int eventSize, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, SensorCharacteristics sensorCharacteristics,
                    long freq, GeoLocation location, MobilityStrategy mobilityStrategy) {
         this.geoLocation = location;
         this.mobilityStrategy = mobilityStrategy;
         this.sensorCharacteristics = sensorCharacteristics;
         // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
-        this.eventSize = evenSize;
+        this.eventSize = eventSize;
         this.startTime = startTime + delay;
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorCharacteristics.getSensorNum();
@@ -321,6 +321,14 @@ public class Station extends Device {
 
     public void setGeoLocation(GeoLocation location) {
         this.geoLocation = location;
+    }
+
+    public long getFreq() {
+        return freq;
+    }
+
+    public void setFreq(long freq) {
+        this.freq = freq;
     }
 
     /**
