@@ -34,7 +34,7 @@ public class TransportScenario2 {
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_athen.xml";
 
         // Frankfurt
-        ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(50.1213479,8.4964818),500*1000);
+        ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(50.1213479,8.4964818),2500*1000);
       
         // Bekescsaba
         ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(46.6795384,21.0128544),50 * 1000);
@@ -63,6 +63,7 @@ public class TransportScenario2 {
         // Szeged
         ComputingAppliance fog9 = new ComputingAppliance(fogfile, "fog9",new GeoLocation(46.232941,20.0003862),50 * 1000);
 
+        /*
         fog1.setLatency(cloud1, 34);
         fog2.setLatency(cloud1, 43);
         fog3.setLatency(cloud1, 32);
@@ -90,10 +91,11 @@ public class TransportScenario2 {
         fog6.addNeighbour(fog7);
         fog7.addNeighbour(fog8);
         fog8.addNeighbour(fog9);
-
+		*/
+		
         // 1 min freq., 250 kilobytes = 5 minutes or 10 minutes
-        Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
-        Application fa1 = new Application(5*60*1000, 256000, "instance2", "Fog-app1", 2400.0, 1, "random", true);
+        Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true);
+        /*Application fa1 = new Application(5*60*1000, 256000, "instance2", "Fog-app1", 2400.0, 1, "random", true);
         Application fa2 = new Application(5*60*1000, 256000, "instance2", "Fog-app2", 2400.0, 1, "random", true);
         Application fa3 = new Application(5*60*1000, 256000, "instance2", "Fog-app3", 2400.0, 1, "random", true);
         Application fa4 = new Application(5*60*1000, 256000, "instance2", "Fog-app4", 2400.0, 1, "random", true);
@@ -101,10 +103,10 @@ public class TransportScenario2 {
         Application fa6 = new Application(5*60*1000, 256000, "instance2", "Fog-app6", 2400.0, 1, "random", true);
         Application fa7 = new Application(5*60*1000, 256000, "instance2", "Fog-app7", 2400.0, 1, "random", true);
         Application fa8 = new Application(5*60*1000, 256000, "instance2", "Fog-app8", 2400.0, 1, "random", true);
-        Application fa9 = new Application(5*60*1000, 256000, "instance2", "Fog-app9", 2400.0, 1, "random", true);
+        Application fa9 = new Application(5*60*1000, 256000, "instance2", "Fog-app9", 2400.0, 1, "random", true);*/
 
         cloud1.addApplication(ca1);
-        fog1.addApplication(fa1);
+        /*fog1.addApplication(fa1);
         fog2.addApplication(fa2);
         fog3.addApplication(fa3);
         fog4.addApplication(fa4);
@@ -112,7 +114,7 @@ public class TransportScenario2 {
         fog6.addApplication(fa6);
         fog7.addApplication(fa7);
         fog8.addApplication(fa8);
-        fog9.addApplication(fa9);
+        fog9.addApplication(fa9);*/
 
         GeoLocation pos1 = new GeoLocation(46.673491, 21.084472);
         GeoLocation pos2 = new GeoLocation(46.682789, 21.079223);
@@ -156,7 +158,7 @@ public class TransportScenario2 {
         GeoLocation pos40 = new GeoLocation(46.678076, 21.047313);
 
 
-        int numberOfDevices=200;
+        int numberOfDevices=20;
 
         Random random = new Random();
         for (int i = 0; i < 2 * 365; i++) {
@@ -167,13 +169,15 @@ public class TransportScenario2 {
             	// par perccel toljuk el a j darab inditasat
             	long startTime = (i * 12 * 60* 60* 1000L) + (j*1000*60);
                 long stopTime = startTime + 12 * 60 * 60 * 1000L;
-                double actuatorRatio = 0.2;
+                double actuatorRatio = 0.5;
                 double fogRatio = random.nextDouble();
                 
                 // latency 10 ms? 
-                Device.DeviceNetwork dn = new Device.DeviceNetwork(10, 10000, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
+                Device.DeviceNetwork dn = new Device.DeviceNetwork(50, 10000, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
                 if(j%2==0) {
+                	// visszakuldott esemeny: 50 byte, 150 byte sensor, 
                 	Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance", 
+                			// 3 sensor, 3/4 (273) ev az mttf,
                 			new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 
                 			5 * 60 * 1000, pos1, 
                 			new LinearMobilityStrategy(pos1, 0.0202777,
