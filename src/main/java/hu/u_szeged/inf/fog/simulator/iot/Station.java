@@ -217,7 +217,7 @@ public class Station extends Device {
         }
         if(this.app == null) {
             ++this.noAppTime;
-            if(this.noAppTime >= 60) {
+            if(this.noAppTime >= 1) {
                 actuator.executeSingleEvent(new TimeoutEvent(), this, actuator.getLatency());
             }
         } else {

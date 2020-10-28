@@ -66,7 +66,6 @@ public abstract class ScenarioBase {
 					}
 
 					sentCapsule += d.sentCapsule;
-
 				}
 				
 				if (a.stopTime > highestApplicationStopTime) {
@@ -107,7 +106,7 @@ public abstract class ScenarioBase {
 				"\n\tReduceFrequencyEvent: " + ReduceFrequencyEvent.counter +
 				"\n\tRestartStationEvent: " + RestartStationEvent.counter +
 				"\n\tStopStationEvent: " + StopStationEvent.counter +
-				"\n\tTimeoutEvent: " + TimeoutEvent.counter);
+				"\n\tTimeoutEvent: " + TimeoutEvent.counter +" with total " + (double)(TimeoutEvent.unprocessed/1024) + " byte ~ " + (TimeoutEvent.unprocessed/1024/1024) +" MB unprocessed data");
 
 
 	}

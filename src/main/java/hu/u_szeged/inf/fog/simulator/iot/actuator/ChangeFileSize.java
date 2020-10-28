@@ -15,7 +15,7 @@ public class ChangeFileSize implements ActuatorEvent {
     public void actuate(Station station) {
         if(filesize > 0) {
             station.setFilesize(filesize);
-            System.out.println(station + " station's filesize has been changed to " + filesize);
+            //System.out.println(station + " station's filesize has been changed to " + filesize);
             counter++;
         }
     }

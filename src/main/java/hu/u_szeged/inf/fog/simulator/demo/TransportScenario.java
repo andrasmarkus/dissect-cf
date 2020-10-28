@@ -26,28 +26,44 @@ public class TransportScenario {
         AlterableResourceConstraints arc1 = new AlterableResourceConstraints(8,0.001,4294967296L);
         AlterableResourceConstraints arc2 = new AlterableResourceConstraints(4,0.001,4294967296L);
 
-        new Instance(va,arc1,0.00000001,"instance1");
-        new Instance(va,arc2,0.000000015,"instance2");
+        // AWS pricing
+        new Instance(va,arc1,0.0000000566666667,"instance1");
+        new Instance(va,arc2,0.0000000283333333,"instance2");
 
         String cloudfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_frankfurt.xml";
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_athen.xml";
 
-        ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(47.497913, 19.040236),500*1000);
+        // Frankfurt
+        ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(50.1213479,8.4964818),2500*1000);
 
-        Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false);
+        // Bekescsaba
+        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(46.6795384,21.0128544),50 * 1000);
 
+        // Szolnok
+        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",new GeoLocation(47.1804973,20.1136325),50 * 1000);
 
-        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(46.670408, 21.034976),50 * 1000);
-        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",new GeoLocation(47.118845, 20.213303),50 * 1000);
-        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",new GeoLocation(46.9332269, 19.659343),50 * 1000);
-        ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",new GeoLocation(47.209831, 19.402650),50 * 1000);
-        ComputingAppliance fog5 = new ComputingAppliance(fogfile, "fog5",new GeoLocation(47.476262, 19.025969),50 * 1000);
-        ComputingAppliance fog6 = new ComputingAppliance(fogfile, "fog6",new GeoLocation(47.087735, 17.966967),50 * 1000);
-        ComputingAppliance fog7 = new ComputingAppliance(fogfile, "fog7",new GeoLocation(46.363608, 17.843199),50 * 1000);
-        ComputingAppliance fog8 = new ComputingAppliance(fogfile, "fog8",new GeoLocation(46.173927, 18.994432),50 * 1000);
-        ComputingAppliance fog9 = new ComputingAppliance(fogfile, "fog9",new GeoLocation(46.245436, 20.098563),50 * 1000);
+        // Kecskemet
+        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",new GeoLocation(46.8857078,19.5389746),50 * 1000);
 
+        // Budapest
+        ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",new GeoLocation(47.4813602,18.9902207),50 * 1000);
 
+        // Tatabanya
+        ComputingAppliance fog5 = new ComputingAppliance(fogfile, "fog5",new GeoLocation(47.5481325,18.347633),50 * 1000);
+
+        // Veszprem
+        ComputingAppliance fog6 = new ComputingAppliance(fogfile, "fog6",new GeoLocation(47.1258945,17.837209),50 * 1000);
+
+        // Kaposvar
+        ComputingAppliance fog7 = new ComputingAppliance(fogfile, "fog7",new GeoLocation(46.3705281,17.7461179),50 * 1000);
+
+        // Baja
+        ComputingAppliance fog8 = new ComputingAppliance(fogfile, "fog8",new GeoLocation(46.183006,18.910856),50 * 1000);
+
+        // Szeged
+        ComputingAppliance fog9 = new ComputingAppliance(fogfile, "fog9",new GeoLocation(46.232941,20.0003862),50 * 1000);
+
+        /*
         fog1.setLatency(cloud1, 34);
         fog2.setLatency(cloud1, 43);
         fog3.setLatency(cloud1, 32);
@@ -57,8 +73,6 @@ public class TransportScenario {
         fog7.setLatency(cloud1, 22);
         fog8.setLatency(cloud1, 26);
         fog9.setLatency(cloud1, 31);
-
-
         fog1.setParentNode(cloud1);
         fog2.setParentNode(cloud1);
         fog3.setParentNode(cloud1);
@@ -76,22 +90,22 @@ public class TransportScenario {
         fog6.addNeighbour(fog7);
         fog7.addNeighbour(fog8);
         fog8.addNeighbour(fog9);
+		*/
 
-        Application fa1 = new Application(60*1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-        Application fa2 = new Application(60*1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
-        Application fa3 = new Application(60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
-        Application fa4 = new Application(60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true);
-        Application fa5 = new Application(60*1000, 179200, "instance2", "Fog-app5", 2400.0, 1, "random", true);
-        Application fa6 = new Application(60*1000, 179200, "instance2", "Fog-app6", 2400.0, 1, "random", true);
-        Application fa7 = new Application(60*1000, 179200, "instance2", "Fog-app7", 2400.0, 1, "random", true);
-        Application fa8 = new Application(60*1000, 179200, "instance2", "Fog-app8", 2400.0, 1, "random", true);
-        Application fa9 = new Application(60*1000, 179200, "instance2", "Fog-app9", 2400.0, 1, "random", true);
-
-
-
+        // 1 min freq., 250 kilobytes = 5 minutes or 10 minutes
+        Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true);
+        /*Application fa1 = new Application(5*60*1000, 256000, "instance2", "Fog-app1", 2400.0, 1, "random", true);
+        Application fa2 = new Application(5*60*1000, 256000, "instance2", "Fog-app2", 2400.0, 1, "random", true);
+        Application fa3 = new Application(5*60*1000, 256000, "instance2", "Fog-app3", 2400.0, 1, "random", true);
+        Application fa4 = new Application(5*60*1000, 256000, "instance2", "Fog-app4", 2400.0, 1, "random", true);
+        Application fa5 = new Application(5*60*1000, 256000, "instance2", "Fog-app5", 2400.0, 1, "random", true);
+        Application fa6 = new Application(5*60*1000, 256000, "instance2", "Fog-app6", 2400.0, 1, "random", true);
+        Application fa7 = new Application(5*60*1000, 256000, "instance2", "Fog-app7", 2400.0, 1, "random", true);
+        Application fa8 = new Application(5*60*1000, 256000, "instance2", "Fog-app8", 2400.0, 1, "random", true);
+        Application fa9 = new Application(5*60*1000, 256000, "instance2", "Fog-app9", 2400.0, 1, "random", true);*/
 
         cloud1.addApplication(ca1);
-        fog1.addApplication(fa1);
+        /*fog1.addApplication(fa1);
         fog2.addApplication(fa2);
         fog3.addApplication(fa3);
         fog4.addApplication(fa4);
@@ -99,8 +113,7 @@ public class TransportScenario {
         fog6.addApplication(fa6);
         fog7.addApplication(fa7);
         fog8.addApplication(fa8);
-        fog9.addApplication(fa9);
-
+        fog9.addApplication(fa9);*/
 
         GeoLocation pos1 = new GeoLocation(46.673491, 21.084472);
         GeoLocation pos2 = new GeoLocation(46.682789, 21.079223);
@@ -143,28 +156,46 @@ public class TransportScenario {
         GeoLocation pos39 = new GeoLocation(46.565530, 20.643327);
         GeoLocation pos40 = new GeoLocation(46.678076, 21.047313);
 
-        int numberOfDevices=0;
 
-        try {
-            if(args.length > 0) {
-                numberOfDevices = Integer.parseInt(args[0]);
-            }
-        }catch (NumberFormatException e){
-            e.printStackTrace();
-        }
+        int numberOfDevices=20;
 
         Random random = new Random();
-        for (int i = 0; i < 2* 365; i++ ) {
-            long startTime = i * 12 * 60* 60* 1000L;
-            long stopTime = startTime + 12 * 60 * 60 * 1000L;
+        for (int i = 0; i < 2 * 365; i++) {
+
+
             for(int j = 0 ; j <numberOfDevices; j++) {
-                double actuatorRatio = 0.2;
+
+                // par perccel toljuk el a j darab inditasat
+                long startTime = (i * 12 * 60* 60* 1000L) + (j*1000*60);
+                long stopTime = startTime + 12 * 60 * 60 * 1000L;
+                double actuatorRatio = 0.5;
                 double fogRatio = random.nextDouble();
-                Device.DeviceNetwork dn = new Device.DeviceNetwork(10, 10240, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
-                Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance", new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 5 * 60 * 1000, pos1, new LinearMobilityStrategy(pos1, 0.0202777,
-                        pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
-                        pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1));
-                s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
+
+                // latency 10 ms?
+                Device.DeviceNetwork dn = new Device.DeviceNetwork(50, 10000, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
+                if(j%2==0) {
+                    // visszakuldott esemeny: 50 byte, 150 byte sensor,
+                    Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
+                            // 3 sensor, 3/4 (273) ev az mttf,
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1),
+                            5 * 60 * 1000, pos1,
+                            new LinearMobilityStrategy(pos1, 0.0202777,
+                                    pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
+                                    pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1));
+                    s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
+                }else {
+                    Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1),
+                            5 * 60 * 1000, pos1,
+                            new LinearMobilityStrategy(pos1, 0.0202777,
+                                    pos40, pos39, pos38, pos37, pos36, pos35, pos34, pos33, pos32, pos31, pos30, pos29, pos28, pos27, pos26, pos25, pos24, pos23, pos22, pos21,
+                                    pos20, pos19, pos18, pos17, pos16, pos15, pos14, pos13, pos12, pos11, pos10, pos9, pos8, pos7, pos6, pos5, pos4, pos3, pos2, pos1));
+                    s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
+                }
+
+
+
+
             }
 
         }

@@ -7,7 +7,7 @@ import java.util.Queue;
 public class LinearMobilityStrategy implements MobilityStrategy {
 
     GeoLocation currentPosition;
-    Queue<GeoLocation> destinations = new LinkedList<GeoLocation>();
+    public Queue<GeoLocation> destinations = new LinkedList<GeoLocation>();
     double speed; //m/tick
 
     public LinearMobilityStrategy(GeoLocation currentPosition, double speed, GeoLocation ... destination) {

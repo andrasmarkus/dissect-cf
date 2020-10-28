@@ -22,7 +22,7 @@ public class ChangeNode implements ActuatorEvent {
         d.dn.lmap.put(d.getDn().repoName, d.dn.latency);
         d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
         d.app.computingAppliance.iaas.repositories.get(0).getLatencies().put(d.getDn().repoName, d.dn.latency);
-        System.out.println("Application of station " + d + " has been changed");
+        //System.out.println("Application of station " + d + " has been changed");
         counter++;
     }
 }

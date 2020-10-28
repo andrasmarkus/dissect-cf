@@ -17,6 +17,6 @@ public class DisconnectFromNode implements ActuatorEvent {
 //        d.app.computingAppliance.iaas.repositories.get(0).getLatencies().remove(d.getDn().repoName);
         d.setApp(null);
         counter++;
-        System.out.println(d + " disconnected from current application");
+        //System.out.println(d + " disconnected from current application");
     }
 }

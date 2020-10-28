@@ -304,7 +304,7 @@ public class Application extends Timed {
 
 	//Moving a given amount of datacapsules from one application to an other
 
-	public static void moveDataCapsule(Application source, Application destination, long dataSize, int direction) {
+	static void moveDataCapsule(Application source, Application destination, long dataSize, int direction) {
 		long counter = 0;
 		DataCapsule toSend;
 		while (counter < dataSize) {

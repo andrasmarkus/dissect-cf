@@ -12,7 +12,7 @@ public class StopStationEvent implements  ActuatorEvent {
     @Override
     public void actuate(Station station) {
         station.stopMeter();
-        System.out.println("Station " + station + " has been stopped at: " + Timed.getFireCount());
+        //System.out.println("Station " + station + " has been stopped at: " + Timed.getFireCount());
         counter++;
     }
 }

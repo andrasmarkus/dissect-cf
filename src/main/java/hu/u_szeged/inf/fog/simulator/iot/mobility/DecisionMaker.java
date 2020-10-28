@@ -99,7 +99,7 @@ public class DecisionMaker {
         Actuator actuator = station.getActuator();
 
         if (actuator != null) {
-            actuator.executeSingleEvent(new DisconnectFromNode(), station, 500);
+            actuator.executeSingleEvent(new DisconnectFromNode(), station, 0);
         } else {
             throw new Exception("Actuator must be set in order to disconnect from fog node!");
         }
@@ -109,7 +109,7 @@ public class DecisionMaker {
     private void connectToApp(final Application from, final Application to) throws Exception {
         Actuator actuator = station.getActuator();
         if(actuator != null) {
-            actuator.executeSingleEvent(new ChangeNode(from, to), station, 1000);
+            actuator.executeSingleEvent(new ChangeNode(from, to), station, 0);
         } else {
             throw new Exception("Actuator must be set in order to connect to a node");
         }
@@ -118,7 +118,7 @@ public class DecisionMaker {
     private void connectToApp(final Application application) throws Exception {
         Actuator actuator = station.getActuator();
         if(actuator != null) {
-            actuator.executeSingleEvent(new ConnectToNode(application), station, 500);
+            actuator.executeSingleEvent(new ConnectToNode(application), station, 0);
         } else {
             throw new Exception("Actuator must be set in order to connect to a node");
         }

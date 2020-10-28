@@ -16,7 +16,7 @@ public class IncreaseFrequencyEvent implements ActuatorEvent {
         if (newFrequency >= station.sensorCharacteristics.getMinFreq() && newFrequency <= station.sensorCharacteristics.getMaxFreq()) {
             long old = station.getFrequency();
             station.setFreq(newFrequency);
-            System.out.println("Frequency of station has been increased from: " + old + " to: " + newFrequency);
+            //System.out.println("Frequency of station has been increased from: " + old + " to: " + newFrequency);
             counter++;
         }
     }
