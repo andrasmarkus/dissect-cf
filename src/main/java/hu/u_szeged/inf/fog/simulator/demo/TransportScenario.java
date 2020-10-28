@@ -8,13 +8,16 @@ import hu.u_szeged.inf.fog.simulator.iot.Device;
 import hu.u_szeged.inf.fog.simulator.iot.SensorCharacteristics;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.iot.actuator.Actuator;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.ActuatorEvent;
 import hu.u_szeged.inf.fog.simulator.iot.actuator.ActuatorRandomStrategy;
+import hu.u_szeged.inf.fog.simulator.iot.actuator.ActuatorStrategy;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.LinearMobilityStrategy;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
+import java.util.Queue;
 import java.util.Random;
 
 public class TransportScenario {
@@ -73,6 +76,7 @@ public class TransportScenario {
         fog7.setLatency(cloud1, 22);
         fog8.setLatency(cloud1, 26);
         fog9.setLatency(cloud1, 31);
+
         fog1.setParentNode(cloud1);
         fog2.setParentNode(cloud1);
         fog3.setParentNode(cloud1);
@@ -171,30 +175,31 @@ public class TransportScenario {
                 double actuatorRatio = 0.5;
                 double fogRatio = random.nextDouble();
 
+
+                final LinearMobilityStrategy mob_strat = new LinearMobilityStrategy(pos1, 0.0202777,
+                        pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
+                        pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1);
+
+                for(GeoLocation gl : mob_strat.destinations){
+                    gl.setWeightPoint(true);
+                }
                 // latency 10 ms?
                 Device.DeviceNetwork dn = new Device.DeviceNetwork(50, 10000, 10000, 10000, 200000000, "dnRepository" + i+"-"+j, null, null);
                 if(j%2==0) {
                     // visszakuldott esemeny: 50 byte, 150 byte sensor,
                     Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
                             // 3 sensor, 3/4 (273) ev az mttf,
-                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1),
-                            5 * 60 * 1000, pos1,
-                            new LinearMobilityStrategy(pos1, 0.0202777,
-                                    pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
-                                    pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1));
-                    s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
+                            10 * 60 * 1000, pos1,
+                            mob_strat);
+                    s.setActuator(new Actuator(new TransportStrategy(), 5, s));
                 }else {
                     Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
-                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1),
-                            5 * 60 * 1000, pos1,
-                            new LinearMobilityStrategy(pos1, 0.0202777,
-                                    pos40, pos39, pos38, pos37, pos36, pos35, pos34, pos33, pos32, pos31, pos30, pos29, pos28, pos27, pos26, pos25, pos24, pos23, pos22, pos21,
-                                    pos20, pos19, pos18, pos17, pos16, pos15, pos14, pos13, pos12, pos11, pos10, pos9, pos8, pos7, pos6, pos5, pos4, pos3, pos2, pos1));
-                    s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 * 1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
+                            10 * 60 * 1000, pos1,
+                            mob_strat);
+                    s.setActuator(new Actuator(new TransportStrategy(), 5, s));
                 }
-
-
-
 
             }
 
@@ -207,6 +212,61 @@ public class TransportScenario {
         // Print some information to the monitor / in file
         TimelineGenerator.generate();
         ScenarioBase.printInformation((stopttime-starttime),false);
+    }
+
+    private static GeoLocation closestWeighted(Queue<GeoLocation> positions, Station station) {
+        double d = Double.MAX_VALUE;
+        GeoLocation closest = null;
+        for (GeoLocation location : positions) {
+            if (location.calculateDistance(station.geoLocation) < d && location.isWeightPoint()) {
+                closest = location;
+                d=location.calculateDistance(station.geoLocation);
+            }
+
+        }
+
+        return closest;
+    }
+
+    public static final class TransportStrategy implements ActuatorStrategy{
+        public ActuatorEvent selectEvent(Station station) {
+
+            GeoLocation next_pos = closestWeighted(((LinearMobilityStrategy) station.mobilityStrategy).destinations, station);
+            if (next_pos != null) {
+                double dist = next_pos.calculateDistance(station.geoLocation);
+                if (dist <= 5000.0) {
+                    return new ActuatorEvent() {
+                        @Override
+                        public void actuate(Station station) {
+                            station.setFreq(1000 * 60 * 2);
+                        }
+                    };
+                } else if (dist > 5000.0 && dist <= 10000.0) {
+                    return new ActuatorEvent() {
+                        @Override
+                        public void actuate(Station station) {
+                            station.setFreq(1000 * 60 * 5);
+                        }
+                    };
+                } else if (dist > 10000.0 && dist <= 30000.0) {
+                    return new ActuatorEvent() {
+                        @Override
+                        public void actuate(Station station) {
+                            station.setFreq(1000 * 60 * 10);
+                        }
+                    };
+                } else {
+                    return new ActuatorEvent() {
+                        @Override
+                        public void actuate(Station station) {
+                            station.setFreq(1000 * 60 * 15);
+                        }
+                    };
+                }
+            }
+
+            return new ActuatorRandomStrategy().selectEvent(station);
+        }
     }
 
 
