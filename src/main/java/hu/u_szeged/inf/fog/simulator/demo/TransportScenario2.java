@@ -190,7 +190,8 @@ public class TransportScenario2 {
                 			5 * 60 * 1000, pos1, 
                 			new LinearMobilityStrategy(pos1, 0.0202777,
                             pos40, pos39, pos38, pos37, pos36, pos35, pos34, pos33, pos32, pos31, pos30, pos29, pos28, pos27, pos26, pos25, pos24, pos23, pos22, pos21,
-                            pos20, pos19, pos18, pos17, pos16, pos15, pos14, pos13, pos12, pos11, pos10, pos9, pos8, pos7, pos6, pos5, pos4, pos3, pos2, pos1)); 	
+                            pos20, pos19, pos18, pos17, pos16, pos15, pos14, pos13, pos12, pos11, pos10, pos9, pos8, pos7, pos6, pos5, pos4, pos3, pos2, pos1)); 
+                			s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
                 }
                 
                 
