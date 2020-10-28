@@ -22,28 +22,30 @@ public abstract class FogSimulationChart {
 		writer.println("google.charts.setOnLoadCallback(drawChart);");
 		writer.println("function drawChart() {");
 		writer.println("var data = google.visualization.arrayToDataTable([");
-		writer.println("['', 'fog nodes'],");
+		writer.println("['', 'fog nodes', { role: 'style' }],");
 		
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
 			for (Application a : c.applicationList) {
 				if (a.canRead) {
-					writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + "],");
+					if (a.computingAppliance.name.contains("fog")) {
+						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#00FF80'],");
+					} else {
+						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#6666FF'],");
+					}
 				}
 			}
 		}
 		
 		writer.println("]);");
-		writer.println("var options = {title: 'Consumptions of fog nodes'};");
+		writer.println("var options = {title: 'Consumptions of fog nodes', legend: { position: 'none' }};");
 		writer.println("var chart = new google.visualization.ColumnChart(document.getElementById('container'));");
 		writer.println("chart.draw(data, options);");
 		writer.println("}");
 		writer.println("google.charts.setOnLoadCallback(drawChart);");
 		writer.println("</script>");
-		writer.println("]);");
-		writer.println("chart.draw(dataTable);");
-		writer.println("}</script>");
+		writer.println("</script>");
 		writer.println("</head><body>");
-		writer.println("<div id=\"example\" style=\"height: 1500px; width=100%;\"></div>");
+		writer.println("<div id=\"container\" style=\"height: 1500px; width=100%;\"></div>");
 		writer.println(" </body></html>");
 		writer.close();
 	}

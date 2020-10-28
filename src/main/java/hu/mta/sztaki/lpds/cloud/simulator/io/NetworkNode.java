@@ -125,7 +125,8 @@ public class NetworkNode {
 		 * The machine is currently serving VMs. The machine and its VMs are consuming
 		 * energy.
 		 */
-		RUNNING
+		RUNNING,
+		METERING
 	};
 
 	State currState;

@@ -630,7 +630,7 @@ public class PhysicalMachine extends MaxMinProvider implements VMManager<Physica
 	 * the tasks to do when turning the PM on. The format of the array is documented
 	 * in the powerstatedelayer class.
 	 */
-	private final double[] onTransition;
+	protected final double[] onTransition;
 	/**
 	 * the tasks to do when switching the PM off. The format of the array is
 	 * documented in the powerstatedelayer class.
@@ -655,7 +655,7 @@ public class PhysicalMachine extends MaxMinProvider implements VMManager<Physica
 	/**
 	 * the manager of the PM's state change notifications.
 	 */
-	private final StateDependentEventHandler<StateChangeListener, Pair<State, State>> stateListenerManager = new StateDependentEventHandler<PhysicalMachine.StateChangeListener, Pair<State, State>>(
+	protected final StateDependentEventHandler<StateChangeListener, Pair<State, State>> stateListenerManager = new StateDependentEventHandler<PhysicalMachine.StateChangeListener, Pair<State, State>>(
 			new SingleNotificationHandler<StateChangeListener, Pair<State, State>>() {
 				@Override
 				public void sendNotification(final StateChangeListener onObject, final Pair<State, State> states) {
@@ -684,7 +684,7 @@ public class PhysicalMachine extends MaxMinProvider implements VMManager<Physica
 	 * in order to be really consistent, the field is directly managed by the
 	 * powerstatedelayer class.
 	 */
-	private PowerStateDelayer onOffEvent = null;
+	protected PowerStateDelayer onOffEvent = null;
 	/**
 	 * this notification handler is used to send out events when some of the PM's
 	 * resources are getting available for others to use
@@ -720,7 +720,7 @@ public class PhysicalMachine extends MaxMinProvider implements VMManager<Physica
 	 * shows when the PM's direct consumer cannot be used as a consumer for tasks
 	 * (in general it is only usable for external users when the PM is running)
 	 */
-	private boolean directConsumerUsageMoratory = true;
+	protected boolean directConsumerUsageMoratory = true;
 
 	private boolean secureExtensions = false;
 

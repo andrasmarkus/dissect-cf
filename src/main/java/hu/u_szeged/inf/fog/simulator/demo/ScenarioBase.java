@@ -83,11 +83,6 @@ public abstract class ScenarioBase {
 					oracle+=a.providers.get(3).cost;
 				} else {
 					if(a.canRead) {
-						//names.add(a.computingAppliance.iaas.machines.get(0).toString());
-						/*for(PhysicalMachine pm : a.computingAppliance.iaas.machines) {
-							names.add(pm.toString());
-							//pm.
-						}*/
 						names.add(a.computingAppliance.name);
 						eCs.add(a.computingAppliance.energyConsumption);
 					}
