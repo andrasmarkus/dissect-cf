@@ -76,9 +76,11 @@ public class HospitalWardScenario2 {
             double fogRatio = 1.0;
 
             Device.DeviceNetwork dn = new Device.DeviceNetwork(10, 10000, 10000, 10000, 200000000, "dnRepository" + i, null, null);
+
             Station s = new Station(10 * 60 * 1000, actuatorResponseSize, dn, 0, 1000L * 60 * 60 * 24, filesize, "distance",
                     new SensorCharacteristics(numberOfSensors, mttf, minFreq, maxFreq, fogRatio, actuatorRatio, 40, 1),
                     defaultFreq, new GeoLocation(46.245286, 20.149618), null);
+
             s.setActuator(new Actuator(new ActuatorStrategy() {
                 @Override
                 public ActuatorEvent selectEvent(Station station) {
@@ -100,7 +102,6 @@ public class HospitalWardScenario2 {
                     }
                     else {
                         return new IncreaseFrequencyEvent(1000 * 60 * 5);
-
                     }
 
                 }
@@ -117,4 +118,6 @@ public class HospitalWardScenario2 {
     }
 
 
+
 }
+
