@@ -40,9 +40,9 @@ public class HospitalWardScenario2 {
         ComputingAppliance  fog2 = new ComputingAppliance(fogfile, "fog2", new GeoLocation(46.245486, 20.149818), 5 * 1000);
         ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3", new GeoLocation(46.245486, 20.149818), 5 * 1000);
         
-        Application fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-        Application fa2 = new Application(60 * 1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
-        Application fa3 = new Application(60 * 1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
+        Application fa1 = new Application(60 * 1000, 256000, "instance2", "Fog-app1", 2400.0, 1, "random", true);
+        Application fa2 = new Application(60 * 1000, 256000, "instance2", "Fog-app2", 2400.0, 1, "random", true);
+        Application fa3 = new Application(60 * 1000, 256000, "instance2", "Fog-app3", 2400.0, 1, "random", true);
 
         cloud1.addApplication(ca1);
         fog1.addApplication(fa1);
@@ -62,7 +62,7 @@ public class HospitalWardScenario2 {
       
         final Random randomValueGenerator = new Random();
         
-        int numberOfDevices=0;
+        int numberOfDevices=10000;
 
         for(int i=0; i<numberOfDevices;i++){
             long mttf = 1000L*60*60*24*365*15;
