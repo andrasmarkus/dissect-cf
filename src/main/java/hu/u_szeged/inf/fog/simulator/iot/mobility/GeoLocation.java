@@ -5,7 +5,7 @@ public class GeoLocation {
     private static final double EARTH_RADIUS = 6378.137; //in km
     private double latitude;
     private double longitude;
-    private boolean weightPoint = false;
+    private boolean weightPoint = true;
 
     public GeoLocation(double latitude, double longitude) {
         this.latitude = latitude;
