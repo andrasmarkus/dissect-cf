@@ -3,6 +3,7 @@ package hu.u_szeged.inf.fog.simulator.physical;
 import java.util.ArrayList;
 import java.util.List;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.IaaSService;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.VirtualMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.util.CloudLoader;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.iot.mobility.GeoLocation;
@@ -59,6 +60,17 @@ public class ComputingAppliance {
 			app.setComputingAppliance(this);
 			this.applicationList.add(app);
 		}
+	}
+	
+	public double getloadOfResource() {
+		double usedCPU = 0.0;
+		for (VirtualMachine vm : this.iaas.listVMs()) {
+			if (vm.getResourceAllocation() != null) {
+				usedCPU += vm.getResourceAllocation().allocated.getRequiredCPUs();
+			}
+		}
+		// TODO: why IaaS runningCapacities isn't equals with pm's capacities?
+		return (usedCPU / this.iaas.getRunningCapacities().getRequiredCPUs()) * 100;
 	}
 	
 	public void setParentNode(ComputingAppliance ca) {
