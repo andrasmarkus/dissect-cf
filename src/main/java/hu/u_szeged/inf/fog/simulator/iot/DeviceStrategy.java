@@ -267,16 +267,17 @@ class RuntimeDeviceStrategy extends DeviceStrategy {
 
             @Override
             protected void eventAction() {
-                double min = Double.MAX_VALUE - 1.0;
-                int choosen = -1;
-                for (int i = 0; i < Application.allApplication.size(); i++) {
-                    double loadRatio = (Application.allApplication.get(i).deviceList.size()) / (Application.allApplication.get(i).computingAppliance.iaas.machines.size());
-                    if (loadRatio < min) {
-                        min = loadRatio;
+
+                int choosen = 0;
+                int choosenResource = (int) Application.allApplication.get(choosen).computingAppliance.getloadOfResource();
+                
+                for (int i = 1; i < Application.allApplication.size(); ++i) {
+                    if (Application.allApplication.get(i).canJoin && Application.allApplication.get(i).computingAppliance.getloadOfResource() < choosenResource){
+                    	choosenResource = (int) Application.allApplication.get(i).computingAppliance.getloadOfResource();
                         choosen = i;
                     }
                 }
-
+                
                 if(Application.allApplication.get(choosen)==null) {
                 	try {
         				throw new Exception("There is no possible application for the data transfer!");
