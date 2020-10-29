@@ -83,7 +83,7 @@ public class Station extends Device {
 
     private Random random = new Random();
     private double FAIL_RATE = 0;
-    private double FAIL_RATIO = 0.0000006;
+    private double FAIL_RATIO;
     public MobilityStrategy mobilityStrategy;
     public int noAppTime = 0;
 
@@ -223,8 +223,10 @@ public class Station extends Device {
         } else {
             this.noAppTime = 0;
         }
-        double fail = random.nextDouble();
-        if(sensorCharacteristics.getMttf() <= Timed.getFireCount()) {
+        double fail = 0.1 + (1.0 - 0.1) * random.nextDouble();
+        long elapsed = Timed.getFireCount() - startTime;
+
+        if(sensorCharacteristics.getMttf() <= elapsed) {
             FAIL_RATE += FAIL_RATIO;
         }
 
