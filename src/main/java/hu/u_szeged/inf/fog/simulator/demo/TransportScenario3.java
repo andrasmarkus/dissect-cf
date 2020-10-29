@@ -35,38 +35,41 @@ public class TransportScenario3 {
 
         String cloudfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_frankfurt.xml";
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_athen.xml";
+        
+        double range = 25 * 1000;
+        int numberOfDevices=20;
 
         // Frankfurt
         ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(50.1213479,8.4964818),2500*1000);
 
         // Bekescsaba
-        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(46.68333,21.1),50 * 1000);
+        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",new GeoLocation(46.68333,21.1),range);
 
         // Szolnok
-        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",new GeoLocation(47.18333,20.2),50 * 1000);
+        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",new GeoLocation(47.18333,20.2),range);
 
         // Kecskemet
-        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",new GeoLocation(46.90618,19.69128),50 * 1000);
+        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3",new GeoLocation(46.90618,19.69128),range);
 
         // Budapest
-        ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",new GeoLocation(47.49801,19.03991),50 * 1000);
+        ComputingAppliance fog4 = new ComputingAppliance(fogfile, "fog4",new GeoLocation(47.49801,19.03991),range);
 
         // Tatabanya
-        ComputingAppliance fog5 = new ComputingAppliance(fogfile, "fog5",new GeoLocation(47.58494,18.39325),50 * 1000);
+        ComputingAppliance fog5 = new ComputingAppliance(fogfile, "fog5",new GeoLocation(47.58494,18.39325), range);
 
         // Veszprem
-        ComputingAppliance fog6 = new ComputingAppliance(fogfile, "fog6",new GeoLocation(47.09327,17.91149),50 * 1000);
+        ComputingAppliance fog6 = new ComputingAppliance(fogfile, "fog6",new GeoLocation(47.09327,17.91149), range);
 
         // Kaposvar
-        ComputingAppliance fog7 = new ComputingAppliance(fogfile, "fog7",new GeoLocation(46.36667,17.8),50 * 1000);
+        ComputingAppliance fog7 = new ComputingAppliance(fogfile, "fog7",new GeoLocation(46.36667,17.8), range);
 
         // Baja
-        ComputingAppliance fog8 = new ComputingAppliance(fogfile, "fog8",new GeoLocation(46.17496,18.95639),50 * 1000);
+        ComputingAppliance fog8 = new ComputingAppliance(fogfile, "fog8",new GeoLocation(46.17496,18.95639), range);
 
         // Szeged
-        ComputingAppliance fog9 = new ComputingAppliance(fogfile, "fog9",new GeoLocation(46.253,20.14824),50 * 1000);
+        ComputingAppliance fog9 = new ComputingAppliance(fogfile, "fog9",new GeoLocation(46.253,20.14824), range);
 
-
+        
         fog1.setLatency(cloud1, 34);
         fog2.setLatency(cloud1, 43);
         fog3.setLatency(cloud1, 32);
@@ -167,7 +170,7 @@ public class TransportScenario3 {
         GeoLocation pos40 = new GeoLocation(46.678076, 21.047313);*/
 
 
-        int numberOfDevices=20;
+
 
         Random random = new Random();
 
@@ -189,35 +192,62 @@ public class TransportScenario3 {
                     // visszakuldott esemeny: 50 byte, 150 byte sensor,
                     Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
                             // 3 sensor, 3/4 (273) ev az mttf,
-                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 * 1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 292, 5 * 60 * 1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
                             10 * 60 * 1000, start_pos,
-                            new LinearMobilityStrategy(new GeoLocation(46.68333, 21.1), 0.0202777,
+                            
+                            new LinearMobilityStrategy(new GeoLocation(46.6795384,21.0128544), 0.0202777,
 
-                                    new GeoLocation(47.18333, 20.2),
-                                    new GeoLocation(46.90618, 19.69128),
-                                    new GeoLocation(47.49801, 19.03991),
-                                    new GeoLocation(47.58494, 18.39325),
-                                    new GeoLocation(47.09327, 17.91149),
-                                    new GeoLocation(46.36667, 17.8),
-                                    new GeoLocation(46.17496, 18.95639),
-                                    new GeoLocation(46.253, 20.14824),
-                                    new GeoLocation(46.68333, 21.1)));
+                                    new GeoLocation(46.8471995,20.5370569),
+                                    new GeoLocation(47.0259811,20.2621087),           
+                                    new GeoLocation(47.1804973,20.1136325),
+                                    new GeoLocation(47.2025217,19.7341719),
+                                    new GeoLocation(46.8857078,19.5389746),
+                                    new GeoLocation(47.4813602,18.9902207),
+                                    new GeoLocation(47.5055901,18.5203231),
+                                    new GeoLocation(47.5481325,18.347633),
+                                    new GeoLocation(47.1946298,18.3712124),
+                                    new GeoLocation(47.1258945,17.837209),
+                                    new GeoLocation(46.9717908,18.1009292), 
+                                    new GeoLocation(46.7450279,17.7097287),
+                                    new GeoLocation(46.3705281,17.7461179),
+                                    new GeoLocation(46.3492927,18.6611945),
+                                    new GeoLocation(46.1736076,18.6581572),
+                                    new GeoLocation(46.1838216,19.2688341),
+                                    new GeoLocation(46.2870984,19.4942792),
+                                    new GeoLocation(46.232941,20.0003862),                                 
+                                    new GeoLocation(46.6795384,21.0128544)
+
+                                    ));
+                	
                     s.setActuator(new Actuator(new TransportStrategy(), 5, s));
                 } else {
                     Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance",
-                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 365, 5 * 60 * 1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
+                            new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 292, 5 * 60 * 1000, 15 * 60 * 1000, fogRatio, actuatorRatio, 50, 1),
                             10 * 60 * 1000, start_pos,
-                            new LinearMobilityStrategy(new GeoLocation(46.68333, 21.1), 0.0202777,
-                                    new GeoLocation(46.253, 20.14824),
-                                    new GeoLocation(46.17496, 18.95639),
-                                    new GeoLocation(46.36667, 17.8),
-                                    new GeoLocation(47.09327, 17.91149),
-                                    new GeoLocation(47.58494, 18.39325),
-                                    new GeoLocation(47.58494, 18.39325),
-                                    new GeoLocation(47.49801, 19.03991),
-                                    new GeoLocation(46.90618, 19.69128),
-                                    new GeoLocation(47.18333, 20.2),
-                                    new GeoLocation(46.68333, 21.1)));
+                            
+                            new LinearMobilityStrategy(new GeoLocation(46.6795384,21.0128544), 0.0202777,
+
+               					 new GeoLocation(46.232941,20.0003862),
+               					 new GeoLocation(46.2870984,19.4942792),
+               					 new GeoLocation(46.1838216,19.2688341),
+               					 new GeoLocation(46.1736076,18.6581572),
+               					 new GeoLocation(46.3492927,18.6611945),
+               					 new GeoLocation(46.3705281,17.7461179),
+               					 new GeoLocation(46.7450279,17.7097287),
+               					 new GeoLocation(46.9717908,18.1009292), 
+               					 new GeoLocation(47.1258945,17.837209),
+               					 new GeoLocation(47.1946298,18.3712124),
+               					 new GeoLocation(47.5481325,18.347633),
+               					 new GeoLocation(47.5055901,18.5203231),
+               					 new GeoLocation(47.4813602,18.9902207),
+               					 new GeoLocation(46.8857078,19.5389746),
+               					 new GeoLocation(47.2025217,19.7341719),
+               					 new GeoLocation(47.1804973,20.1136325),
+               					 new GeoLocation(47.0259811,20.2621087),    
+                                   new GeoLocation(46.8471995,20.5370569),
+                                   new GeoLocation(46.6795384,21.0128544) 
+
+                                   ));
                     s.setActuator(new Actuator(new TransportStrategy(), 5, s));
                 }
 

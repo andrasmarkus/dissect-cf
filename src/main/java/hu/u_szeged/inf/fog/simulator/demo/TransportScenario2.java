@@ -33,7 +33,9 @@ public class TransportScenario2 {
         String cloudfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_frankfurt.xml";
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_athen.xml";
 
-        double range = 50*1000;
+        int numberOfDevices=2;
+        double range = 25*1000;
+        
         // Frankfurt
         ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(50.1213479,8.4964818),2500*1000);
       
@@ -159,7 +161,7 @@ public class TransportScenario2 {
         GeoLocation pos40 = new GeoLocation(46.678076, 21.047313);
 
 
-        int numberOfDevices=2;
+      
 
         Random random = new Random();
         for (int i = 0; i < 2 * 365; i++) {
@@ -179,17 +181,60 @@ public class TransportScenario2 {
                 			// 3 sensor, 80% ev az mttf,
                 			new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 292, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 
                 			5 * 60 * 1000, pos1, 
-                			new LinearMobilityStrategy(pos1, 0.0202777,
-                            pos2, pos3, pos4, pos5, pos6, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20,
-                            pos21, pos22, pos23, pos24, pos25, pos26, pos27, pos28, pos29, pos30, pos31, pos32, pos33, pos34, pos35, pos36, pos37, pos38, pos39, pos40, pos1));
+                			
+                			new LinearMobilityStrategy(new GeoLocation(46.6795384,21.0128544), 0.0202777,
+
+                                    new GeoLocation(46.8471995,20.5370569),
+                                    new GeoLocation(47.0259811,20.2621087),           
+                                    new GeoLocation(47.1804973,20.1136325),
+                                    new GeoLocation(47.2025217,19.7341719),
+                                    new GeoLocation(46.8857078,19.5389746),
+                                    new GeoLocation(47.4813602,18.9902207),
+                                    new GeoLocation(47.5055901,18.5203231),
+                                    new GeoLocation(47.5481325,18.347633),
+                                    new GeoLocation(47.1946298,18.3712124),
+                                    new GeoLocation(47.1258945,17.837209),
+                                    new GeoLocation(46.9717908,18.1009292), 
+                                    new GeoLocation(46.7450279,17.7097287),
+                                    new GeoLocation(46.3705281,17.7461179),
+                                    new GeoLocation(46.3492927,18.6611945),
+                                    new GeoLocation(46.1736076,18.6581572),
+                                    new GeoLocation(46.1838216,19.2688341),
+                                    new GeoLocation(46.2870984,19.4942792),
+                                    new GeoLocation(46.232941,20.0003862),                                 
+                                    new GeoLocation(46.6795384,21.0128544)
+
+                                    ));
+                	
                 			s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
                 }else {
                 	Station s = new Station(10 * 60 * 1000, 50, dn, startTime, stopTime, 150, "distance", 
                 			new SensorCharacteristics(3, 1000L * 60 * 60 * 24 * 292, 5 * 60 *1000, 5 * 60 * 10000, fogRatio, actuatorRatio, 50, 1), 
                 			5 * 60 * 1000, pos1, 
-                			new LinearMobilityStrategy(pos1, 0.0202777,
-                            pos40, pos39, pos38, pos37, pos36, pos35, pos34, pos33, pos32, pos31, pos30, pos29, pos28, pos27, pos26, pos25, pos24, pos23, pos22, pos21,
-                            pos20, pos19, pos18, pos17, pos16, pos15, pos14, pos13, pos12, pos11, pos10, pos9, pos8, pos7, pos6, pos5, pos4, pos3, pos2, pos1)); 
+                			
+                			new LinearMobilityStrategy(new GeoLocation(46.6795384,21.0128544), 0.0202777,
+
+                					 new GeoLocation(46.232941,20.0003862),
+                					 new GeoLocation(46.2870984,19.4942792),
+                					 new GeoLocation(46.1838216,19.2688341),
+                					 new GeoLocation(46.1736076,18.6581572),
+                					 new GeoLocation(46.3492927,18.6611945),
+                					 new GeoLocation(46.3705281,17.7461179),
+                					 new GeoLocation(46.7450279,17.7097287),
+                					 new GeoLocation(46.9717908,18.1009292), 
+                					 new GeoLocation(47.1258945,17.837209),
+                					 new GeoLocation(47.1946298,18.3712124),
+                					 new GeoLocation(47.5481325,18.347633),
+                					 new GeoLocation(47.5055901,18.5203231),
+                					 new GeoLocation(47.4813602,18.9902207),
+                					 new GeoLocation(46.8857078,19.5389746),
+                					 new GeoLocation(47.2025217,19.7341719),
+                					 new GeoLocation(47.1804973,20.1136325),
+                					 new GeoLocation(47.0259811,20.2621087),    
+                                    new GeoLocation(46.8471995,20.5370569),
+                                    new GeoLocation(46.6795384,21.0128544) 
+
+                                    ));
                 			s.setActuator(new Actuator(new ActuatorRandomStrategy(), 5, s));
                 }
                 

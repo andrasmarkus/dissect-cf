@@ -1,6 +1,7 @@
 package hu.u_szeged.inf.fog.simulator.iot.actuator;
 
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 
 public class TimeoutEvent implements ActuatorEvent {
