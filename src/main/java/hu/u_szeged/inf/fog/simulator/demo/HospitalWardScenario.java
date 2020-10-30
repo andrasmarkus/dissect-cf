@@ -24,95 +24,49 @@ public class HospitalWardScenario {
         AlterableResourceConstraints arc1 = new AlterableResourceConstraints(8,0.001,4294967296L);
         AlterableResourceConstraints arc2 = new AlterableResourceConstraints(4,0.001,4294967296L);
 
-        new Instance(va,arc1,0.00000001,"instance1");
-        new Instance(va,arc2,0.000000015,"instance2");
+        //new Instance(va,arc1,0.00000001,"instance1");
+        //new Instance(va,arc2,0.000000015,"instance2");
+        new Instance(va,arc1,0.0000000566666667,"instance1");
+        new Instance(va,arc2,0.0000000283333333,"instance2");
+
 
         String cloudfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_frankfurt.xml";
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_budapest.xml";
 
         ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(42.497913, 15.040236),1000*1000);
-
         Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true);
-
-
-        ComputingAppliance fog1;
-        Application fa1;
-        ComputingAppliance fog2;
-        Application fa2;
-        ComputingAppliance fog3;
-        Application fa3;
-
-
-
         cloud1.addApplication(ca1);
 
+        
+        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1", new GeoLocation(46.245286, 20.149618), 5 * 1000);
+        fog1.setLatency(cloud1, 18);
+        fog1.setParentNode(cloud1);
+        Application fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
+        fog1.addApplication(fa1);
+        
+        
+        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2", new GeoLocation(46.245486, 20.149818), 5 * 1000);
+        fog2.setLatency(cloud1, 17);
+        fog2.setLatency(fog1, 6);
+        fog2.setParentNode(cloud1);
+        Application fa2 = new Application(60 * 1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
+        fog2.addApplication(fa2);
+        
+        
+        
+        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3", new GeoLocation(46.245486, 20.149818), 5 * 1000);
+        fog3.setLatency(cloud1, 16);
+        fog3.setParentNode(cloud1);
+        Application fa3 = new Application(60 * 1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
+        fog3.addApplication(fa3);
+        
+
+        fog1.addNeighbour(fog2);
+        fog2.addNeighbour(fog3);
+
         //Setting fog and device numbers, based on the argumentums
-        int numberOfDevices=0;
-        int numberOfFogs=0;
-        try {
-            if(args.length == 2) {
-                numberOfDevices = Integer.parseInt(args[0]);
-                numberOfFogs = Integer.parseInt(args[1]);
-
-                if(numberOfFogs==1) {
-                    fog1 = new ComputingAppliance(fogfile, "fog1", new GeoLocation(46.245286, 20.149618), 5 * 1000);
-                    fog1.setLatency(cloud1, 18);
-                    fog1.setParentNode(cloud1);
-                    fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-                    fog1.addApplication(fa1);
-                }
-                else if(numberOfFogs==2){
-                    fog1 = new ComputingAppliance(fogfile, "fog1", new GeoLocation(46.245286, 20.149618), 5 * 1000);
-                    fog1.setLatency(cloud1, 16);
-                    fog1.setParentNode(cloud1);
-                    fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-                    fog1.addApplication(fa1);
-
-                    fog2 = new ComputingAppliance(fogfile, "fog2", new GeoLocation(46.245486, 20.149818), 5 * 1000);
-                    fog2.setLatency(cloud1, 17);
-                    fog2.setLatency(fog1, 6);
-                    fog2.setParentNode(cloud1);
-                    fa2 = new Application(60 * 1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
-                    fog2.addApplication(fa2);
-
-                    fog1.addNeighbour(fog2);
-                } else if(numberOfFogs==3) {
-                    fog1 = new ComputingAppliance(fogfile, "fog1", new GeoLocation(46.245286, 20.149618), 5 * 1000);
-                    fog1.setLatency(cloud1, 18);
-                    fog1.setParentNode(cloud1);
-                    fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-                    fog1.addApplication(fa1);
-
-                    fog2 = new ComputingAppliance(fogfile, "fog2", new GeoLocation(46.245486, 20.149818), 5 * 1000);
-                    fog2.setLatency(cloud1, 17);
-                    fog2.setParentNode(cloud1);
-                    fa2 = new Application(60 * 1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
-                    fog2.addApplication(fa2);
-
-                    fog3 = new ComputingAppliance(fogfile, "fog3", new GeoLocation(46.245486, 20.149818), 5 * 1000);
-                    fog3.setLatency(cloud1, 16);
-                    fog3.setParentNode(cloud1);
-                    fa3 = new Application(60 * 1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
-                    fog3.addApplication(fa3);
-
-                    fog1.addNeighbour(fog2);
-                    fog2.addNeighbour(fog3);
-                } else if(numberOfFogs!=0) {
-                    throw new IllegalArgumentException("Invalid number of fogs");
-                }
-
-
-            }
-            else if(args.length == 1) {
-                numberOfDevices = Integer.parseInt(args[0]);
-            }
-            else {
-                throw new IllegalArgumentException("Invalid number of arguments");
-            }
-        }catch (IllegalArgumentException e){
-            e.printStackTrace();
-            return;
-        }
+        int numberOfDevices=100;
+        int numberOfFogs=1;
 
         //Setting up the devices
 
@@ -124,14 +78,16 @@ public class HospitalWardScenario {
             int maxFreq = 1000 * 60 * 30;
             int actuatorResponseSize = 120;
             long defaultFreq = 1000 * 60 * 15 ;
-            int filesize = numberOfFogs>0?50:150;
+            //int filesize = numberOfFogs>0?50:150;
+            int filesize = 150;
             int numberOfSensors = 2;
             double actuatorRatio = 1.0;
             double fogRatio = 1.0;
-            int dnLatency = numberOfFogs>0?3:18;
-
+            //int dnLatency = numberOfFogs>0?3:18;
+            int dnLatency = 50;
+            
             Device.DeviceNetwork dn = new Device.DeviceNetwork(dnLatency, 10240, 10000, 10000, 200000000, "dnRepository" + i, null, null);
-            Station s = new Station(10 * 60 * 1000, actuatorResponseSize, dn, 0, 1000L * 60 * 60 * 24, filesize, "random", new SensorCharacteristics(numberOfSensors, mttf, minFreq, maxFreq, fogRatio, actuatorRatio, 40, 1), defaultFreq, new GeoLocation(46.245286, 20.149618), null);
+            Station s = new Station(10 * 60 * 1000, actuatorResponseSize, dn, 0, 1000L * 60 * 60 * 24, filesize, "random", new SensorCharacteristics(numberOfSensors, mttf, minFreq, maxFreq, fogRatio, actuatorRatio, 50, 1), defaultFreq, new GeoLocation(46.245286, 20.149618), null);
             s.setActuator(new Actuator(new ActuatorStrategy() {
                 @Override
                 public ActuatorEvent selectEvent(Station station) {

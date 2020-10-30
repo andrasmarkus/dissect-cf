@@ -160,6 +160,8 @@ public class Station extends Device {
 
                 @Override
                 protected void eventAction() {
+                	//System.out.println("Station started on day: "+Timed.getFireCount()+ ": " +Timed.getFireCount()/1000/60/60/24);
+                	
                     subscribe(freq);
                     nodeRepository = app.computingAppliance.iaas.repositories.get(0);
                 }
