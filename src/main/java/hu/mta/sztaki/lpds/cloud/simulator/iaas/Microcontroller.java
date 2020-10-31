@@ -6,11 +6,12 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.PowerStateDelayer;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.State;
-import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
-import hu.mta.sztaki.lpds.cloud.simulator.util.PowerTransitionGenerator;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
+import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
+import hu.mta.sztaki.lpds.cloud.simulator.util.PowerTransitionGenerator;
 
 public class Microcontroller extends PhysicalMachine {
 	
@@ -22,7 +23,7 @@ public class Microcontroller extends PhysicalMachine {
 	
 	public static final EnumSet<State> StatesOfHighEnergyConsumption = EnumSet.of(State.RUNNING, State.METERING);
 	
-	private State currentState = null;
+	private State currentState = State.OFF;
 	
 	public Microcontroller(double cores, double perCorePocessing, long memory, Repository disk, int onD, int offD,
 			Map<String, PowerState> cpuPowerTransitions) {
@@ -39,9 +40,13 @@ public class Microcontroller extends PhysicalMachine {
 		case OFF:
 			break;
 		case RUNNING:
-			setState(State.METERING);
+			try {
+				setState(State.METERING);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
 		case METERING:
-			break;
+			System.err.println("WARNING: an already metering MC was tasked to meter!");
 		}
 	}
 
@@ -53,7 +58,7 @@ public class Microcontroller extends PhysicalMachine {
 
 		currentState = newState;
 		directConsumerUsageMoratory = newState != State.RUNNING;
-		//stateListenerManager.notifyListeners(Pair.of(pastState, newState));
+		//stateListenerManager.notifyListeners(Pair.of(getState(), newState));
 
 		// Power state management:
 		setCurrentPowerBehavior(PowerTransitionGenerator.getPowerStateFromMap(hostPowerBehavior, newState.toString()));

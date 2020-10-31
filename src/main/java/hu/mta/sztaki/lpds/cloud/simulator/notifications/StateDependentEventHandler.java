@@ -28,6 +28,10 @@ package hu.mta.sztaki.lpds.cloud.simulator.notifications;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine.State;
+
 /**
  * The main non-time dependent event handling mechanism in DISSECT-CF. This
  * class is kept generic, and every user could either derive from it or use this
