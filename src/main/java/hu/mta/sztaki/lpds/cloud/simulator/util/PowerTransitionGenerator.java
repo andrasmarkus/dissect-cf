@@ -28,6 +28,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.ConstantConsumpt
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.LinearConsumptionModel;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.NoIdleConsumptionModel;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.Microcontroller;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 
@@ -119,20 +120,17 @@ public class PowerTransitionGenerator {
 		for (PhysicalMachine.State aState : PhysicalMachine.StatesOfHighEnergyConsumption) {
 			hostStates.put(aState.toString(), hostDefault);
 		}
+		hostStates.put(Microcontroller.State.OFF.toString(), hostDefault);
+		hostStates.put(Microcontroller.State.RUNNING.toString(), hostDefault);
+		hostStates.put(Microcontroller.State.METERING.toString(), hostDefault);
 		hostStates.put(PhysicalMachine.State.OFF.toString(),
 				new PowerState(minpower, 0, ConstantConsumptionModel.class));
-		hostStates.put(NetworkNode.State.METERING.toString(), new PowerState(idlepower / diskDivider / 2,
-				(maxpower) / diskDivider / 2, NoIdleConsumptionModel.class));
 		diskStates.put(NetworkNode.State.OFF.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));
 		diskStates.put(NetworkNode.State.RUNNING.toString(), new PowerState(idlepower / diskDivider / 2,
 				(maxpower - idlepower) / diskDivider / 2, LinearConsumptionModel.class));
-		diskStates.put(NetworkNode.State.METERING.toString(), new PowerState(idlepower / diskDivider / 2,
-				(maxpower) / diskDivider / 2, NoIdleConsumptionModel.class));
 		netStates.put(NetworkNode.State.OFF.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));
 		netStates.put(NetworkNode.State.RUNNING.toString(), new PowerState(idlepower / netDivider / 2,
 				(maxpower - idlepower) / netDivider / 2, LinearConsumptionModel.class));
-		netStates.put(NetworkNode.State.METERING.toString(), new PowerState(idlepower / diskDivider / 2,
-				(maxpower) / diskDivider / 2, NoIdleConsumptionModel.class));
 		return returner;
 	}
 
