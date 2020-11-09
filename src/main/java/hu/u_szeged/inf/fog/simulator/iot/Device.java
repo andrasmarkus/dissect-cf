@@ -27,8 +27,10 @@ package hu.u_szeged.inf.fog.simulator.iot;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.Microcontroller;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
@@ -181,7 +183,7 @@ public abstract class Device extends Timed {
      * The goal of this class 
      */
     public static class DeviceNetwork {
-        Repository localRepository;
+    	Microcontroller microcontroller;
         public String repoName;
         protected HashMap < String, Integer > lmap;
         protected int latency;
@@ -197,7 +199,8 @@ public abstract class Device extends Timed {
          * @param storageTransitions Storage power behavior, leave it to null for the default value
          * @param networkTransitions Network power behavior, leave it to null for the default value
          */
-        public DeviceNetwork(int latency, long maxinbw, long maxoutbw, long diskbw, long repoSize, String repoName, Map < String, PowerState > storageTransitions, Map < String, PowerState > networkTransitions) {
+        public DeviceNetwork(int latency, long maxinbw, long maxoutbw, long diskbw, long repoSize, String repoName, Map < String, PowerState > storageTransitions, Map < String, PowerState > networkTransitions, double cores, double perCorePocessing, long memory, Repository disk, int onD, int offD,
+    			Map<String, PowerState> cpuPowerTransitions) {
         	this.repoName=repoName;
         	if (storageTransitions == null) {
                 storageTransitions = defaultTransitions("storage");
@@ -207,9 +210,9 @@ public abstract class Device extends Timed {
             }
             this.latency=latency;
             lmap = new HashMap < String, Integer > ();
-            localRepository = new Repository(repoSize, repoName, maxinbw, maxoutbw, diskbw, lmap, storageTransitions, networkTransitions);
+            microcontroller = new Microcontroller(cores,perCorePocessing, memory, disk, onD, offD, cpuPowerTransitions);
             try {
-                localRepository.setState(NetworkNode.State.RUNNING);
+                microcontroller.localDisk.setState(NetworkNode.State.RUNNING);
             } catch (NetworkException e) {
                 e.printStackTrace();
             }

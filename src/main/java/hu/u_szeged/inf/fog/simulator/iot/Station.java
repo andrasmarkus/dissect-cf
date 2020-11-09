@@ -102,9 +102,9 @@ public class Station extends Device {
      * This method sends all of the generated data (called StorageObject) to the node repository.
      */
     private void startCommunicate() throws NetworkException {
-        for (StorageObject so: this.dn.localRepository.contents()) {
+        for (StorageObject so: this.dn.microcontroller.localDisk.contents()) {
             StorObjEvent soe = new StorObjEvent(so);
-            NetworkNode.initTransfer(so.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
+            NetworkNode.initTransfer(so.size, ResourceConsumption.unlimitedProcessing, this.dn.microcontroller.localDisk, this.nodeRepository, soe);
         }
     }
 
@@ -151,10 +151,16 @@ public class Station extends Device {
     public void tick(long fires) {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
         	// TODO: fix this delay value
-            new Sensor(this, 1);
+            new Sensor(this, 1000);
+            try {
+				this.dn.microcontroller.metering();
+			} catch (NetworkException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
 
-        if (this.dn.localRepository.getFreeStorageCapacity() == this.dn.localRepository.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
+        if (this.dn.microcontroller.localDisk.getFreeStorageCapacity() == this.dn.microcontroller.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
             this.stopMeter();
         }
 
@@ -252,7 +258,7 @@ public class Station extends Device {
          */
         @Override
         public void conComplete() {
-            dn.localRepository.deregisterObject(this.so);
+            dn.microcontroller.localDisk.deregisterObject(this.so);
             // TODO: fix this "cheat"
             app.sumOfArrivedData += this.so.size;
         }
@@ -273,7 +279,7 @@ public class Station extends Device {
 
 
 	public static void loadDevice(String stationfile) throws JAXBException {
-		for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
+		/*for (DeviceModel dm: DeviceModel.loadDeviceXML(stationfile)) {
 			System.out.println(dm);
             for (int i = 0; i < dm.number; i++) {
                 DeviceNetwork dn = new DeviceNetwork(dm.latency, dm.maxinbw, dm.maxoutbw, dm.diskbw, dm.reposize, dm.name+i, null, null);
@@ -281,7 +287,7 @@ public class Station extends Device {
                 new Station(50, dn, dm.starttime, dm.stoptime, dm.filesize, dm.strategy, dm.sensor, dm.freq, dm.xCoord, dm.yCoord);
             }
 
-        }
+        }*/
 		
 	}
 }

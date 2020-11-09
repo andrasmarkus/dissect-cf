@@ -58,7 +58,7 @@ class Sensor extends DeferredEvent {
         StorageObject so = new StorageObject(this.s.getDn().repoName + " " + this.s.filesize + " " + this.s.getSensorNum() + " " + Timed.getFireCount(),
             this.s.filesize, false);
 
-        if (this.s.dn.localRepository.registerObject(so)) {
+        if (this.s.dn.microcontroller.localDisk.registerObject(so)) {
             this.s.incSumOfGeneratedData(this.s.filesize);
             this.s.messageCount += 1;
         } else {

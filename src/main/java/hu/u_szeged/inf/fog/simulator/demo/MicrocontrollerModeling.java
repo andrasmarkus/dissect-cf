@@ -54,14 +54,6 @@ public class MicrocontrollerModeling {
 			@Override
 			public void tick(final long fires) {
 				
-				try {
-		            if (r.getCurrState().equals(Repository.State.RUNNING)) {
-		                mc.metering();
-		            }
-		        } catch (NetworkException e) {
-		            e.printStackTrace();
-		        }
-				
 				readingtime.add(fires);
 				readingpm.add(pmm.getTotalConsumption());
 			}

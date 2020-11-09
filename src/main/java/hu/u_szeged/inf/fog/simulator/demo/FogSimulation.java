@@ -2,6 +2,9 @@ package hu.u_szeged.inf.fog.simulator.demo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,8 +12,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
+import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
+import hu.mta.sztaki.lpds.cloud.simulator.util.PowerTransitionGenerator;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.demo.ScenarioBase;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
@@ -90,13 +96,21 @@ public class FogSimulation {
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
-	for(int i=0;i<1000;i++) {
+	for(int i=0;i<1;i++) {
 		int x,y;
 		Random randomGenerator = new Random();
 		x = randomGenerator.nextInt(21)-10;
 		y = randomGenerator.nextInt(9)-10;
 		
-		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "dnRepository"+i, null, null);
+		HashMap<String, Integer> latencyMap = new HashMap<String, Integer>();
+		
+		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = PowerTransitionGenerator.generateTransitions(10, 200, 300, 5, 5);
+		final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
+		final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
+		final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
+		
+		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "mc", null, null,
+				1, 1, 1000, new Repository(100001, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
 		new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();
 	}
 	

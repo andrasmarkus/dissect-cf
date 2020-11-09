@@ -64,6 +64,14 @@ public abstract class DeviceStrategy {
         app.deviceList.add(d);
         d.dn.lmap.put(d.getDn().repoName, d.dn.latency);
         d.dn.lmap.put(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
+        System.out.println(d.getDn().repoName);
+        System.exit(0);
+        try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }
