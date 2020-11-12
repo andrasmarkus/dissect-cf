@@ -44,6 +44,25 @@ public class Microcontroller extends PhysicalMachine {
 			cpuPowerTransitions = defaultTransitions("host");
 		}
 	}
+	
+	public void turnon() {
+		switch (currentState) {
+		case OFF:
+			try {
+				setState(State.RUNNING);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
+
+			break;
+		case RUNNING:
+			System.err.println("WARNING: an already running PM was tasked to switch on!");
+		case METERING:
+			break;
+		default:
+			break;
+		}
+	}
 
 	public void metering() throws NetworkException {
 		switch (currentState) {

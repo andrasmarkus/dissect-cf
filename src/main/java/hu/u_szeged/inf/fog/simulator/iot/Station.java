@@ -158,6 +158,7 @@ public class Station extends Device {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+            System.out.println(this.dn.microcontroller.getState());
         }
 
         if (this.dn.microcontroller.localDisk.getFreeStorageCapacity() == this.dn.microcontroller.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {

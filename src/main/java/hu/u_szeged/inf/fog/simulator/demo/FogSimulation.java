@@ -91,7 +91,7 @@ public class FogSimulation {
 	fog1.addApplication(fa1);
 	fog2.addApplication(fa2);
 	fog3.addApplication(fa3);
-	fog4.addApplication(fa4);	 
+	fog4.addApplication(fa4);
 	
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
