@@ -28,16 +28,15 @@ import javax.xml.bind.JAXBException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.Microcontroller;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption.ConsumptionEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
-import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
-import hu.u_szeged.inf.fog.simulator.demo.DeferredEventTest;
-import hu.u_szeged.inf.fog.simulator.loaders.DeviceModel;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
+import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
 
 /**
  * The Station is an realization of the Device class, it represents a simple, one-way entity which operates only on sensors.
@@ -79,7 +78,7 @@ public class Station extends Device {
      * @param y The Y coordinate of the position.
      */
     public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
-        long freq, double x, double y) {
+        long freq, double x, double y, Microcontroller microcontroller, int latency) {
     	// TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
         this.startTime = startTime + delay;
@@ -158,10 +157,11 @@ public class Station extends Device {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            System.out.println(this.dn.microcontroller.getState());
+            System.out.println(this.dn.microcontroller.getMicrocontrollerState());
         }
 
         if (this.dn.microcontroller.localDisk.getFreeStorageCapacity() == this.dn.microcontroller.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
+        	this.dn.microcontroller.setStateToRunning();
             this.stopMeter();
         }
 

@@ -25,31 +25,46 @@ public class Microcontroller extends PhysicalMachine {
 
 	public static final EnumSet<State> StatesOfHighEnergyConsumption = EnumSet.of(State.RUNNING, State.METERING);
 
-	private State currentState = State.OFF;
+	private State currentState = null;
 
 	public Microcontroller(double cores, double perCorePocessing, long memory, Repository disk, int onD, int offD,
 			Map<String, PowerState> cpuPowerTransitions) {
 		super(cores, perCorePocessing, memory, disk, onD, offD, cpuPowerTransitions);
-
-		if (disk.getName() == "host") {
-			cpuPowerTransitions = defaultTransitions("host");
-		}
 	}
 
 	public Microcontroller(double cores, double perCorePocessing, long memory, Repository disk,
 			double[] turnonOperations, double[] switchoffOperations, Map<String, PowerState> cpuPowerTransitions) {
 		super(cores, perCorePocessing, memory, disk, turnonOperations, switchoffOperations, cpuPowerTransitions);
-
-		if (disk.getName() == "host") {
-			cpuPowerTransitions = defaultTransitions("host");
+	}
+	
+	public State getMicrocontrollerState() {
+		return this.currentState;
+	}
+	
+	public void setStateToRunning() {
+		switch (this.currentState) {
+		case OFF:
+			this.turnon();
+			break;
+		case RUNNING:
+			System.err.println("WARNING: an already running PM was tasked to switch on!");
+		case METERING:
+			try {
+				setState(Microcontroller.State.RUNNING);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
+			break;
+		default:
+			break;
 		}
 	}
 	
 	public void turnon() {
-		switch (currentState) {
+		switch (this.currentState) {
 		case OFF:
 			try {
-				setState(State.RUNNING);
+				setState(Microcontroller.State.RUNNING);
 			} catch (NetworkException nex) {
 				throw new RuntimeException(nex);
 			}
@@ -65,12 +80,12 @@ public class Microcontroller extends PhysicalMachine {
 	}
 
 	public void metering() throws NetworkException {
-		switch (currentState) {
+		switch (this.currentState) {
 		case OFF:
 			break;
 		case RUNNING:
 			try {
-				setState(State.METERING);
+				setState(Microcontroller.State.METERING);
 			} catch (NetworkException nex) {
 				throw new RuntimeException(nex);
 			}
