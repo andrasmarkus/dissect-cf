@@ -152,6 +152,7 @@ public class Station extends Device {
         	// TODO: fix this delay value
             new Sensor(this, 1000);
             try {
+            	this.dn.microcontroller.turnon();
 				this.dn.microcontroller.metering();
 			} catch (NetworkException e) {
 				// TODO Auto-generated catch block
