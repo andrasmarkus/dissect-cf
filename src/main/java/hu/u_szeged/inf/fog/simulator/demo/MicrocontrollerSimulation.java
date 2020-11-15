@@ -31,7 +31,7 @@ public class MicrocontrollerSimulation {
 		
 		ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5);
 		
-		Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false, true);
+		Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true, true);
 
 		System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
 		System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
@@ -56,8 +56,8 @@ public class MicrocontrollerSimulation {
 			final Microcontroller mc;
 			mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
 			
-			/*DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "mc", null, null,
-					1, 1, 1000, new Repository(100001, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);*/
+			DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "mc", null, null,
+					1, 1, 1000, new Repository(100001, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
 			new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y, mc, 10).startMeter();
 		}
 		

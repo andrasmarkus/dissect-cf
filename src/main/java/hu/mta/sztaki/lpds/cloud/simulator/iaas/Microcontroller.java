@@ -25,7 +25,7 @@ public class Microcontroller extends PhysicalMachine {
 
 	public static final EnumSet<State> StatesOfHighEnergyConsumption = EnumSet.of(State.RUNNING, State.METERING);
 
-	private State currentState = null;
+	private State currentState = Microcontroller.State.OFF;
 
 	public Microcontroller(double cores, double perCorePocessing, long memory, Repository disk, int onD, int offD,
 			Map<String, PowerState> cpuPowerTransitions) {
