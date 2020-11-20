@@ -22,6 +22,7 @@ import hu.u_szeged.inf.fog.simulator.demo.ScenarioBase;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
+import hu.u_szeged.inf.fog.simulator.physical.Microcontroller;
 import hu.u_szeged.inf.fog.simulator.providers.AmazonProvider;
 import hu.u_szeged.inf.fog.simulator.providers.AzureProvider;
 import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider;
@@ -53,7 +54,7 @@ public class FogSimulation {
 	new Instance(va,arc2,0.000000015,"instance2");
 	
 	String cloudfile = ScenarioBase.resourcePath+"LPDS_original.xml";	
-	String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";	
+	String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";
 	
 	// we create our clouds using predefined cloud schema
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5);
@@ -104,14 +105,17 @@ public class FogSimulation {
 		
 		HashMap<String, Integer> latencyMap = new HashMap<String, Integer>();
 		
+		final long disksize = 100001;
+		
 		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = PowerTransitionGenerator.generateTransitions(10, 200, 300, 5, 5);
 		final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
 		final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
 		final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
 		
-		DeviceNetwork dn  = new DeviceNetwork(10, 10240, 10000, 10000, 10000, "mc", null, null,
-				1, 1, 1000, new Repository(100001, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
-		new Station(10*60*1000,dn, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y).startMeter();
+		final Microcontroller mc;
+		mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
+		
+		new Station(10*60*1000, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y, mc, 10).startMeter();	
 	}
 	
 	// Setting up the IoT pricing

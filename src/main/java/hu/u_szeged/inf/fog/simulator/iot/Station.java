@@ -24,11 +24,15 @@
 
 package hu.u_szeged.inf.fog.simulator.iot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 import hu.mta.sztaki.lpds.cloud.simulator.DeferredEvent;
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
-import hu.mta.sztaki.lpds.cloud.simulator.iaas.Microcontroller;
+import hu.mta.sztaki.lpds.cloud.simulator.energy.specialized.PhysicalMachineEnergyMeter;
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.VMManager.VMManagementException;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption.ConsumptionEvent;
@@ -37,6 +41,9 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
+import hu.u_szeged.inf.fog.simulator.application.Application;
+import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
+import hu.u_szeged.inf.fog.simulator.physical.Microcontroller;
 
 /**
  * The Station is an realization of the Device class, it represents a simple, one-way entity which operates only on sensors.
@@ -45,6 +52,8 @@ import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
  * @author Peter Gacsi (gacsi.peti95@gmail.com)
  */
 public class Station extends Device {
+	
+	public static List<Station> allStations = new ArrayList<Station>();
 
     /**
      * Number of the sensors. A sensor can represent for example a wind speed meter or rain sensor.
@@ -63,6 +72,8 @@ public class Station extends Device {
     public int getSensorNum() {
         return sensorNum;
     }
+    
+    public double microcontrollerEnergyConsumption;
 
     private int reInstall;
     /**
@@ -77,7 +88,7 @@ public class Station extends Device {
      * @param x The X coordinate of the position.
      * @param y The Y coordinate of the position.
      */
-    public Station(int reInstall, DeviceNetwork dn, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
+    public Station(int reInstall, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
         long freq, double x, double y, Microcontroller microcontroller, int latency) {
     	// TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
@@ -85,25 +96,28 @@ public class Station extends Device {
         this.stopTime = stopTime + delay;
         this.filesize = filesize * sensorNum;
         this.strategy = strategy;
-        this.dn = dn;
         this.sensorNum = sensorNum;
         this.reInstall=reInstall;
         this.freq = freq;
         this.sumOfGeneratedData = 0;
+        //this.dn
+        this.mc = microcontroller;
+        this.latency = latency;
         this.x = x;
         this.y = y;
         installionProcess(this);
         this.startMeter();
         this.setMessageCount(0);
+        Station.allStations.add(this);
     }
 
     /**
      * This method sends all of the generated data (called StorageObject) to the node repository.
      */
     private void startCommunicate() throws NetworkException {
-        for (StorageObject so: this.dn.microcontroller.localDisk.contents()) {
+        for (StorageObject so: this.mc.localDisk.contents()) {
             StorObjEvent soe = new StorObjEvent(so);
-            NetworkNode.initTransfer(so.size, ResourceConsumption.unlimitedProcessing, this.dn.microcontroller.localDisk, this.nodeRepository, soe);
+            NetworkNode.initTransfer(so.size, ResourceConsumption.unlimitedProcessing, this.mc.localDisk, this.nodeRepository, soe);
         }
     }
 
@@ -152,17 +166,20 @@ public class Station extends Device {
         	// TODO: fix this delay value
             new Sensor(this, 1000);
             try {
-            	this.dn.microcontroller.turnon();
-				this.dn.microcontroller.metering();
+				this.mc.turnon();
+				this.mc.metering();
 			} catch (NetworkException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            System.out.println(this.dn.microcontroller.getMicrocontrollerState());
+            //System.out.println(this.mc.getMicrocontrollerState());
+            
+            
         }
 
-        if (this.dn.microcontroller.localDisk.getFreeStorageCapacity() == this.dn.microcontroller.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
-        	this.dn.microcontroller.setStateToRunning();
+        if (this.mc.localDisk.getFreeStorageCapacity() == this.mc.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
+        	readMicrocontrollerEnergy();
+        	this.mc.setStateToRunning();
             this.stopMeter();
         }
 
@@ -185,6 +202,38 @@ public class Station extends Device {
             }
         }
     }
+    
+    public void readMicrocontrollerEnergy() {
+		final PhysicalMachineEnergyMeter pmm = new PhysicalMachineEnergyMeter(this.mc);
+		final ArrayList<Long> readingtime = new ArrayList<Long>();
+		final ArrayList<Double> readingpm = new ArrayList<Double>();
+		class MeteredDataCollector extends Timed {
+			public void start() {
+				subscribe(freq);
+			}
+			public void stop() {
+				unsubscribe();
+			}
+			@Override
+			public void tick(final long fires) {
+				readingtime.add(fires);
+				readingpm.add(pmm.getTotalConsumption());
+
+				if(Timed.getFireCount()>(24*12*freq)) {
+					this.stop();
+					pmm.stopMeter();
+					for(int i=0;i<readingtime.size();i++) {
+						microcontrollerEnergyConsumption+=readingpm.get(i);
+					}
+				}
+			}
+		}
+			
+			final MeteredDataCollector mdc = new MeteredDataCollector();
+			
+			pmm.startMeter(freq, true);
+			mdc.start();
+		}
 
     /**
      * Load the defined devices from XML file.
@@ -260,7 +309,7 @@ public class Station extends Device {
          */
         @Override
         public void conComplete() {
-            dn.microcontroller.localDisk.deregisterObject(this.so);
+            mc.localDisk.deregisterObject(this.so);
             // TODO: fix this "cheat"
             app.sumOfArrivedData += this.so.size;
         }

@@ -4,14 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.application.Application.VmCollector;
 import hu.u_szeged.inf.fog.simulator.iot.Device;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 
-
-public abstract class ScenarioBase {
+public abstract class ScenarioEnergy {
 	
 	private static ArrayList<String> names = new ArrayList<String>();
 	private static ArrayList<Double> eCs = new ArrayList<Double>();
@@ -37,10 +35,6 @@ public abstract class ScenarioBase {
 		long timeout=Long.MIN_VALUE;
 		long highestApplicationStopTime = Long.MIN_VALUE;
 		long highestStationStoptime = Long.MIN_VALUE;
-		double bluemix=0;
-		double amazon=0;
-		double azure=0;
-		double oracle=0;
 		//String name = null;
 		//double eC = 0;
 		
@@ -75,22 +69,10 @@ public abstract class ScenarioBase {
 				}
 				
 				System.out.println(a.name+" stations: " + a.deviceList.size()+ " cost:"+a.instance.calculateCloudCost(a.sumOfWorkTime));
-				if(iotpricing) {
-					System.out.println(a.providers);
-					bluemix+=a.providers.get(0).cost;	
-					amazon+=a.providers.get(1).cost;	
-					azure+=a.providers.get(2).cost;	
-					oracle+=a.providers.get(3).cost;
-				} else {
-					if(a.canRead) {
-						names.add(a.computingAppliance.name);
-						eCs.add(a.computingAppliance.energyConsumption);
-					}
-				}
 				
+				names.add(a.computingAppliance.name);
+				eCs.add(a.computingAppliance.energyConsumption);
 			}
-			
-			
 			
 			System.out.println();
 		}
@@ -99,7 +81,6 @@ public abstract class ScenarioBase {
 		System.out.println("VMs " + usedVM + " tasks: " + tasks);
 		System.out.println("Generated/processed/arrived data: " + generatedData + "/" + processedData+ "/"+arrivedData+ " bytes (~"+(arrivedData/1024/1024)+" MB)");
 		System.out.println("Cloud cost: "+totalCost);
-		System.out.println("IoT cost: Bluemix: "+bluemix+ " Amazon: "+ amazon +" Azure: "+azure+ " Oracle: "+ oracle);
 		System.out.println("Network: "+TimeUnit.SECONDS.convert(Application.sumOfTimeOnNetwork, TimeUnit.MILLISECONDS)+ " seconds");
 		System.out.println("Network: "+(Application.sumOfByteOnNetwork/1024/1024)+ " MB");
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");
@@ -110,4 +91,5 @@ public abstract class ScenarioBase {
 		
 
 	}
+
 }

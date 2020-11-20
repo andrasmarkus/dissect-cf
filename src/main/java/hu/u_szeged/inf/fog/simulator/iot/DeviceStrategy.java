@@ -62,8 +62,8 @@ public abstract class DeviceStrategy {
     public void makeConnection(Device d, Application app) {
         d.setApp(app);
         app.deviceList.add(d);
-        d.dn.microcontroller.localDisk.addLatencies(d.getDn().repoName, d.dn.latency);
-        d.dn.microcontroller.localDisk.addLatencies(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.dn.latency);
+        d.getMicrocontroller().localDisk.addLatencies(d.getMicrocontroller().localDisk.getName(), d.getLatency());
+        d.getMicrocontroller().localDisk.addLatencies(d.app.computingAppliance.iaas.repositories.get(0).getName(), d.getLatency());
         //System.out.println(d.getDn().microcontroller.localDisk.getCurrState());
 
         /*try {

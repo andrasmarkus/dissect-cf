@@ -28,9 +28,9 @@ import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.ConstantConsumpt
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.LinearConsumptionModel;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.NoIdleConsumptionModel;
 import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
-import hu.mta.sztaki.lpds.cloud.simulator.iaas.Microcontroller;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
+import hu.u_szeged.inf.fog.simulator.physical.Microcontroller;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -120,7 +120,7 @@ public class PowerTransitionGenerator {
 		for (PhysicalMachine.State aState : PhysicalMachine.StatesOfHighEnergyConsumption) {
 			hostStates.put(aState.toString(), hostDefault);
 		}
-		hostStates.put(Microcontroller.State.OFF.toString(), hostDefault);
+		hostStates.put(Microcontroller.State.OFF.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));
 		hostStates.put(Microcontroller.State.RUNNING.toString(), hostDefault);
 		hostStates.put(Microcontroller.State.METERING.toString(), hostDefault);
 		hostStates.put(PhysicalMachine.State.OFF.toString(),
