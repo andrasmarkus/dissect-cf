@@ -29,7 +29,7 @@ public abstract class FogSimulationChart {
 				if (a.canRead) {
 					if (a.computingAppliance.name.contains("fog")) {
 						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#00FF80'],");
-					} else {
+					} else if (a.computingAppliance.name.contains("cloud")) {
 						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#6666FF'],");
 					}
 				}
@@ -45,7 +45,7 @@ public abstract class FogSimulationChart {
 		writer.println("</script>");
 		writer.println("</script>");
 		writer.println("</head><body>");
-		writer.println("<div id=\"container\" style=\"height: 1500px; width=100%;\"></div>");
+		writer.println("<div id=\"container\" style=\"height: 800px; width=100%;\"></div>");
 		writer.println(" </body></html>");
 		writer.close();
 	}

@@ -42,19 +42,69 @@ public class Microcontroller extends PhysicalMachine {
 		return this.currentState;
 	}
 	
+	public boolean isRunning() {
+		if (this.currentState == State.RUNNING) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean isMetering() {
+		if (this.currentState == State.METERING) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean isSwitchedOff() {
+		if (this.currentState == State.OFF) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void setStateToRunning() {
 		switch (this.currentState) {
 		case OFF:
 			this.turnon();
 			break;
 		case RUNNING:
-			System.err.println("WARNING: an already running PM was tasked to switch on!");
+			System.err.println("WARNING: an already running MC was tasked to switch on!");
 		case METERING:
 			try {
-				setState(Microcontroller.State.RUNNING);
+				this.setState(Microcontroller.State.RUNNING);
 			} catch (NetworkException nex) {
 				throw new RuntimeException(nex);
 			}
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void turnoff() {
+		switch (this.currentState) {
+		case OFF:
+			System.err.println("WARNING: an already switched off MC was tasked to switch off!");
+			break;
+		case RUNNING:
+			try {
+				this.setState(Microcontroller.State.OFF);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
+			break;
+		case METERING:
+			try {
+				this.setState(Microcontroller.State.RUNNING);
+			} catch (NetworkException nex) {
+				throw new RuntimeException(nex);
+			}
+			
+			this.turnoff();
 			break;
 		default:
 			break;
@@ -65,14 +115,14 @@ public class Microcontroller extends PhysicalMachine {
 		switch (this.currentState) {
 		case OFF:
 			try {
-				setState(Microcontroller.State.RUNNING);
+				this.setState(Microcontroller.State.RUNNING);
 			} catch (NetworkException nex) {
 				throw new RuntimeException(nex);
 			}
 
 			break;
 		case RUNNING:
-			System.err.println("WARNING: an already running PM was tasked to switch on!");
+			System.err.println("WARNING: an already running MC was tasked to switch on!");
 		case METERING:
 			break;
 		default:
@@ -86,7 +136,7 @@ public class Microcontroller extends PhysicalMachine {
 			break;
 		case RUNNING:
 			try {
-				setState(Microcontroller.State.METERING);
+				this.setState(Microcontroller.State.METERING);
 			} catch (NetworkException nex) {
 				throw new RuntimeException(nex);
 			}

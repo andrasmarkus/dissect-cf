@@ -61,6 +61,13 @@ class Sensor extends DeferredEvent {
         if (this.s.getMicrocontroller().localDisk.registerObject(so)) {
             this.s.incSumOfGeneratedData(this.s.filesize);
             this.s.messageCount += 1;
+
+            if (this.s.getMicrocontroller().isSwitchedOff()) {
+            	this.s.getMicrocontroller().turnon();
+            } else {
+            	this.s.getMicrocontroller().setStateToRunning();
+            }
+            System.out.println(this.s.getMicrocontroller().getMicrocontrollerState());
         } else {
             try {
                 throw new Exception("Saving data into the local repository is unsuccessful!");

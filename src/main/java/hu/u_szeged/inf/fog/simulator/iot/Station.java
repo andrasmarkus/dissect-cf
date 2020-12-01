@@ -64,6 +64,8 @@ public class Station extends Device {
      * The frequency of the data measurement and sending process (e.g. in ms).
      */
     private long freq;
+    
+    private long sensorFreq;
 
     private long delay;
     /**
@@ -74,6 +76,10 @@ public class Station extends Device {
     }
     
     public double microcontrollerEnergyConsumption;
+    
+    private MeteredDataCollector mdc;
+    
+    private PhysicalMachineEnergyMeter pmm;
 
     private int reInstall;
     /**
@@ -89,7 +95,7 @@ public class Station extends Device {
      * @param y The Y coordinate of the position.
      */
     public Station(int reInstall, long startTime, long stopTime, long filesize, String strategy, int sensorNum,
-        long freq, double x, double y, Microcontroller microcontroller, int latency) {
+        long freq, double x, double y, Microcontroller microcontroller, int latency, long sensorFreq) {
     	// TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 20) * 60 * 1000;
         this.startTime = startTime + delay;
@@ -102,6 +108,8 @@ public class Station extends Device {
         this.sumOfGeneratedData = 0;
         //this.dn
         this.mc = microcontroller;
+        this.sensorFreq = sensorFreq;
+        this.pmm = new PhysicalMachineEnergyMeter(this.mc);
         this.latency = latency;
         this.x = x;
         this.y = y;
@@ -109,6 +117,7 @@ public class Station extends Device {
         this.startMeter();
         this.setMessageCount(0);
         Station.allStations.add(this);
+        this.mdc = new MeteredDataCollector(this.pmm);
     }
 
     /**
@@ -141,6 +150,7 @@ public class Station extends Device {
      * It stops the station.
      */
     private void stopMeter() {
+    	
         unsubscribe();
     }
     
@@ -164,22 +174,22 @@ public class Station extends Device {
     public void tick(long fires) {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
         	// TODO: fix this delay value
-            new Sensor(this, 1000);
+            new Sensor(this, this.sensorFreq);
             try {
-				this.mc.turnon();
-				this.mc.metering();
+				if (!this.mc.isMetering()) {
+					this.mc.metering();
+				}
 			} catch (NetworkException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            //System.out.println(this.mc.getMicrocontrollerState());
+            System.out.println(this.mc.getMicrocontrollerState());
             
             
         }
 
         if (this.mc.localDisk.getFreeStorageCapacity() == this.mc.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
         	readMicrocontrollerEnergy();
-        	this.mc.setStateToRunning();
             this.stopMeter();
         }
 
@@ -203,36 +213,33 @@ public class Station extends Device {
         }
     }
     
-    public void readMicrocontrollerEnergy() {
-		final PhysicalMachineEnergyMeter pmm = new PhysicalMachineEnergyMeter(this.mc);
-		final ArrayList<Long> readingtime = new ArrayList<Long>();
+    static class MeteredDataCollector extends Timed {
+    	
+    	PhysicalMachineEnergyMeter pmm;
+    	
+    	MeteredDataCollector(PhysicalMachineEnergyMeter pmm) {
+    		this.pmm = pmm;
+    	}
+    	
+    	final ArrayList<Long> readingtime = new ArrayList<Long>();
 		final ArrayList<Double> readingpm = new ArrayList<Double>();
-		class MeteredDataCollector extends Timed {
-			public void start() {
-				subscribe(freq);
-			}
-			public void stop() {
-				unsubscribe();
-			}
-			@Override
-			public void tick(final long fires) {
-				readingtime.add(fires);
-				readingpm.add(pmm.getTotalConsumption());
-
-				if(Timed.getFireCount()>(24*12*freq)) {
-					this.stop();
-					pmm.stopMeter();
-					for(int i=0;i<readingtime.size();i++) {
-						microcontrollerEnergyConsumption+=readingpm.get(i);
-					}
-				}
-			}
+    	
+		public void start(long sensorFreq) {
+			subscribe(sensorFreq*sensorFreq);
 		}
-			
-			final MeteredDataCollector mdc = new MeteredDataCollector();
-			
-			pmm.startMeter(freq, true);
-			mdc.start();
+		public void stop() {
+			unsubscribe();
+		}
+		@Override
+		public void tick(final long fires) {
+			readingtime.add(fires);
+			readingpm.add(pmm.getTotalConsumption());
+		}
+	}
+    
+    public void readMicrocontrollerEnergy() {			
+			pmm.startMeter(sensorFreq*sensorFreq, true);
+			mdc.start(sensorFreq);
 		}
 
     /**

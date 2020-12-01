@@ -25,36 +25,36 @@ public class MicrocontrollerSimulation {
 		VirtualAppliance va = new VirtualAppliance("va", 100, 0, false, 1073741824L);
 		
 		AlterableResourceConstraints arc1 = new AlterableResourceConstraints(8,0.001,4294967296L);
-		AlterableResourceConstraints arc2 = new AlterableResourceConstraints(4,0.001,4294967296L);//
+		//AlterableResourceConstraints arc2 = new AlterableResourceConstraints(4,0.001,4294967296L);//
 		
 		new Instance(va,arc1,0.00000001,"instance1");
-		new Instance(va,arc2,0.000000015,"instance2");//
+		//new Instance(va,arc2,0.000000015,"instance2");//
 		
 		String cloudfile = ScenarioBase.resourcePath+"LPDS_original.xml";
-		String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";//
+		//String fogfile = ScenarioBase.resourcePath+"LPDS_Fog_T1.xml";//
 		
 		ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",-4,5);
 		
-		Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", false, true);
+		Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true, true);
 		
-		ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0);
-		ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0);
+		//ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1",-6,0);
+		//ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2",-2,0);
 
 		//System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
 		//System.out.println(cloud1.iaas.repositories.get(0).getLatencies());
 		
-		fog1.setLatency(cloud1, 20);//
+		//fog1.setLatency(cloud1, 20);//
 		
-		fog1.setParentNode(cloud1);//
+		//fog1.setParentNode(cloud1);//
 		
-		Application fa1 = new Application(5*60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true, true);
-		Application fa2 = new Application(5*60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true, true);
+		//Application fa1 = new Application(5*60*1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true, true);
+		//Application fa2 = new Application(5*60*1000, 179200, "instance2", "Fog-app4", 2400.0, 1, "random", true, true);
 		
 		cloud1.addApplication(ca1);
-		fog1.addApplication(fa1);
-		fog2.addApplication(fa2);
+		//fog1.addApplication(fa1);
+		//fog2.addApplication(fa2);
 		
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<1;i++) {
 			int x,y;
 			Random randomGenerator = new Random();
 			x = randomGenerator.nextInt(21)-10;
@@ -64,15 +64,15 @@ public class MicrocontrollerSimulation {
 			
 			final long disksize = 100001;
 			
-			final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = PowerTransitionGenerator.generateTransitions(10, 200, 300, 5, 5);
+			final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = PowerTransitionGenerator.generateTransitions(0.1, 1, 1.44, 0, 0);
 			final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
 			final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
 			final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
 			
 			final Microcontroller mc;
-			mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
+			mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 100, 100, 100, latencyMap, stTransitions, nwTransitions), 1, 1, cpuTransitions);
 			
-			new Station(10*60*1000, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y, mc, 10).startMeter();	
+			new Station(10*60*1000, 0, 60*60*1000, 50, "random", 5, 60*1000, x, y, mc, 10, 10000).startMeter();	
 		}
 
 		long starttime = System.nanoTime();
