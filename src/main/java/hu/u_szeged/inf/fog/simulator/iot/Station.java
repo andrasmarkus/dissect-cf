@@ -150,7 +150,8 @@ public class Station extends Device {
      * It stops the station.
      */
     private void stopMeter() {
-    	
+    	this.mdc.stop();
+    	this.pmm.stopMeter();
         unsubscribe();
     }
     
@@ -191,6 +192,7 @@ public class Station extends Device {
         if (this.mc.localDisk.getFreeStorageCapacity() == this.mc.localDisk.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
         	readMicrocontrollerEnergy();
             this.stopMeter();
+            
         }
 
         try {
