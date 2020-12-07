@@ -54,7 +54,6 @@ public class Microcontroller extends PhysicalMachine {
 		if (this.currentState == State.METERING) {
 			return true;
 		}
-		
 		return false;
 	}
 	
