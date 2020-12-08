@@ -76,10 +76,6 @@ public class Station extends Device {
     }
     
     public double microcontrollerEnergyConsumption;
-    
-    private MeteredDataCollector mdc;
-    
-    PhysicalMachineEnergyMeter pmm;
 
     /**
      * The constructor is to create new static, one-way entity for data generation.
@@ -116,9 +112,6 @@ public class Station extends Device {
         this.startMeter();
         this.setMessageCount(0);
         Station.allStations.add(this);
-        
-        this.pmm = new PhysicalMachineEnergyMeter(this.mc);
-        this.mdc = new MeteredDataCollector(this.pmm);
     }
 
     /**
@@ -152,11 +145,12 @@ public class Station extends Device {
      * It stops the station.
      */
     private void stopMeter() {
-    	this.mdc.stop();
-    	this.pmm.stopMeter();
         unsubscribe();
     }
     
+    private boolean isRunning() {
+    	return this.isSubscribed();
+    }
     
     /**
      * This method is called when time elapsed defined in the freq variable.
@@ -164,14 +158,14 @@ public class Station extends Device {
      */
     @Override
     public void tick(long fires) {
-    	System.out.println("Tick-ben "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+pmm.getTotalConsumption());
+    	System.out.println("Tick-ben "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
 
             new Sensor(this, this.sensorFreq);
             try {
 				if (!this.mc.isMetering()) {
 					this.mc.metering();
-					System.out.println("Metering-ben: "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+pmm.getTotalConsumption());
+					System.out.println("Metering-ben: "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
 				}
 			} catch (NetworkException e) {
 				e.printStackTrace();
@@ -201,39 +195,36 @@ public class Station extends Device {
             }
         }
     }
-    
-    class MeteredDataCollector extends Timed {
+        
+    public void readMicrocontrollerEnergy() {
+    	final PhysicalMachineEnergyMeter pmm = new PhysicalMachineEnergyMeter(this.mc);
     	
-    	PhysicalMachineEnergyMeter pmm;
-    	
-    	MeteredDataCollector(PhysicalMachineEnergyMeter pmm) {
-    		this.pmm = pmm;
-    	}
-    	
-    	final ArrayList<Long> readingtime = new ArrayList<Long>();
+		final ArrayList<Long> readingtime = new ArrayList<Long>();
 		final ArrayList<Double> readingpm = new ArrayList<Double>();
-    	
-		public void start(long sensorFreq) {
-			subscribe(sensorFreq);
-		}
-		public void stop() {
-			unsubscribe();
-			System.out.println(readingtime);
-			System.out.println(readingpm);
-			for(int i=0;i<readingtime.size();i++) {
-				microcontrollerEnergyConsumption+=readingpm.get(i);
+		
+    	class MeteredDataCollector extends Timed {
+			public void start() {
+				subscribe(sensorFreq);
+			}
+			public void stop() {
+				unsubscribe();
+			}
+			@Override
+			public void tick(final long fires) {
+				readingtime.add(fires);
+				readingpm.add(pmm.getTotalConsumption());
+				microcontrollerEnergyConsumption=readingpm.get(readingtime.size()-1);
+				if(!isRunning()) {
+					this.stop();
+					pmm.stopMeter();
+					System.out.println(readingtime);
+					System.out.println(readingpm);
+				}
 			}
 		}
-		@Override
-		public void tick(final long fires) {
-			readingtime.add(fires);
-			readingpm.add(pmm.getTotalConsumption());
-		}
-	}
-    
-    public void readMicrocontrollerEnergy() {			
+    		final MeteredDataCollector mdc = new MeteredDataCollector();
 			pmm.startMeter(sensorFreq, true);
-			mdc.start(sensorFreq);
+			mdc.start();
 		}
 
     /**

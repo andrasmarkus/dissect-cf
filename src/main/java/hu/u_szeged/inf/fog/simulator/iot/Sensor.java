@@ -57,7 +57,7 @@ class Sensor extends DeferredEvent {
     protected void eventAction() {
         StorageObject so = new StorageObject(this.s.getMicrocontroller().localDisk.getName() + " " + this.s.filesize + " " + this.s.getSensorNum() + " " + Timed.getFireCount(),
             this.s.filesize, false);
-        System.out.println("Sensor-ban 1x: "+this.s.getMicrocontroller().getMicrocontrollerState()+" "+Timed.getFireCount()+" "+s.pmm.getTotalConsumption());
+        System.out.println("Sensor-ban 1x: "+this.s.getMicrocontroller().getMicrocontrollerState()+" "+Timed.getFireCount()+" "+s.microcontrollerEnergyConsumption);
         if (this.s.getMicrocontroller().localDisk.registerObject(so)) {
             this.s.incSumOfGeneratedData(this.s.filesize);
             this.s.messageCount += 1;
@@ -67,7 +67,7 @@ class Sensor extends DeferredEvent {
             } else {
             	this.s.getMicrocontroller().setStateToRunning();
             }
-            System.out.println("Sensor-ban 2x: "+this.s.getMicrocontroller().getMicrocontrollerState()+" "+Timed.getFireCount()+" "+s.pmm.getTotalConsumption());
+            System.out.println("Sensor-ban 2x: "+this.s.getMicrocontroller().getMicrocontrollerState()+" "+Timed.getFireCount()+" "+s.microcontrollerEnergyConsumption);
         } else {
             try {
                 throw new Exception("Saving data into the local repository is unsuccessful!");
