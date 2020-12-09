@@ -74,8 +74,6 @@ public class Station extends Device {
     public int getSensorNum() {
         return sensorNum;
     }
-    
-    public double microcontrollerEnergyConsumption;
 
     /**
      * The constructor is to create new static, one-way entity for data generation.

@@ -30,6 +30,8 @@ import hu.u_szeged.inf.fog.simulator.providers.BluemixProvider.Bluemix;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.providers.OracleProvider;
 import hu.u_szeged.inf.fog.simulator.util.FogSimulationChart;
+import hu.u_szeged.inf.fog.simulator.util.MicrocontrollerConsumptionChartGenerator;
+import hu.u_szeged.inf.fog.simulator.util.MicrocontrollerPowerTransitionGenerator;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
 /**
@@ -97,7 +99,7 @@ public class FogSimulation {
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
-	for(int i=0;i<1;i++) {
+	for(int i=0;i<10000;i++) {
 		int x,y;
 		Random randomGenerator = new Random();
 		x = randomGenerator.nextInt(21)-10;
@@ -107,19 +109,24 @@ public class FogSimulation {
 		
 		final long disksize = 100001;
 		
-		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = PowerTransitionGenerator.generateTransitions(10, 200, 300, 5, 5);
+		//ESP32 (0.025, 0.155, 0.2)
+		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
+					MicrocontrollerPowerTransitionGenerator.generateTransitions(0.025, 0.155, 0.225, 0, 0);
+		//final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
+					//MicrocontrollerPowerTransitionGenerator.generateTransitions(0.5, 1.45,1.7, 0, 0);
 		final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
 		final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
 		final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
 		
 		final Microcontroller mc;
-		mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 10000, 10000, 10000, latencyMap, stTransitions, nwTransitions), 10, 10, cpuTransitions);
+		mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 100, 100, 100, latencyMap, stTransitions, nwTransitions), 1, 1, cpuTransitions);
 		
-		new Station(10*60*1000, 0, 24*60*60*1000, 50, "random", 5, 60*1000, x, y, mc, 10).startMeter();	
+		// 20 perc üzemidõ - 1 perces frekvencia - 10 mp szenzorfrekvencia
+		new Station(0, 1*20*60*1000, 50, 1, "random", 60*1000, x, y, mc, 10, 10*1000).startMeter();
 	}
 	
 	// Setting up the IoT pricing
-	ArrayList<Bluemix> bmList = new ArrayList<Bluemix>();
+	/*ArrayList<Bluemix> bmList = new ArrayList<Bluemix>();
 	bmList.add(new Bluemix(0,499999,0.00097));
 	bmList.add(new Bluemix(450000,6999999,0.00068));
 	bmList.add(new Bluemix(7000000,Long.MAX_VALUE,0.00014));
@@ -135,18 +142,21 @@ public class FogSimulation {
 	
 	new OracleProvider(2678400000L,0.93,15000,0.02344,1000, ca1); new OracleProvider(2678400000L,0.93,15000,0.02344,1000, ca2); 
 	new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa1); new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa2);
-	new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa3); new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa4);
+	new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa3); new OracleProvider(2678400000L,0.93,15000,0.02344,1000, fa4);*/
 		
 	// we start the simulation
 	long starttime = System.nanoTime();
 	Timed.simulateUntilLastEvent();
-	long stopttime = System.nanoTime();
+	long stoptime = System.nanoTime();
 	
 	// Print some information to the monitor / in file
-	TimelineGenerator.generate();
+	//TimelineGenerator.generate();
+	//FogSimulationChart.generate();
+	/*ScenarioBase.printInformation((stopttime-starttime),true);
+	ScenarioBase.printInformation(stopttime-starttime, false);*/
+	MicrocontrollerConsumptionChartGenerator.generate();
 	FogSimulationChart.generate();
-	ScenarioBase.printInformation((stopttime-starttime),true);
-	ScenarioBase.printInformation(stopttime-starttime, false);
+	ScenarioEnergy.printInformation(stoptime-starttime, false);
 	
 	}
 

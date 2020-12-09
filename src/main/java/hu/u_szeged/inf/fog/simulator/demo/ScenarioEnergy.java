@@ -13,6 +13,7 @@ public abstract class ScenarioEnergy {
 	
 	private static ArrayList<String> names = new ArrayList<String>();
 	private static ArrayList<Double> eCs = new ArrayList<Double>();
+	private static ArrayList<Double> stationConsumptions = new ArrayList<Double>();
 	
 	public final static String resourcePath = new StringBuilder(System.getProperty("user.dir")).
 			append(File.separator).
@@ -35,6 +36,7 @@ public abstract class ScenarioEnergy {
 		long timeout=Long.MIN_VALUE;
 		long highestApplicationStopTime = Long.MIN_VALUE;
 		long highestStationStoptime = Long.MIN_VALUE;
+		double stationConsumption = 0;
 		//String name = null;
 		//double eC = 0;
 		
@@ -58,6 +60,7 @@ public abstract class ScenarioEnergy {
 				
 				for(Device d : a.deviceList) {
 					generatedData+=d.getSumOfGeneratedData();
+					stationConsumption+=d.getMicrocontrollerEnergyConsumption();
 						
 					if(d.stopTime>highestStationStoptime) {
 						highestStationStoptime=d.stopTime;
@@ -72,6 +75,7 @@ public abstract class ScenarioEnergy {
 				
 				names.add(a.computingAppliance.name);
 				eCs.add(a.computingAppliance.energyConsumption);
+				stationConsumptions.add(stationConsumption);
 			}
 			
 			System.out.println();
@@ -87,6 +91,7 @@ public abstract class ScenarioEnergy {
 		System.out.println("Runtime: "+TimeUnit.SECONDS.convert(t, TimeUnit.NANOSECONDS)+ " seconds");
 		for(int i=0;i<names.size();i++) {
 			System.out.println(names.get(i)+" => "+eCs.get(i));
+			System.out.println(names.get(i)+" stations consumption: " + stationConsumptions.get(i) + " W");
 		}
 		
 

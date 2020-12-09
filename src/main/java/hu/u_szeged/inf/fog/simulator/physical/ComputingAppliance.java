@@ -80,12 +80,10 @@ public class ComputingAppliance {
 					readingtime.add(fires);
 					readingpm.add(pmm.getTotalConsumption());
 
-					if(Timed.getFireCount()>(24*12*a.getFrequency())) {
+					if(!a.isSubscribed()) {
 						this.stop();
 						pmm.stopMeter();
-						for(int i=0;i<readingtime.size();i++) {
-							energyConsumption+=readingpm.get(i);
-						}
+						energyConsumption = readingpm.get(readingpm.size()-1);
 					}
 				}
 			}

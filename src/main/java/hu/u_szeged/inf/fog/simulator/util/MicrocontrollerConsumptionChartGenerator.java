@@ -40,7 +40,7 @@ public abstract class MicrocontrollerConsumptionChartGenerator {
 		ArrayList<Double> consumptions = new ArrayList<Double>();
 		
 		for (Station s : Station.allStations) {
-			consumptions.add(s.microcontrollerEnergyConsumption);
+			consumptions.add(s.getMicrocontrollerEnergyConsumption());
 		}
 		
 		Collections.sort(consumptions);
