@@ -31,6 +31,8 @@ public abstract class FogSimulationChart {
 						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#00FF80'],");
 					} else if (a.computingAppliance.name.contains("cloud")) {
 						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#6666FF'],");
+					} else {
+						writer.println("['" + a.computingAppliance.name + "', " + a.computingAppliance.energyConsumption + ", '#f2a03d'],");
 					}
 				}
 			}

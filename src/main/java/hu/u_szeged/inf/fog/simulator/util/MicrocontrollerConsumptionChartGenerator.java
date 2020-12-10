@@ -60,7 +60,7 @@ public abstract class MicrocontrollerConsumptionChartGenerator {
 				"        height:300,\r\n" + 
 				"        legend: \"none\",\r\n" + 
 				"        chartArea: {\r\n" + 
-				"            width: 1200,\r\n" + 
+				"            width: 700,\r\n" + 
 				"            left: 50\r\n" + 
 				"        },\r\n" + 
 				"        bar: {\r\n" + 
@@ -94,7 +94,7 @@ public abstract class MicrocontrollerConsumptionChartGenerator {
 		writer.println("</script>");
 		writer.println("</script>");
 		writer.println("</head><body>");
-		writer.println("<div id=\"table_63\" class=\"pie\" style=\"width:1250px; margin:0 auto;\"></div>");
+		writer.println("<div id=\"table_63\" class=\"pie\" style=\"width:750px; margin:0 auto;\"></div>");
 		writer.println("</body></html>");
 		writer.close();
 	}

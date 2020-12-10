@@ -14,6 +14,8 @@ public abstract class ScenarioEnergy {
 	private static ArrayList<String> names = new ArrayList<String>();
 	private static ArrayList<Double> eCs = new ArrayList<Double>();
 	private static ArrayList<Double> stationConsumptions = new ArrayList<Double>();
+	private static double totalStationsConsumption = 0;
+	private static double totalNodesConsumption = 0;
 	
 	public final static String resourcePath = new StringBuilder(System.getProperty("user.dir")).
 			append(File.separator).
@@ -76,6 +78,8 @@ public abstract class ScenarioEnergy {
 				names.add(a.computingAppliance.name);
 				eCs.add(a.computingAppliance.energyConsumption);
 				stationConsumptions.add(stationConsumption);
+				totalStationsConsumption += stationConsumption;
+				totalNodesConsumption += a.computingAppliance.energyConsumption;
 			}
 			
 			System.out.println();
@@ -93,6 +97,8 @@ public abstract class ScenarioEnergy {
 			System.out.println(names.get(i)+" => "+eCs.get(i));
 			System.out.println(names.get(i)+" stations consumption: " + stationConsumptions.get(i) + " W");
 		}
+		System.out.println("Total nodes consumption: "+totalNodesConsumption);
+		System.out.println("Total stations consumption: "+totalStationsConsumption);
 		
 
 	}

@@ -111,7 +111,7 @@ public class FogSimulation {
 		
 		//ESP32 (0.025, 0.155, 0.2)
 		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
-					MicrocontrollerPowerTransitionGenerator.generateTransitions(0.025, 0.155, 0.225, 0, 0);
+					MicrocontrollerPowerTransitionGenerator.generateTransitions(0.065, 1.475, 2.0, 0, 0);
 		//final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
 					//MicrocontrollerPowerTransitionGenerator.generateTransitions(0.5, 1.45,1.7, 0, 0);
 		final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);

@@ -1,15 +1,25 @@
 package hu.u_szeged.inf.fog.simulator.demo;
 
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import hu.mta.sztaki.lpds.cloud.simulator.Timed;
+import hu.mta.sztaki.lpds.cloud.simulator.energy.powermodelling.PowerState;
 import hu.mta.sztaki.lpds.cloud.simulator.iaas.constraints.AlterableResourceConstraints;
+import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
 import hu.mta.sztaki.lpds.cloud.simulator.io.VirtualAppliance;
+import hu.mta.sztaki.lpds.cloud.simulator.util.PowerTransitionGenerator;
 import hu.u_szeged.inf.fog.simulator.application.Application;
 import hu.u_szeged.inf.fog.simulator.iot.Station;
 import hu.u_szeged.inf.fog.simulator.iot.Device.DeviceNetwork;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
+import hu.u_szeged.inf.fog.simulator.physical.Microcontroller;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
+import hu.u_szeged.inf.fog.simulator.util.FogSimulationChart;
+import hu.u_szeged.inf.fog.simulator.util.MicrocontrollerConsumptionChartGenerator;
+import hu.u_szeged.inf.fog.simulator.util.MicrocontrollerPowerTransitionGenerator;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
 public class NewFogSimulation   {
@@ -73,10 +83,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog4 = new ComputingAppliance(westfile4, "Paris", 2, 49);
 	
 		// creating the cloud application modules
-		Application fogapp1 = new Application(freq, tasksize, "a1.large", "London-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp2 = new Application(freq, tasksize, "a1.xlarge", "Brussels-app", numberOfInstruction, borderline, strategy, false);
-		Application fogapp3 = new Application(freq, tasksize, "a1.large", "Amsterdam-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp4 = new Application(freq, tasksize, "a1.large", "Paris-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp1 = new Application(freq, tasksize, "a1.large", "London-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp2 = new Application(freq, tasksize, "a1.xlarge", "Brussels-app", numberOfInstruction, borderline, strategy, false, true);
+		Application fogapp3 = new Application(freq, tasksize, "a1.large", "Amsterdam-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp4 = new Application(freq, tasksize, "a1.large", "Paris-app", numberOfInstruction, borderline, strategy, true, true);
 		
 		// mapping applications to the resources
 		fog1.addApplication(fogapp1);
@@ -97,10 +107,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog8 = new ComputingAppliance(centrefile4, "Vienna", 16, 48);
 	
 		// creating the cloud application modules
-		Application fogapp5 = new Application(freq, tasksize, "a1.large", "Bratislava-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp6 = new Application(freq, tasksize, "a1.xlarge", "Budapest-app", numberOfInstruction, borderline, strategy, false);
-		Application fogapp7 = new Application(freq, tasksize, "a1.large", "Prague-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp8 = new Application(freq, tasksize, "a1.large", "Vienna-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp5 = new Application(freq, tasksize, "a1.large", "Bratislava-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp6 = new Application(freq, tasksize, "a1.xlarge", "Budapest-app", numberOfInstruction, borderline, strategy, false, true);
+		Application fogapp7 = new Application(freq, tasksize, "a1.large", "Prague-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp8 = new Application(freq, tasksize, "a1.large", "Vienna-app", numberOfInstruction, borderline, strategy, true, true);
 		
 		// mapping applications to the resources
 			fog5.addApplication(fogapp5);
@@ -120,10 +130,10 @@ public class NewFogSimulation   {
 	ComputingAppliance fog12 = new ComputingAppliance(eastfile4, "Warsaw", 21, 52);
 	
 		// creating the cloud application modules
-		Application fogapp9 = new Application(freq, tasksize, "a1.xlarge", "Kiev-app", numberOfInstruction, borderline, strategy, false);
-		Application fogapp10 = new Application(freq, tasksize, "a1.large", "Moscow-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp11 = new Application(freq, tasksize, "a1.large", "Vilnius-app", numberOfInstruction, borderline, strategy, true);
-		Application fogapp12 = new Application(freq, tasksize, "a1.large", "Warsaw-app", numberOfInstruction, borderline, strategy, true);
+		Application fogapp9 = new Application(freq, tasksize, "a1.xlarge", "Kiev-app", numberOfInstruction, borderline, strategy, false, true);
+		Application fogapp10 = new Application(freq, tasksize, "a1.large", "Moscow-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp11 = new Application(freq, tasksize, "a1.large", "Vilnius-app", numberOfInstruction, borderline, strategy, true, true);
+		Application fogapp12 = new Application(freq, tasksize, "a1.large", "Warsaw-app", numberOfInstruction, borderline, strategy, true, true);
 
 		// mapping applications to the resources
 		fog9.addApplication(fogapp9);
@@ -139,8 +149,8 @@ public class NewFogSimulation   {
 	ComputingAppliance fog14 = new ComputingAppliance(holdfogfile2, "Stockholm", 18, 59);
 		
 			// creating the cloud application modules
-			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athens-app", numberOfInstruction, borderline, strategy, false);
-			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, borderline, strategy, false);
+			Application fogapp13 = new Application(freq, tasksize, "a1.xlarge", "Athens-app", numberOfInstruction, borderline, strategy, false, true);
+			Application fogapp14 = new Application(freq, tasksize, "a1.xlarge", "Stockholm-app", numberOfInstruction, borderline, strategy, false, true);
 			
 			// mapping applications to the resources
 			fog13.addApplication(fogapp13);
@@ -152,7 +162,7 @@ public class NewFogSimulation   {
 	ComputingAppliance cloud1 = new ComputingAppliance(cloudfile1, "Frankfurt", 15, 52);
 	
 		// creating the cloud application modules
-		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, borderline, strategy, false);
+		Application cloudapp1 = new Application(freq, tasksize, "a2.xlarge", "Frankfurt-app", numberOfInstruction, borderline, strategy, false, true);
 		
 		
 		cloud1.addApplication(cloudapp1);
@@ -229,16 +239,44 @@ public class NewFogSimulation   {
 
 		
 		// stations
-		Station.loadDevice(stationfile);
+		//Station.loadDevice(stationfile);
+		for(int i=0;i<10000;i++) {
+			int x,y;
+			Random randomGenerator = new Random();
+			x = randomGenerator.nextInt(21)-10;
+			y = randomGenerator.nextInt(9)-10;
+			
+			HashMap<String, Integer> latencyMap = new HashMap<String, Integer>();
+			
+			final long disksize = 100001;
+			
+			//ESP32 (0.025, 0.155, 0.2)
+			final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
+						MicrocontrollerPowerTransitionGenerator.generateTransitions(0.065, 1.475, 2.0, 0, 0);
+			//final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
+						//MicrocontrollerPowerTransitionGenerator.generateTransitions(0.5, 1.45,1.7, 0, 0);
+			final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
+			final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
+			final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
+			
+			final Microcontroller mc;
+			mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 100, 100, 100, latencyMap, stTransitions, nwTransitions), 1, 1, cpuTransitions);
+			
+			// 20 perc üzemidõ - 1 perces frekvencia - 10 mp szenzorfrekvencia
+			new Station(0, 1*20*60*1000, 50, 1, "random", 60*1000, x, y, mc, 10, 10*1000).startMeter();
+		}
 		
 		// we start the simulation
 		long starttime = System.nanoTime();
 		Timed.simulateUntilLastEvent();
-		long stopttime = System.nanoTime();
+		long stoptime = System.nanoTime();
 		
 		// Print some information to the monitor / in file
-		TimelineGenerator.generate();
-		ScenarioBase.printInformation((stopttime-starttime),false);
+		//TimelineGenerator.generate();
+		//ScenarioBase.printInformation((stopttime-starttime),false);
+		MicrocontrollerConsumptionChartGenerator.generate();
+		FogSimulationChart.generate();
+		ScenarioEnergy.printInformation(stoptime-starttime, false);
 	}
 	
 }
