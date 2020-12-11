@@ -2,6 +2,7 @@ package hu.u_szeged.inf.fog.simulator.demo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import hu.u_szeged.inf.fog.simulator.application.Application;
@@ -98,7 +99,7 @@ public abstract class ScenarioEnergy {
 			System.out.println(names.get(i)+" stations consumption: " + stationConsumptions.get(i) + " W");
 		}
 		System.out.println("Total nodes consumption: "+totalNodesConsumption);
-		System.out.println("Total stations consumption: "+totalStationsConsumption);
+		System.out.println("Total stations consumption: "+Collections.max(stationConsumptions));
 		
 
 	}

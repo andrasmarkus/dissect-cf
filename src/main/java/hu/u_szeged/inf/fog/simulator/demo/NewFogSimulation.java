@@ -31,7 +31,7 @@ public class NewFogSimulation   {
 	//final String strategy = "random";
 	//final String strategy = "load";
 	//final String strategy = "push"; 
-	final String strategy = "fuzzy";
+	final String strategy = "random";
 	
 	// device strategy
 	final String deviceStrategy = "distance";
@@ -240,7 +240,7 @@ public class NewFogSimulation   {
 		
 		// stations
 		//Station.loadDevice(stationfile);
-		for(int i=0;i<10000;i++) {
+		for(int i=0;i<10;i++) {
 			int x,y;
 			Random randomGenerator = new Random();
 			x = randomGenerator.nextInt(21)-10;

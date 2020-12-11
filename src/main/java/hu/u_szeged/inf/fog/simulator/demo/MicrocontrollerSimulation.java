@@ -37,7 +37,7 @@ public class MicrocontrollerSimulation {
 		
 		cloud1.addApplication(ca1);
 		
-		for(int i=0;i<10000;i++) {
+		for(int i=0;i<10;i++) {
 			int x,y;
 			Random randomGenerator = new Random();
 			x = randomGenerator.nextInt(21)-10;

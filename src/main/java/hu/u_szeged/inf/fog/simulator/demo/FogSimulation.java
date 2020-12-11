@@ -99,7 +99,7 @@ public class FogSimulation {
 	// we create 1000 smart device with random installation strategy, 10kB storage, 10000 bandwidth, 
 	// 24 hours long running time, 50 bytes of generated data by each sensor, each smart device has 5 sensor,
 	// and the frequency is 1 minute, last 3 zero parameters are for the geolocation, but it is now irrelevant for us
-	for(int i=0;i<10000;i++) {
+	for(int i=0;i<10;i++) {
 		int x,y;
 		Random randomGenerator = new Random();
 		x = randomGenerator.nextInt(21)-10;
@@ -109,17 +109,19 @@ public class FogSimulation {
 		
 		final long disksize = 100001;
 		
-		//ESP32 (0.025, 0.155, 0.2)
+		//ESP32 (0.025, 0.155, 0.225)
+		//Raspberry Pi (0.065, 1.475, 2.0)
 		final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
 					MicrocontrollerPowerTransitionGenerator.generateTransitions(0.065, 1.475, 2.0, 0, 0);
-		//final EnumMap<PowerTransitionGenerator.PowerStateKind, Map<String, PowerState>> transitions = 
-					//MicrocontrollerPowerTransitionGenerator.generateTransitions(0.5, 1.45,1.7, 0, 0);
+		
 		final Map<String, PowerState> cpuTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.host);
 		final Map<String, PowerState> stTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.storage);
 		final Map<String, PowerState> nwTransitions = transitions.get(PowerTransitionGenerator.PowerStateKind.network);
 		
 		final Microcontroller mc;
-		mc = new Microcontroller(1, 1, 1000, new Repository(disksize, "mc", 100, 100, 100, latencyMap, stTransitions, nwTransitions), 1, 1, cpuTransitions);
+		mc = new Microcontroller(1, 1, 1000,
+								 new Repository(disksize, "mc", 100, 100, 100, latencyMap, stTransitions, nwTransitions),
+								 1, 1, cpuTransitions);
 		
 		// 20 perc üzemidõ - 1 perces frekvencia - 10 mp szenzorfrekvencia
 		new Station(0, 1*20*60*1000, 50, 1, "random", 60*1000, x, y, mc, 10, 10*1000).startMeter();
