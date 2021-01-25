@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import hu.mta.sztaki.lpds.cloud.simulator.iaas.PhysicalMachine;
 import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.pliant.FuzzyIndicators;
 import hu.u_szeged.inf.fog.simulator.pliant.Kappa;
@@ -100,6 +101,41 @@ class LoadApplicationStrategy extends ApplicationStrategy{
 			}
 			
 			
+			a.strategyApplication=chosen.applicationList.get(0);
+		}
+		
+		
+	}
+	
+}
+
+class EnergyApplicationStrategy extends ApplicationStrategy{
+	
+	public EnergyApplicationStrategy(Application a) {
+		this.install(a);
+	}
+
+	@Override
+	public void install(Application a) {
+		
+		ArrayList<ComputingAppliance> caList = new ArrayList<ComputingAppliance>();
+		caList.addAll(a.computingAppliance.neighbourList);
+		if(a.computingAppliance.parentNode!=null) {
+			caList.add(a.computingAppliance.parentNode);
+		}
+		if(caList.size()>0) {
+
+			ComputingAppliance chosen=caList.get(0);
+			int tmp = Integer.MAX_VALUE;
+			
+			for(ComputingAppliance ca :  caList) {
+				for(PhysicalMachine pm : ca.iaas.machines) {
+					double tmp2 = pm.hostPowerBehavior.get("default").getMinConsumption()+pm.hostPowerBehavior.get("default").getConsumptionRange();
+					if((int)tmp2<tmp) {
+						chosen = ca;
+					}
+				}
+			}
 			a.strategyApplication=chosen.applicationList.get(0);
 		}
 		

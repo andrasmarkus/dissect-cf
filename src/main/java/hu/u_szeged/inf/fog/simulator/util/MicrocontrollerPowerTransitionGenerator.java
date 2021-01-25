@@ -94,9 +94,9 @@ public class MicrocontrollerPowerTransitionGenerator extends PowerTransitionGene
 		returner.put(PowerTransitionGenerator.PowerStateKind.network, netStates);
 		PowerState hostDefault = new PowerState(idlepower, maxpower - idlepower, LinearConsumptionModel.class);
 		
-		hostStates.put(Microcontroller.State.OFF.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));
+		hostStates.put(Microcontroller.State.OFF.toString(), new PowerState(minpower, 0, ConstantConsumptionModel.class));
 		hostStates.put(Microcontroller.State.RUNNING.toString(), hostDefault);
-		hostStates.put(Microcontroller.State.METERING.toString(), new PowerState(minpower, maxpower-(idlepower/2), LinearConsumptionModel.class));
+		hostStates.put(Microcontroller.State.METERING.toString(), new PowerState(idlepower, maxpower-(idlepower/2), LinearConsumptionModel.class));
 		
 		diskStates.put(NetworkNode.State.OFF.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));
 		diskStates.put(NetworkNode.State.RUNNING.toString(), new PowerState(0, 0, ConstantConsumptionModel.class));

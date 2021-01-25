@@ -156,14 +156,14 @@ public class Station extends Device {
      */
     @Override
     public void tick(long fires) {
-    	System.out.println("Tick-ben "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
+    	//System.out.println("Tick-ben "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
 
             new Sensor(this, this.sensorFreq);
             try {
 				if (!this.mc.isMetering()) {
 					this.mc.metering();
-					System.out.println("Metering-ben: "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
+					//System.out.println("Metering-ben: "+this.mc.getMicrocontrollerState()+" "+Timed.getFireCount()+" "+microcontrollerEnergyConsumption);
 				}
 			} catch (NetworkException e) {
 				e.printStackTrace();
@@ -215,8 +215,8 @@ public class Station extends Device {
 				if(!isRunning()) {
 					this.stop();
 					pmm.stopMeter();
-					System.out.println(readingtime);
-					System.out.println(readingpm);
+					//System.out.println(readingtime);
+					//System.out.println(readingpm);
 				}
 			}
 		}

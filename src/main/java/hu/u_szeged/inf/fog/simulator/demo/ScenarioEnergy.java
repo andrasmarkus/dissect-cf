@@ -42,6 +42,7 @@ public abstract class ScenarioEnergy {
 		double stationConsumption = 0;
 		//String name = null;
 		//double eC = 0;
+		double bluemix=0;
 		
 		for (ComputingAppliance c : ComputingAppliance.allComputingAppliance) {
 			System.out.println("computingAppliance: " + c.name);
@@ -68,6 +69,11 @@ public abstract class ScenarioEnergy {
 					if(d.stopTime>highestStationStoptime) {
 						highestStationStoptime=d.stopTime;
 					}
+					if(iotpricing) {
+						System.out.println(a.providers);
+						bluemix+=a.providers.get(0).cost;	
+						
+					}
 				}
 				
 				if (a.stopTime > highestApplicationStopTime) {
@@ -90,6 +96,7 @@ public abstract class ScenarioEnergy {
 		System.out.println("VMs " + usedVM + " tasks: " + tasks);
 		System.out.println("Generated/processed/arrived data: " + generatedData + "/" + processedData+ "/"+arrivedData+ " bytes (~"+(arrivedData/1024/1024)+" MB)");
 		System.out.println("Cloud cost: "+totalCost);
+		System.out.println("IoT cost: Bluemix: "+bluemix);		
 		System.out.println("Network: "+TimeUnit.SECONDS.convert(Application.sumOfTimeOnNetwork, TimeUnit.MILLISECONDS)+ " seconds");
 		System.out.println("Network: "+(Application.sumOfByteOnNetwork/1024/1024)+ " MB");
 		System.out.println("Timeout: "+((double)timeout/1000/60) +" minutes");

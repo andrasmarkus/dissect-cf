@@ -406,7 +406,9 @@ public class Application extends Timed {
     	  new PushUpApplicationStrategy(this);
       } else if(this.strategy.equals("load")) {
     	  new LoadApplicationStrategy(this);
-      } else{
+      } else if(this.strategy.equals("energy")) {
+    	  new EnergyApplicationStrategy(this);
+      }else{
         	try {
 				throw new Exception("This application strategy does not exist!");
 			} catch (Exception e) {
