@@ -34,6 +34,8 @@ import hu.mta.sztaki.lpds.cloud.simulator.iaas.resourcemodel.ResourceConsumption
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode;
 import hu.mta.sztaki.lpds.cloud.simulator.io.NetworkNode.NetworkException;
 import hu.mta.sztaki.lpds.cloud.simulator.util.SeedSyncer;
+import hu.u_szeged.inf.fog.simulator.datareader.SensorData;
+import hu.u_szeged.inf.fog.simulator.datareader.SensorDataReader;
 import hu.u_szeged.inf.fog.simulator.demo.DeferredEventTest;
 import hu.u_szeged.inf.fog.simulator.loaders.DeviceModel;
 import hu.mta.sztaki.lpds.cloud.simulator.io.Repository;
@@ -47,8 +49,7 @@ import hu.mta.sztaki.lpds.cloud.simulator.io.StorageObject;
  */
 public class StationRD extends Device {
 
-    private String traceFilePath;
-
+    private SensorDataReader sensorDataReader;
 
     /**
      * Number of the sensors. A sensor can represent for example a wind speed meter or rain sensor.
@@ -64,6 +65,11 @@ public class StationRD extends Device {
     /**
      * Getter for the number of the sensors.
      */
+
+    private int tickCounter = 0;
+
+
+
     public int getSensorNum() {
         return sensorNum;
     }
@@ -79,7 +85,8 @@ public class StationRD extends Device {
      * @param x The X coordinate of the position.
      * @param y The Y coordinate of the position.
      */
-    public StationRD(DeviceNetwork dn, long startTime, long stopTime, String strategy, int sensorNum, double x, double y, String traceFilePath) {
+    public StationRD(SensorDataReader sensorDataReader, DeviceNetwork dn, long startTime, long stopTime, String strategy, int sensorNum, double x, double y) {
+        this.sensorDataReader = sensorDataReader;
         // TODO: fix this delay value
         this.delay = Math.abs(SeedSyncer.centralRnd.nextLong() % 5) * 60 * 1000;
         this.startTime = startTime + delay;
@@ -93,13 +100,12 @@ public class StationRD extends Device {
         installionProcess(this);
         this.startMeter();
         this.setMessageCount(0);
-        this.traceFilePath = traceFilePath;
     }
 
     /**
      * This method sends all of the generated data (called StorageObject) to the node repository.
      */
-    private void startCommunicate() throws NetworkException { //TODO itt egy kérdés
+    private void startCommunicate() throws NetworkException {
         for (StorageObject so: this.dn.localRepository.contents()) {
             StorObjEvent soe = new StorObjEvent(so);
             NetworkNode.initTransfer(so.size, ResourceConsumption.unlimitedProcessing, this.dn.localRepository, this.nodeRepository, soe);
@@ -115,7 +121,7 @@ public class StationRD extends Device {
 
                 @Override
                 protected void eventAction() {
-                    subscribe(freq); //TODO: itt egy kérdés
+                    subscribe(freq);
                     nodeRepository = app.computingAppliance.iaas.repositories.get(0);
                 }
             };
@@ -136,13 +142,16 @@ public class StationRD extends Device {
     @Override
     public void tick(long fires) {
         if (Timed.getFireCount() < (stopTime) && Timed.getFireCount() >= (startTime)) {
-
+            SensorData data = sensorDataReader.ReadData(tickCounter);
+            //TODO: levizsgálni, hogy van e következő adat
+            SensorData temp = sensorDataReader.ReadData(tickCounter+1);
+            freq = temp.getDate() - data.getDate();
+            updateFrequency(freq);
         }
 
         if (this.dn.localRepository.getFreeStorageCapacity() == this.dn.localRepository.getMaxStorageCapacity() && Timed.getFireCount() > stopTime) {
             this.stopMeter();
         }
-
 
         try {
             if (this.nodeRepository.getCurrState().equals(Repository.State.RUNNING)) {

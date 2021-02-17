@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -21,46 +20,35 @@ public class SensorDataReader {
     public static final String SIMPLE_SPACE_SEPARATOR = " ";
     public static final String TABULATED_TXT_SEPARATOR = "  ";
 
-    public SensorDataReader() throws FileNotFoundException {
+    private final String path;
+    private final String separator;
+    private final boolean hasMiliseconds;
+    private final int dateColumn;
+    private final int idColumn;
+
+    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn, int idColumn) {
+        this.path = path;
+        this.separator = separator;
+        this.hasMiliseconds = hasMiliseconds;
+        this.dateColumn = dateColumn;
+        this.idColumn = idColumn;
     }
 
-    public static boolean hasNextLine(String path, int row){
-        return true;
-    }
-
-    public static List<String> ReadData(String path) {
-        List<String> list = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File(path))) {
-            while (scanner.hasNext()) {
-                list.add(scanner.nextLine());
-            }
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        }
-        return list;
+    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn) {
+        this.path = path;
+        this.separator = separator;
+        this.hasMiliseconds = hasMiliseconds;
+        this.dateColumn = dateColumn;
+        this.idColumn = NO_ID_COLUMN;
     }
 
 
-    public static SensorData ReadFromMemory(String path, String separator, int row, int dateColumn, int idColumn){
-        return null;
-    }
-
-
-    public static String ReadData(String path, int row) {
-
-        try (Stream<String> lines = Files.lines(Paths.get(path))) {
-            return lines.skip(row).findFirst().get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    public static SensorData ReadData(String path, String separator, boolean hasMiliseconds, int row, int dateColumn, int idColumn) throws IllegalArgumentException {
+    public SensorData ReadData(int row) throws IllegalArgumentException {
         if(row < 0 || dateColumn < 0 || idColumn < -1){
             throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
         }
         try (Stream<String> lines = Files.lines(Paths.get(path))) {
+
             String[] split = lines.skip(row).findFirst().get().split(separator);
 
             String rawData = "";
@@ -85,13 +73,45 @@ public class SensorDataReader {
         return null;
     }
 
+    public ArrayList<SensorData> ReadAllLines() {
+        int row = 0;
+        ArrayList<SensorData> dataList = new ArrayList<>();
+        if (dateColumn < 0 || idColumn < -1) {
+            throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
+        }
+        try (Scanner scanner = new Scanner(new File(path))) {
+            scanner.nextLine();
+            while (scanner.hasNextLine()) {
+                String[] split = scanner.nextLine().split(separator);
+                String rawData = "";
+                for (int i = 0; i < split.length; i++) {
+                    if (i != dateColumn && i != idColumn) {
+                        rawData += split[i];
+                    }
+                }
 
-    public static SensorData ReadData(String path, String separator, boolean hasMiliseconds, int row, int dateColumn) {
-        return ReadData(path, separator, hasMiliseconds, row, dateColumn, -1);
+                final byte[] bytes = rawData.getBytes(StandardCharsets.UTF_8);
+
+                if (idColumn == NO_ID_COLUMN) {
+                    Random r = new Random();
+                    String id = row + "_measurement_" + split[dateColumn] + "_" + r.nextInt(1000);
+                    dataList.add(new SensorData(getDate(split[dateColumn], hasMiliseconds), id, bytes.length));
+                }else{
+                    dataList.add(new SensorData(getDate(split[dateColumn], hasMiliseconds), split[idColumn], bytes.length));
+                }
+
+                row++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return dataList;
     }
 
 
-    private static long getDate(String s, boolean hasMilisec){
+
+
+    private long getDate(String s, boolean hasMilisec){
         SimpleDateFormat format;
         if(hasMilisec){
             format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSS");
@@ -122,7 +142,8 @@ public class SensorDataReader {
         return 0;
     }
 
-    private static long getDate(String s) {
+    private long getDate(String s) {
         return getDate(s, false);
     }
+
 }
