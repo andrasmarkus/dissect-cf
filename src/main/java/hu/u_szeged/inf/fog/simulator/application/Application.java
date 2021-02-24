@@ -521,42 +521,21 @@ public class Application extends Timed {
 	}
 
 	private void transferBackToStation(long allocatedData) throws Exception {
-		copyForwardToBackward(allocatedData);
+		//copyForwardToBackward(allocatedData);
 		long sent = 0;
-		Application currentApp = this;
+		//Application currentApp = this;
 		while (sent < allocatedData) {
-			DataCapsule toSend = backwardDataCapsules.poll();
+			DataCapsule toSend = forwardDataCapsules.poll();
 			if (toSend != null) {
 				if(toSend.isActuationNeeded()) {
 					toSend.setProcessTime(Timed.getFireCount());
 					toSend.setActuatorEvent(toSend.getSource().getActuator().selectStrategyEvent());
-					while (!toSend.getDataFlowPath().isEmpty()) {
-						Application nextApp = toSend.getDataFlowPath().pop();
-						if (nextApp != currentApp) {
-							if (nextApp.isSubscribed()) {
-								try {
-									long toProcess = toSend.getEventSize();
-									initiateDataTransfer(toProcess, currentApp, nextApp, -1);
-									currentApp = nextApp;
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									nextApp.restartApplication();
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								new BrokerCheck(currentApp, nextApp, toSend.getEventSize(), (nextApp.freq / 2));
-							}
-
-						}
-					}
+					Application dest = toSend.getDataFlowPath().firstElement();
 					try {
 						NetworkNode.initTransfer(toSend.getEventSize(), ResourceConsumption.unlimitedProcessing,
-								currentApp.computingAppliance.iaas.repositories.get(0), toSend.getSource().getDn().localRepository,
+								dest.computingAppliance.iaas.repositories.get(0), toSend.getSource().getDn().localRepository,
 								new Station.ActualizationEvent(toSend.getSource(), toSend));
-						currentApp.backwardDataCapsules.remove(toSend);
+						//currentApp.backwardDataCapsules.remove(toSend);
 					}catch (NetworkException e) {
 						e.printStackTrace();
 					}

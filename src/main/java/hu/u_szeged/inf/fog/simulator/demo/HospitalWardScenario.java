@@ -65,7 +65,7 @@ public class HospitalWardScenario {
         fog2.addNeighbour(fog3);
 
         //Setting fog and device numbers, based on the argumentums
-        int numberOfDevices=100;
+        int numberOfDevices=190000;
         int numberOfFogs=1;
 
         //Setting up the devices
