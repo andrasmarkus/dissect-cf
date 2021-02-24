@@ -13,6 +13,7 @@ import hu.u_szeged.inf.fog.simulator.physical.ComputingAppliance;
 import hu.u_szeged.inf.fog.simulator.providers.Instance;
 import hu.u_szeged.inf.fog.simulator.util.TimelineGenerator;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class HospitalWardScenario {
@@ -33,40 +34,27 @@ public class HospitalWardScenario {
         String cloudfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_frankfurt.xml";
         String fogfile = ScenarioBase.resourcePath+"\\fuzzy\\LPDS_budapest.xml";
 
+        //Setting fog and device numbers, based on the argumentums
+        int numberOfDevices=190000;
+        int numberOfFogs=55;
+        
         ComputingAppliance cloud1 = new ComputingAppliance(cloudfile, "cloud1",new GeoLocation(42.497913, 15.040236),1000*1000);
         Application ca1 = new Application(5*60*1000, 256000, "instance1", "Cloud-app1", 2400.0, 1, "random", true);
         cloud1.addApplication(ca1);
-
         
-        ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1", new GeoLocation(46.245286, 20.149618), 5 * 1000);
-        fog1.setLatency(cloud1, 18);
-        fog1.setParentNode(cloud1);
-        Application fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1", 2400.0, 1, "random", true);
-        fog1.addApplication(fa1);
+        ArrayList<ComputingAppliance> fogs = new ArrayList<ComputingAppliance>();
         
-        
-        ComputingAppliance fog2 = new ComputingAppliance(fogfile, "fog2", new GeoLocation(46.245486, 20.149818), 5 * 1000);
-        fog2.setLatency(cloud1, 17);
-        fog2.setLatency(fog1, 6);
-        fog2.setParentNode(cloud1);
-        Application fa2 = new Application(60 * 1000, 179200, "instance2", "Fog-app2", 2400.0, 1, "random", true);
-        fog2.addApplication(fa2);
-        
-        
-        
-        ComputingAppliance fog3 = new ComputingAppliance(fogfile, "fog3", new GeoLocation(46.245486, 20.149818), 5 * 1000);
-        fog3.setLatency(cloud1, 16);
-        fog3.setParentNode(cloud1);
-        Application fa3 = new Application(60 * 1000, 179200, "instance2", "Fog-app3", 2400.0, 1, "random", true);
-        fog3.addApplication(fa3);
-        
-
-        fog1.addNeighbour(fog2);
-        fog2.addNeighbour(fog3);
-
-        //Setting fog and device numbers, based on the argumentums
-        int numberOfDevices=190000;
-        int numberOfFogs=1;
+        for(int i=0;i<numberOfFogs;i++){
+        	ComputingAppliance fog1 = new ComputingAppliance(fogfile, "fog1"+i, new GeoLocation(46.245286, 20.149618), 5 * 1000);
+            fog1.setLatency(cloud1, 18);
+            fog1.setParentNode(cloud1);
+            Application fa1 = new Application(60 * 1000, 179200, "instance2", "Fog-app1"+i, 2400.0, 1, "random", true);
+            fog1.addApplication(fa1);
+            fogs.add(fog1);
+        }
+        for(int i=1;i<fogs.size();i++) {
+        	fogs.get(0).addNeighbour(fogs.get(i));
+        }        
 
         //Setting up the devices
 
