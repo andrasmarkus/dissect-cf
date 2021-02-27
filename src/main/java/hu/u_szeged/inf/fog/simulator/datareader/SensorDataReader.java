@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 public class SensorDataReader {
     public static final int NO_ID_COLUMN = -1;
+    public static final int NO_SECOND_DATE_COLUMN = -1;
     public static final String CSV_SEMICOLON_SEPARATOR = ";";
     public static final String CSV_COMMA_SEPARATOR = ",";
     public static final String SIMPLE_SPACE_SEPARATOR = " ";
@@ -23,10 +24,26 @@ public class SensorDataReader {
     private final String path;
     private final String separator;
     private final boolean hasMiliseconds;
-    private final int dateColumn;
+    private final int[] dateColumn;
     private final int idColumn;
 
     public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn, int idColumn) {
+        this.path = path;
+        this.separator = separator;
+        this.hasMiliseconds = hasMiliseconds;
+        this.dateColumn = new int[] {dateColumn, NO_SECOND_DATE_COLUMN};
+        this.idColumn = idColumn;
+    }
+
+    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn) {
+        this.path = path;
+        this.separator = separator;
+        this.hasMiliseconds = hasMiliseconds;
+        this.dateColumn = new int[] {dateColumn, NO_SECOND_DATE_COLUMN};
+        this.idColumn = NO_ID_COLUMN;
+    }
+
+    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int[] dateColumn, int idColumn) {
         this.path = path;
         this.separator = separator;
         this.hasMiliseconds = hasMiliseconds;
@@ -34,7 +51,7 @@ public class SensorDataReader {
         this.idColumn = idColumn;
     }
 
-    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn) {
+    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int[] dateColumn) {
         this.path = path;
         this.separator = separator;
         this.hasMiliseconds = hasMiliseconds;
@@ -43,8 +60,17 @@ public class SensorDataReader {
     }
 
 
+
+
     public SensorData ReadData(int row) throws IllegalArgumentException {
-        if(row < 0 || dateColumn < 0 || idColumn < -1){
+        if(row >= 0 && idColumn >= -1){
+            for(int i : dateColumn){
+                if(i < 0 && i != NO_SECOND_DATE_COLUMN){
+                    throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
+                }
+            }
+
+        }else{
             throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
         }
         try (Stream<String> lines = Files.lines(Paths.get(path))) {
@@ -53,20 +79,39 @@ public class SensorDataReader {
 
             String rawData = "";
             for(int i = 0; i < split.length; i++){
-                if(i != dateColumn && i != idColumn){
+                if(i != dateColumn[0] && i != dateColumn[1] && i != idColumn){
                     rawData += split[i];
                 }
+
             }
 
             final byte[] bytes = rawData.getBytes(StandardCharsets.UTF_8);
 
             if(idColumn == NO_ID_COLUMN){
                 Random r = new Random();
-                String id = row + "_measurement_" + split[dateColumn] + "_" + r.nextInt(1000);
-                return new SensorData(getDate(split[dateColumn], hasMiliseconds), id, bytes.length);
+                if(dateColumn[1] != NO_SECOND_DATE_COLUMN){
+                    String id = row + "_measurement_" + split[dateColumn[0]] + "_" + split[dateColumn[1]] + "_" + r.nextInt(1000);
+                    String rawdate = split[dateColumn[0]] + " " + split[dateColumn[1]];
+                    return new SensorData(getDate(rawdate, hasMiliseconds), id, bytes.length);
+                }
+                else{
+                    String id = row + "_measurement_" + split[dateColumn[0]] + "_" + r.nextInt(1000);
+                    return new SensorData(getDate(split[dateColumn[0]], hasMiliseconds), id, bytes.length);
+                }
+
+
+            }else{
+                if(dateColumn[1] != NO_SECOND_DATE_COLUMN){
+                    String rawdate = split[dateColumn[0]] + " " + split[dateColumn[1]];
+                    return new SensorData(getDate(rawdate, hasMiliseconds), split[idColumn], bytes.length);
+                }
+                else{
+                    return new SensorData(getDate(split[dateColumn[0]], hasMiliseconds), split[idColumn], bytes.length);
+                }
             }
 
-            return new SensorData(getDate(split[dateColumn], hasMiliseconds), split[idColumn], bytes.length);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -76,16 +121,24 @@ public class SensorDataReader {
     public ArrayList<SensorData> ReadAllLines() {
         int row = 0;
         ArrayList<SensorData> dataList = new ArrayList<>();
-        if (dateColumn < 0 || idColumn < -1) {
+        if(idColumn >= -1){
+            for(int i : dateColumn){
+                if(i < 0 && i != NO_SECOND_DATE_COLUMN){
+                    throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
+                }
+            }
+
+        }else{
             throw new IllegalArgumentException("Column and row id-s must be higher than 0 (-1 in case of id column)");
         }
+
         try (Scanner scanner = new Scanner(new File(path))) {
             scanner.nextLine();
             while (scanner.hasNextLine()) {
                 String[] split = scanner.nextLine().split(separator);
                 String rawData = "";
                 for (int i = 0; i < split.length; i++) {
-                    if (i != dateColumn && i != idColumn) {
+                    if(i != dateColumn[0] && i != dateColumn[1] && i != idColumn){
                         rawData += split[i];
                     }
                 }
@@ -94,13 +147,27 @@ public class SensorDataReader {
 
                 if (idColumn == NO_ID_COLUMN) {
                     Random r = new Random();
-                    String id = row + "_measurement_" + split[dateColumn] + "_" + r.nextInt(1000);
-                    dataList.add(new SensorData(getDate(split[dateColumn], hasMiliseconds), id, bytes.length));
+                    if(dateColumn[1] != NO_SECOND_DATE_COLUMN){
+                        String id = row + "_measurement_" + split[dateColumn[0]] + "_" + split[dateColumn[1]] + "_" + r.nextInt(1000);
+                        String rawdate = split[dateColumn[0]] + " " + split[dateColumn[1]];
+                        dataList.add(new SensorData(getDate(rawdate, hasMiliseconds), id, bytes.length));
+                    }
+                    else {
+                        String id = row + "_measurement_" + split[dateColumn[0]] + "_" + r.nextInt(1000);
+                        dataList.add(new SensorData(getDate(split[dateColumn[0]], hasMiliseconds), id, bytes.length));
+                    }
                 }else{
-                    dataList.add(new SensorData(getDate(split[dateColumn], hasMiliseconds), split[idColumn], bytes.length));
+                    if(dateColumn[1] != NO_SECOND_DATE_COLUMN){
+                        String rawdate = split[dateColumn[0]] + " " + split[dateColumn[1]];
+                        dataList.add(new SensorData(getDate(rawdate, hasMiliseconds), split[idColumn], bytes.length));
+                    }
+                    else {
+                        dataList.add(new SensorData(getDate(split[dateColumn[0]], hasMiliseconds), split[idColumn], bytes.length));
+                    }
                 }
 
                 row++;
+                System.out.println(row);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

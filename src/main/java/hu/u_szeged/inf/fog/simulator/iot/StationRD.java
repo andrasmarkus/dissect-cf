@@ -68,7 +68,8 @@ public class StationRD extends Device {
 
     private int tickCounter = 0;
 
-
+    private SensorData prevData;
+    private SensorData currData;
 
     public int getSensorNum() {
         return sensorNum;
