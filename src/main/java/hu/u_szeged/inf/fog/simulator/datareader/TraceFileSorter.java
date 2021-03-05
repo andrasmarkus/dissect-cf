@@ -11,6 +11,7 @@ import java.util.*;
 public class TraceFileSorter {
     private static String path;
     private static String separator;
+    private static boolean hasColumnHeader;
     private static boolean hasMiliseconds;
     private static int[] dateColumn;
 
@@ -23,7 +24,9 @@ public class TraceFileSorter {
             }
         }
         try (Scanner scanner = new Scanner(new File(path))) {
-            scanner.nextLine(); //TODO: EZ NEM JÓ ÍGY
+            if(hasColumnHeader){
+                scanner.nextLine();
+            }
             while (scanner.hasNextLine()) {
                 String[] split = scanner.nextLine().split(separator);
                 String rawData = "";
@@ -88,9 +91,10 @@ public class TraceFileSorter {
         return getDate(s, false);
     }
 
-    public static void sortFile(String pathi, String separatori, boolean hasMilisecondsi, int[] dateColumni){
+    public static void sortFile(String pathi, String separatori, boolean hasColumnHeaderi, boolean hasMilisecondsi, int[] dateColumni){
         path = pathi;
         separator = separatori;
+        hasColumnHeader = hasColumnHeaderi;
         hasMiliseconds = hasMilisecondsi;
         dateColumn = dateColumni;
 
@@ -99,9 +103,10 @@ public class TraceFileSorter {
         Collections.sort(dataList, compareByTime);
         writeFile(dataList);
     }
-    public static void sortFile(String pathi, String separatori, boolean hasMilisecondsi, int dateColumni) {
+
+    public static void sortFile(String pathi, String separatori, boolean hasColumnHeaderi, boolean hasMilisecondsi, int dateColumni) {
         int[] temp = {dateColumni, SensorDataReader.NO_SECOND_DATE_COLUMN};
-        sortFile(pathi, separatori, hasMilisecondsi, temp);
+        sortFile(pathi, separatori, hasColumnHeaderi, hasMilisecondsi, temp);
     }
 
     private static void writeFile(ArrayList<data> dataList){

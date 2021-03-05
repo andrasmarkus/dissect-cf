@@ -23,37 +23,43 @@ public class SensorDataReader {
 
     private final String path;
     private final String separator;
+    private final boolean hasColumnHeader;
     private final boolean hasMiliseconds;
     private final int[] dateColumn;
     private final int idColumn;
 
-    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn, int idColumn) {
+
+    public SensorDataReader(String path, String separator, boolean hasColumnHeader, boolean hasMiliseconds, int dateColumn, int idColumn) {
         this.path = path;
         this.separator = separator;
+        this.hasColumnHeader = hasColumnHeader;
         this.hasMiliseconds = hasMiliseconds;
         this.dateColumn = new int[] {dateColumn, NO_SECOND_DATE_COLUMN};
         this.idColumn = idColumn;
     }
 
-    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int dateColumn) {
+    public SensorDataReader(String path, String separator, boolean hasColumnHeader, boolean hasMiliseconds, int dateColumn) {
         this.path = path;
         this.separator = separator;
+        this.hasColumnHeader = hasColumnHeader;
         this.hasMiliseconds = hasMiliseconds;
         this.dateColumn = new int[] {dateColumn, NO_SECOND_DATE_COLUMN};
         this.idColumn = NO_ID_COLUMN;
     }
 
-    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int[] dateColumn, int idColumn) {
+    public SensorDataReader(String path, String separator, boolean hasColumnHeader, boolean hasMiliseconds, int[] dateColumn, int idColumn) {
         this.path = path;
         this.separator = separator;
+        this.hasColumnHeader = hasColumnHeader;
         this.hasMiliseconds = hasMiliseconds;
         this.dateColumn = dateColumn;
         this.idColumn = idColumn;
     }
 
-    public SensorDataReader(String path, String separator, boolean hasMiliseconds, int[] dateColumn) {
+    public SensorDataReader(String path, String separator, boolean hasColumnHeader, boolean hasMiliseconds, int[] dateColumn) {
         this.path = path;
         this.separator = separator;
+        this.hasColumnHeader = hasColumnHeader;
         this.hasMiliseconds = hasMiliseconds;
         this.dateColumn = dateColumn;
         this.idColumn = NO_ID_COLUMN;
@@ -133,7 +139,9 @@ public class SensorDataReader {
         }
 
         try (Scanner scanner = new Scanner(new File(path))) {
-            scanner.nextLine();
+            if(hasColumnHeader){
+                scanner.nextLine();
+            }
             while (scanner.hasNextLine()) {
                 String[] split = scanner.nextLine().split(separator);
                 String rawData = "";
